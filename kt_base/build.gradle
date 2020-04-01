@@ -43,7 +43,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycle"
     implementation "com.android.support:multidex:$rootProject.multidex"
-    implementation project(path: ':kt_network')
+    api project(path: ':kt_network')
     api 'com.kingja.loadsir:loadsir:1.3.6'
 }
 

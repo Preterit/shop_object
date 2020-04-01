@@ -12,6 +12,7 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -26,12 +27,13 @@ public interface APIServer {
 
     /**
      * 登录
+     *
      * @param map
      * @return
      */
     @FormUrlEncoded
     @POST(Constom.LOGIN_URL)
-    Call<LoginBean> Login(@FieldMap Map<String,String> map);
+    Call<LoginBean> Login(@FieldMap Map<String, String> map);
 
     //注册的网络请求
     //http://172.17.8.100/movieApi/user/v1/registerUser
@@ -42,4 +44,7 @@ public interface APIServer {
     @FormUrlEncoded
     @POST(Constom.CODE_URL)
     Observable<BaseResponse> getCode(@Field("data") String map);
+
+    @GET("server")
+    Call<Object> postGetSetting();
 }

@@ -14,6 +14,8 @@ public class Constom {
      * 通过flag返回内网/外网测试环境
      */
     public final static String GETNETWORK = netWrok();
+    public final static String GETNETWORK_PORT = "http://39.106.156.132/";
+
 
     public static String netWrok() {
         if (flag) {
