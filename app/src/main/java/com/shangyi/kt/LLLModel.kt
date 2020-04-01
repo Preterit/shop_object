@@ -1,4 +1,4 @@
-package com.kt.model
+package com.shangyi.kt
 
 import com.sdxxtop.base.BaseViewModel
 
@@ -7,6 +7,5 @@ import com.sdxxtop.base.BaseViewModel
  * author:lwb
  * Desc:
  */
-class TestViewModel :BaseViewModel() {
-
+class LLLModel :BaseViewModel() {
 }

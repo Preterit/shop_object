@@ -6,16 +6,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.kt.TestActivity;
 import com.shangyi.business.R;
 import com.shangyi.business.base.BaseMVPActivity;
 import com.shangyi.business.bean.LoginBean;
-import com.shangyi.business.editaddress.EditAddressActivity;
-import com.shangyi.business.goods.GoodsDetailActivity;
-import com.shangyi.business.goods.GoodsDialog;
+import com.shangyi.business.ui.goods.GoodsDialog;
 import com.shangyi.business.net.APIServer;
 import com.shangyi.business.register.RegisterActivity;
 import com.shangyi.business.settingpwd.BackPwdActivity;
+import com.shangyi.kt.LiillActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -85,7 +83,7 @@ public class LoginActivity extends BaseMVPActivity<LoginInterface,LoginPresenter
         switch (v.getId()){
             case R.id.btn_login:
 //                Intent intent3 = new Intent(LoginActivity.this,EditAddressActivity.class);
-                Intent intent3 = new Intent(this, TestActivity.class);
+                Intent intent3 = new Intent(this, LiillActivity.class);
                 startActivity(intent3);
                 //initLogin();
                 break;

@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.kt.TestActivity"></activity>
+        <activity android:name="com.shangyi.kt.LiillActivity"></activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".NetWorkActivity" />
         <activity android:name=".login.LoginActivity">
@@ -28,7 +28,7 @@
         <activity android:name=".replenish.ReplenishActivity" />
         <activity android:name=".login.YzmActivity" />
         <activity android:name=".settingpwd.BackPwdActivity" />
-        <activity android:name=".goods.GoodsDetailActivity" />
+        <activity android:name=".ui.goods.GoodsDetailActivity" />
         <activity android:name=".editaddress.EditAddressActivity" />
     </application>
 

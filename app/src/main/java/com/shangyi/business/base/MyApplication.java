@@ -10,6 +10,8 @@ import com.alibaba.fastjson.JSON;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.sdxxtop.base.BaseApplication;
+import com.sdxxtop.base.BuildConfig;
 
 
 import sing.util.LogUtil;
@@ -21,7 +23,7 @@ import sing.util.ToastUtil;
  * auther: Dz
  * function:
  */
-public class MyApplication extends Application {
+public class MyApplication extends BaseApplication {
 
 
     @Override
@@ -55,7 +57,8 @@ public class MyApplication extends Application {
     }
 
 
-
-
-
+    @Override
+    public boolean isDebug() {
+        return BuildConfig.DEBUG;
+    }
 }

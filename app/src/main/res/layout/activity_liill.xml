@@ -7,17 +7,19 @@
 
         <variable
             name="vm"
-            type="com.kt.model.TestViewModel" />
+            type="com.shangyi.kt.LLLModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context="com.shangyi.kt.LiillActivity">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="测试" />
+            android:text="skkskksks" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

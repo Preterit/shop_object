@@ -1,4 +1,4 @@
-package com.shangyi.business.goods;
+package com.shangyi.business.ui.goods;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;

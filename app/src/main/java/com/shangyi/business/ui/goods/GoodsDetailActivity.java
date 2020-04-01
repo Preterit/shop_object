@@ -1,4 +1,4 @@
-package com.shangyi.business.goods;
+package com.shangyi.business.ui.goods;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
