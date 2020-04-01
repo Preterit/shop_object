@@ -1,0 +1,130 @@
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_42"
+    android:background="@color/colorPrimary"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/dp_55"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/image"
+            android:padding="@dimen/dp_7"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:adjustViewBounds="true"
+            android:gravity="center"
+            android:paddingEnd="@dimen/dp_15"
+            android:paddingStart="@dimen/dp_15"
+            android:text="@string/cancel"
+            android:textColor="@color/login"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="@dimen/dp_32"
+            android:layout_marginTop="@dimen/dp_5"
+            android:adjustViewBounds="true"
+            android:background="@drawable/bg_circle_red"
+            android:gravity="center"
+            android:minHeight="@dimen/dp_15"
+            android:minWidth="@dimen/dp_15"
+            android:textColor="@color/login"
+            android:textSize="10sp"
+            android:visibility="gone"
+            tools:ignore="RtlCompat,SmallSp" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="@dimen/dp_80"
+            android:layout_marginStart="@dimen/dp_80"
+            android:drawablePadding="@dimen/dp_5"
+            android:ellipsize="middle"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:layout_marginStart="@dimen/dp_55"
+            android:layout_marginTop="@dimen/dp_8"
+            android:background="@drawable/shape_white_6px"
+            android:drawablePadding="@dimen/dp_5"
+            android:drawableStart="@mipmap/common_nav_btn_search_n2828"
+            android:gravity="start|center_vertical"
+            android:hint="搜索"
+            android:imeOptions="actionSearch"
+            android:inputType="none"
+            android:paddingEnd="0dp"
+            android:paddingStart="@dimen/dp_5"
+            android:singleLine="true"
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:id="@+id/tv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:visibility="gone"
+            tools:ignore="RtlCompat" />
+
+        <ImageView
+            android:id="@+id/iv_right"
+            android:layout_width="@dimen/dp_55"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/image"
+            android:padding="@dimen/dp_10"
+            android:visibility="gone"
+            tools:ignore="RtlCompat" />
+
+        <ImageView
+            android:id="@+id/iv_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/dp_55"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/image"
+            android:padding="@dimen/dp_7"
+            android:visibility="gone"
+            tools:ignore="RtlCompat" />
+    </RelativeLayout>
+</androidx.appcompat.widget.Toolbar>

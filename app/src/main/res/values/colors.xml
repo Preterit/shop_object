@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3A4154</color>
+    <color name="colorPrimaryDark">#3A4154</color>
+    <color name="colorAccent">#D81B60</color>
+
+
+    <color name="login">#f7f5f6</color>
+    <color name="registertitle">#2F2F2F</color>
+    <color name="btnregister">#F1110D</color>
+    <color name="btnyzm">#FFEE00</color>
+
+    <color name="btn">#32e7e4e4</color>
+
+    <color name="hint">#d6d3d2</color>
+
+    <color name="main_color">#3A4154</color>
+    <color name="main_color_red">#EA3B42</color>
+    <color name="main_color_red_p">#D2353B</color>
+    <color name="main_color_red_noclick">#F49DA0</color>
+    <color name="sub_color_a">#95A4B7</color>
+    <color name="sub_color_b">#CAD1DB</color>
+    <color name="sub_color_c">#E4E8ED</color>
+    <color name="sub_color_d">#BA9F8A</color>
+    <color name="sub_color_e">#DCCFC4</color>
+
+    <color name="text_color_black">#282828</color>
+    <color name="text_color_gray">#656565</color>
+
+    <color name="bg_color">#F2F2F2</color>
+    <color name="divider">#E3E3E3</color>
+
+    <color name="border">#C3C3C3</color> <!--按钮边框-->
+    <color name="color_white">#FFFFFF</color>
+    <color name="color_white_p">#E5E5E5</color>
+</resources>
