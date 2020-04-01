@@ -1,4 +1,4 @@
-package com.shangyi.business.replenish;
+package com.shangyi.business.user.replenish;
 
 import com.shangyi.business.base.BaseMVPPresenter;
 

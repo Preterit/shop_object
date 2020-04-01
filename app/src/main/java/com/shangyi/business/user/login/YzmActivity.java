@@ -1,15 +1,17 @@
-package com.shangyi.business.login;
+package com.shangyi.business.user.login;
 
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 import android.widget.TextView;
 
 import com.shangyi.business.R;
 import com.shangyi.business.base.BaseMVPActivity;
-import com.shangyi.business.register.RegisterActivity;
+import com.shangyi.business.user.register.RegisterActivity;
 
+/**
+ * 验证码登录
+ */
 public class YzmActivity extends BaseMVPActivity<YzmInterface,YzmPresenter> implements YzmInterface, View.OnClickListener  {
 
 

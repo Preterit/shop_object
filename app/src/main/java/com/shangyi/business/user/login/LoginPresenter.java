@@ -1,9 +1,9 @@
-package com.shangyi.business.login;
+package com.shangyi.business.user.login;
 
 import android.text.TextUtils;
 
 import com.shangyi.business.base.BaseMVPPresenter;
-import com.shangyi.business.register.RegistInterface;
+import com.shangyi.business.user.register.RegistInterface;
 
 /**
  * data: 2020/3/26 14:53

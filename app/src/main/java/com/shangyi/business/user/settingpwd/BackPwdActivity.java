@@ -1,11 +1,10 @@
-package com.shangyi.business.settingpwd;
+package com.shangyi.business.user.settingpwd;
 
 import android.view.View;
 import android.widget.TextView;
 
 import com.shangyi.business.R;
 import com.shangyi.business.base.BaseMVPActivity;
-import com.shangyi.business.base.BaseMVPPresenter;
 
 /**
  * 找回密码页面

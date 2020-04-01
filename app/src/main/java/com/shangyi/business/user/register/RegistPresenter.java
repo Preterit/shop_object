@@ -1,4 +1,4 @@
-package com.shangyi.business.register;
+package com.shangyi.business.user.register;
 
 import android.text.TextUtils;
 

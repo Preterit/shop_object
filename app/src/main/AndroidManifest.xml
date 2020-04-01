@@ -16,18 +16,18 @@
         <activity android:name="com.shangyi.kt.LiillActivity"></activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".NetWorkActivity" />
-        <activity android:name=".login.LoginActivity">
+        <activity android:name=".user.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".register.RegisterActivity" />
-        <activity android:name=".settingpwd.SettingPwdActivity" />
-        <activity android:name=".replenish.ReplenishActivity" />
-        <activity android:name=".login.YzmActivity" />
-        <activity android:name=".settingpwd.BackPwdActivity" />
+        <activity android:name=".user.register.RegisterActivity" />
+        <activity android:name=".user.settingpwd.SettingPwdActivity" />
+        <activity android:name=".user.replenish.ReplenishActivity" />
+        <activity android:name=".user.login.YzmActivity" />
+        <activity android:name=".user.settingpwd.BackPwdActivity" />
         <activity android:name=".ui.goods.GoodsDetailActivity" />
         <activity android:name=".editaddress.EditAddressActivity" />
     </application>

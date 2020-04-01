@@ -1,4 +1,4 @@
-package com.shangyi.business.settingpwd;
+package com.shangyi.business.user.settingpwd;
 
 import com.shangyi.business.base.BaseMVPPresenter;
 

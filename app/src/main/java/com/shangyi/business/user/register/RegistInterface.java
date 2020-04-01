@@ -1,4 +1,4 @@
-package com.shangyi.business.register;
+package com.shangyi.business.user.register;
 
 import com.shangyi.business.bean.RegisterBean;
 
