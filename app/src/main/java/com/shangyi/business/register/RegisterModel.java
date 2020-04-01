@@ -1,6 +1,7 @@
 package com.shangyi.business.register;
 
 import com.shangyi.business.base.DefaultDisposable;
+import com.shangyi.business.bean.BaseResponse;
 import com.shangyi.business.bean.RegisterBean;
 import com.shangyi.business.net.APIServer;
 import com.shangyi.business.utils.RetrofitUtils;
@@ -25,6 +26,16 @@ public class RegisterModel {
         RetrofitUtils.getInstance()
                 .getService(APIServer.class)
                 .getRegister(map)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(observer);
+        mDisposable = observer;
+    }
+
+    public void getCodeData(String map, DisposableObserver<BaseResponse> observer){
+        RetrofitUtils.getInstance()
+                .getService(APIServer.class)
+                .getCode(map)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(observer);

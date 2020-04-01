@@ -1,5 +1,6 @@
 package com.shangyi.business.net;
 
+import com.shangyi.business.bean.BaseResponse;
 import com.shangyi.business.bean.LoginBean;
 import com.shangyi.business.bean.RegisterBean;
 
@@ -8,6 +9,7 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 import retrofit2.Call;
+import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
@@ -36,4 +38,8 @@ public interface APIServer {
     @FormUrlEncoded
     @POST(Constom.REGISTER_URL)
     Observable<RegisterBean> getRegister(@FieldMap HashMap<String, String> map);
+
+    @FormUrlEncoded
+    @POST(Constom.CODE_URL)
+    Observable<BaseResponse> getCode(@Field("data") String map);
 }

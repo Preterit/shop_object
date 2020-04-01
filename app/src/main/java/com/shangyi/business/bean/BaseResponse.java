@@ -7,19 +7,40 @@ package com.shangyi.business.bean;
  */
 public class BaseResponse {
 
-    private String message;
-    private String status;
-    public static final String SUCCESS = "0000";
+    private int code;
+    private String msg;
+    private Object data;
 
-    public String getMessage() {
-        return message;
+    public int getCode() {
+        return code;
     }
 
-    public String getStatus() {
-        return status;
+    public void setCode(int code) {
+        this.code = code;
     }
 
-    public boolean isSuccess() {
-        return SUCCESS.equals(status);
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "BaseResponse{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                '}';
     }
 }

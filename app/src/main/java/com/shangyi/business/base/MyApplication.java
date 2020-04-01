@@ -1,18 +1,13 @@
 package com.shangyi.business.base;
 
-import android.app.Application;
-import android.content.Context;
-import android.content.Intent;
-
 import androidx.multidex.MultiDex;
 
-import com.alibaba.fastjson.JSON;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.sdxxtop.base.BaseApplication;
 import com.sdxxtop.base.BuildConfig;
-
+import com.shangyi.business.network.NetWorkSession;
 
 import sing.util.LogUtil;
 import sing.util.SharedPreferencesUtil;
@@ -33,7 +28,7 @@ public class MyApplication extends BaseApplication {
 
         // 在加载图片之前，你必须初始化Fresco类
         Fresco.initialize(this);
-
+        NetWorkSession.init(this, BuildConfig.DEBUG);
 
         instance = this;
         mQueue = Volley.newRequestQueue(this);

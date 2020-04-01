@@ -6,9 +6,11 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,6 +31,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     Toast mToast;
 
     private Toolbar mBacktoolbar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,16 +53,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void setBack(View.OnClickListener listener){
-        if (mBacktoolbar != null){
+    public void setBack(View.OnClickListener listener) {
+        if (mBacktoolbar != null) {
             ImageView iv = mBacktoolbar.findViewById(R.id.iv_back);
-            if (iv == null){
+            if (iv == null) {
                 return;
             }
 
-            if (listener != null){
+            if (listener != null) {
                 iv.setOnClickListener(listener);
-            }else {
+            } else {
                 iv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -70,8 +73,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
 
     }
+
     /**
      * 判断网络
+     *
      * @return
      */
     public boolean isConnNet() {
@@ -120,12 +125,14 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 申请权限
+     *
      * @param code
      * @param permissions
      */
-    public void requestPermission(int code,String... permissions){
-        ActivityCompat.requestPermissions(this,permissions,code);
+    public void requestPermission(int code, String... permissions) {
+        ActivityCompat.requestPermissions(this, permissions, code);
     }
+
     public void _setHintBack(int visibility) {
         if (mBacktoolbar != null) {
             ImageView iv = mBacktoolbar.findViewById(R.id.iv_back);
@@ -198,9 +205,9 @@ public abstract class BaseActivity extends AppCompatActivity {
             tv.setVisibility(visibility);
 
             Drawable rightDrawable = getResources().getDrawable(R.mipmap.library_icon_arrow_down);
-            if (visibility == View.GONE){
+            if (visibility == View.GONE) {
                 rightDrawable.setBounds(0, 0, 0, 0);
-            }else {
+            } else {
                 rightDrawable.setBounds(0, 0, rightDrawable.getMinimumWidth(), rightDrawable.getMinimumHeight());
             }
             tv.setCompoundDrawables(null, null, rightDrawable, null);
@@ -231,6 +238,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             iv.setOnClickListener(listener);
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
