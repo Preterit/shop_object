@@ -1,31 +1,35 @@
-package com.shangyi.business.login;
+package com.shangyi.business.user.login;
 
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 import android.widget.TextView;
 
 import com.shangyi.business.R;
 import com.shangyi.business.base.BaseMVPActivity;
+import com.shangyi.business.network.Params;
+import com.shangyi.business.user.register.RegistPresenter;
 import com.shangyi.business.user.register.RegisterActivity;
 
 /**
  * 验证码登录
  */
-public class YzmActivity extends BaseMVPActivity<YzmInterface,YzmPresenter> implements YzmInterface, View.OnClickListener  {
+public class YzmActivity extends BaseMVPActivity<YzmInterface, YzmPresenter> implements YzmInterface, View.OnClickListener  {
 
 
     private TextView mTvRegister;
     private TextView mTvGologin;
+    private TextView btnYzm;
 
     @Override
     protected void initView() {
 
         mTvRegister = findViewById(R.id.tv_goregist);
         mTvGologin = findViewById(R.id.tv_gologin);
+        btnYzm = findViewById(R.id.btn_yzm);
         mTvRegister.setOnClickListener(this);
         mTvGologin.setOnClickListener(this);
+        btnYzm.setOnClickListener(this);
     }
 
     @Override
@@ -59,9 +63,26 @@ public class YzmActivity extends BaseMVPActivity<YzmInterface,YzmPresenter> impl
                 Intent intent1 = new Intent(YzmActivity.this,LoginActivity.class);
                 startActivity(intent1);
                 break;
+            case R.id.btn_yzm://获取验证码
+                getCode();
+                break;
             default:
                 //nothing
                 break;
         }
+    }
+
+    /**
+     * 获取验证码
+     */
+    private void getCode() {
+        Params params = new Params();
+        params.put("login_name", "18614005205");
+        params.put("send_type", "1");
+        String aesData = params.getAESData();
+
+        RegistPresenter registPresenter = new RegistPresenter();
+        registPresenter.getCode(aesData);
+
     }
 }

@@ -76,78 +76,10 @@ public final class RequestUtils {
 
     private void request() {
         show();
-        VolleyRequest.RequestPost(url, tag, json, new VolleyInterface() {
-            @Override
-            public void onMySuccess(HttpResponse response) {
-
-                cancel();
-                if (response != null) {
-                    if (response.getJavaCode().equals("1")) {
-                        JSONObject dataJson = JSON.parseObject(response.getData());
-                        HttpResponse.e(dataJson.toString());
-                        if (callBack != null) {
-                            callBack.onSuccess(dataJson);
-                        }
-                    } else {
-                        String msg = response.getJavaMsg();
-                        if (StringUtil.isEmpty(msg)) {
-                            ToastUtil.showShort("信息获取失败，请重试");
-                        } else {
-                            ToastUtil.showShort(msg);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onMyError(VolleyError arg0) {
-                cancel();
-                if (callBack != null) {
-                    callBack.onError(arg0);
-                }
-            }
-        });
     }
 
     private void requestPhp() {
         show();
-        VolleyRequest.RequestPost(url, tag, json, new VolleyInterface() {
-            @Override
-            public void onMySuccess(HttpResponse response) {
-                cancel();
-                if (response != null) {
-                    if (response.getCode().equals("200")) {
-                        JSONObject jb = JSON.parseObject(response.getData());
-                        HttpResponse.e(jb.toString());
-                        callBack.onSuccess(jb);
-                    } else {
-                        if (response.getMsg() != null) {
-                            if (response.getMsg().contains("请完善")){
-                                callBack.onSuccess(null);
-                            }else{
-                                ToastUtil.showShort(response.getMsg());
-                            }
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onMyError(VolleyError arg0) {
-                cancel();
-                if (callBack != null) {
-                    callBack.onError(arg0);
-                }
-
-                if (arg0 != null && arg0.networkResponse != null && arg0.networkResponse.statusCode == 500) {
-                    ToastUtil.showShort("服务器异常");
-                }else if (arg0 != null && arg0.getMessage() != null&& arg0.getMessage().contains("ConnectException")){
-                    ToastUtil.showShort("请检查网络");
-                } else {
-                    ToastUtil.showShort(arg0.getMessage());
-                }
-            }
-        });
     }
 
     public void cancel() {
