@@ -11,8 +11,6 @@ import com.shangyi.business.base.LoadingDialog;
 import com.shangyi.business.bean.ParmsBean;
 import com.shangyi.business.http.HttpResponse;
 import com.shangyi.business.http.RequestCallBack;
-import com.shangyi.business.http.VolleyInterface;
-import com.shangyi.business.http.VolleyRequest;
 
 
 import sing.MaterialRefreshLayout;

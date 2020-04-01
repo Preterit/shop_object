@@ -1,4 +1,4 @@
-package com.shangyi.business.register;
+package com.shangyi.business.user.register;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
@@ -16,9 +16,9 @@ import com.shangyi.business.base.BaseMVPActivity;
 import com.shangyi.business.bean.ParmsBean;
 import com.shangyi.business.bean.RegisterBean;
 import com.shangyi.business.http.RequestCallBack;
-import com.shangyi.business.login.LoginActivity;
+import com.shangyi.business.user.login.LoginActivity;
 import com.shangyi.business.net.APIServer;
-import com.shangyi.business.settingpwd.SettingPwdActivity;
+import com.shangyi.business.user.settingpwd.SettingPwdActivity;
 import com.shangyi.business.utils.CheckUtil;
 import com.shangyi.business.utils.RequestUtils;
 import com.shangyi.business.utils.Utils;

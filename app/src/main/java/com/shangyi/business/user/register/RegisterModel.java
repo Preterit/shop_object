@@ -1,4 +1,4 @@
-package com.shangyi.business.register;
+package com.shangyi.business.user.register;
 
 import com.shangyi.business.base.DefaultDisposable;
 import com.shangyi.business.bean.BaseResponse;
@@ -12,7 +12,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Retrofit;
 
 /**
  * data: 2020/3/30 9:55

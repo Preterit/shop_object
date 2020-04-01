@@ -1,4 +1,4 @@
-package com.shangyi.business.replenish;
+package com.shangyi.business.user.replenish;
 
 import android.graphics.Paint;
 import android.view.View;

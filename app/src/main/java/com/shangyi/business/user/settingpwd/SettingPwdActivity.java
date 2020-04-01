@@ -1,8 +1,7 @@
-package com.shangyi.business.settingpwd;
+package com.shangyi.business.user.settingpwd;
 
 import android.content.Intent;
 import android.graphics.Paint;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -10,7 +9,7 @@ import android.widget.TextView;
 
 import com.shangyi.business.R;
 import com.shangyi.business.base.BaseMVPActivity;
-import com.shangyi.business.replenish.ReplenishActivity;
+import com.shangyi.business.user.replenish.ReplenishActivity;
 
 /**
  * 设置密码

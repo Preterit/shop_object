@@ -1,4 +1,4 @@
-package com.shangyi.business.login;
+package com.shangyi.business.user.login;
 
 import com.shangyi.business.base.BaseMVPPresenter;
 

@@ -1,4 +1,4 @@
-package com.shangyi.business.login;
+package com.shangyi.business.user.login;
 
 import android.content.Intent;
 import android.util.Log;
@@ -14,8 +14,8 @@ import com.shangyi.business.http.AESUtils;
 import com.shangyi.business.network.Params;
 import com.shangyi.business.ui.goods.GoodsDialog;
 import com.shangyi.business.net.APIServer;
-import com.shangyi.business.register.RegisterActivity;
-import com.shangyi.business.settingpwd.BackPwdActivity;
+import com.shangyi.business.user.register.RegisterActivity;
+import com.shangyi.business.user.settingpwd.BackPwdActivity;
 import com.shangyi.kt.LiillActivity;
 
 import java.util.HashMap;
