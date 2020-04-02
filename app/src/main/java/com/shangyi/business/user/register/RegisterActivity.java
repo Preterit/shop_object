@@ -12,19 +12,27 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.android.volley.VolleyError;
 import com.shangyi.business.R;
+import com.shangyi.business.api.RetrofitClient;
 import com.shangyi.business.base.BaseMVPActivity;
+import com.shangyi.business.bean.BaseResponse;
 import com.shangyi.business.bean.ParmsBean;
 import com.shangyi.business.bean.RegisterBean;
 import com.shangyi.business.http.RequestCallBack;
+import com.shangyi.business.network.Params;
 import com.shangyi.business.user.login.LoginActivity;
 import com.shangyi.business.net.APIServer;
+import com.shangyi.business.user.login.LoginModel;
 import com.shangyi.business.user.settingpwd.SettingPwdActivity;
 import com.shangyi.business.utils.CheckUtil;
 import com.shangyi.business.utils.RequestUtils;
+import com.shangyi.business.utils.RetrofitUtils;
 import com.shangyi.business.utils.Utils;
 
 import java.util.HashMap;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 import sing.util.LogUtil;
 
 /**
@@ -41,10 +49,12 @@ public class RegisterActivity extends BaseMVPActivity<RegistInterface,RegistPres
     private TextView mBtnYzm;
     private TextView mEtPhone;
     private EditText mRegisterCode;
+    private LoginModel mLoginModel;
 
     @Override
     protected void initView() {
 
+        mLoginModel = new LoginModel();
         mRegisterTitle = findViewById(R.id.register_title);
         mBtnRegister = findViewById(R.id.btn_register);
         mBtnGoLogin = findViewById(R.id.btn_gologin);
@@ -85,6 +95,8 @@ public class RegisterActivity extends BaseMVPActivity<RegistInterface,RegistPres
         switch (v.getId()){
             case R.id.btn_register:
                 initRegister();
+                Intent intent = new Intent(RegisterActivity.this,SettingPwdActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btn_gologin:
                 Intent intent1 = new Intent(RegisterActivity.this,LoginActivity.class);
@@ -92,7 +104,6 @@ public class RegisterActivity extends BaseMVPActivity<RegistInterface,RegistPres
                 break;
             case R.id.btn_yzm:
                 //获取验证码
-                timer.start();
                 getSMSCode();
                 break;
             default:
@@ -108,20 +119,7 @@ public class RegisterActivity extends BaseMVPActivity<RegistInterface,RegistPres
         String registerphone = mEtPhone.getText().toString().trim();
         String registerCode = mRegisterCode.getText().toString().trim();
 
-        String pass = presenter.isPass(registerphone, registerCode);
-        if (pass.equals("yes")){
-            //创建集合，存放参数
-            HashMap<String,String> map = new HashMap<>();
-            //添加参数
-            map.put("phone",registerphone);
-            map.put("code",registerCode);
-
-            presenter.getRegister(map);
-            Log.e("lz",registerphone + ""+registerCode+"");
-        }else {
-            showToast(pass);
-            Log.e("lz","您输入的手机号格式错误");
-        }
+        mLoginModel.register(registerphone,registerCode);
     }
 
 
@@ -132,29 +130,17 @@ public class RegisterActivity extends BaseMVPActivity<RegistInterface,RegistPres
      * 获取验证码
      */
     private void getSMSCode() {
+
         final String phone = Utils.getString(mEtPhone);
         if (!CheckUtil.checkPhone(phone)){
             return;
         }
 
-        new RequestUtils(this, null)
-                .tag(TAG)
-                .url(APIServer.NETWORK_SMS_CODE)
-                .parms(new ParmsBean("mobile", phone))
-                .parms(new ParmsBean("type", "regis"))
-                .setCallBack(false, new RequestCallBack() {
-                    @Override
-                    public void onSuccess(JSONObject obj) {
-                        LogUtil.e(obj.toString());
-                        phoneStr = phone;
-                        code = (String) JSON.parseObject(obj.toString()).get("code");
-                        timer.start();
-                    }
-                    @Override
-                    public void onError(VolleyError arg0) {
-                        super.onError(arg0);
-                    }
-                });
+        timer.start();
+        //获取验证码
+        mLoginModel.getCode(phone);
+
+
     }
 
     private CountDownTimer timer = new CountDownTimer(60000, 1000) {
@@ -171,6 +157,15 @@ public class RegisterActivity extends BaseMVPActivity<RegistInterface,RegistPres
             mBtnYzm.setText("重新获取");
         }
     };
+
+    public void getCodeData(String map, DisposableObserver<BaseResponse> observer){
+        RetrofitUtils.getInstance()
+                .getService(APIServer.class)
+                .getCode(map)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(observer);
+    }
 
     @Override
     public void Success(RegisterBean registerBean) {

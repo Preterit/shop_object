@@ -24,4 +24,38 @@ class LoginModel:BaseViewModel() {
             UIUtils.showToast(msg)
         })
     }
+
+    /**
+     * 获取验证码
+     */
+    fun getCode(phone: String) {
+        val params = Params()
+        params.put("login_name", phone)
+        params.put("send_type", 1)
+        loadOnUI({
+            RetrofitClient.apiService.getCode(params.aesData)
+        }, {
+
+            mIsLoadingShow.value = false
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+        })
+    }
+
+    /**
+     * 注册
+     */
+    fun register(phone: String, code: String) {
+        val params = Params()
+        params.put("login_name", phone)
+        params.put("code", code)
+        loadOnUI({
+            RetrofitClient.apiService.register(params.aesData)
+        }, {
+
+            mIsLoadingShow.value = false
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+        })
+    }
 }

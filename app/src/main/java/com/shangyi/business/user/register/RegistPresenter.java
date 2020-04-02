@@ -21,31 +21,6 @@ public class RegistPresenter extends BaseMVPPresenter<RegistInterface> {
     public RegisterModel mRegisterModel;
     private String TAG = "RegistPresenter";
 
-    public void getRegister(HashMap<String, String> map) {
-        mRegisterModel.getRegisterData(map, new DisposableObserver<RegisterBean>() {
-            @Override
-            public void onNext(RegisterBean registerBean) {
-                if (registerBean.getMessage().equals("注册成功")) {
-                    //返回查询到的bean
-                    view.Success(registerBean);
-                } else {
-                    //返回错getRegister误提示
-                    view.failure(registerBean.getMessage());
-                }
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                view.failure(e.toString());
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
-    }
-
 
     public String isPass(String phone, String pwd) {
         final String PHONE = "^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(17[0,1,3,5,6,7,8]))\\d{8}$";

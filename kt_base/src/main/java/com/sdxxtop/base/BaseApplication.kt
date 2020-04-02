@@ -24,7 +24,7 @@ abstract class BaseApplication : MultiDexApplication() {
         super.onCreate()
         INSTANCE = this
 
-        ConnectivityReceiver.register(this)
+//        ConnectivityReceiver.register(this)
 
         LoadSir.beginBuilder()
                 .addCallback(ErrorCallback())

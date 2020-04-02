@@ -39,4 +39,20 @@ interface ApiService {
     @POST("api/login/login")
     suspend fun login(@Field("data") data: String): BaseResponse<String?>
 
+    /**
+     * 获取验证码
+     */
+    @FormUrlEncoded
+    @POST("api/login/send_code")
+    suspend fun getCode(@Field("data") data: String): BaseResponse<String?>
+
+    /**
+     * 注册
+     */
+    @FormUrlEncoded
+    @POST("api/login/register")
+    suspend fun register(@Field("data") data: String): BaseResponse<String?>
+
+
+
 }
