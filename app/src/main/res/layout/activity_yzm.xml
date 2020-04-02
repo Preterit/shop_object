@@ -75,7 +75,7 @@
             android:text="立即注册"/>
     </LinearLayout>
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_yzmlogin"
         android:layout_marginTop="@dimen/dp_20"
         android:layout_width="@dimen/dp_325"
         android:layout_height="@dimen/dp_50"
@@ -96,7 +96,7 @@
         android:textColor="@color/login"
         android:text="登录即代表你已同意"/>
     <TextView
-        android:id="@+id/btn_userxieyi"
+        android:id="@+id/yzm_btn_userxieyi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_5"

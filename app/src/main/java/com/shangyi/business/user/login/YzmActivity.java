@@ -10,6 +10,7 @@ import com.shangyi.business.base.BaseMVPActivity;
 import com.shangyi.business.network.Params;
 import com.shangyi.business.user.register.RegistPresenter;
 import com.shangyi.business.user.register.RegisterActivity;
+import com.shangyi.kt.LiillActivity;
 
 /**
  * 验证码登录
@@ -20,6 +21,7 @@ public class YzmActivity extends BaseMVPActivity<YzmInterface, YzmPresenter> imp
     private TextView mTvRegister;
     private TextView mTvGologin;
     private TextView btnYzm;
+    private TextView mYzmXieyi;
 
     @Override
     protected void initView() {
@@ -27,9 +29,11 @@ public class YzmActivity extends BaseMVPActivity<YzmInterface, YzmPresenter> imp
         mTvRegister = findViewById(R.id.tv_goregist);
         mTvGologin = findViewById(R.id.tv_gologin);
         btnYzm = findViewById(R.id.btn_yzm);
+        mYzmXieyi = findViewById(R.id.yzm_btn_userxieyi);
         mTvRegister.setOnClickListener(this);
         mTvGologin.setOnClickListener(this);
         btnYzm.setOnClickListener(this);
+        mYzmXieyi.setOnClickListener(this);
     }
 
     @Override
@@ -65,6 +69,10 @@ public class YzmActivity extends BaseMVPActivity<YzmInterface, YzmPresenter> imp
                 break;
             case R.id.btn_yzm://获取验证码
                 getCode();
+                break;
+            case R.id.yzm_btn_userxieyi:
+                Intent intent3 = new Intent(YzmActivity.this, LiillActivity.class);
+                startActivity(intent3);
                 break;
             default:
                 //nothing
