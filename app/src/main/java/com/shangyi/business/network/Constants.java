@@ -12,4 +12,6 @@ public interface Constants {
     String USER_ID = "user_id";
 
     String BASEURL = "baseurl";
+
+    String API_KEY = "api_key"; // 加密的key
 }

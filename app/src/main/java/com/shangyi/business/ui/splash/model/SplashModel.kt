@@ -5,6 +5,8 @@ import android.view.View
 import com.sdxxtop.base.BaseViewModel
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.api.RetrofitClient
+import com.shangyi.business.http.AESUtils
+import com.shangyi.business.net.Constom
 import com.shangyi.business.network.Constants
 import com.shangyi.business.network.Params
 import com.shangyi.business.network.SpUtil
@@ -39,7 +41,7 @@ class SplashModel : BaseViewModel() {
                 var responseBody = response.body()
                 val baseUrl = responseBody?.string()?.replace("\n", "")
                 SpUtil.putString(Constants.BASEURL, baseUrl)
-                Log.e("SplashModel --2-- ", "onResponse: ${SpUtil.getString(Constants.BASEURL)}")
+//                Log.e("SplashModel --2-- ", "onResponse: ${SpUtil.getString(Constants.BASEURL)}")
                 responseBody?.close()
 
                 /**
@@ -52,14 +54,12 @@ class SplashModel : BaseViewModel() {
 
     fun getSetting() {
         loadOnUI({
-            val params = Params()
-            RetrofitClient.apiService.getSetting(params.aesData)
+            RetrofitClient.apiService.getSetting("")
         }, {
             mIsLoadingShow.value = false
-            Log.e("SplashModel -- ", "${it.toString()}")
+            SpUtil.putString(Constants.API_KEY, it?.api_key)
         }, { code, msg, t ->
             UIUtils.showToast(msg)
-            mIsLoadingShow.value = false
         })
     }
 

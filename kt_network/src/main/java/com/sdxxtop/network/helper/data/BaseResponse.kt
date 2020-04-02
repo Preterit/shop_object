@@ -8,6 +8,6 @@ package com.sdxxtop.network.helper.data
  */
 data class BaseResponse<T>(
         val `data`: T,
-        val code: Int,
+        val code: String,
         val msg: String
 )

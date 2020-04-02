@@ -96,8 +96,6 @@ public class LoginActivity extends BaseMVPActivity<LoginInterface, LoginPresente
 //                Intent intent3 = new Intent(LoginActivity.this,EditAddressActivity.class);
                 Intent intent3 = new Intent(this, LiillActivity.class);
 //                startActivity(intent3);
-
-
                 Params params = new Params();
                 String data = params.getAESData();
 

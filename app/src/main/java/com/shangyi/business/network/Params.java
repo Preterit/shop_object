@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 
 import com.shangyi.business.http.AESUtils;
+import com.shangyi.business.net.Constom;
 
 import java.util.HashMap;
 
@@ -72,9 +73,10 @@ public class Params {
 
     public String getAESData() {
         String normalData = NetUtil.getNormalData(map);
+
         String requestData = "";
         try {
-            requestData = AESUtils.encrypt(normalData, "1234567890123456");
+            requestData = AESUtils.encrypt(normalData, Constom.API_KEY);
         } catch (Exception e) {
             e.printStackTrace();
         }
