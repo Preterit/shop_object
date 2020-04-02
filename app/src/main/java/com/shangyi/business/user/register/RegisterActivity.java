@@ -158,15 +158,6 @@ public class RegisterActivity extends BaseMVPActivity<RegistInterface,RegistPres
         }
     };
 
-    public void getCodeData(String map, DisposableObserver<BaseResponse> observer){
-        RetrofitUtils.getInstance()
-                .getService(APIServer.class)
-                .getCode(map)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(observer);
-    }
-
     @Override
     public void Success(RegisterBean registerBean) {
            showToast(registerBean.getMessage()+"");

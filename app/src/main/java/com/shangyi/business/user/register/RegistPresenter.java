@@ -35,26 +35,5 @@ public class RegistPresenter extends BaseMVPPresenter<RegistInterface> {
         }
     }
 
-    public void getCode(String data) {
-        if (mRegisterModel == null) {
-            mRegisterModel = new RegisterModel();
-        }
-        mRegisterModel.getCodeData(data, new DisposableObserver<BaseResponse>() {
-            @Override
-            public void onNext(BaseResponse registerBean) {
-                Log.e(TAG, "onNext: success----  "+registerBean.toString());
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.e(TAG, "onError: " + e.toString());
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
-    }
 
 }

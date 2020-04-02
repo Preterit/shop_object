@@ -16,7 +16,7 @@ public class Constom {
     //默认域名 在获取不到动态域名的情况下。
     private static String BASRURL_DEFAULT = "http://shop.xueli001.cn/";
     //测试环境 域名
-    private static String BASRURL_DEBUG = "http://5zad4j.natappfree.cc/";
+    private static String BASRURL_DEBUG = "http://vp7kh2.natappfree.cc/";
     //获取存在sp中的动态域名
     private static String BASEURL = SpUtil.getString(Constants.BASEURL);
     //获取存在sp中的加密key
@@ -30,11 +30,11 @@ public class Constom {
 
 
     public static String netWrok() {
-        if (BuildConfig.DEBUG) {
-            return BASRURL_DEBUG;
-        } else {
+//        if (BuildConfig.DEBUG) {
+//            return BASRURL_DEBUG;
+//        } else {
             return !TextUtils.isEmpty(BASEURL) ? BASEURL : BASRURL_DEFAULT;
-        }
+//        }
     }
 
     public static final String KEY = "35549002c129b36f587aa2d8911ddce1";

@@ -68,7 +68,7 @@ public class YzmActivity extends BaseMVPActivity<YzmInterface, YzmPresenter> imp
                 startActivity(intent1);
                 break;
             case R.id.btn_yzm://获取验证码
-                getCode();
+//                getCode();?
                 break;
             case R.id.yzm_btn_userxieyi:
                 Intent intent3 = new Intent(YzmActivity.this, LiillActivity.class);
@@ -80,17 +80,4 @@ public class YzmActivity extends BaseMVPActivity<YzmInterface, YzmPresenter> imp
         }
     }
 
-    /**
-     * 获取验证码
-     */
-    private void getCode() {
-        Params params = new Params();
-        params.put("login_name", "18614005205");
-        params.put("send_type", "1");
-        String aesData = params.getAESData();
-
-        RegistPresenter registPresenter = new RegistPresenter();
-        registPresenter.getCode(aesData);
-
-    }
 }

@@ -21,25 +21,6 @@ import io.reactivex.schedulers.Schedulers;
 public class RegisterModel {
     private Disposable mDisposable = new DefaultDisposable();
 
-    public void getRegisterData(HashMap<String,String> map, DisposableObserver<RegisterBean> observer){
-        RetrofitUtils.getInstance()
-                .getService(APIServer.class)
-                .getRegister(map)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(observer);
-        mDisposable = observer;
-    }
-
-    public void getCodeData(String map, DisposableObserver<BaseResponse> observer){
-        RetrofitUtils.getInstance()
-                .getService(APIServer.class)
-                .getCode(map)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(observer);
-        mDisposable = observer;
-    }
 
     public boolean  isDisposable(){
         return mDisposable.isDisposed();
