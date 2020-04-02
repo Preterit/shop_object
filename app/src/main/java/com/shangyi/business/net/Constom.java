@@ -16,9 +16,12 @@ public class Constom {
     //默认域名 在获取不到动态域名的情况下。
     private static String BASRURL_DEFAULT = "http://shop.xueli001.cn/";
     //测试环境 域名
-    private static String BASRURL_DEBUG = "http://shop.xueli001.cn/";
+    private static String BASRURL_DEBUG = "http://5zad4j.natappfree.cc/";
     //获取存在sp中的动态域名
     private static String BASEURL = SpUtil.getString(Constants.BASEURL);
+    //获取存在sp中的加密key
+    public static String API_KEY = !TextUtils.isEmpty(SpUtil.getString(Constants.API_KEY)) ? SpUtil.getString(Constants.API_KEY) : "1234567890123456";
+
 
     /**
      * 判断是debug还是release

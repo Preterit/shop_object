@@ -75,17 +75,17 @@ class LoadDataImpl(override val context: Context, override val viewModelScope: C
                               successBlock: (T) -> Unit,
                               failBlock: (code: Int, msg: String, t: Throwable) -> Unit,
                               throwable: MutableLiveData<ApiException>) {
+
+        val t = Throwable("正常数据，业务code不是0")
         if (response == null) {
-            val t = Throwable("正常数据，业务code非200")
             failBlock(-100, "系统发生错误", t)
             return
         }
-        if (response.code == 200) {
+        if (response.code == "0") {
             successBlock(response.data)
         } else {
-            val t = Throwable("正常数据，业务code非200")
-            throwable.value = ApiException(response.code, response.msg)
-            failBlock(response.code, response.msg, t)
+            throwable.value = ApiException(response.code.toInt(), response.msg)
+            failBlock(response.code.toInt(), response.msg, t)
         }
     }
 
@@ -121,17 +121,17 @@ class LoadDataImpl(override val context: Context, override val viewModelScope: C
                                   successBlock: (BaseResponse<T>) -> Unit,
                                   failBlock: (code: Int, msg: String, t: Throwable) -> Unit,
                                   throwable: MutableLiveData<ApiException>) {
+
+        val t = Throwable("正常数据，业务code不是0")
         if (response == null) {
-            val t = Throwable("正常数据，业务code非200")
             failBlock(-100, "系统发生错误", t)
             return
         }
-        if (response.code == 200) {
+        if (response.code == "0") {
             successBlock(response)
         } else {
-            val t = Throwable("正常数据，业务code非200")
-            throwable.value = ApiException(response.code, response.msg)
-            failBlock(response.code, response.msg, t)
+            throwable.value = ApiException(response.code.toInt(), response.msg)
+            failBlock(response.code.toInt(), response.msg, t)
         }
     }
 }

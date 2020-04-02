@@ -16,10 +16,12 @@
         tools:context="com.shangyi.kt.LiillActivity">
 
         <TextView
+            android:id="@+id/KKKsuss"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="页面为空" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -8,4 +8,10 @@ import com.sdxxtop.base.BaseViewModel
  * Desc:
  */
 class LLLModel :BaseViewModel() {
+    val value = ""
+
+    fun setTx():String{
+        return value
+    }
+
 }
