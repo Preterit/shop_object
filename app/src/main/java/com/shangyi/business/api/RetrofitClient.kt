@@ -11,7 +11,6 @@ import okhttp3.OkHttpClient
  * Description:
  */
 object RetrofitClient : BaseRetrofitClient() {
-
     val apiService by lazy {
         getService(ApiService::class.java, Constom.GETNETWORK)
     }

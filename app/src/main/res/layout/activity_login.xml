@@ -34,6 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="请输入手机号或者账号"
+            android:inputType="number"
+            android:maxLines="1"
             android:textColor="@color/login"
             android:textColorHint="@color/hint"
             android:theme="@style/MyEditText" />
@@ -57,6 +59,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:maxLines="1"
             android:textColor="@color/login"
             android:textColorHint="@color/hint"
             android:theme="@style/MyEditText" />
@@ -149,5 +153,5 @@
             android:textColor="@color/login"
             android:textSize="@dimen/sp_15" />
     </LinearLayout>
-    
+
 </LinearLayout>

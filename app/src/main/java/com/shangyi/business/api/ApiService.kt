@@ -1,10 +1,15 @@
 package com.shangyi.business.api
 
 import com.sdxxtop.network.helper.data.BaseResponse
+import com.shangyi.business.bean.RegisterBean
+import com.shangyi.business.net.Constom
 import com.shangyi.kt.bean.GetSettingBean
+import io.reactivex.Observable
 import retrofit2.http.Field
+import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
+import java.util.*
 
 
 /**
@@ -28,5 +33,10 @@ interface ApiService {
     @FormUrlEncoded
     @POST("api/sys_config/getConfigInfo")
     suspend fun getAESSetting(@Field("data") data: String): BaseResponse<GetSettingBean?>
+
+
+    @FormUrlEncoded
+    @POST("api/login/login")
+    suspend fun login(@Field("data") data: String): BaseResponse<String?>
 
 }
