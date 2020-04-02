@@ -19,6 +19,7 @@ import com.shangyi.business.http.AESUtils;
 import com.shangyi.business.network.Params;
 import com.shangyi.business.ui.goods.GoodsDialog;
 import com.shangyi.business.net.APIServer;
+import com.shangyi.business.ui.poster.PosterActivity;
 import com.shangyi.business.user.register.RegisterActivity;
 import com.shangyi.business.user.settingpwd.BackPwdActivity;
 import com.shangyi.business.utils.RetrofitUtils;
@@ -107,7 +108,7 @@ public class LoginActivity extends BaseMVPActivity<LoginInterface, LoginPresente
                 startActivity(intent1);
                 break;
             case R.id.tv_back_pwd:
-                Intent intent2 = new Intent(LoginActivity.this, BackPwdActivity.class);
+                Intent intent2 = new Intent(LoginActivity.this, PosterActivity.class);
                 startActivity(intent2);
                 break;
             case R.id.btn_userxieyi:
