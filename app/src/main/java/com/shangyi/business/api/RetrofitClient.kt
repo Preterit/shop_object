@@ -11,12 +11,9 @@ import okhttp3.OkHttpClient
  * Description:
  */
 object RetrofitClient : BaseRetrofitClient() {
+
     val apiService by lazy {
         getService(ApiService::class.java, Constom.GETNETWORK)
-    }
-
-    val apiServicePort by lazy {
-        getService(ApiService::class.java, Constom.GETNETWORK_PORT)
     }
 
     override fun isDebug(): Boolean {

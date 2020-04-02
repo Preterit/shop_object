@@ -10,4 +10,6 @@ public interface Constants {
 
     String PART_ID = "part_id";
     String USER_ID = "user_id";
+
+    String BASEURL = "baseurl";
 }

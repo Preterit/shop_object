@@ -3,7 +3,7 @@ package com.shangyi.business.api
 import com.sdxxtop.network.helper.data.BaseResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
+import retrofit2.http.POST
 
 
 /**
@@ -20,6 +20,8 @@ interface ApiService {
 //        const val BASE_URL = "http://envir.test.sdxxtop.com/api/"
     }
 
-    @GET("server")
-    suspend fun postGetSetting(): String
+    @FormUrlEncoded
+    @POST("api/sys_config/getConfigInfo")
+    suspend fun getSetting(@Field("data") data: String): BaseResponse<Any?>
+
 }

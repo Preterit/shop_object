@@ -1,8 +1,13 @@
 package com.shangyi.business.ui.splash.model
 
 import android.util.Log
+import android.view.View
 import com.sdxxtop.base.BaseViewModel
-import com.shangyi.kt.NetInterceptor
+import com.sdxxtop.base.utils.UIUtils
+import com.shangyi.business.api.RetrofitClient
+import com.shangyi.business.network.Constants
+import com.shangyi.business.network.Params
+import com.shangyi.business.network.SpUtil
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.IOException
@@ -14,9 +19,12 @@ import java.io.IOException
  * Desc:
  */
 class SplashModel : BaseViewModel() {
+    /**
+     * 动态获取域名
+     */
     fun loadSettingInfo() {
         val url = "http://39.106.156.132/server"
-        val okHttpClient = OkHttpClient().newBuilder().addInterceptor(NetInterceptor()).build()
+        val okHttpClient = OkHttpClient().newBuilder().build()
         val request: Request = Request.Builder()
                 .url(url)
                 .get() //默认就是GET请求，可以不写
@@ -29,10 +37,29 @@ class SplashModel : BaseViewModel() {
 
             override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
                 var responseBody = response.body()
-                Log.e("SplashModel --2-- ", "onResponse: ${responseBody?.string()}")
+                val baseUrl = responseBody?.string()?.replace("\n", "")
+                SpUtil.putString(Constants.BASEURL, baseUrl)
+                Log.e("SplashModel --2-- ", "onResponse: ${SpUtil.getString(Constants.BASEURL)}")
                 responseBody?.close()
-            }
 
+                /**
+                 * 获取配置信息
+                 */
+                getSetting()
+            }
+        })
+    }
+
+    fun getSetting() {
+        loadOnUI({
+            val params = Params()
+            RetrofitClient.apiService.getSetting(params.aesData)
+        }, {
+            mIsLoadingShow.value = false
+            Log.e("SplashModel -- ", "${it.toString()}")
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
         })
     }
 
