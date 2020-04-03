@@ -45,6 +45,7 @@ class LoginModel : BaseViewModel() {
             }
             mIsLoadingShow.value = false
         }, { code, msg, t ->
+            mIsLoadingShow.value = false
             UIUtils.showToast(msg)
         })
     }
@@ -77,6 +78,7 @@ class LoginModel : BaseViewModel() {
                  password: String = "",
                  repeat_password: String = ""
     ) {
+        showLoadingDialog(true)
         val params = Params()
         params.put("login_name", phone)
         params.put("code", code)
@@ -92,6 +94,7 @@ class LoginModel : BaseViewModel() {
             mIsLoadingShow.value = false
         }, { code, msg, t ->
             UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
         })
     }
 
@@ -111,10 +114,9 @@ class LoginModel : BaseViewModel() {
             params.put("gender", gender)
             params.put("birthday", birthday)
             params.put("sign", sign)
-            RetrofitClient.apiService.register(params.aesData)
+            RetrofitClient.apiService.commitInfo(params.aesData)
         }, {
-            val forMatGson = FormatGson.instance.forMatGson(it, Any::class.java)
-            commitInfoSuccess.value = it == null
+            commitInfoSuccess.value = it != null
             mIsLoadingShow.value = false
         }, { code, msg, t ->
             UIUtils.showToast(msg)

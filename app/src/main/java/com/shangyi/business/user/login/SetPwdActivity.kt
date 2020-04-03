@@ -45,7 +45,6 @@ class SetPwdActivity : BaseKTActivity<ActivitySetPwdBinding, LoginModel>() {
         when (v.id) {
             R.id.btnRegist -> {
                 register()
-                startActivity(Intent(this, SetUserinfoActivity::class.java))
             }
         }
     }

@@ -8,17 +8,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.lifecycle.Observer;
+
+import com.sdxxtop.base.BaseKTActivity;
 import com.sdxxtop.base.BaseNormalActivity;
 import com.sdxxtop.base.utils.UIUtils;
 import com.shangyi.business.R;
 import com.shangyi.business.databinding.ActivityLoginBinding;
+import com.shangyi.business.ui.MainActivity;
 import com.shangyi.business.ui.goods.GoodsDialog;
 import com.shangyi.business.ui.poster.PosterActivity;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * 登陆界面
  */
-public class LoginActivity extends BaseNormalActivity<ActivityLoginBinding> implements View.OnClickListener {
+public class LoginActivity extends BaseKTActivity<ActivityLoginBinding, LoginModel> implements View.OnClickListener {
 
     private final String TAG = "LoginActivity";
 
@@ -29,7 +35,6 @@ public class LoginActivity extends BaseNormalActivity<ActivityLoginBinding> impl
     private EditText mEtPhone;
     private EditText mEtPwd;
     private TextView mBtnUserxieyi;
-    private LoginModel loginModel = new LoginModel();
 
 
     @Override
@@ -72,7 +77,7 @@ public class LoginActivity extends BaseNormalActivity<ActivityLoginBinding> impl
             return;
         }
 
-        loginModel.login(phone, pwd, "0", 1);
+        getMBinding().getVm().login(phone, pwd, "", 1);
     }
 
 
@@ -101,5 +106,29 @@ public class LoginActivity extends BaseNormalActivity<ActivityLoginBinding> impl
 
         InputFilter[] filters = {new InputFilter.LengthFilter(11)};
         mEtPhone.setFilters(filters);
+    }
+
+    @NotNull
+    @Override
+    public Class<LoginModel> vmClazz() {
+        return LoginModel.class;
+    }
+
+    @Override
+    public void bindVM() {
+        getMBinding().setVm(getMViewModel());
+    }
+
+    @Override
+    public void initObserve() {
+        getMBinding().getVm().getLoginSuccess().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
+                }
+            }
+        });
     }
 }

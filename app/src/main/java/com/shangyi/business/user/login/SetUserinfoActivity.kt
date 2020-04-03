@@ -1,6 +1,7 @@
 package com.shangyi.business.user.login
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.view.Gravity
 import android.view.View
@@ -13,6 +14,7 @@ import com.sdxxtop.base.BaseKTActivity
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivitySetUserinfoBinding
+import com.shangyi.business.ui.MainActivity
 import kotlinx.android.synthetic.main.activity_set_userinfo.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -36,14 +38,17 @@ class SetUserinfoActivity : BaseKTActivity<ActivitySetUserinfoBinding, LoginMode
         checkWindow?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         checkDialog.findViewById<TextView>(R.id.tvNv).setOnClickListener {
             sex = 0
+            tvSex.text = "女"
             checkDialog.dismiss()
         }
         checkDialog.findViewById<TextView>(R.id.tvMan).setOnClickListener {
             sex = 1
+            tvSex.text = "男"
             checkDialog.dismiss()
         }
         checkDialog.findViewById<TextView>(R.id.tvBaomi).setOnClickListener {
             sex = 2
+            tvSex.text = "保密"
             checkDialog.dismiss()
         }
         checkDialog.findViewById<TextView>(R.id.tvCancel).setOnClickListener { checkDialog.dismiss() }
@@ -65,6 +70,7 @@ class SetUserinfoActivity : BaseKTActivity<ActivitySetUserinfoBinding, LoginMode
             val format = SimpleDateFormat("yyyy-MM-dd")
             try {
                 birthday = format.format(date)
+                tvBirthday.text = birthday
             } finally {
                 birthday = ""
             }
@@ -101,18 +107,24 @@ class SetUserinfoActivity : BaseKTActivity<ActivitySetUserinfoBinding, LoginMode
     }
 
     override fun initObserve() {
-        mBinding.vm?.commitInfoSuccess?.observe(this,androidx.lifecycle.Observer {
+        mBinding.vm?.commitInfoSuccess?.observe(this, androidx.lifecycle.Observer {
             if (it) {
                 UIUtils.showToast("提交成功")
                 login()
+            }
+        })
+        mBinding.vm?.loginSuccess?.observe(this, androidx.lifecycle.Observer {
+            if (it) {
+                startActivity(Intent(this@SetUserinfoActivity, MainActivity::class.java))
+                finish()
             }
         })
     }
 
 
     override fun initView() {
-        intent?.getStringExtra("registerphone") ?: ""
-        intent?.getStringExtra("password") ?: ""
+        registerphone = intent?.getStringExtra("registerphone") ?: ""
+        password = intent?.getStringExtra("password") ?: ""
     }
 
     override fun onClick(v: View) {

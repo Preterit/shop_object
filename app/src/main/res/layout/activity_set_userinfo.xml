@@ -99,8 +99,9 @@
                 android:onClick="@{activity::onClick}"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
-                android:text="性别"
-                android:textColor="#8B8B8B"
+                android:textColorHint="#8B8B8B"
+                android:textColor="@color/black"
+                android:hint="性别"
                 android:textSize="15sp" />
 
             <TextView
@@ -116,8 +117,9 @@
                 android:onClick="@{activity::onClick}"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
-                android:text="生日"
-                android:textColor="#8B8B8B"
+                android:hint="生日"
+                android:textColorHint="#8B8B8B"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <TextView
@@ -154,5 +156,6 @@
             android:src="@drawable/next_icon"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/llLayout" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
