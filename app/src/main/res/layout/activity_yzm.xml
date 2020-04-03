@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.shangyi.business.user.login.LoginModel" />
+            type="com.shangyi.kt.ui.userlogin.model.LoginModel" />
     </data>
 
     <LinearLayout
@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:background="@mipmap/login_bg_img"
         android:orientation="vertical"
-        tools:context=".user.login.LoginActivity">
+        tools:context="com.shangyi.kt.ui.userlogin.login.LoginActivity">
 
         <ImageView
             android:id="@+id/logo_icon"

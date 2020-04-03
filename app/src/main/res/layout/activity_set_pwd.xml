@@ -7,18 +7,18 @@
 
         <variable
             name="vm"
-            type="com.shangyi.business.user.login.LoginModel" />
+            type="com.shangyi.kt.ui.userlogin.model.LoginModel" />
 
         <variable
             name="activity"
-            type="com.shangyi.business.user.login.SetPwdActivity" />
+            type="com.shangyi.kt.ui.userlogin.SetPwdActivity" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".user.login.SetPwdActivity">
+        tools:context="com.shangyi.kt.ui.userlogin.SetPwdActivity">
 
         <TextView
             android:id="@+id/tvSetPwd"

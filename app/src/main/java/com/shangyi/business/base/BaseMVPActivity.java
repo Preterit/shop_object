@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.shangyi.business.NetWorkActivity;
 import com.shangyi.business.R;
 import com.shangyi.business.utils.StatusBarUtil;
 

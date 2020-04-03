@@ -5,7 +5,7 @@
     <data>
         <variable
             name="vm"
-            type="com.shangyi.business.user.login.LoginModel" />
+            type="com.shangyi.kt.ui.userlogin.model.LoginModel" />
     </data>
 
     <LinearLayout
@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:background="@mipmap/register_bg_img"
         android:orientation="vertical"
-        tools:context=".user.login.RegisterActivity">
+        tools:context="com.shangyi.kt.ui.userlogin.login.RegisterActivity">
 
         <TextView
             android:id="@+id/register_title"

@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
-import com.shangyi.business.NetWorkActivity;
 import com.shangyi.business.R;
 
 /**

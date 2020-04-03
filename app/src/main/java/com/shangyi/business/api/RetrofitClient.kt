@@ -1,7 +1,6 @@
 package com.shangyi.business.api
 
 import com.sdxxtop.network.api.BaseRetrofitClient
-import com.shangyi.business.net.Constom
 import okhttp3.OkHttpClient
 
 /**

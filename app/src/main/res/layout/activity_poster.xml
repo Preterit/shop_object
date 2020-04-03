@@ -7,14 +7,14 @@
 
         <variable
             name="vm"
-            type="com.shangyi.business.ui.poster.model.PosterModel" />
+            type="com.shangyi.kt.ui.poster.model.PosterModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@mipmap/posterbg"
-        tools:context=".ui.poster.PosterActivity">
+        tools:context="com.shangyi.kt.ui.poster.PosterActivity">
 
         <ImageView
             android:layout_width="wrap_content"

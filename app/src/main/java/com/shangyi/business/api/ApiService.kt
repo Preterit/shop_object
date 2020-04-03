@@ -1,7 +1,7 @@
 package com.shangyi.business.api
 
 import com.sdxxtop.network.helper.data.BaseResponse
-import com.shangyi.kt.bean.GetSettingBean
+import com.shangyi.kt.ui.splash.bean.GetSettingBean
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST

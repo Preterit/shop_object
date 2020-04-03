@@ -6,11 +6,11 @@
 
         <variable
             name="vm"
-            type="com.shangyi.business.ui.splash.model.SplashModel" />
+            type="com.shangyi.kt.ui.splash.model.SplashModel" />
 
         <variable
             name="activity"
-            type="com.shangyi.business.ui.splash.SplashActivity" />
+            type="com.shangyi.kt.ui.splash.SplashActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

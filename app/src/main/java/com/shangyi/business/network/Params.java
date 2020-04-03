@@ -3,9 +3,8 @@ package com.shangyi.business.network;
 import android.content.Context;
 import android.text.TextUtils;
 
-
 import com.sdxxtop.network.utils.AESUtils;
-import com.shangyi.business.net.Constom;
+import com.shangyi.business.api.Constom;
 
 import java.util.HashMap;
 
