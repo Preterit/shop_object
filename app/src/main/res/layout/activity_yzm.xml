@@ -1,120 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@mipmap/login_bg_img"
-    tools:context=".user.login.LoginActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/logo_icon"
-        android:layout_width="@dimen/dp_80"
-        android:layout_height="@dimen/dp_80"
-        android:layout_marginTop="@dimen/dp_102"
-        android:layout_marginLeft="@dimen/dp_140"
-        android:layout_marginRight="@dimen/dp_140"
-        android:background="@mipmap/ic_launcher"/>
+    <data>
 
-    <EditText
-        android:id="@+id/et_phone"
+        <variable
+            name="vm"
+            type="com.shangyi.business.user.login.LoginModel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_60"
-        android:layout_marginLeft="@dimen/dp_37"
-        android:layout_marginRight="@dimen/dp_37"
-        android:textSize="16sp"
-        android:textColor="@color/login"
-        android:textColorHint="@color/hint"
-        android:theme="@style/MyEditText"
-        android:hint="请输入手机号"/>
-    <RelativeLayout
-        android:layout_marginTop="@dimen/dp_20"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:layout_marginLeft="@dimen/dp_37"
-        android:layout_marginRight="@dimen/dp_37">
+        android:layout_height="match_parent"
+        android:background="@mipmap/login_bg_img"
+        android:orientation="vertical"
+        tools:context=".user.login.LoginActivity">
+
+        <ImageView
+            android:id="@+id/logo_icon"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_80"
+            android:layout_marginLeft="@dimen/dp_140"
+            android:layout_marginTop="@dimen/dp_102"
+            android:layout_marginRight="@dimen/dp_140"
+            android:background="@mipmap/ic_launcher" />
+
         <EditText
+            android:id="@+id/et_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:layout_marginLeft="@dimen/dp_37"
+            android:layout_marginTop="@dimen/dp_60"
+            android:layout_marginRight="@dimen/dp_37"
+            android:hint="请输入手机号或者账号"
+            android:inputType="number"
+            android:maxLines="1"
             android:textColor="@color/login"
             android:textColorHint="@color/hint"
-            android:theme="@style/MyEditText"
-            android:hint="请输入验证码"/>
-        <TextView
-            android:id="@+id/btn_yzm"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_30"
-            android:layout_marginLeft="@dimen/dp_190"
-            android:textColor="@color/btnyzm"
-            android:textSize="@dimen/sp_15"
-            android:text="获取验证码"/>
-    </RelativeLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_180"
-        android:layout_marginRight="@dimen/dp_37"
-        android:layout_marginTop="@dimen/dp_20"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
+            android:textSize="15sp"
+            android:theme="@style/MyEditText" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="还没有账户？"
-            android:textSize="@dimen/sp_14"
-            android:textColor="@color/login"/>
-        <TextView
-            android:id="@+id/tv_goregist"
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:textSize="@dimen/sp_14"
-            android:textColor="@color/btnyzm"
-            android:text="立即注册"/>
-    </LinearLayout>
-    <Button
-        android:id="@+id/btn_yzmlogin"
-        android:layout_marginTop="@dimen/dp_20"
-        android:layout_width="@dimen/dp_325"
-        android:layout_height="@dimen/dp_50"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:background="@drawable/btn"
-        android:textSize="22sp"
-        android:textColor="@color/btnregister"
-        android:text="登录"/>
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/dp_18"
-    android:gravity="center"
-    android:orientation="horizontal">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/login"
-        android:text="登录即代表你已同意"/>
-    <TextView
-        android:id="@+id/yzm_btn_userxieyi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_5"
-        android:textColor="@color/btnyzm"
-        android:text="《用户协议》"/>
-</LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/dp_60"
-        android:orientation="horizontal">
+            android:layout_marginLeft="@dimen/dp_37"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_37">
+
+            <EditText
+                android:id="@+id/etCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入验证码"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="@color/login"
+                android:textColorHint="@color/hint"
+                android:textSize="15sp"
+                android:theme="@style/MyEditText" />
+
+            <TextView
+                android:id="@+id/btn_yzm"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_30"
+                android:layout_alignParentRight="true"
+                android:text="获取验证码"
+                android:textColor="@color/btnyzm"
+                android:textSize="@dimen/sp_15" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_180"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_37"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="还没有账户？"
+                android:textColor="@color/login"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:id="@+id/tv_goregist"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="立即注册"
+                android:textColor="@color/btnyzm"
+                android:textSize="@dimen/sp_14" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_yzmlogin"
+            android:layout_width="@dimen/dp_325"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@drawable/btn"
+            android:text="登录"
+            android:textColor="@color/btnregister"
+            android:textSize="17sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_18"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="登录蓝标大学代表你以同意"
+                android:textColor="@color/login" />
+
+            <TextView
+                android:id="@+id/yzm_btn_userxieyi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:text="《蓝标大学用户协议》"
+                android:textColor="@color/btnyzm" />
+        </LinearLayout>
+
+
         <TextView
             android:id="@+id/tv_gologin"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="—— 密码登录 ——"
             android:textColor="@color/login"
-            android:textSize="@dimen/sp_15"
-            android:text="—— 密码登录 ——"/>
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
     </LinearLayout>
-</LinearLayout>
+</layout>

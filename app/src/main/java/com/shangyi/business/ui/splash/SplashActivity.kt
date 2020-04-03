@@ -33,6 +33,7 @@ class SplashActivity : BaseKTActivity<ActivitySplashBinding, SplashModel>() {
         when (v.id) {
             R.id.tvClick -> {
                 startActivity(Intent(this, LoginActivity::class.java))
+                finish()
             }
         }
     }

@@ -6,6 +6,7 @@
 
 
     <color name="login">#f7f5f6</color>
+    <color name="color_DDDDDD">#DDDDDD</color>
     <color name="registertitle">#2F2F2F</color>
     <color name="btnregister">#F1110D</color>
     <color name="btnyzm">#FFEE00</color>
@@ -33,4 +34,5 @@
     <color name="border">#C3C3C3</color> <!--按钮边框-->
     <color name="color_white">#FFFFFF</color>
     <color name="color_white_p">#E5E5E5</color>
+    <color name="color_2F2F2F">#2F2F2F</color>
 </resources>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.shangyi.business.user.login.LoginModel" />
+
+        <variable
+            name="activity"
+            type="com.shangyi.business.user.login.SetUserinfoActivity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".user.login.SetUserinfoActivity">
+
+        <TextView
+            android:id="@+id/tvDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="100dp"
+            android:text="补充个人资料信息"
+            android:textColor="@color/color_2F2F2F"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/redLine"
+            android:layout_width="50dp"
+            android:layout_height="7dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/shape_login_red_line_bg"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@+id/tvDesc"
+            app:layout_constraintTop_toBottomOf="@+id/tvDesc" />
+
+        <TextView
+            android:id="@+id/skip"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:onClick="@{activity::onClick}"
+            android:text="跳过"
+            android:textColor="#F1110D"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDesc"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvDesc" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:background="#F1110D"
+            app:layout_constraintLeft_toLeftOf="@+id/skip"
+            app:layout_constraintRight_toRightOf="@+id/skip"
+            app:layout_constraintTop_toBottomOf="@+id/skip" />
+
+        <LinearLayout
+            android:id="@+id/llLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="30dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/etNiCheng"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="昵称"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/color_DDDDDD" />
+
+            <TextView
+                android:id="@+id/tvSex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/icon_arrows_right"
+                android:onClick="@{activity::onClick}"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="性别"
+                android:textColor="#8B8B8B"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/color_DDDDDD" />
+
+            <TextView
+                android:id="@+id/tvBirthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/icon_arrows_right"
+                android:onClick="@{activity::onClick}"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="生日"
+                android:textColor="#8B8B8B"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/color_DDDDDD" />
+
+            <EditText
+                android:id="@+id/etQianMing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="个性签名"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/color_DDDDDD" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivNext"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="37dp"
+            android:background="@drawable/btnnext"
+            android:onClick="@{activity::onClick}"
+            android:padding="15dp"
+            android:src="@drawable/next_icon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llLayout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

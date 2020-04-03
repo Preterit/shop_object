@@ -1,7 +1,9 @@
-package com.shangyi.business;
+package com.shangyi.business.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.shangyi.business.R;
 
 public class MainActivity extends AppCompatActivity {
 

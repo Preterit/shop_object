@@ -8,17 +8,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.sdxxtop.base.BaseNormalActivity;
 import com.sdxxtop.base.utils.UIUtils;
 import com.shangyi.business.R;
-import com.shangyi.business.base.BaseMVPActivity;
+import com.shangyi.business.databinding.ActivityLoginBinding;
 import com.shangyi.business.ui.goods.GoodsDialog;
 import com.shangyi.business.ui.poster.PosterActivity;
-import com.shangyi.business.user.register.RegisterActivity;
 
 /**
  * 登陆界面
  */
-public class LoginActivity extends BaseMVPActivity<LoginInterface, LoginPresenter> implements LoginInterface, View.OnClickListener {
+public class LoginActivity extends BaseNormalActivity<ActivityLoginBinding> implements View.OnClickListener {
 
     private final String TAG = "LoginActivity";
 
@@ -31,47 +31,6 @@ public class LoginActivity extends BaseMVPActivity<LoginInterface, LoginPresente
     private TextView mBtnUserxieyi;
     private LoginModel loginModel = new LoginModel();
 
-    @Override
-    protected void initView() {
-        mTvRegister = findViewById(R.id.tv_goregist);
-        mTvYzm = findViewById(R.id.tv_goyzm);
-        mTvBackPwd = findViewById(R.id.tv_back_pwd);
-        mBtnLogin = findViewById(R.id.btn_login);
-        mEtPhone = findViewById(R.id.et_phone);
-        mEtPwd = findViewById(R.id.et_pwd);
-        mBtnUserxieyi = findViewById(R.id.btn_userxieyi);
-
-        mTvRegister.setOnClickListener(this);
-        mTvYzm.setOnClickListener(this);
-        mTvBackPwd.setOnClickListener(this);
-        mBtnLogin.setOnClickListener(this);
-        mBtnUserxieyi.setOnClickListener(this);
-        //字体加粗
-        mTvYzm.getPaint().setFakeBoldText(true);
-
-        InputFilter[] filters = {new InputFilter.LengthFilter(11)};
-        mEtPhone.setFilters(filters);
-    }
-
-    @Override
-    protected void initData() {
-
-    }
-
-    @Override
-    protected void setListener() {
-
-    }
-
-    @Override
-    protected int setView() {
-        return R.layout.activity_login;
-    }
-
-    @Override
-    protected LoginPresenter initPresenter() {
-        return new LoginPresenter();
-    }
 
     @Override
     public void onClick(View v) {
@@ -113,8 +72,34 @@ public class LoginActivity extends BaseMVPActivity<LoginInterface, LoginPresente
             return;
         }
 
-        loginModel.login(phone,pwd);
+        loginModel.login(phone, pwd, "0", 1);
     }
 
 
+    @Override
+    public int layoutId() {
+        return R.layout.activity_login;
+    }
+
+    @Override
+    public void initView() {
+        mTvRegister = findViewById(R.id.tv_goregist);
+        mTvYzm = findViewById(R.id.tv_goyzm);
+        mTvBackPwd = findViewById(R.id.tv_back_pwd);
+        mBtnLogin = findViewById(R.id.btn_login);
+        mEtPhone = findViewById(R.id.et_phone);
+        mEtPwd = findViewById(R.id.et_pwd);
+        mBtnUserxieyi = findViewById(R.id.btn_userxieyi);
+
+        mTvRegister.setOnClickListener(this);
+        mTvYzm.setOnClickListener(this);
+        mTvBackPwd.setOnClickListener(this);
+        mBtnLogin.setOnClickListener(this);
+        mBtnUserxieyi.setOnClickListener(this);
+        //字体加粗
+        mTvYzm.getPaint().setFakeBoldText(true);
+
+        InputFilter[] filters = {new InputFilter.LengthFilter(11)};
+        mEtPhone.setFilters(filters);
+    }
 }

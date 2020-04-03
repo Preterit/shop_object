@@ -14,12 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.poster.PosterActivity"></activity>
-        <activity android:name="com.shangyi.kt.LiiiiiActivity"></activity>
+        <activity android:name=".user.login.SetUserinfoActivity"></activity>
+        <activity android:name=".user.login.SetPwdActivity" />
+        <activity android:name=".ui.poster.PosterActivity" />
         <activity android:name="com.shangyi.kt.LiillActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".ui.MainActivity" />
         <activity android:name=".NetWorkActivity" />
-        <activity android:name=".user.login.LoginActivity" />
+        <activity
+            android:name=".user.login.LoginActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,8 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".user.register.RegisterActivity" />
-        <activity android:name=".user.settingpwd.SettingPwdActivity" />
+        <activity android:name=".user.login.RegisterActivity" />
         <activity android:name=".user.replenish.ReplenishActivity" />
         <activity android:name=".user.login.YzmActivity" />
         <activity android:name=".user.settingpwd.BackPwdActivity" />
