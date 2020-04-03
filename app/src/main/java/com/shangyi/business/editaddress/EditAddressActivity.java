@@ -20,7 +20,6 @@ import com.lljjcoder.bean.DistrictBean;
 import com.lljjcoder.bean.ProvinceBean;
 import com.lljjcoder.style.cityjd.JDCityConfig;
 import com.lljjcoder.style.cityjd.JDCityPicker;
-import com.shangyi.business.MainActivity;
 import com.shangyi.business.R;
 
 import java.util.ArrayList;
