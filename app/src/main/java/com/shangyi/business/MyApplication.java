@@ -1,4 +1,4 @@
-package com.shangyi.business.base;
+package com.shangyi.business;
 
 import androidx.multidex.MultiDex;
 
