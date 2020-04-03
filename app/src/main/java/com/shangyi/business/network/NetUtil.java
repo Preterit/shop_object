@@ -7,8 +7,6 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 
-import com.shangyi.business.http.AESUtils;
-
 import org.apache.http.conn.ConnectTimeoutException;
 import org.json.JSONObject;
 

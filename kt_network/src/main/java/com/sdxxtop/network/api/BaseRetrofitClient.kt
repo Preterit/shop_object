@@ -81,4 +81,13 @@ abstract class BaseRetrofitClient {
                 .create(clazz)
     }
 
+    fun <S> getCusService(clazz: Class<S>, baseUrl: String): S {
+        return Retrofit.Builder()
+                .addConverterFactory(CustomGsonConverterFactory.create())
+                .baseUrl(baseUrl)
+                .client(client)
+                .build()
+                .create(clazz)
+    }
+
 }

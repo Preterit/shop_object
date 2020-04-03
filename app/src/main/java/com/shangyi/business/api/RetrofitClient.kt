@@ -14,7 +14,9 @@ object RetrofitClient : BaseRetrofitClient() {
     val apiService by lazy {
         getService(ApiService::class.java, Constom.GETNETWORK)
     }
-
+    val apiCusService by lazy {
+        getCusService(ApiService::class.java, Constom.GETNETWORK)
+    }
     override fun isDebug(): Boolean {
         return true
     }

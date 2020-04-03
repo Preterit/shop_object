@@ -3,7 +3,6 @@ package com.shangyi.business.user.login;
 import android.content.Intent;
 import android.text.InputFilter;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,29 +10,10 @@ import android.widget.TextView;
 
 import com.sdxxtop.base.utils.UIUtils;
 import com.shangyi.business.R;
-import com.shangyi.business.api.RetrofitClient;
 import com.shangyi.business.base.BaseMVPActivity;
-import com.shangyi.business.bean.LoginBean;
-import com.shangyi.business.bean.RegisterBean;
-import com.shangyi.business.http.AESUtils;
-import com.shangyi.business.network.Params;
 import com.shangyi.business.ui.goods.GoodsDialog;
-import com.shangyi.business.net.APIServer;
 import com.shangyi.business.ui.poster.PosterActivity;
 import com.shangyi.business.user.register.RegisterActivity;
-import com.shangyi.business.user.settingpwd.BackPwdActivity;
-import com.shangyi.business.utils.RetrofitUtils;
-import com.shangyi.kt.LiillActivity;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import io.reactivex.Observable;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * 登陆界面

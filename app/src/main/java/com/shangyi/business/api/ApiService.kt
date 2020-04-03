@@ -3,6 +3,7 @@ package com.shangyi.business.api
 import com.sdxxtop.network.helper.data.BaseResponse
 import com.shangyi.business.bean.RegisterBean
 import com.shangyi.business.net.Constom
+import com.shangyi.kt.bean.GetCodeBean
 import com.shangyi.kt.bean.GetSettingBean
 import io.reactivex.Observable
 import retrofit2.http.Field

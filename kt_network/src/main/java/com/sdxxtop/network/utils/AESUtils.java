@@ -1,4 +1,4 @@
-package com.shangyi.business.http;
+package com.sdxxtop.network.utils;
 
 import android.util.Base64;
 

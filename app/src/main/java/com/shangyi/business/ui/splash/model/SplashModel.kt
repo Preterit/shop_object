@@ -1,14 +1,10 @@
 package com.shangyi.business.ui.splash.model
 
 import android.util.Log
-import android.view.View
 import com.sdxxtop.base.BaseViewModel
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.api.RetrofitClient
-import com.shangyi.business.http.AESUtils
-import com.shangyi.business.net.Constom
 import com.shangyi.business.network.Constants
-import com.shangyi.business.network.Params
 import com.shangyi.business.network.SpUtil
 import okhttp3.OkHttpClient
 import okhttp3.Request
