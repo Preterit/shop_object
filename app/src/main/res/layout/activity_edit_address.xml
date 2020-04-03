@@ -27,24 +27,15 @@
             android:textColor="#666666"
             android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/img_right"
-            android:layout_width="26px"
-            android:layout_height="26px"
-            android:layout_alignBaseline="@id/receipt"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="24px"
-            android:background="@mipmap/ic_back_left" />
-
         <EditText
             android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/receipt"
-            android:layout_toLeftOf="@id/img_right"
             android:layout_toRightOf="@id/receipt"
             android:background="@null"
             android:textSize="14sp"
+            android:hint="请输入收货人姓名"
             android:layout_marginLeft="40px"
             android:layout_marginRight="24px"/>
 
@@ -59,25 +50,16 @@
             android:textColor="#666666"
             android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/img_phone_right"
-            android:layout_width="26px"
-            android:layout_height="26px"
-            android:layout_alignBaseline="@id/phone"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="24px"
-            android:background="@mipmap/ic_back_left" />
-
         <EditText
             android:id="@+id/et_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/phone"
-            android:layout_toLeftOf="@id/img_phone_right"
             android:layout_toRightOf="@id/phone"
             android:background="@null"
             android:inputType="phone"
             android:textSize="14sp"
+            android:hint="请输入手机号"
             android:layout_marginLeft="24px"
             android:layout_marginRight="24px"/>
 
@@ -99,14 +81,13 @@
             android:layout_alignBaseline="@id/address"
             android:layout_alignParentRight="true"
             android:layout_marginRight="24px"
-            android:background="@mipmap/ic_back_left" />
+            android:background="@mipmap/right" />
 
         <TextView
             android:id="@+id/tv_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/address"
-            android:layout_toLeftOf="@id/img_phone_right"
             android:layout_toRightOf="@id/address"
             android:textSize="14sp"
             android:textColor="@color/sub_color_b"
@@ -173,21 +154,23 @@
 
     <TextView
         android:id="@+id/tv_del"
-        android:layout_width="match_parent"
-        android:layout_height="100px"
-        android:textColor="#FF0000"
+        android:layout_width="560px"
+        android:layout_height="76px"
+        android:textColor="@color/white"
         android:textSize="14sp"
-        android:text="删除收货地址"
-        android:gravity="center_vertical"
-        android:layout_below="@id/layout_default"
-        android:background="@drawable/shape_corners_write1"
+        android:text="删除地址"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btnnext"
         android:layout_margin="24px"
+        android:layout_below="@+id/tv_save"
         android:paddingLeft="24px"/>
     <TextView
         android:id="@+id/tv_save"
         android:layout_width="560px"
         android:layout_height="76px"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/dp_120"
+        android:layout_below="@+id/layout_default"
         android:background="@drawable/btnnext"
         android:layout_centerHorizontal="true"
         android:text="保存地址"

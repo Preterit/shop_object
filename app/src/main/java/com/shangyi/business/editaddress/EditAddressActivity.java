@@ -1,15 +1,26 @@
 package com.shangyi.business.editaddress;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lljjcoder.Interface.OnCityItemClickListener;
+import com.lljjcoder.bean.CityBean;
+import com.lljjcoder.bean.DistrictBean;
+import com.lljjcoder.bean.ProvinceBean;
+import com.lljjcoder.style.cityjd.JDCityConfig;
+import com.lljjcoder.style.cityjd.JDCityPicker;
+import com.shangyi.business.MainActivity;
 import com.shangyi.business.R;
 
 import java.util.ArrayList;
@@ -19,7 +30,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class EditAddressActivity extends AppCompatActivity {
+public class EditAddressActivity extends AppCompatActivity implements View.OnClickListener {
     @BindView(R.id.et_name)
     EditText etName;//收货人
     @BindView(R.id.et_phone)
@@ -42,6 +53,7 @@ public class EditAddressActivity extends AppCompatActivity {
 
     private int flag, uaid, isDefault;//0为添加地址 1为修改地址
     private String province, city, area, info, phone, name;//省市区  uaid 地址id
+    private TextView mAddressRight;
 
 
     @Override
@@ -49,7 +61,8 @@ public class EditAddressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_address);
         ButterKnife.bind(this);
-       // DeviceUtils.initData(this);
+        // DeviceUtils.initData(this);
+        mAddressRight = findViewById(R.id.img_address_right);
         flag = getIntent().getIntExtra("flag", 0);
         if (flag == 1) {
             tvTitle.setText("修改地址");
@@ -69,50 +82,12 @@ public class EditAddressActivity extends AppCompatActivity {
             etDetail.setText("" + info);
 
         } else {
-            tvTitle.setText("添加新地址");
-            tvDel.setVisibility(View.GONE);
         }
-        initJsonData();
+
+        mAddressRight.setOnClickListener(this);
+
     }
 
-    @OnClick({R.id.img_title_back, R.id.tv_save, R.id.tv_address, R.id.tv_del})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.img_title_back:
-                //返回键
-                //finish();
-                break;
-            case R.id.tv_save:
-                //保存
-                String name = etName.getText().toString().trim();
-                String phone = etPhone.getText().toString().trim();
-                String detail = etDetail.getText().toString();
-                //1默认 2非默认
-                int isDefault = ckDefault.isChecked() ? 1 : 2;
-                if (check(name, phone, detail)) {
-                    if (flag == 1) {
-                        //修改地址
-                        //mPresenter.updateAddressInfo(province, city, area, detail, name, phone, isDefault);
-
-                    } else {
-                        //新增地址
-                       // mPresenter.addAddressInfo(province, city, area, detail, name, phone, isDefault);
-                    }
-                }
-
-
-                break;
-            case R.id.tv_address:
-                //省市区选择
-                showPickerView();
-                break;
-            case R.id.tv_del:
-                //showDelDialog();
-
-                break;
-
-        }
-    }
 
     /**
      * 校验输入
@@ -138,143 +113,40 @@ public class EditAddressActivity extends AppCompatActivity {
     }
 
     private void showPickerView() {// 弹出选择器（省市区三级联动）
-        /*OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+        JDCityPicker cityPicker = new JDCityPicker();
+        JDCityConfig jdCityConfig = new JDCityConfig.Builder().build();
+
+        jdCityConfig.setShowType(JDCityConfig.ShowType.PRO_CITY_DIS);
+        cityPicker.init(this);
+        cityPicker.setConfig(jdCityConfig);
+        cityPicker.setOnCityItemClickListener(new OnCityItemClickListener() {
             @Override
-            public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                //返回的分别是三个级别的选中位置
-                province = options1Items.get(options1).getPickerViewText();
-                city = options2Items.get(options1).get(options2);
-                area = options3Items.get(options1).get(options2).get(options3);
-                tvAdress.setText(province + "  "
-                        + city + "  "
-                        + area);
-
+            public void onSelected(ProvinceBean province, CityBean city, DistrictBean district) {
+                tvAdress.setText("城市选择结果：\n" + province.getName() + "(" + province.getId() + ")\n"
+                        + city.getName() + "(" + city.getId() + ")\n"
+                        + district.getName() + "(" + district.getId() + ")");
             }
-        })
-                .setTitleText("城市选择")
-                .setSubmitText("确定")//确定按钮文字
-                .setCancelText("取消")//取消按钮文字
-                .setTitleBgColor(0xFFFFDD00)//标题背景颜色 Night mode
-//                .setLabels("省", "市", "区")//设置选择的三级单位
-                .setCancelColor(Color.BLACK)
-                .setSubmitColor(Color.BLACK)
-                .setDividerColor(Color.YELLOW)
-                .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
-                .setContentTextSize(20)
-                .build();
-        *//*pvOptions.setPicker(options1Items);//一级选择器
-        pvOptions.setPicker(options1Items, options2Items);//二级选择器*//*
-        pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
-        pvOptions.show();*/
+
+            @Override
+            public void onCancel() {
+            }
+        });
+        cityPicker.showCityPicker();
     }
 
 
-    private void initJsonData() {//解析数据 （省市区三级联动）
-        /**
-         * 注意：assets 目录下的Json文件仅供参考，实际使用可自行替换文件
-         * 关键逻辑在于循环体
-         *
-         * */
-        //String JsonData = new GetJsonDataUtil().getJson(this, "cityData.json");//获取assets目录下的json文件数据
-
-        ////ArrayList<AddressThreeEntry> jsonBean = parseData(JsonData);//用Gson 转成实体
-        ////Log.e("------", jsonBean.toString());
 
 
-        /**
-         * 添加省份数据
-         *
-         * 注意：如果是添加的JavaBean实体，则实体类需要实现 IPickerViewData 接口，
-         * PickerView会通过getPickerViewText方法获取字符串显示出来。
-         */
-       // options1Items = jsonBean;
-
-       /* for (int i = 0; i < jsonBean.size(); i++) {//遍历省份
-            ArrayList<String> CityList = new ArrayList<>();//该省的城市列表（第二级）
-            ArrayList<ArrayList<String>> Province_AreaList = new ArrayList<>();//该省的所有地区列表（第三级）
-
-            for (int j = 0; j < jsonBean.get(i).getRegionEntitys().size(); j++) {
-                CityList.add(jsonBean.get(i).getRegionEntitys().get(j).getName());
-                ArrayList<String> list = new ArrayList<>();
-                for (int k = 0; k < jsonBean.get(i).getRegionEntitys().get(j).getRegionEntitys().size(); k++) {
-
-                    list.add(jsonBean.get(i).getRegionEntitys().get(j).getRegionEntitys().get(k).getRegion());
-
-                }
-                Province_AreaList.add(list);
-            }
-*/
-
-            /**
-             * 添加城市数据
-             */
-            //options2Items.add(CityList);
-
-            /**
-             * 添加地区数据
-             */
-           // options3Items.add(Province_AreaList);
-        //}
-    }
-
-    /*public ArrayList<AddressThreeEntry> parseData(String result) {//Gson 解析
-        ArrayList<AddressThreeEntry> detail = new ArrayList<>();
-        try {
-            JSONArray data = new JSONArray(result);
-            Gson gson = new Gson();
-            for (int i = 0; i < data.length(); i++) {
-                AddressThreeEntry entity = gson.fromJson(data.optJSONObject(i).toString(), AddressThreeEntry.class);
-                detail.add(entity);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.img_address_right:
+                //省市区选择
+                showPickerView();
+                break;
         }
-        return detail;
-    }*/
 
-   /* @Override
-    public void showResult(Results results) {
-        if (results.isSuccess()) {
-            ToastUtils.setToast(results.getMsg());
-            finish();
-        } else ToastUtils.setToast(results.getMsg());
+    }
 
-    }*/
-
-    /*public void showDelDialog() {
-        if (del_search != null && del_search.isShowing())
-            del_search.dismiss();
-
-        del_search = new SelectDialog(this, R.style.dialog);
-
-        View contentView = LayoutInflater.from(this).inflate(R.layout.dialog_confirm_del, null);
-        del_search.setContentView(contentView);
-        AutoUtils.auto(contentView);
-        contentView.findViewById(R.id.dialog_confirm_sure).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //确认
-                mPresenter.delAddressInfo("" + uaid);
-
-            }
-        });
-        contentView.findViewById(R.id.dialog_confirm_cancle).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //取消
-                del_search.dismiss();
-            }
-        });
-
-
-        Display display = getWindowManager().getDefaultDisplay();
-        int width = display.getWidth();
-        int height = display.getHeight();
-        //设置dialog的宽高为屏幕的宽高
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(width, height);
-        del_search.setContentView(contentView, layoutParams);
-        del_search.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        del_search.show();
-    }*/
 
 }
