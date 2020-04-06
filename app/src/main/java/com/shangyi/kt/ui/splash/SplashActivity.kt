@@ -5,6 +5,7 @@ import android.view.View
 import com.sdxxtop.base.BaseKTActivity
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivitySplashBinding
+import com.shangyi.kt.ui.WebViewTestActivity
 import com.shangyi.kt.ui.splash.model.SplashModel
 import com.shangyi.kt.ui.userlogin.LoginActivity
 
@@ -32,7 +33,7 @@ class SplashActivity : BaseKTActivity<ActivitySplashBinding, SplashModel>() {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.tvClick -> {
-                startActivity(Intent(this, LoginActivity::class.java))
+                startActivity(Intent(this, WebViewTestActivity::class.java))
                 finish()
             }
         }

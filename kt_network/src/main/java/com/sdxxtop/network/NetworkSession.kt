@@ -13,7 +13,7 @@ object NetworkSession {
     lateinit var contextDef: WeakReference<Context>
     var version: Int = 0
 
-
+    @JvmStatic
     fun initNetwork(context: Context, version: Int) {
         this@NetworkSession.contextDef = WeakReference(context)
         this@NetworkSession.version = version

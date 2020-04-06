@@ -5,6 +5,7 @@ import androidx.multidex.MultiDexApplication
 import com.kingja.loadsir.core.LoadSir
 import com.sdxxtop.base.loadsir.*
 import com.sdxxtop.common.receiver.ConnectivityReceiver
+import com.sdxxtop.network.NetworkSession
 import kotlin.properties.Delegates
 
 /**
@@ -23,6 +24,7 @@ abstract class BaseApplication : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
+        NetworkSession.initNetwork(this, versionCode())
 
 //        ConnectivityReceiver.register(this)
 
@@ -37,4 +39,5 @@ abstract class BaseApplication : MultiDexApplication() {
     }
 
     abstract fun isDebug(): Boolean
+    abstract fun versionCode(): Int
 }

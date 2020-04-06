@@ -36,14 +36,4 @@ public class Constom {
         return !TextUtils.isEmpty(BASEURL) ? BASEURL : BASRURL_DEFAULT;
 //        }
     }
-
-    public static final String KEY = "35549002c129b36f587aa2d8911ddce1";
-    public static final String LOGIN_URL = "";
-
-
-    public static final String BSAE_URL = "http://39.106.97.65";// 正式
-    //注册的接口
-    public final static String REGISTER_URL = "movieApi/user/v1/registerUser";
-    //获取验证码的接口
-    public final static String CODE_URL = "api/login/send_code";
 }

@@ -8,7 +8,7 @@ import com.sdxxtop.network.NetworkSession;
 import java.util.Map;
 
 public class SpUtil {
-    private static final String SP_NAME = "xxapp_sp";
+    private static final String SP_NAME = "shangyi_sp";
 
     private static SharedPreferences getSp(Context context) {
         return context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);

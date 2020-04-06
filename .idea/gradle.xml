@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/kt_base" />
             <option value="$PROJECT_DIR$/kt_network" />
+            <option value="$PROJECT_DIR$/syzx_webview" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

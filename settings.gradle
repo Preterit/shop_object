@@ -1,1 +1,1 @@
-include ':app', ':kt_base', ':kt_network'
+include ':app', ':kt_base', ':kt_network', ':syzx_webview'

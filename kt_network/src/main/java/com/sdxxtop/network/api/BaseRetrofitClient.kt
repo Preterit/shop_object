@@ -1,5 +1,7 @@
 package com.sdxxtop.network.api
 
+import com.sdxxtop.network.CusResponseInter
+import com.sdxxtop.network.DecodeConverterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -81,11 +83,28 @@ abstract class BaseRetrofitClient {
                 .create(clazz)
     }
 
+
+    val cusRespIpt: OkHttpClient
+        get() {
+            val builder = OkHttpClient.Builder()
+//            val logging = CusResponseInter()
+
+            builder
+                    .connectTimeout(connectTimeOut().toLong(), TimeUnit.SECONDS)
+                    .readTimeout(connectTimeOut().toLong(), TimeUnit.SECONDS)
+                    .writeTimeout(connectTimeOut().toLong(), TimeUnit.SECONDS)
+
+            builder.retryOnConnectionFailure(true)
+            handleBuilder(builder)
+
+            return builder.build()
+        }
+
     fun <S> getCusService(clazz: Class<S>, baseUrl: String): S {
         return Retrofit.Builder()
-                .addConverterFactory(CustomGsonConverterFactory.create())
+                .addConverterFactory(DecodeConverterFactory.create())
                 .baseUrl(baseUrl)
-                .client(client)
+                .client(cusRespIpt)
                 .build()
                 .create(clazz)
     }

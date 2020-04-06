@@ -28,4 +28,12 @@ data class UserInfoBean(
         val create_time: String,
         val modify_time: String,
         val token: String
-)
+
+
+) {
+    override fun toString(): String {
+        return "UserInfoBean(id=$id, login_name='$login_name', nickname='$nickname', mobile='$mobile', password='$password', avatar='$avatar', birthday='$birthday', sign='$sign', gender=$gender, status=$status, type=$type, grade=$grade, father_id=$father_id, create_time='$create_time', modify_time='$modify_time', token='$token')"
+    }
+}
+
+

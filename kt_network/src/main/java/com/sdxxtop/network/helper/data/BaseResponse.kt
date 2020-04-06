@@ -10,4 +10,9 @@ data class BaseResponse<T>(
         val `data`: T,
         val code: String,
         val msg: String
-)
+
+) {
+    override fun toString(): String {
+        return "BaseResponse(`data`=$`data`, code='$code', msg='$msg')"
+    }
+}
