@@ -1,5 +1,6 @@
 package com.shangyi.kt.ui.userlogin;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -53,11 +54,11 @@ public class LoginActivity extends BaseKTActivity<ActivityLoginBinding, LoginMod
                 startActivity(intent1);
                 break;
             case R.id.tv_back_pwd:
-                Intent intent2 = new Intent(LoginActivity.this, PosterActivity.class);
+                Intent intent2 = new Intent(LoginActivity.this, FindPwdActivity.class);
                 startActivity(intent2);
                 break;
             case R.id.btn_userxieyi:
-                WebActivity.startCommonWeb(LoginActivity.this, "蓝标大学用户协议", "https://xw.qq.com/?f=qqcom", WebConstants.LEVEL_BASE);
+                WebActivity.startCommonWeb(LoginActivity.this, "上医宝库用户协议", "http://39.106.156.132/service.html", WebConstants.LEVEL_BASE);
                 break;
             default:
                 //nothing

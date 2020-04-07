@@ -20,6 +20,7 @@ class LoginModel : BaseViewModel() {
     var loginSuccess = MutableLiveData<Boolean>(false)
     var registerSuccess = MutableLiveData<Boolean>(false)
     var commitInfoSuccess = MutableLiveData<Boolean>(false)
+    var findPwdSuccess = MutableLiveData<Boolean>(false)
 
 
     /**
@@ -143,4 +144,32 @@ class LoginModel : BaseViewModel() {
             mIsLoadingShow.value = false
         })
     }
+
+
+    /**
+     * 找回密码
+     */
+    fun findPwd(phone: String,
+                 code: String,
+                 password: String = "",
+                 repeat_password: String = ""
+    ) {
+        showLoadingDialog(true)
+        val params = Params()
+        params.put("login_name", phone)
+        params.put("code", code)
+        params.put("password", password)
+        params.put("repeat_password", repeat_password)
+        loadOnUI({
+            RetrofitClient.apiService.findpwd(params.aesData)
+        }, {
+//            val forMatGson = FormatGson.instance.forMatGson(it, Any::class.java)
+//            findPwdSuccess.value = forMatGson != null
+            mIsLoadingShow.value = false
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
+        })
+    }
+
 }
