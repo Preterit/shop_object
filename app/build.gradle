@@ -100,5 +100,9 @@ dependencies {
     implementation 'liji.library.dev:citypickerview:5.2.2'
     implementation 'com.contrarywind:Android-PickerView:4.1.9'
 
+    //SmartRefreshLayout下拉刷新
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'  //1.0.5及以前版本的老用户升级需谨慎，API改动过大
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.2'  //没有使用特殊Header，可以不加这行
+
 
 }
