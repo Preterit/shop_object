@@ -144,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_5"
-                android:text="《蓝标大学用户协议》"
+                android:text="《上医宝库用户协议》"
                 android:textColor="@color/btnyzm" />
         </LinearLayout>
 

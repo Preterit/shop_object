@@ -63,4 +63,10 @@ interface ApiService {
     @POST("api/login/login")
     suspend fun loginSSS(@Field("data") data: String): BaseResponse<Data>
 
+    /**
+     * 找回密码
+     */
+    @FormUrlEncoded
+    @POST("api/login/findPwd")
+    suspend fun findpwd(@Field("data") data: String): BaseResponse<String?>
 }
