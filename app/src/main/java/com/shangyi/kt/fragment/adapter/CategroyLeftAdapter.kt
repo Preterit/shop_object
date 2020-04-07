@@ -27,8 +27,6 @@ class CategroyLeftAdapter constructor(private val normalTxColor: Int, private va
 
     var currentItem = 0
 
-    // <item android:drawable="@drawable/categroy_left_item_unselect" android:state_checkable="false" />
-//    <item android:drawable="@drawable/categroy_left_item_select" android:state_checkable="true" />
     override fun convert(holder: BaseViewHolder, item: String) {
         holder.itemView.tvTitle.text = item
         holder.itemView.tvTitle.paint.isFakeBoldText = currentItem == holder.layoutPosition  //加粗

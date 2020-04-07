@@ -38,8 +38,10 @@
 
 
         <FrameLayout
+            android:id="@+id/frameLayout"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/smartLayout"
             app:layout_constraintRight_toRightOf="parent"

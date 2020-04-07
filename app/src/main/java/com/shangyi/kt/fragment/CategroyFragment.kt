@@ -6,10 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sdxxtop.base.BaseKTFragment
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentCategroyBinding
-import com.shangyi.business.databinding.FragmentHomeBinding
 import com.shangyi.kt.fragment.adapter.CategroyLeftAdapter
 import com.shangyi.kt.fragment.model.HomeModel
-import com.shangyi.kt.ui.userlogin.model.LoginModel
 import kotlinx.android.synthetic.main.fragment_categroy.*
 
 /**
@@ -34,14 +32,24 @@ class CategroyFragment : BaseKTFragment<FragmentCategroyBinding, HomeModel>() {
         }
     }
 
-    override fun initObserve() {
+    /**
+     * 初始化右侧数据fragment
+     */
+    private val categroyRightFragment: CategroyRightFragment by lazy {
+        val categroyRightFragment = CategroyRightFragment.newInstance()
+        categroyRightFragment
     }
 
+    override fun initObserve() {
+
+    }
 
     override fun initView() {
         mLoadService.showSuccess()
         recyclerview.layoutManager = LinearLayoutManager(activity)
-        recyclerview.adapter = CategroyLeftAdapter(Color.parseColor("#8B8B8B"),Color.parseColor("#FF2941"))
+        recyclerview.adapter = CategroyLeftAdapter(Color.parseColor("#8B8B8B"), Color.parseColor("#FF2941"))
+
+        childFragmentManager.beginTransaction().replace(R.id.frameLayout, categroyRightFragment).commitAllowingStateLoss()
     }
 
 
