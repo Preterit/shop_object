@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.shangyi.business.view.MyScrollView
+    <com.shangyi.business.weight.MyScrollView
         android:id="@+id/details_scroll_changecolor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -176,7 +176,7 @@
             </RelativeLayout>
 
         </LinearLayout>
-    </com.shangyi.business.view.MyScrollView>
+    </com.shangyi.business.weight.MyScrollView>
 
     <RelativeLayout
         android:id="@+id/details_relat_changecolor"

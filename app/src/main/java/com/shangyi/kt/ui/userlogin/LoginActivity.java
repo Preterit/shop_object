@@ -12,9 +12,11 @@ import androidx.lifecycle.Observer;
 
 import com.sdxxtop.base.BaseKTActivity;
 import com.sdxxtop.base.utils.UIUtils;
+import com.sdxxtop.webview.utils.WebConstants;
 import com.shangyi.business.R;
 import com.shangyi.business.databinding.ActivityLoginBinding;
 import com.shangyi.kt.ui.MainActivity;
+import com.shangyi.kt.ui.WebActivity;
 import com.shangyi.kt.ui.goods.GoodsDialog;
 import com.shangyi.kt.ui.poster.PosterActivity;
 import com.shangyi.kt.ui.userlogin.model.LoginModel;
@@ -56,8 +58,7 @@ public class LoginActivity extends BaseKTActivity<ActivityLoginBinding, LoginMod
                 startActivity(intent2);
                 break;
             case R.id.btn_userxieyi:
-                GoodsDialog goodsDialog = new GoodsDialog();
-                goodsDialog.show(getSupportFragmentManager(), "");
+                WebActivity.startCommonWeb(LoginActivity.this, "蓝标大学用户协议", "https://xw.qq.com/?f=qqcom", WebConstants.LEVEL_BASE);
                 break;
             default:
                 //nothing

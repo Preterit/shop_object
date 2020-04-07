@@ -1,4 +1,4 @@
-package com.shangyi.business.view;
+package com.shangyi.business.weight;
 
 import android.content.Context;
 import android.util.AttributeSet;
