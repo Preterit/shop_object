@@ -11,7 +11,8 @@ import kotlinx.android.synthetic.main.item_categroy_left.view.*
  * author:lwb
  * Desc:
  */
-class CategroyLeftAdapter constructor(private val normalTxColor: Int, private val selectTxColor: Int) : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_categroy_left) {
+class CategroyLeftAdapter constructor(private val normalTxColor: Int, private val selectTxColor: Int)
+    : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_categroy_left) {
 
     init {
         var list = arrayListOf<String>(

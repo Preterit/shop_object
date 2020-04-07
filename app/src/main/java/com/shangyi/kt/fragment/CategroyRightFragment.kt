@@ -1,10 +1,13 @@
 package com.shangyi.kt.fragment
 
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.sdxxtop.base.BaseKTFragment
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentCategroyRightBinding
+import com.shangyi.kt.fragment.adapter.CategroyRightAdapter
 import com.shangyi.kt.fragment.model.CategroyModel
+import kotlinx.android.synthetic.main.fragment_categroy_right.*
 
 /**
  * Date:2020/4/7
@@ -19,6 +22,7 @@ class CategroyRightFragment : BaseKTFragment<FragmentCategroyRightBinding, Categ
     }
 
     override fun initObserve() {
+
     }
 
     companion object {
@@ -32,6 +36,8 @@ class CategroyRightFragment : BaseKTFragment<FragmentCategroyRightBinding, Categ
 
     override fun initView() {
         mLoadService.showSuccess()
+        recyclerview.layoutManager = LinearLayoutManager(activity)
+        recyclerview.adapter = CategroyRightAdapter()
     }
 
 
