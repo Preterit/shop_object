@@ -68,5 +68,5 @@ interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/login/findPwd")
-    suspend fun findpwd(@Field("data") data: String): BaseResponse<String?>
+    suspend fun findpwd(@Field( "data") data: String): BaseResponse<String?>
 }
