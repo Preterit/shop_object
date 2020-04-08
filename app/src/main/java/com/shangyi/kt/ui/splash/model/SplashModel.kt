@@ -37,7 +37,6 @@ class SplashModel : BaseViewModel() {
                 var responseBody = response.body()
                 val baseUrl = responseBody?.string()?.replace("\n", "")
                 SpUtil.putString(Constants.BASEURL, baseUrl)
-//                Log.e("SplashModel --2-- ", "onResponse: ${SpUtil.getString(Constants.BASEURL)}")
                 responseBody?.close()
 
                 /**

@@ -1,6 +1,7 @@
 package com.shangyi.business.api;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.shangyi.business.BuildConfig;
 import com.shangyi.business.network.Constants;
@@ -33,7 +34,8 @@ public class Constom {
 //        if (BuildConfig.DEBUG) {
 //            return BASRURL_DEBUG;
 //        } else {
-        return !TextUtils.isEmpty(BASEURL) ? BASEURL : BASRURL_DEFAULT;
+        Log.e("Constom", "netWrok: " + SpUtil.getString(Constants.BASEURL));
+        return !TextUtils.isEmpty(SpUtil.getString(Constants.BASEURL)) ? SpUtil.getString(Constants.BASEURL) : BASRURL_DEFAULT;
 //        }
     }
 }
