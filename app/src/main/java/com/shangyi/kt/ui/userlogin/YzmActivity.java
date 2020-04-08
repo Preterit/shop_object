@@ -12,10 +12,12 @@ import androidx.lifecycle.Observer;
 
 import com.sdxxtop.base.BaseKTActivity;
 import com.sdxxtop.base.utils.UIUtils;
+import com.sdxxtop.webview.utils.WebConstants;
 import com.shangyi.business.R;
 import com.shangyi.business.databinding.ActivityYzmBinding;
 import com.shangyi.business.utils.TimerUtil;
 import com.shangyi.kt.ui.MainActivity;
+import com.shangyi.kt.ui.WebActivity;
 import com.shangyi.kt.ui.userlogin.model.LoginModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -101,6 +103,7 @@ public class YzmActivity extends BaseKTActivity<ActivityYzmBinding, LoginModel> 
             case R.id.yzm_btn_userxieyi:
 //                Intent intent3 = new Intent(YzmActivity.this, LiillActivity.class);
 //                startActivity(intent3);
+                WebActivity.startCommonWeb(YzmActivity.this, "上医宝库用户协议", "http://39.106.156.132/service.html", WebConstants.LEVEL_BASE);
                 break;
             case R.id.btn_yzmlogin:
                 login();

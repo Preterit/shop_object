@@ -152,7 +152,7 @@
             android:id="@+id/tv_goyzm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="@dimen/dp_60"
             android:gravity="center"
             android:text="—— 验证码登录 ——"
             android:textColor="@color/login"
