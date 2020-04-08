@@ -18,7 +18,6 @@ import com.shangyi.business.R;
 import com.shangyi.business.databinding.ActivityLoginBinding;
 import com.shangyi.kt.ui.MainActivity;
 import com.shangyi.kt.ui.WebActivity;
-import com.shangyi.kt.ui.goods.GoodsDialog;
 import com.shangyi.kt.ui.poster.PosterActivity;
 import com.shangyi.kt.ui.userlogin.model.LoginModel;
 

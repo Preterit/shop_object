@@ -1,6 +1,5 @@
 package com.sdxxtop.network.api
 
-import com.sdxxtop.network.CusResponseInter
 import com.sdxxtop.network.DecodeConverterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -104,7 +103,7 @@ abstract class BaseRetrofitClient {
         return Retrofit.Builder()
                 .addConverterFactory(DecodeConverterFactory.create())
                 .baseUrl(baseUrl)
-                .client(cusRespIpt)
+                .client(client)
                 .build()
                 .create(clazz)
     }

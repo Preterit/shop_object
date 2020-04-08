@@ -2,9 +2,7 @@ package com.shangyi.business.api
 
 import com.sdxxtop.network.helper.data.BaseResponse
 import com.shangyi.kt.ui.splash.bean.GetSettingBean
-import com.shangyi.kt.ui.userlogin.bean.Data
 import com.shangyi.kt.ui.userlogin.bean.LoginSuccess
-import com.shangyi.kt.ui.userlogin.bean.UserInfoBean
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -61,7 +59,7 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("api/login/login")
-    suspend fun loginSSS(@Field("data") data: String): BaseResponse<Data>
+    suspend fun loginSSS(@Field("data") data: String): BaseResponse<LoginSuccess>
 
     /**
      * 找回密码

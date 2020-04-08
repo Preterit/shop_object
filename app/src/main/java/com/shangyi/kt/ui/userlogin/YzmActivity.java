@@ -14,8 +14,8 @@ import com.sdxxtop.base.BaseKTActivity;
 import com.sdxxtop.base.utils.UIUtils;
 import com.shangyi.business.R;
 import com.shangyi.business.databinding.ActivityYzmBinding;
-import com.shangyi.kt.ui.MainActivity;
 import com.shangyi.business.utils.TimerUtil;
+import com.shangyi.kt.ui.MainActivity;
 import com.shangyi.kt.ui.userlogin.model.LoginModel;
 
 import org.jetbrains.annotations.NotNull;
