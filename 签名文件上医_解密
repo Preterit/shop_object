@@ -1,0 +1,19 @@
+app包名:com.shangyi.business
+密码:sy8888
+别名: shangyi
+创建日期: 2020-4-8
+条目类型: PrivateKeyEntry
+证书链长度: 1
+证书[1]:
+所有者: CN=shangyi
+发布者: CN=shangyi
+序列号: 6eb0c5fa
+有效期为 Wed Apr 08 10:07:43 CST 2020 至 Sun Apr 02 10:07:43 CST 2045
+证书指纹:
+	 MD5:  AC:A0:3D:1F:C0:40:D6:94:40:98:EF:49:B6:A8:10:A7
+	 SHA1: 52:62:B0:71:FF:78:8D:93:C8:C7:B6:92:E8:3B:DC:9F:1E:7C:82:64
+	 SHA256: E4:D6:7A:F9:60:42:6E:D1:40:7C:B2:21:D5:3F:BC:3C:74:C4:06:E1:42:2E:CC:EC:99:FA:71:BB:B5:64:D8:42
+签名算法名称: SHA256withRSA
+主体公共密钥算法: 2048 位 RSA 密钥
+版本: 3
+

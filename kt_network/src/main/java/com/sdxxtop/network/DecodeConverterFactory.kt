@@ -83,6 +83,7 @@ internal class GsonCusResponseBodyConverter<T>(
             var baseResponse = gson.fromJson(resultStr, BaseResponse::class.java)
             if (baseResponse.code == "0" && baseResponse.data != null && SpUtil.getString("api_key").isNotEmpty()) {
                 val decrypt = AESUtils.decrypt(baseResponse.data as String, SpUtil.getString("api_key"))
+                Log.e("data decode result --  ", "$decrypt")
                 val fromJson = gson.fromJson(decrypt, Any::class.java)
                 val resultResponse = BaseResponse<Any>(fromJson, baseResponse.code, baseResponse.msg)
                 resultStr = gson.toJson(resultResponse)

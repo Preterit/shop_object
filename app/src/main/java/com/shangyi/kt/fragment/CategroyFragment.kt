@@ -7,7 +7,7 @@ import com.sdxxtop.base.BaseKTFragment
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentCategroyBinding
 import com.shangyi.kt.fragment.adapter.CategroyLeftAdapter
-import com.shangyi.kt.fragment.model.HomeModel
+import com.shangyi.kt.fragment.model.CategroyModel
 import kotlinx.android.synthetic.main.fragment_categroy.*
 
 /**
@@ -15,9 +15,9 @@ import kotlinx.android.synthetic.main.fragment_categroy.*
  * author:lwb
  * Desc:
  */
-class CategroyFragment : BaseKTFragment<FragmentCategroyBinding, HomeModel>() {
+class CategroyFragment : BaseKTFragment<FragmentCategroyBinding, CategroyModel>() {
 
-    override fun vmClazz() = HomeModel::class.java
+    override fun vmClazz() = CategroyModel::class.java
     override fun layoutId() = R.layout.fragment_categroy
     override fun bindVM() {
         mBinding.vm = mViewModel
@@ -52,5 +52,19 @@ class CategroyFragment : BaseKTFragment<FragmentCategroyBinding, HomeModel>() {
         childFragmentManager.beginTransaction().replace(R.id.frameLayout, categroyRightFragment).commitAllowingStateLoss()
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        if (isVisible) {
+            mBinding.vm?.getCategory()
+        }
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+            mBinding.vm?.getCategory()
+        }
+    }
 
 }

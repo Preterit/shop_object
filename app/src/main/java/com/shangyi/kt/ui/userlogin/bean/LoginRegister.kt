@@ -9,31 +9,21 @@ data class GetCodeBean(
         val status: Int
 )
 
-data class LoginSuccess(val userInfo: UserInfoBean)
+data class LoginSuccess(val userInfo: UserInfo)
 
-data class UserInfoBean(
+data class UserInfo(
+        val avatar: Any,
+        val birthday: Any,
+        val gender: String,
+        val grade: Int,
         val id: Int,
         val login_name: String,
+        val mobile: Any,
         val nickname: String,
-        val mobile: String,
-        val password: String,
-        val avatar: String,
-        val birthday: String,
-        val sign: String,
-        val gender: Int,
-        val status: Int,
-        val type: Int,
-        val grade: Int,
-        val father_id: Int,
-        val create_time: String,
-        val modify_time: String,
-        val token: String
+        val sign: Any,
+        val token: String,
+        val type: Int
+)
 
-
-) {
-    override fun toString(): String {
-        return "UserInfoBean(id=$id, login_name='$login_name', nickname='$nickname', mobile='$mobile', password='$password', avatar='$avatar', birthday='$birthday', sign='$sign', gender=$gender, status=$status, type=$type, grade=$grade, father_id=$father_id, create_time='$create_time', modify_time='$modify_time', token='$token')"
-    }
-}
 
 

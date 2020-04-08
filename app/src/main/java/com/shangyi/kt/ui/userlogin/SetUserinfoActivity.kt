@@ -134,7 +134,7 @@ class SetUserinfoActivity : BaseKTActivity<ActivitySetUserinfoBinding, LoginMode
                 // 提交信息
                 commitInfo()
             }
-            R.id.ivNext -> {
+            R.id.skip -> {
                 // 跳过
                 login()
             }

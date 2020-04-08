@@ -1,6 +1,7 @@
 package com.shangyi.business.api
 
 import com.sdxxtop.network.helper.data.BaseResponse
+import com.shangyi.kt.fragment.bean.CategroyLeftBean
 import com.shangyi.kt.ui.splash.bean.GetSettingBean
 import com.shangyi.kt.ui.userlogin.bean.LoginSuccess
 import retrofit2.http.Field
@@ -66,5 +67,12 @@ interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/login/findPwd")
-    suspend fun findpwd(@Field( "data") data: String): BaseResponse<String?>
+    suspend fun findpwd(@Field("data") data: String): BaseResponse<String?>
+
+    /**
+     * 找回密码
+     */
+    @FormUrlEncoded
+    @POST("/api/goods_category/goodsCateList")
+    suspend fun getCategory(@Field("data") data: String): BaseResponse<List<CategroyLeftBean>?>
 }

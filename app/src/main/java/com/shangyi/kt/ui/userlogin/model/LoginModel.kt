@@ -44,8 +44,9 @@ class LoginModel : BaseViewModel() {
             val bean = FormatGson.instance.forMatGson(it, LoginSuccess::class.java)
             if (bean?.userInfo != null) {
                 loginSuccess.value = true
+            } else {
+                mIsLoadingShow.value = false
             }
-            mIsLoadingShow.value = false
         }, { code, msg, t ->
             mIsLoadingShow.value = false
             UIUtils.showToast(msg)
@@ -137,7 +138,7 @@ class LoginModel : BaseViewModel() {
 
             RetrofitClient.apiCusService.loginSSS(params.aesData)
         }, {
-            Log.e("LWB ---  data  -- ","${it.userInfo.login_name}")
+//            Log.e("LWB ---  data  -- ","${it.userInfo.login_name}")
             mIsLoadingShow.value = false
         }, { code, msg, t ->
             UIUtils.showToast(msg)
@@ -150,9 +151,9 @@ class LoginModel : BaseViewModel() {
      * 找回密码
      */
     fun findPwd(phone: String,
-                 code: String,
-                 password: String = "",
-                 repeat_password: String = ""
+                code: String,
+                password: String = "",
+                repeat_password: String = ""
     ) {
         showLoadingDialog(true)
         val params = Params()

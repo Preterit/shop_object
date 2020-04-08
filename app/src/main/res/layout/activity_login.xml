@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -8,147 +9,154 @@
             type="com.shangyi.kt.ui.userlogin.model.LoginModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@mipmap/login_bg_img"
-        android:orientation="vertical"
-        tools:context="com.shangyi.kt.ui.userlogin.login.LoginActivity">
-
-        <ImageView
-            android:id="@+id/logo_icon"
-            android:layout_width="@dimen/dp_80"
-            android:layout_height="@dimen/dp_80"
-            android:layout_marginLeft="@dimen/dp_140"
-            android:layout_marginTop="@dimen/dp_102"
-            android:layout_marginRight="@dimen/dp_140"
-            android:background="@mipmap/ic_launcher" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            android:layout_marginLeft="@dimen/dp_46"
-            android:layout_marginTop="@dimen/dp_60"
-            android:layout_marginRight="@dimen/dp_46"
-            android:gravity="center">
+            android:layout_height="match_parent"
+            android:background="@mipmap/login_bg_img"
+            android:orientation="vertical">
 
             <ImageView
-                android:layout_width="@dimen/dp_16"
-                android:layout_height="@dimen/dp_16"
-                android:background="@mipmap/personal_icon" />
+                android:id="@+id/logo_icon"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_80"
+                android:layout_marginLeft="@dimen/dp_140"
+                android:layout_marginTop="@dimen/dp_102"
+                android:layout_marginRight="@dimen/dp_140"
+                android:background="@mipmap/ic_launcher" />
 
-            <EditText
-                android:id="@+id/et_phone"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginLeft="@dimen/dp_46"
+                android:layout_marginTop="@dimen/dp_60"
+                android:layout_marginRight="@dimen/dp_46"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_16"
+                    android:layout_height="@dimen/dp_16"
+                    android:background="@mipmap/personal_icon" />
+
+                <EditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="请输入手机号或者账号"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textColor="@color/login"
+                    android:textColorHint="@color/hint"
+                    android:textSize="15sp"
+                    android:theme="@style/MyEditText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginLeft="@dimen/dp_46"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_46"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_16"
+                    android:layout_height="@dimen/dp_16"
+                    android:background="@mipmap/password_icon" />
+
+                <EditText
+                    android:id="@+id/et_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="请输入密码"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:textColor="@color/login"
+                    android:textColorHint="@color/hint"
+                    android:textSize="15sp"
+                    android:theme="@style/MyEditText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_20"
+                android:layout_marginLeft="@dimen/dp_46"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_46"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="还没有账户？"
+                    android:textColor="@color/login"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:id="@+id/tv_goregist"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:text="立即注册"
+                    android:textColor="@color/btnyzm"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_back_pwd"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:text="忘记密码"
+                    android:textColor="@color/login"
+                    android:textSize="@dimen/sp_14" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="@dimen/dp_325"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@drawable/btn"
+                android:text="登录"
+                android:textColor="@color/btnregister"
+                android:textSize="17sp" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="请输入手机号或者账号"
-                android:inputType="number"
-                android:maxLines="1"
-                android:textColor="@color/login"
-                android:textColorHint="@color/hint"
-                android:textSize="15sp"
-                android:theme="@style/MyEditText" />
-        </LinearLayout>
+                android:layout_marginTop="@dimen/dp_18"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            android:layout_marginLeft="@dimen/dp_46"
-            android:layout_marginTop="@dimen/dp_20"
-            android:layout_marginRight="@dimen/dp_46"
-            android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="登录即代表你以同意"
+                    android:textColor="@color/login"/>
 
-            <ImageView
-                android:layout_width="@dimen/dp_16"
-                android:layout_height="@dimen/dp_16"
-                android:background="@mipmap/password_icon" />
+                <TextView
+                    android:id="@+id/btn_userxieyi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:text="《上医宝库用户协议》"
+                    android:textColor="@color/btnyzm" />
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/et_pwd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="请输入密码"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:textColor="@color/login"
-                android:textColorHint="@color/hint"
-                android:textSize="15sp"
-                android:theme="@style/MyEditText" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_20"
-            android:layout_marginLeft="@dimen/dp_46"
-            android:layout_marginTop="@dimen/dp_20"
-            android:layout_marginRight="@dimen/dp_46"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="还没有账户？"
-                android:textColor="@color/login"
-                android:textSize="@dimen/sp_14" />
-
-            <TextView
-                android:id="@+id/tv_goregist"
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:text="立即注册"
-                android:textColor="@color/btnyzm"
-                android:textSize="@dimen/sp_14" />
-
-            <TextView
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/tv_back_pwd"
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:text="忘记密码"
-                android:textColor="@color/login"
-                android:textSize="@dimen/sp_14" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="@dimen/dp_325"
-            android:layout_height="@dimen/dp_50"
-            android:layout_marginLeft="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_20"
-            android:background="@drawable/btn"
-            android:text="登录"
-            android:textColor="@color/btnregister"
-            android:textSize="17sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_18"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="登录即代表你以同意"
-                android:textColor="@color/login"/>
-
-            <TextView
-                android:id="@+id/btn_userxieyi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_5"
-                android:text="《上医宝库用户协议》"
-                android:textColor="@color/btnyzm" />
         </LinearLayout>
 
         <TextView
+            android:layout_marginBottom="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:id="@+id/tv_goyzm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -157,6 +165,6 @@
             android:text="—— 验证码登录 ——"
             android:textColor="@color/login"
             android:textSize="15sp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
 </layout>

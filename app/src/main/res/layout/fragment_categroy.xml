@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.shangyi.kt.fragment.model.HomeModel" />
+            type="com.shangyi.kt.fragment.model.CategroyModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
