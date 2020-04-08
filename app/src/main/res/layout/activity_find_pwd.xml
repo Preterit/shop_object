@@ -44,7 +44,7 @@
             android:textColor="@color/black"
             android:textColorHint="@color/hint"
             android:textSize="15sp"
-            android:theme="@style/MyEditText" />
+            android:theme="@style/MySetPwdTextFindPwd" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/hint"
                 android:textSize="15sp"
-                android:theme="@style/MyEditText" />
+                android:theme="@style/MySetPwdTextFindPwd"/>
 
             <TextView
                 android:id="@+id/btn_yzm"
@@ -89,7 +89,7 @@
             android:textColor="@color/black"
             android:textColorHint="@color/hint"
             android:textSize="15sp"
-            android:theme="@style/MyEditText" />
+            android:theme="@style/MySetPwdTextFindPwd" />
         <EditText
             android:id="@+id/et_setpwds"
             android:layout_width="match_parent"
@@ -103,7 +103,7 @@
             android:textColor="@color/black"
             android:textColorHint="@color/hint"
             android:textSize="15sp"
-            android:theme="@style/MyEditText" />
+            android:theme="@style/MySetPwdTextFindPwd" />
         <Button
             android:id="@+id/btn_findpwd"
             android:layout_width="match_parent"

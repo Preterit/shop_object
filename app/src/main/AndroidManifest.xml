@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.shangyi.kt.ui.userlogin.FindPwdActivity"></activity>
+        <activity android:name="com.shangyi.kt.ui.userlogin.FindPwdActivity"
+            android:theme="@style/YellowTheme"/>
         <activity android:name="com.shangyi.kt.ui.userlogin.SetUserinfoActivity" />
         <activity android:name="com.shangyi.kt.ui.userlogin.SetPwdActivity" />
         <activity android:name="com.shangyi.kt.ui.poster.PosterActivity" />

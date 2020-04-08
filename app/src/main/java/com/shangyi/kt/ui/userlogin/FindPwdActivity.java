@@ -1,6 +1,7 @@
 package com.shangyi.kt.ui.userlogin;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * 找回密码
  */
-public class FindPwdActivity extends BaseKTActivity<ActivityFindPwdBinding,LoginModel> implements View.OnClickListener {
+public class FindPwdActivity extends BaseKTActivity<ActivityFindPwdBinding, LoginModel> implements View.OnClickListener {
 
     private TextView mRegisterTitle;
     private TextView mBtnYzm;
@@ -55,7 +56,14 @@ public class FindPwdActivity extends BaseKTActivity<ActivityFindPwdBinding,Login
 
     @Override
     public void initObserve() {
-
+        getMBinding().getVm().getFindPwdSuccess().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    finish();
+                }
+            }
+        });
     }
 
     @Override
@@ -140,9 +148,8 @@ public class FindPwdActivity extends BaseKTActivity<ActivityFindPwdBinding,Login
             return;
         }
 
-        getMBinding().getVm().findPwd(findPwdphone,findPwdCode,setPwd,setPwds);
+        getMBinding().getVm().findPwd(findPwdphone, findPwdCode, setPwd, setPwds);
     }
-
 
 
     @Override

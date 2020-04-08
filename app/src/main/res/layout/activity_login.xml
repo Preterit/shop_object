@@ -136,8 +136,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="登录蓝标大学代表你以同意"
-                android:textColor="@color/login" />
+                android:text="登录即代表你以同意"
+                android:textColor="@color/login"/>
 
             <TextView
                 android:id="@+id/btn_userxieyi"

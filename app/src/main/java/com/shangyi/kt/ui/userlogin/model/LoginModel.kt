@@ -163,9 +163,9 @@ class LoginModel : BaseViewModel() {
         loadOnUI({
             RetrofitClient.apiService.findpwd(params.aesData)
         }, {
-//            val forMatGson = FormatGson.instance.forMatGson(it, Any::class.java)
-//            findPwdSuccess.value = forMatGson != null
+            UIUtils.showToast("修改成功")
             mIsLoadingShow.value = false
+            findPwdSuccess.value = true
         }, { code, msg, t ->
             UIUtils.showToast(msg)
             mIsLoadingShow.value = false
