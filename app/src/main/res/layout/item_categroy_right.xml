@@ -8,7 +8,6 @@
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="15dp"
         android:background="@color/white"
         android:paddingLeft="15dp"
         android:paddingTop="15dp"
@@ -24,7 +23,6 @@
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="15dp"
         android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 

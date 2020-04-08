@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.item_categroy_right.view.*
 class CategroyRightAdapter : BaseQuickAdapter<String, BaseViewHolder> {
 
     var height = 5.dp2px()
+
     constructor() : super(R.layout.item_categroy_right) {
         val list = arrayListOf<String>(
                 "常用分类", "热门频道", "推荐活动",
@@ -27,6 +28,5 @@ class CategroyRightAdapter : BaseQuickAdapter<String, BaseViewHolder> {
     override fun convert(holder: BaseViewHolder, item: String) {
         holder.itemView.recyclerview.layoutManager = GridLayoutManager(context, 3)
         holder.itemView.recyclerview.adapter = CategroyRightChildAdapter()
-        holder.itemView.recyclerview.addItemDecoration(GridDividerItemDecoration(height, height))
     }
 }
