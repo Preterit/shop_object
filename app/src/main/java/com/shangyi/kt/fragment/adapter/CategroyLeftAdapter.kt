@@ -4,6 +4,7 @@ import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.shangyi.business.R
+import com.shangyi.kt.fragment.bean.CategroyLeftBean
 import kotlinx.android.synthetic.main.item_categroy_left.view.*
 
 /**
@@ -12,7 +13,9 @@ import kotlinx.android.synthetic.main.item_categroy_left.view.*
  * Desc:
  */
 class CategroyLeftAdapter constructor(private val normalTxColor: Int, private val selectTxColor: Int)
-    : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_categroy_left) {
+    : BaseQuickAdapter<CategroyLeftBean, BaseViewHolder>(R.layout.item_categroy_left) {
+
+    private var mListener: OnItemClickListener? = null
 
     init {
         var list = arrayListOf<String>(
@@ -23,13 +26,13 @@ class CategroyLeftAdapter constructor(private val normalTxColor: Int, private va
                 "运动户外", "家具厨具", "礼品鲜花", "宠物生活", "生活旅行",
                 "图书文娱", "农资园艺", "特茶馆", "京东金融", "拍卖",
                 "房产", "京东服务", "工业品")
-        addData(list)
     }
 
     var currentItem = 0
 
-    override fun convert(holder: BaseViewHolder, item: String) {
-        holder.itemView.tvTitle.text = item
+    override fun convert(holder: BaseViewHolder, item: CategroyLeftBean) {
+        holder.itemView.tvTitle.text = item.name
+
         holder.itemView.tvTitle.paint.isFakeBoldText = currentItem == holder.layoutPosition  //加粗
 
         if (currentItem == holder.layoutPosition) {
@@ -47,6 +50,17 @@ class CategroyLeftAdapter constructor(private val normalTxColor: Int, private va
         holder.itemView.setOnClickListener {
             currentItem = holder.layoutPosition
             notifyDataSetChanged()
+            if (null != mListener) {
+                mListener?.onItemClick(holder.layoutPosition)
+            }
         }
+    }
+
+    fun setOnCategroyItemClick(listener: OnItemClickListener) {
+        this.mListener = listener
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(categroyId: Int)
     }
 }

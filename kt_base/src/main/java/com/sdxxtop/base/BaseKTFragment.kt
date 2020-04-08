@@ -13,6 +13,8 @@ import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
 import com.sdxxtop.base.dialog.LoadingDialog
 import com.sdxxtop.base.load.IPreLoad
+import com.sdxxtop.base.loadsir.EmptyCallback
+import com.sdxxtop.base.loadsir.ErrorCallback
 
 /**
  * Email: sdxxtop@163.com

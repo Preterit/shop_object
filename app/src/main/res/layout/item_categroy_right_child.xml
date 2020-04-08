@@ -7,18 +7,18 @@
 
     <ImageView
         android:id="@+id/ivImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="3dp"
         android:src="@drawable/main_menu_home_select" />
 
     <TextView
+        android:maxLines="1"
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="3dp"
         android:text="卫生棉条"
-        android:textColor="@color/color_292929"
-        android:textSize="13sp" />
+        android:textSize="12sp" />
 </LinearLayout>

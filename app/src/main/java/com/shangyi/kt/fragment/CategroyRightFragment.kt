@@ -1,8 +1,12 @@
 package com.shangyi.kt.fragment
 
 import android.os.Bundle
+import android.util.Log
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sdxxtop.base.BaseKTFragment
+import com.sdxxtop.base.loadsir.EmptyCallback
+import com.sdxxtop.base.loadsir.ErrorCallback
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentCategroyRightBinding
 import com.shangyi.kt.fragment.adapter.CategroyRightAdapter
@@ -21,8 +25,21 @@ class CategroyRightFragment : BaseKTFragment<FragmentCategroyRightBinding, Categ
         mBinding.vm = mViewModel
     }
 
-    override fun initObserve() {
+    /**
+     * 适配器
+     */
+    private var adapter = CategroyRightAdapter()
+    private var mCategroyId = 0  // 分类ID
 
+    override fun initObserve() {
+        mBinding.vm?.categoryRightData?.observe(this, Observer {
+            if (it?.child_list != null) {
+                adapter.replaceData(it.child_list)
+                if (it.child_list.isEmpty()) mLoadService.showCallback(EmptyCallback::class.java) else mLoadService.showSuccess()
+            } else {
+                mLoadService.showCallback(ErrorCallback::class.java)
+            }
+        })
     }
 
     companion object {
@@ -37,8 +54,19 @@ class CategroyRightFragment : BaseKTFragment<FragmentCategroyRightBinding, Categ
     override fun initView() {
         mLoadService.showSuccess()
         recyclerview.layoutManager = LinearLayoutManager(activity)
-        recyclerview.adapter = CategroyRightAdapter()
+        recyclerview.adapter = adapter
+    }
+
+    fun loadCategroyRightData(categroyId: Int) {
+        mCategroyId = categroyId
+        mBinding.vm?.getRightCategory(categroyId)
     }
 
 
+    /**
+     * 重试
+     */
+    override fun preLoad() {
+        mBinding.vm?.getRightCategory(mCategroyId)
+    }
 }

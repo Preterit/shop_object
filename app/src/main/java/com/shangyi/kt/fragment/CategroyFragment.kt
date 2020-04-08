@@ -2,8 +2,10 @@ package com.shangyi.kt.fragment
 
 import android.graphics.Color
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sdxxtop.base.BaseKTFragment
+import com.sdxxtop.base.loadsir.ErrorCallback
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentCategroyBinding
 import com.shangyi.kt.fragment.adapter.CategroyLeftAdapter
@@ -32,6 +34,8 @@ class CategroyFragment : BaseKTFragment<FragmentCategroyBinding, CategroyModel>(
         }
     }
 
+    private val adapter = CategroyLeftAdapter(Color.parseColor("#8B8B8B"), Color.parseColor("#FF2941"))
+
     /**
      * 初始化右侧数据fragment
      */
@@ -41,14 +45,25 @@ class CategroyFragment : BaseKTFragment<FragmentCategroyBinding, CategroyModel>(
     }
 
     override fun initObserve() {
-
+        mBinding.vm?.categoryLeftData?.observe(this, Observer {
+            if (null != it) {
+                mLoadService.showSuccess()
+                adapter.replaceData(it)
+            } else {
+                mLoadService.showCallback(ErrorCallback::class.java)
+            }
+        })
     }
 
     override fun initView() {
-        mLoadService.showSuccess()
-        recyclerview.layoutManager = LinearLayoutManager(activity)
-        recyclerview.adapter = CategroyLeftAdapter(Color.parseColor("#8B8B8B"), Color.parseColor("#FF2941"))
+        adapter.setOnCategroyItemClick(object :CategroyLeftAdapter.OnItemClickListener{
+            override fun onItemClick(categroyId: Int) {
+                categroyRightFragment.loadCategroyRightData(categroyId)
+            }
+        })
 
+        recyclerview.layoutManager = LinearLayoutManager(activity)
+        recyclerview.adapter = adapter
         childFragmentManager.beginTransaction().replace(R.id.frameLayout, categroyRightFragment).commitAllowingStateLoss()
     }
 
@@ -56,14 +71,14 @@ class CategroyFragment : BaseKTFragment<FragmentCategroyBinding, CategroyModel>(
     override fun onResume() {
         super.onResume()
         if (isVisible) {
-            mBinding.vm?.getCategory()
+            mBinding.vm?.getLeftCategory()
         }
     }
 
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         if (!hidden) {
-            mBinding.vm?.getCategory()
+            mBinding.vm?.getLeftCategory()
         }
     }
 

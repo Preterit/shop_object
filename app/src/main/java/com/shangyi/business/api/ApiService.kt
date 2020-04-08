@@ -2,6 +2,7 @@ package com.shangyi.business.api
 
 import com.sdxxtop.network.helper.data.BaseResponse
 import com.shangyi.kt.fragment.bean.CategroyLeftBean
+import com.shangyi.kt.fragment.bean.CategroyRightBean
 import com.shangyi.kt.ui.splash.bean.GetSettingBean
 import com.shangyi.kt.ui.userlogin.bean.LoginSuccess
 import retrofit2.http.Field
@@ -74,5 +75,12 @@ interface ApiService {
      */
     @FormUrlEncoded
     @POST("/api/goods_category/goodsCateList")
-    suspend fun getCategory(@Field("data") data: String): BaseResponse<List<CategroyLeftBean>?>
+    suspend fun getLeftCategory(@Field("data") data: String): BaseResponse<List<CategroyLeftBean>?>
+
+    /**
+     * 找回密码
+     */
+    @FormUrlEncoded
+    @POST("/api/goods_category/goodsCateList")
+    suspend fun getRightCategory(@Field("data") data: String): BaseResponse<CategroyRightBean?>
 }
