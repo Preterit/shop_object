@@ -1,6 +1,5 @@
 package com.shangyi.kt.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -14,7 +13,6 @@ import com.shangyi.kt.fragment.adapter.BannerDataBean
 import com.shangyi.kt.fragment.adapter.CategroyRightAdapter
 import com.shangyi.kt.fragment.adapter.CategroyRightBanner
 import com.shangyi.kt.fragment.model.CategroyModel
-import com.shangyi.kt.ui.goods.GoodDetailActivity
 import com.youth.banner.Banner
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_categroy_right.*

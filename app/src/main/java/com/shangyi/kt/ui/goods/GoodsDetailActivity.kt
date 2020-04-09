@@ -11,7 +11,7 @@ import com.youth.banner.Banner
 import com.youth.banner.config.IndicatorConfig
 import java.util.*
 
-class GoodDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetailModel>() {
+class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetailModel>() {
 
     override fun vmClazz() = GoodDetailModel::class.java
     override fun layoutId() = R.layout.activity_goods_detail

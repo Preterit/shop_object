@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import com.shangyi.business.R
-import com.shangyi.kt.ui.goods.GoodDetailActivity
+import com.shangyi.kt.ui.goods.GoodsDetailActivity
 import kotlinx.android.synthetic.main.good_detail_toptitle.view.*
 
 /**
@@ -38,8 +38,8 @@ class GoodDetailTopTitle : FrameLayout, View.OnClickListener {
         tvDetail.setOnClickListener(this)
         tvTuijian.setOnClickListener(this)
         ivBack.setOnClickListener {
-            if (context is GoodDetailActivity) {
-                val activity = context as GoodDetailActivity
+            if (context is GoodsDetailActivity) {
+                val activity = context as GoodsDetailActivity
                 activity.finish()
             }
         }
