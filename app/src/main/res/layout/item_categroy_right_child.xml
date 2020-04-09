@@ -5,12 +5,11 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <ImageView
+    <com.study.glidemodel.GlideImageView
         android:id="@+id/ivImg"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="3dp"
-        android:src="@drawable/main_menu_home_select" />
+        android:layout_marginTop="3dp" />
 
     <TextView
         android:maxLines="1"

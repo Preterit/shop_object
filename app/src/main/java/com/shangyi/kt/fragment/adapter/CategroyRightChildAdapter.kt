@@ -1,6 +1,6 @@
 package com.shangyi.kt.fragment.adapter
 
-import com.bumptech.glide.Glide
+import android.annotation.SuppressLint
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.shangyi.business.R
@@ -22,8 +22,10 @@ class CategroyRightChildAdapter constructor(data: List<ChildItemBean>?) :
                 "免洗洗手液", "趣闻用品")
     }
 
+    @SuppressLint("CheckResult")
     override fun convert(holder: BaseViewHolder, item: ChildItemBean?) {
         holder.itemView.tvTitle.text = item?.name
-        Glide.with(context).load(item?.category_img?.img).into(holder.itemView.ivImg)
+        val opation = holder.itemView.ivImg.requestOptions(R.color.placeholder_color).error(R.color.placeholder_color)
+        holder.itemView.ivImg.load(item?.category_img?.img?:"",opation)
     }
 }
