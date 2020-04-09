@@ -14,6 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name="com.shangyi.kt.ui.goods.GoodDetailActivity"></activity>
         <activity
             android:name="com.shangyi.kt.ui.userlogin.FindPwdActivity"
             android:theme="@style/YellowTheme" />
@@ -34,9 +35,7 @@
         </activity>
         <activity android:name="com.shangyi.kt.ui.userlogin.RegisterActivity" />
         <activity android:name="com.shangyi.kt.ui.userlogin.YzmActivity" />
-        <activity android:name="com.shangyi.kt.ui.goods.GoodsDetailActivity" />
         <activity android:name="com.shangyi.kt.ui.editaddress.EditAddressActivity" />
-
         <activity
             android:name="com.shangyi.kt.ui.WebActivity"
             android:hardwareAccelerated="true"
