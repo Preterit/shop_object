@@ -51,13 +51,18 @@ class CategroyLeftAdapter constructor(private val normalTxColor: Int, private va
             currentItem = holder.layoutPosition
             notifyDataSetChanged()
             if (null != mListener) {
-                mListener?.onItemClick(holder.layoutPosition)
+                mListener?.onItemClick(item?.id)
             }
         }
     }
 
     fun setOnCategroyItemClick(listener: OnItemClickListener) {
         this.mListener = listener
+    }
+
+    fun setSelectPosition(i: Int) {
+        this.currentItem = i
+        notifyDataSetChanged()
     }
 
     interface OnItemClickListener {

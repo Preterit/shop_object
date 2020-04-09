@@ -49,6 +49,10 @@ class CategroyFragment : BaseKTFragment<FragmentCategroyBinding, CategroyModel>(
             if (null != it) {
                 mLoadService.showSuccess()
                 adapter.replaceData(it)
+                if (it.isNotEmpty()) {
+                    categroyRightFragment.loadCategroyRightData(it[0].id)
+                    adapter.setSelectPosition(0)
+                }
             } else {
                 mLoadService.showCallback(ErrorCallback::class.java)
             }
@@ -56,7 +60,7 @@ class CategroyFragment : BaseKTFragment<FragmentCategroyBinding, CategroyModel>(
     }
 
     override fun initView() {
-        adapter.setOnCategroyItemClick(object :CategroyLeftAdapter.OnItemClickListener{
+        adapter.setOnCategroyItemClick(object : CategroyLeftAdapter.OnItemClickListener {
             override fun onItemClick(categroyId: Int) {
                 categroyRightFragment.loadCategroyRightData(categroyId)
             }

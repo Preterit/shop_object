@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.shangyi.business">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -15,10 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.shangyi.kt.ui.personal.SettingActivity"></activity>
         <activity
             android:name="com.shangyi.kt.ui.userlogin.FindPwdActivity"
             android:theme="@style/YellowTheme" />
+        <activity android:name="com.shangyi.kt.ui.personal.SettingActivity"></activity>
         <activity android:name="com.shangyi.kt.ui.userlogin.SetUserinfoActivity" />
         <activity android:name="com.shangyi.kt.ui.userlogin.SetPwdActivity" />
         <activity android:name="com.shangyi.kt.ui.poster.PosterActivity" />
@@ -38,10 +37,10 @@
         <activity android:name="com.shangyi.kt.ui.userlogin.YzmActivity" />
         <activity android:name="com.shangyi.kt.ui.goods.GoodsDetailActivity" />
         <activity android:name="com.shangyi.kt.ui.editaddress.EditAddressActivity" />
-        <activity
-            android:name="com.shangyi.kt.ui.WebActivity"
+
+        <activity android:name="com.shangyi.kt.ui.WebActivity"
             android:hardwareAccelerated="true"
-            android:process=":remoteweb" />
+            android:process=":remoteweb"/>
     </application>
 
 </manifest>

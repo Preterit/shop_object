@@ -3,7 +3,8 @@ package com.shangyi.kt.fragment.adapter
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.study.glidemodel.GlideImageView
+import com.study.glidemodel.R
 import com.youth.banner.adapter.BannerAdapter
 
 
@@ -15,7 +16,7 @@ import com.youth.banner.adapter.BannerAdapter
 class CategroyRightBanner : BannerAdapter<BannerDataBean, CategroyRightBannerHoler>(arrayListOf()) {
 
     override fun onCreateHolder(parent: ViewGroup?, viewType: Int): CategroyRightBannerHoler {
-        val imageView = ImageView(parent!!.context)
+        val imageView = GlideImageView(parent!!.context)
         //注意，必须设置为match_parent，这个是viewpager2强制要求的
         imageView.layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -26,7 +27,7 @@ class CategroyRightBanner : BannerAdapter<BannerDataBean, CategroyRightBannerHol
     }
 
     override fun onBindView(holder: CategroyRightBannerHoler?, data: BannerDataBean?, position: Int, size: Int) {
-        Glide.with(holder?.itemView?.context!!).load(data?.img).into(holder.imageView!!)
+        holder?.imageView?.loadImage(data?.img, R.color.placeholder_color)
     }
 
     override fun setDatas(datas: MutableList<BannerDataBean>?) {
@@ -40,13 +41,12 @@ class CategroyRightBanner : BannerAdapter<BannerDataBean, CategroyRightBannerHol
  */
 class CategroyRightBannerHoler : RecyclerView.ViewHolder {
 
-    var imageView: ImageView? = null
+    var imageView: GlideImageView? = null
 
-    constructor(itemView: ImageView) : super(itemView) {
+    constructor(itemView: GlideImageView) : super(itemView) {
         this.imageView = itemView
     }
 }
-
 
 
 data class BannerDataBean(
