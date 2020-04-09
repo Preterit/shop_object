@@ -85,6 +85,7 @@ dependencies {
     //kt———start
     implementation project(path: ':kt_base')
     implementation project(path: ':syzx_webview')
+    implementation project(path: ':glidemodel')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$rootProject.appcompat"
