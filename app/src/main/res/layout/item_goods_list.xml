@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@drawable/shape_goods_list_item_bg"
+    android:paddingLeft="10dp"
+    android:paddingTop="10dp"
+    android:paddingRight="10dp">
+
+    <LinearLayout
+        android:id="@+id/imgLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.study.glidemodel.GlideImageView
+            android:id="@+id/glideImageView"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="产品名称产品名称产品名称产称产品名称产..."
+        android:textColor="@color/color_333333"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@+id/imgLayout" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="7dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+
+        <TextView
+            android:id="@+id/tvPriceTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:text="¥"
+            android:textColor="@color/color_333333"
+            app:layout_constraintBottom_toBottomOf="@+id/tvPrice"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:includeFontPadding="false"
+            android:text="89.09"
+            android:textColor="@color/color_333333"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toRightOf="@+id/tvPriceTag"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tvZhuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/shape_goods_list_zhuan_bg"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="赚"
+            android:textColor="@color/color_FF0000"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvPrice"
+            app:layout_constraintLeft_toRightOf="@+id/tvPrice"
+            app:layout_constraintTop_toTopOf="@+id/tvPrice" />
+
+        <TextView
+            android:id="@+id/tvZhuanTx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:text="￥0.89"
+            android:textColor="@color/color_FF0000"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvPrice"
+            app:layout_constraintLeft_toRightOf="@+id/tvZhuan"
+            app:layout_constraintTop_toTopOf="@+id/tvPrice" />
+
+        <TextView
+            android:id="@+id/tvYhTx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/shape_goods_list_zhuan_bg"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingTop="2dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="2dp"
+            android:text="5元优惠券"
+            android:textColor="@color/color_FF0000"
+            android:textSize="10sp"
+            app:layout_constraintLeft_toLeftOf="@+id/tvPriceTag"
+            app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
+
+        <TextView
+            android:id="@+id/tvPjNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="1000+好评"
+            android:textColor="@color/color_999999"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/tvPriceTag"
+            app:layout_constraintTop_toBottomOf="@+id/tvYhTx" />
+
+        <TextView
+            android:id="@+id/tvPjBfb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="96%好评"
+            android:textColor="@color/color_999999"
+            android:textSize="10sp"
+            app:layout_constraintLeft_toRightOf="@+id/tvPjNum"
+            app:layout_constraintTop_toBottomOf="@+id/tvYhTx" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,3 +9,7 @@ import com.sdxxtop.base.BaseViewModel
  */
 class GoodDetailModel :BaseViewModel(){
 }
+
+class GoodsListModel:BaseViewModel(){
+
+}

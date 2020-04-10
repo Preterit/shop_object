@@ -23,8 +23,12 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.IdRes;
+
+import com.shangyi.business.MyApplication;
+import com.shangyi.business.utils.interceptor.SystemUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.Random;
@@ -328,5 +332,21 @@ public class ViewUtil {
         B = B.length() == 1 ? "0" + B : B;
 
         return "#" + R + G + B;
+    }
+
+    public static boolean isVersionMoreKitkat() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static void topViewPadding(View view) {
+        WeakReference weakReference = new WeakReference<View>(view);
+        view = (View) weakReference.get();
+        if (isVersionMoreKitkat()) {
+            view.setPadding(0, SystemUtil.getStatusHeight(MyApplication.getInstance()), 0, 0);
+        }
     }
 }

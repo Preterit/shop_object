@@ -7,6 +7,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.shangyi.business.R
 import com.shangyi.kt.fragment.bean.ChildItemBean
 import com.shangyi.kt.ui.goods.GoodsDetailActivity
+import com.shangyi.kt.ui.goods.GoodsListActivity
 import kotlinx.android.synthetic.main.item_categroy_right_child.view.*
 
 /**
@@ -30,7 +31,7 @@ class CategroyRightChildAdapter constructor(data: List<ChildItemBean>?) :
         holder.itemView.ivImg.loadImage(item?.category_img?.img ?: "", R.color.placeholder_color)
 
         holder.itemView.ivImg.setOnClickListener {
-            var intent = Intent(context, GoodsDetailActivity::class.java)
+            var intent = Intent(context, GoodsListActivity::class.java)
             intent.putExtra("categroyId", item?.id)
             context.startActivity(intent)
         }
