@@ -59,7 +59,7 @@ class CategroyRightFragment : BaseKTFragment<FragmentCategroyRightBinding, Categ
                 } else {
                     banner?.visibility = View.VISIBLE
                 }
-                bannerAdapter.setDatas(list)
+                bannerAdapter?.setDatas(list)
             } else {
                 mLoadService.showCallback(ErrorCallback::class.java)
             }
@@ -82,9 +82,9 @@ class CategroyRightFragment : BaseKTFragment<FragmentCategroyRightBinding, Categ
 
 
         banner = mBinding.root.findViewById(R.id.banner)
-        if (banner != null) {
-            bannerAdapter.setDatas(list)
-            banner!!.setAdapter(bannerAdapter).setIndicator(CircleIndicator(context)).start()
+        if (banner != null && bannerAdapter != null) {
+            bannerAdapter?.setDatas(list)
+            banner!!.setAdapter(bannerAdapter!!).setIndicator(CircleIndicator(context)).start()
         }
 
     }

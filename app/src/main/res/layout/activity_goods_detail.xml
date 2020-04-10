@@ -502,6 +502,8 @@
                     app:layout_constraintBottom_toBottomOf="@+id/ivShopPhoto"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/ivShopPhoto" />
+
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

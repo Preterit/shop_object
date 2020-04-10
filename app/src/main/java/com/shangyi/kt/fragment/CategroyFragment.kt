@@ -60,6 +60,9 @@ class CategroyFragment : BaseKTFragment<FragmentCategroyBinding, CategroyModel>(
     }
 
     override fun initView() {
+        /**
+         * 左侧分类点击事件
+         */
         adapter.setOnCategroyItemClick(object : CategroyLeftAdapter.OnItemClickListener {
             override fun onItemClick(categroyId: Int) {
                 categroyRightFragment.loadCategroyRightData(categroyId)

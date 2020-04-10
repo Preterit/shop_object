@@ -1,5 +1,6 @@
 package com.study.glidemodel;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -21,6 +22,7 @@ import com.study.glidemodel.progress.OnGlideImageViewListener;
 import com.study.glidemodel.progress.OnProgressListener;
 import com.study.glidemodel.progress.ProgressManager;
 import com.study.glidemodel.transformation.GlideCircleTransformation;
+import com.study.glidemodel.util.ActivityDestroy;
 
 import java.lang.ref.WeakReference;
 
@@ -85,12 +87,24 @@ public class GlideImageLoader {
 
     public void load(Uri uri, RequestOptions options) {
         if (uri == null || getContext() == null) return;
-        requestBuilder(uri, options).into(getImageView());
+        Context context = getImageView().getContext();
+        if (context instanceof Activity) {
+            boolean destroy = ActivityDestroy.isDestroy((Activity) context);
+            if (!destroy){
+                requestBuilder(uri, options).into(getImageView());
+            }
+        }
     }
 
     public void load(String url, RequestOptions options) {
         if (url == null || getContext() == null) return;
-        requestBuilder(url, options).into(getImageView());
+        Context context = getImageView().getContext();
+        if (context instanceof Activity) {
+            boolean destroy = ActivityDestroy.isDestroy((Activity) context);
+            if (!destroy){
+                requestBuilder(url, options).into(getImageView());
+            }
+        }
     }
 
     public RequestBuilder<Drawable> requestBuilder(Object obj, RequestOptions options) {

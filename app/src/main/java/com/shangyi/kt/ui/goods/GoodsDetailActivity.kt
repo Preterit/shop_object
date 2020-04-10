@@ -19,14 +19,18 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         mBinding.vm = mViewModel
     }
 
+    private var bannerAdapter: MultipleTypesAdapter? = null   // 轮播图适配器
     private var banner: Banner<GoodDetailTopBarBean, MultipleTypesAdapter>? = null
+
     override fun initObserve() {
+
     }
 
 
     override fun initView() {
+        bannerAdapter = MultipleTypesAdapter(this, getTestDataVideo())
         banner = findViewById(R.id.banner)
-        banner!!.setAdapter(MultipleTypesAdapter(this, getTestDataVideo()))
+        banner!!.setAdapter(bannerAdapter!!)
                 .setIndicator(NumIndicator(this))
                 .setIndicatorGravity(IndicatorConfig.Direction.RIGHT)
                 .start()
@@ -45,5 +49,11 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         list.add(GoodDetailTopBarBean(imageUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586443031233&di=f6ad3d53ef63e76de9905859d1d4b865&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fspider202048%2F29%2Fw1093h536%2F20200408%2F05a4-iryninw6738585.png", viewType = 1))
         list.add(GoodDetailTopBarBean(imageUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586443031231&di=3e78616ada111050b3763da6387aab9a&imgtype=0&src=http%3A%2F%2Fa3.att.hudong.com%2F16%2F18%2F300000932954129238184537620_950.jpg", viewType = 1))
         return list
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        banner = null
+        bannerAdapter = null
     }
 }
