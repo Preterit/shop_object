@@ -3,6 +3,7 @@ package com.shangyi.business;
 import androidx.multidex.MultiDex;
 
 import com.sdxxtop.base.BaseApplication;
+import com.sdxxtop.webview.remotewebview.ProgressWebView;
 import com.shangyi.business.network.NetWorkSession;
 
 import sing.util.LogUtil;

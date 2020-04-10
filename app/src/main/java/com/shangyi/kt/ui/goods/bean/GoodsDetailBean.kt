@@ -15,3 +15,7 @@ data class GoodDetailTopBarBean(
         var viewType: Int
 )
 
+data class GoodsDetailTjProduce(
+        val str: String
+)
+

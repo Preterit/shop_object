@@ -1,14 +1,20 @@
 package com.shangyi.kt.ui.goods
 
+import androidx.recyclerview.widget.GridLayoutManager
 import com.sdxxtop.base.BaseKTActivity
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityGoodsDetailBinding
+import com.shangyi.kt.ui.goods.adapter.GoodsDetailLookmoreAdapter
+import com.shangyi.kt.ui.goods.adapter.GoodsDetailTjBannerAdapter
+import com.shangyi.kt.ui.goods.adapter.GoodsDetailTjBean
 import com.shangyi.kt.ui.goods.adapter.MultipleTypesAdapter
 import com.shangyi.kt.ui.goods.bean.GoodDetailTopBarBean
 import com.shangyi.kt.ui.goods.model.GoodDetailModel
 import com.shangyi.kt.ui.goods.weight.banner.indicator.NumIndicator
 import com.youth.banner.Banner
 import com.youth.banner.config.IndicatorConfig
+import com.youth.banner.indicator.CircleIndicator
+import kotlinx.android.synthetic.main.activity_goods_detail.*
 import java.util.*
 
 class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetailModel>() {
@@ -20,7 +26,8 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     }
 
     private var bannerAdapter: MultipleTypesAdapter? = null   // 轮播图适配器
-    private var banner: Banner<GoodDetailTopBarBean, MultipleTypesAdapter>? = null
+    private var banner: Banner<GoodDetailTopBarBean, MultipleTypesAdapter>? = null  // 商品轮播图
+    private var shopTjBanner: Banner<GoodDetailTopBarBean, GoodsDetailTjBannerAdapter>? = null  // 商品推荐轮播图
 
     override fun initObserve() {
 
@@ -34,6 +41,29 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
                 .setIndicator(NumIndicator(this))
                 .setIndicatorGravity(IndicatorConfig.Direction.RIGHT)
                 .start()
+
+        /**
+         * 看了又看适配器
+         */
+        goodsDetailLookmoreRecycler.layoutManager = GridLayoutManager(this, 2)
+        goodsDetailLookmoreRecycler.adapter = GoodsDetailLookmoreAdapter()
+
+        goodsDetailWeb.loadUrl("http://39.106.156.132/service.html")
+
+        /**
+         * 店铺推荐
+         */
+        shopTjBanner = findViewById(R.id.shopTjBanner)
+        var goodsDetailTjBannerAdapter = GoodsDetailTjBannerAdapter()
+        goodsDetailTjBannerAdapter.setDatas(arrayListOf<GoodsDetailTjBean>(
+                GoodsDetailTjBean(""),
+                GoodsDetailTjBean(""),
+                GoodsDetailTjBean("")
+        ))
+        shopTjBanner!!.setAdapter(goodsDetailTjBannerAdapter)
+                .setIndicator(CircleIndicator(this))
+                .setIndicatorGravity(IndicatorConfig.Direction.CENTER)
+
     }
 
 

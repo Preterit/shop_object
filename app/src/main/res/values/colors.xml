@@ -50,5 +50,6 @@
     <color name="black">#000000</color>
 
     <color name="color_F61630">#F61630</color>
-    <color name="color_F0F0F0">#F0F0F0</color>  <!-- 黑色 -->
+    <color name="color_F0F0F0">#F0F0F0</color>
+    <color name="color_F8F8F8">#F8F8F8</color>  <!-- 黑色 -->
 </resources>
