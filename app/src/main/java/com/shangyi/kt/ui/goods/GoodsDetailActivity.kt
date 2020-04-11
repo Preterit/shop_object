@@ -81,6 +81,13 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         return list
     }
 
+    /**
+     * 初始化数据
+     */
+    override fun initData() {
+        mBinding.vm?.loadGoodsInfo()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         banner = null

@@ -19,12 +19,15 @@ class GoodsListActivity : BaseKTActivity<ActivityGoodsListBinding, GoodsListMode
         mBinding.vm = mViewModel
     }
 
+    private var categroyId = 0 // 商品分类ID
+
     override fun initObserve() {
     }
 
 
     override fun initView() {
         ViewUtil.topViewPadding(topView)
+        categroyId = intent.getIntExtra("categroyId", 0)
 
         recyclerview.layoutManager = GridLayoutManager(this, 2)
         recyclerview.adapter = GoodsListAdapter()
@@ -36,5 +39,9 @@ class GoodsListActivity : BaseKTActivity<ActivityGoodsListBinding, GoodsListMode
             override fun onRefresh(refreshLayout: RefreshLayout) {
             }
         })
+    }
+
+    override fun initData() {
+        mBinding.vm?.loadGoodsData(categroyId)
     }
 }

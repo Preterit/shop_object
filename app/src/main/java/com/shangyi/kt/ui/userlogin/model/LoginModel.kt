@@ -127,26 +127,6 @@ class LoginModel : BaseViewModel() {
         })
     }
 
-
-    fun loadWebViewData() {
-        loadOnUI({
-            var params = Params()
-            params.put("login_name", "18614005205")
-            params.put("password", "123456")
-            params.put("code", "")
-            params.put("login_type", 1)
-
-            RetrofitClient.apiCusService.loginSSS(params.aesData)
-        }, {
-//            Log.e("LWB ---  data  -- ","${it.userInfo.login_name}")
-            mIsLoadingShow.value = false
-        }, { code, msg, t ->
-            UIUtils.showToast(msg)
-            mIsLoadingShow.value = false
-        })
-    }
-
-
     /**
      * 找回密码
      */

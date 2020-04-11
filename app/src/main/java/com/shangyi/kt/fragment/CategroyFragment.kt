@@ -75,18 +75,22 @@ class CategroyFragment : BaseKTFragment<FragmentCategroyBinding, CategroyModel>(
     }
 
 
-    override fun onResume() {
-        super.onResume()
-        if (isVisible) {
-            mBinding.vm?.getLeftCategory()
-        }
+    override fun initData() {
+        mBinding.vm?.getLeftCategory()
     }
 
-    override fun onHiddenChanged(hidden: Boolean) {
-        super.onHiddenChanged(hidden)
-        if (!hidden) {
-            mBinding.vm?.getLeftCategory()
-        }
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        if (isVisible) {
+//            mBinding.vm?.getLeftCategory()
+//        }
+//    }
+//
+//    override fun onHiddenChanged(hidden: Boolean) {
+//        super.onHiddenChanged(hidden)
+//        if (!hidden) {
+//            mBinding.vm?.getLeftCategory()
+//        }
+//    }
 
 }

@@ -81,7 +81,8 @@ public class ShapeImageView extends androidx.appcompat.widget.AppCompatImageView
         }
 
         initPressedPaint();
-        setClickable(true);
+        // 注释掉 点击事件冲突
+//        setClickable(true);
         setDrawingCacheEnabled(true);
         setWillNotDraw(false);
     }
@@ -173,26 +174,26 @@ public class ShapeImageView extends androidx.appcompat.widget.AppCompatImageView
         }
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                pressedPaint.setAlpha((int) (pressedAlpha * 255));
-                invalidate();
-                break;
-            case MotionEvent.ACTION_UP:
-                pressedPaint.setAlpha(0);
-                invalidate();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                break;
-            default:
-                pressedPaint.setAlpha(0);
-                invalidate();
-                break;
-        }
-        return super.onTouchEvent(event);
-    }
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        switch (event.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                pressedPaint.setAlpha((int) (pressedAlpha * 255));
+//                invalidate();
+//                break;
+//            case MotionEvent.ACTION_UP:
+//                pressedPaint.setAlpha(0);
+//                invalidate();
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                break;
+//            default:
+//                pressedPaint.setAlpha(0);
+//                invalidate();
+//                break;
+//        }
+//        return super.onTouchEvent(event);
+//    }
 
     // 获取Bitmap内容
     private Bitmap getBitmapFromDrawable(Drawable drawable) {

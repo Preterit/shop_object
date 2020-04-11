@@ -58,11 +58,6 @@ interface ApiService {
     @POST("api/login/improveInfo")
     suspend fun commitInfo(@Field("data") data: String): BaseResponse<String?>
 
-
-    @FormUrlEncoded
-    @POST("api/login/login")
-    suspend fun loginSSS(@Field("data") data: String): BaseResponse<LoginSuccess>
-
     /**
      * 找回密码
      */
@@ -71,16 +66,29 @@ interface ApiService {
     suspend fun findpwd(@Field("data") data: String): BaseResponse<String?>
 
     /**
-     * 找回密码
+     * 分类左侧分类数据
      */
     @FormUrlEncoded
     @POST("/api/goods_category/goodsCateList")
     suspend fun getLeftCategory(@Field("data") data: String): BaseResponse<List<CategroyLeftBean>?>
 
     /**
-     * 找回密码
+     * 分类右侧分类数据
      */
     @FormUrlEncoded
     @POST("/api/goods_category/goodsCateList")
     suspend fun getRightCategory(@Field("data") data: String): BaseResponse<CategroyRightBean?>
+
+    /**
+     * 找回密码
+     */
+    @FormUrlEncoded
+    @POST("/api/goods/goodsList")
+    suspend fun getGoodsList(@Field("data") data: String): BaseResponse<Any?>
+    /**
+     * 商品详情——商品信息
+     */
+    @FormUrlEncoded
+    @POST("/api/Goods/getGoodsInfo")
+    suspend fun getGoodsInfo(@Field("data") data: String): BaseResponse<Any?>
 }

@@ -8,6 +8,10 @@
         <variable
             name="vm"
             type="com.shangyi.kt.ui.goods.model.GoodsListModel" />
+
+        <variable
+            name="activity"
+            type="com.shangyi.kt.ui.goods.GoodsListActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,6 +39,7 @@
                 android:id="@+id/ivBack"
                 android:layout_width="50dp"
                 android:layout_height="0dp"
+                android:onClick="@{activity::onClick}"
                 android:padding="16dp"
                 android:src="@drawable/black_back"
                 app:layout_constraintBottom_toBottomOf="parent"
