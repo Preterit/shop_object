@@ -14,9 +14,9 @@ class GoodDetailModel : BaseViewModel() {
     fun loadGoodsInfo() {
         loadOnUI({
             val params = Params()
-            params.put("id", 35)
+            params.put("id", 1)
             params.put("uid", 0)
-            RetrofitClient.apiService.getGoodsInfo(params.aesData)
+            RetrofitClient.apiCusService.getGoodsInfo(params.aesData)
         }, {
             mIsLoadingShow.value = false
         }, { code, msg, t ->
@@ -35,7 +35,7 @@ class GoodsListModel : BaseViewModel() {
             params.put("page", 1)
             params.put("order", "sales——")
             params.put("order_value", "sales——")
-            RetrofitClient.apiService.getGoodsList("")
+            RetrofitClient.apiCusService.getGoodsList("")
         }, {
             mIsLoadingShow.value = false
         }, { code, msg, t ->

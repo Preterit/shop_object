@@ -2,6 +2,7 @@ package com.shangyi.kt.ui.goods.weight
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.good_detail_toptitle.view.*
  */
 class GoodDetailTopTitle : FrameLayout, View.OnClickListener {
 
+    private var mListener: OnTabSelectListener? = null
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -45,6 +47,9 @@ class GoodDetailTopTitle : FrameLayout, View.OnClickListener {
         }
     }
 
+    /**
+     * 设置字体加粗
+     */
     fun setTextBold(tx: TextView) {
         tx.paint.isFakeBoldText = tx.isSelected
     }
@@ -57,14 +62,46 @@ class GoodDetailTopTitle : FrameLayout, View.OnClickListener {
         when (v?.id) {
             R.id.tvProduct -> {
                 tvProduct.isSelected = true
+                mListener?.onItemSelect(0)
             }
             R.id.tvPinjia -> {
                 tvPinjia.isSelected = true
+                mListener?.onItemSelect(1)
             }
             R.id.tvDetail -> {
                 tvDetail.isSelected = true
+                mListener?.onItemSelect(2)
             }
             R.id.tvTuijian -> {
+                tvTuijian.isSelected = true
+                mListener?.onItemSelect(3)
+            }
+        }
+        setTextBold(tvProduct)
+        setTextBold(tvPinjia)
+        setTextBold(tvDetail)
+        setTextBold(tvTuijian)
+    }
+
+    /**
+     * 设置滑动选中的条目
+     */
+    fun setOnItemSelect(position: Int) {
+        tvProduct.isSelected = false
+        tvPinjia.isSelected = false
+        tvDetail.isSelected = false
+        tvTuijian.isSelected = false
+        when (position) {
+            0 -> {
+                tvProduct.isSelected = true
+            }
+            1 -> {
+                tvPinjia.isSelected = true
+            }
+            2 -> {
+                tvDetail.isSelected = true
+            }
+            3 -> {
                 tvTuijian.isSelected = true
             }
         }
@@ -73,4 +110,14 @@ class GoodDetailTopTitle : FrameLayout, View.OnClickListener {
         setTextBold(tvDetail)
         setTextBold(tvTuijian)
     }
+
+
+    fun setOnItemSelectListener(listener: OnTabSelectListener) {
+        this.mListener = listener
+    }
+
+    interface OnTabSelectListener {
+        fun onItemSelect(position: Int)
+    }
+
 }

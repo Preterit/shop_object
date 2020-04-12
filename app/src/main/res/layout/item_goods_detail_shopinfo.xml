@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvProductPJ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="20dp"
+            android:text="商品评价"
+            android:textColor="@color/color_333333"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvProductPjNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginBottom="2dp"
+            android:text="(19)"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvProductPJ"
+            app:layout_constraintLeft_toRightOf="@+id/tvProductPJ" />
+
+        <TextView
+            android:id="@+id/tvPjMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="13dp"
+            android:layout_marginBottom="2dp"
+            android:text="好评率98% >"
+            android:textColor="@color/color_F61630"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvProductPJ"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+        <com.study.glidemodel.GlideImageView
+            android:id="@+id/ivUserPhoto"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/duck"
+            app:layout_constraintLeft_toLeftOf="@+id/tvProductPJ"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductPJ"
+            app:siv_shape_type="circle" />
+
+        <TextView
+            android:id="@+id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="飞***店"
+            android:textColor="@color/color_999999"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivUserPhoto"
+            app:layout_constraintLeft_toRightOf="@+id/ivUserPhoto"
+            app:layout_constraintTop_toTopOf="@+id/ivUserPhoto" />
+
+        <TextView
+            android:id="@+id/tvPjContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="20dp"
+            android:text="评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivUserPhoto" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="7dp"
+        android:background="#F8F8F8" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/conShopLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.study.glidemodel.GlideImageView
+                android:id="@+id/ivShopPhoto"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/tianxianbaobao"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvShopName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="10dp"
+                android:text="店铺名称店铺名称"
+                android:textColor="@color/color_333333"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ivShopPhoto"
+                app:layout_constraintLeft_toRightOf="@+id/ivShopPhoto"
+                app:layout_constraintRight_toLeftOf="@+id/tvJoinShop"
+                app:layout_constraintTop_toTopOf="@+id/ivShopPhoto" />
+
+            <TextView
+                android:id="@+id/tvJoinShop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="13dp"
+                android:text="进入店铺 >"
+                android:textColor="@color/color_F61630"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivShopPhoto"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ivShopPhoto" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tvShopLine"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="12dp"
+            android:background="@color/color_F0F0F0"
+            app:layout_constraintTop_toBottomOf="@+id/conShopLayout" />
+
+        <TextView
+            android:id="@+id/tvShopTJStr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="15dp"
+            android:text="店铺推荐"
+            android:textColor="@color/color_333333"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvShopLine" />
+
+        <com.youth.banner.Banner
+            android:id="@+id/shopTjBanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:indicator_normal_color="@color/color_999999"
+            app:indicator_selected_color="#5CB85C"
+            app:is_auto_loop="false"
+            app:is_infinite_loop="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvShopTJStr" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="7dp"
+        android:background="@color/color_F8F8F8" />
+
+</LinearLayout>
