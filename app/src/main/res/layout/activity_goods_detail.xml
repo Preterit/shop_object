@@ -28,10 +28,11 @@
             app:layout_constraintTop_toBottomOf="@+id/topGoodsTop">
 
             <LinearLayout
+                android:paddingBottom="70dp"
                 android:id="@+id/detailLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical" />
+                android:orientation="vertical"/>
 
         </androidx.core.widget.NestedScrollView>
 

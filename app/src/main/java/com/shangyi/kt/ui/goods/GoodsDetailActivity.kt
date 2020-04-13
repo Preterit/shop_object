@@ -3,10 +3,12 @@ package com.shangyi.kt.ui.goods
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.widget.NestedScrollView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sdxxtop.base.BaseKTActivity
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityGoodsDetailBinding
+import com.shangyi.business.databinding.ItemGoodsDetailGoodsinfoBinding
 import com.shangyi.kt.ui.goods.adapter.GoodsDetailLookmoreAdapter
 import com.shangyi.kt.ui.goods.adapter.GoodsDetailTjBannerAdapter
 import com.shangyi.kt.ui.goods.adapter.GoodsDetailTjBean
@@ -40,7 +42,9 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     private lateinit var goodsTjView: View
 
     private var scrollviewFlag = false
-    private var tabIndex = -1
+    private var tabIndex = -1  // 当前选中tab的下标
+
+    private var goodsId = 0 // 商品ID
 
     override fun initObserve() {
 
@@ -52,6 +56,10 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         shopInfoView = LayoutInflater.from(this).inflate(R.layout.item_goods_detail_shopinfo, null, false)         // 店铺信息
         goodsDetailView = LayoutInflater.from(this).inflate(R.layout.item_goods_detail_goodsdetail, null, false)   // 商品详情
         goodsTjView = LayoutInflater.from(this).inflate(R.layout.item_goods_detail_tuijian, null, false)           // 推荐商品
+
+        val bind = DataBindingUtil.bind<ItemGoodsDetailGoodsinfoBinding>(goodsInfoView)
+        bind?.lifecycleOwner = this
+        bind?.vm = mViewModel
 
 
         bannerAdapter = MultipleTypesAdapter(this, getTestDataVideo())
@@ -85,17 +93,14 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
 
 
         if (goodsInfoView != null) {
-//            goodsInfoLayout.addView(goodsInfoView)
             detailLayout.addView(goodsInfoView)
         }
 
         if (shopInfoView != null) {
-//            shopInfoLayout.addView(shopInfoView)
             detailLayout.addView(shopInfoView)
         }
 
         if (goodsDetailView != null) {
-//            goodsDetailLayout.addView(goodsDetailView)
             detailLayout.addView(goodsDetailView)
         }
 
@@ -166,7 +171,8 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
      * 初始化数据
      */
     override fun initData() {
-        mBinding.vm?.loadGoodsInfo()
+        goodsId = intent.getIntExtra("goodsId", 0)
+        mBinding.vm?.loadGoodsInfo(goodsId)
     }
 
     override fun onDestroy() {
