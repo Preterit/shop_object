@@ -40,7 +40,10 @@
                 android:layout_width="50dp"
                 android:layout_height="0dp"
                 android:onClick="@{activity::onClick}"
-                android:padding="16dp"
+                android:paddingLeft="7dp"
+                android:paddingTop="18dp"
+                android:paddingRight="18dp"
+                android:paddingBottom="18dp"
                 android:src="@drawable/black_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -66,6 +69,7 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="请输入商品名称"
+                    android:singleLine="true"
                     android:textSize="13sp" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -80,7 +84,9 @@
                 android:id="@+id/tvXiaoliang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableBottom="@drawable/shape_goods_detail_top_red_line_selecter"
+                android:drawableBottom="@drawable/shape_goodslist_top_red_line_selecter"
+                android:drawablePadding="3dp"
+                android:onClick="@{activity::onClick}"
                 android:paddingLeft="15dp"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
@@ -96,7 +102,9 @@
                 android:id="@+id/tvPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableBottom="@drawable/shape_goods_detail_top_red_line_selecter"
+                android:drawableBottom="@drawable/shape_goodslist_top_red_line_selecter"
+                android:drawablePadding="3dp"
+                android:onClick="@{activity::onClick}"
                 android:paddingLeft="15dp"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
@@ -108,9 +116,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:id="@+id/ivPriceOrder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/shape_goods_detail_top_red_line"
+                android:src="@drawable/select_goodslist_price_order"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/tvPrice"
                 app:layout_constraintTop_toTopOf="parent" />

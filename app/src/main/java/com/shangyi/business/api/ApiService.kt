@@ -3,6 +3,7 @@ package com.shangyi.business.api
 import com.sdxxtop.network.helper.data.BaseResponse
 import com.shangyi.kt.fragment.bean.CategroyLeftBean
 import com.shangyi.kt.fragment.bean.CategroyRightBean
+import com.shangyi.kt.ui.goods.bean.GoodsListBean
 import com.shangyi.kt.ui.splash.bean.GetSettingBean
 import com.shangyi.kt.ui.userlogin.bean.LoginSuccess
 import retrofit2.http.Field
@@ -84,7 +85,8 @@ interface ApiService {
      */
     @FormUrlEncoded
     @POST("/api/goods/goodsList")
-    suspend fun getGoodsList(@Field("data") data: String): BaseResponse<Any?>
+    suspend fun getGoodsList(@Field("data") data: String): BaseResponse<List<GoodsListBean>?>
+
     /**
      * 商品详情——商品信息
      */
