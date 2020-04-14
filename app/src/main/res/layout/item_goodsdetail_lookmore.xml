@@ -29,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
+        android:ellipsize="end"
         android:maxLines="2"
         android:text="产品名称产品名称产品名称产称产品名称产..."
         android:textColor="@color/color_333333"
@@ -59,10 +60,10 @@
             android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:includeFontPadding="false"
             android:text="89"
             android:textColor="@color/color_333333"
             android:textSize="18sp"
-            android:includeFontPadding="false"
             app:layout_constraintLeft_toRightOf="@+id/tvPriceTag"
             app:layout_constraintTop_toTopOf="parent" />
 
