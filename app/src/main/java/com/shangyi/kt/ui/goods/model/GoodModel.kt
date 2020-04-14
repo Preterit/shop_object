@@ -11,6 +11,7 @@ import com.shangyi.business.network.Params
 import com.shangyi.business.network.SpUtil
 import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
 import com.shangyi.kt.ui.goods.bean.GoodsListBean
+import com.shangyi.kt.ui.goods.bean.YouhuiquanBean
 
 /**
  * Date:2020/4/9
@@ -39,6 +40,32 @@ class GoodDetailModel : BaseViewModel() {
             UIUtils.showToast(msg)
             mIsLoadingShow.value = false
         })
+    }
+
+    /**
+     * 获取代金券的描述信息
+     */
+    fun getYouhuiquanStr(bean: YouhuiquanBean): String {
+        return when (bean.type) {
+            1 -> {  // 满减
+                "${"领券满" + bean.full_price + "减" + bean.price}"
+            }
+            2 -> {   // 代金券
+                "${"领券立减" + bean.price}"
+            }
+            else -> ""
+        }
+    }
+
+    /**
+     * 获取规格的描述信息
+     */
+    fun getStandardStr(it: GoodsDetailBean): String {
+        return if (it.spec != null) {
+            "${it.spec.value},1${it.goods_unit?.name}"
+        } else {
+            ""
+        }
     }
 }
 

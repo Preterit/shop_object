@@ -4,9 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.shangyi.kt.ui.goods.model.GoodDetailModel" />
+
+        <variable
+            name="view"
+            type="android.view.View" />
+
     </data>
 
     <LinearLayout
@@ -45,12 +51,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="28dp"
                 android:includeFontPadding="false"
-                tools:text="200"
+                android:text='@{"" + vm.data.sale_price}'
                 android:textColor="@color/color_F61630"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="200" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
@@ -61,6 +68,7 @@
                 android:paddingTop="2dp"
                 android:paddingRight="12dp"
                 android:paddingBottom="2dp"
+                android:visibility="@{vm.data.dealer==null ? view.GONE : view.VISIBLE}"
                 app:layout_constraintBottom_toBottomOf="@id/tvPrice"
                 app:layout_constraintLeft_toRightOf="@+id/tvPrice"
                 app:layout_constraintTop_toTopOf="@id/tvPrice">
@@ -79,11 +87,12 @@
                     android:id="@+id/tvShareMoney"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="20"
+                    android:text="@{vm.data.dealer.dealer}"
                     android:textColor="@color/color_F61630"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="20" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -91,27 +100,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="价格 ¥ 350"
+                android:text='@{@string/goods_price + vm.data.price}'
                 android:textColor="@color/color_999999"
                 android:textSize="12sp"
                 app:layout_constraintLeft_toLeftOf="@+id/tvTag"
-                app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
+                app:layout_constraintTop_toBottomOf="@+id/tvPrice"
+                tools:text="价格 ¥ 350" />
 
             <TextView
                 android:id="@+id/tvLable1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:background="@color/red"
-                android:paddingLeft="12dp"
-                android:paddingTop="3dp"
-                android:paddingRight="12dp"
-                android:paddingBottom="3dp"
-                android:text="领券满10减5"
+                android:background="@drawable/icon_youhuiquan_bg"
+                android:paddingLeft="15dp"
+                android:paddingTop="2dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="2dp"
                 android:textColor="@color/white"
                 android:textSize="11sp"
+                android:visibility="gone"
                 app:layout_constraintLeft_toLeftOf="@+id/tvInvalidate"
-                app:layout_constraintTop_toBottomOf="@+id/tvInvalidate" />
+                app:layout_constraintTop_toBottomOf="@+id/tvInvalidate"
+                tools:text="领券满10减5"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/tvLable2"
@@ -119,16 +131,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="14dp"
-                android:background="@color/red"
-                android:paddingLeft="12dp"
-                android:paddingTop="3dp"
-                android:paddingRight="12dp"
-                android:paddingBottom="3dp"
-                android:text="领券满10减5"
+                android:background="@drawable/icon_youhuiquan_bg"
+                android:paddingLeft="15dp"
+                android:paddingTop="2dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="2dp"
                 android:textColor="@color/white"
                 android:textSize="11sp"
+                android:visibility="gone"
                 app:layout_constraintLeft_toRightOf="@+id/tvLable1"
-                app:layout_constraintTop_toBottomOf="@+id/tvInvalidate" />
+                app:layout_constraintTop_toBottomOf="@+id/tvInvalidate"
+                tools:text="领券满10减5"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/tvMoreAction"
@@ -139,9 +153,11 @@
                 android:text="更多优惠 >"
                 android:textColor="@color/color_F61630"
                 android:textSize="12sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/tvLable1"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvLable1" />
+                app:layout_constraintTop_toTopOf="@+id/tvLable1"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/tvProductName"
@@ -155,7 +171,8 @@
                 android:textColor="@color/color_333333"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/tvLable1" />
+                app:layout_constraintTop_toBottomOf="@+id/tvLable1"
+                tools:text="商品名称" />
 
             <ImageView
                 android:id="@+id/ivAddressLogo"
@@ -173,12 +190,13 @@
                 android:layout_marginLeft="9dp"
                 android:layout_marginTop="14dp"
                 android:layout_marginBottom="15dp"
-                android:text="发货地址：北京朝阳"
+                android:text='@{@string/send_address + vm.data.shop_info.address}'
                 android:textColor="@color/color_999999"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/ivAddressLogo"
-                app:layout_constraintTop_toBottomOf="@+id/tvProductName" />
+                app:layout_constraintTop_toBottomOf="@+id/tvProductName"
+                tools:text="发货地址：北京朝阳" />
 
             <TextView
                 android:id="@+id/tvRemainder"
@@ -186,12 +204,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="9dp"
                 android:layout_marginRight="13dp"
-                android:text="月销9384件"
+                android:text='@{@string/month_count+vm.data.msales+@string/month_count_unit}'
                 android:textColor="@color/color_999999"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/tvAddress"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvAddress" />
+                app:layout_constraintTop_toTopOf="@+id/tvAddress"
+                tools:text="月销9384件" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
