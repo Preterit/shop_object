@@ -5,6 +5,9 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.shangyi.business.R
+import com.shangyi.kt.ui.goods.adapter.GoodsDetailTjBean
+import com.shangyi.kt.ui.goods.bean.ReecommendGood
+import kotlinx.android.synthetic.main.item_goodsdetail_tuijian.view.*
 
 /**
  * Date:2020/4/10
@@ -18,7 +21,9 @@ class GoodsDetailTjItemView : LinearLayout {
         val view = LayoutInflater.from(context).inflate(R.layout.item_goodsdetail_tuijian, this, true)
     }
 
-    fun setData(){
-
+    fun setData(data: ReecommendGood?) {
+        glideImageView.loadImage(data?.intro ?: "", R.color.placeholder_color)
+        tvTitle.text = data?.name
+        tvPrice.text = data?.sale_price.toString()
     }
 }

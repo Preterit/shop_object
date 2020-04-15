@@ -74,4 +74,10 @@ public class MultipleTypesAdapter extends BannerAdapter<GoodDetailTopBarBean, Re
                 break;
         }
     }
+
+    @Override
+    public void setDatas(List<GoodDetailTopBarBean> datas) {
+        super.setDatas(datas);
+        notifyDataSetChanged();
+    }
 }

@@ -26,7 +26,9 @@ class GoodsListAdapter : BaseQuickAdapter<GoodsListBean, BaseViewHolder>(R.layou
 
 
         holder.itemView.setOnClickListener {
-            context.startActivity(Intent(context, GoodsDetailActivity::class.java))
+            var intent = Intent(context, GoodsDetailActivity::class.java)
+            intent.putExtra("goodsId", item.id)
+            context.startActivity(intent)
         }
     }
 }

@@ -1,17 +1,23 @@
 package com.shangyi.kt.ui.goods
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
+import androidx.asynclayoutinflater.view.AsyncLayoutInflater
 import androidx.core.widget.NestedScrollView
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.sdxxtop.base.BaseKTActivity
+import com.sdxxtop.webview.remotewebview.BaseWebView
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityGoodsDetailBinding
-import com.shangyi.kt.ui.goods.adapter.GoodsDetailLookmoreAdapter
-import com.shangyi.kt.ui.goods.adapter.GoodsDetailTjBannerAdapter
-import com.shangyi.kt.ui.goods.adapter.GoodsDetailTjBean
-import com.shangyi.kt.ui.goods.adapter.MultipleTypesAdapter
+import com.shangyi.business.databinding.ItemGoodsDetailGoodsinfoBinding
+import com.shangyi.kt.ui.goods.adapter.*
 import com.shangyi.kt.ui.goods.bean.GoodDetailTopBarBean
+import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
+import com.shangyi.kt.ui.goods.bean.ReecommendGood
 import com.shangyi.kt.ui.goods.model.GoodDetailModel
 import com.shangyi.kt.ui.goods.weight.GoodDetailTopTitle
 import com.shangyi.kt.ui.goods.weight.banner.indicator.NumIndicator
@@ -20,8 +26,10 @@ import com.youth.banner.config.IndicatorConfig
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.activity_goods_detail.*
 import kotlinx.android.synthetic.main.item_goods_detail_goodsdetail.view.*
+import kotlinx.android.synthetic.main.item_goods_detail_goodsinfo.view.*
+import kotlinx.android.synthetic.main.item_goods_detail_shopinfo.view.*
 import kotlinx.android.synthetic.main.item_goods_detail_tuijian.view.*
-import java.util.*
+import java.util.concurrent.ConcurrentHashMap
 
 class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetailModel>() {
 
@@ -32,97 +40,112 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     }
 
     private var bannerAdapter: MultipleTypesAdapter? = null   // 轮播图适配器
+    private var goodsDetailTjBannerAdapter = GoodsDetailTjBannerAdapter()   // 商铺推荐的轮播图适配器
     private var banner: Banner<GoodDetailTopBarBean, MultipleTypesAdapter>? = null  // 商品轮播图
+    private val topBannerDataList: MutableList<GoodDetailTopBarBean> = ArrayList<GoodDetailTopBarBean>()  // 商品顶部轮播图
     private var shopTjBanner: Banner<GoodDetailTopBarBean, GoodsDetailTjBannerAdapter>? = null  // 商品推荐轮播图
-    private lateinit var goodsInfoView: View
-    private lateinit var shopInfoView: View
-    private lateinit var goodsDetailView: View
-    private lateinit var goodsTjView: View
 
-    private var scrollviewFlag = false
-    private var tabIndex = -1
+    private var viewList = ConcurrentHashMap<Int, View?>()  // 填充的view布局
+    private var bindList = ArrayList<ViewDataBinding?>()  // 填充的DataBind
+
+    private var pjAdapter = PjAdaper()  // 商品评价的信息适配器
+    private var lookMoreAdapter = GoodsDetailLookmoreAdapter()  // 推荐查看更多适配器
+
+    private var webView: BaseWebView? = null  // 商品详情的h5页面
+    private var scrollviewFlag = false  // 滑动的标识
+    private var tabIndex = -1  // 当前选中tab的下标
+    private var goodsId = 0 // 商品ID
 
     override fun initObserve() {
-
+        mBinding.vm?.data?.observe(this, androidx.lifecycle.Observer {
+            if (it != null) {
+                bindData(it)
+            }
+        })
     }
 
-
     override fun initView() {
-        goodsInfoView = LayoutInflater.from(this).inflate(R.layout.item_goods_detail_goodsinfo, null, false)       // 商品信息
-        shopInfoView = LayoutInflater.from(this).inflate(R.layout.item_goods_detail_shopinfo, null, false)         // 店铺信息
-        goodsDetailView = LayoutInflater.from(this).inflate(R.layout.item_goods_detail_goodsdetail, null, false)   // 商品详情
-        goodsTjView = LayoutInflater.from(this).inflate(R.layout.item_goods_detail_tuijian, null, false)           // 推荐商品
-
-
-        bannerAdapter = MultipleTypesAdapter(this, getTestDataVideo())
-        banner = goodsInfoView?.findViewById(R.id.banner)
-        banner!!.setAdapter(bannerAdapter!!)
-                .setIndicator(NumIndicator(this))
-                .setIndicatorGravity(IndicatorConfig.Direction.RIGHT)
-                .start()
+//        goodsInfoView = LayoutInflater.from(this).inflate(R.layout.item_goods_detail_goodsinfo, null, false)       // 商品信息
+//        shopInfoView = LayoutInflater.from(this).inflate(R.layout.item_goods_detail_shopinfo, null, false)         // 店铺信息
+//        goodsTjView = LayoutInflater.from(this).inflate(R.layout.item_goods_detail_tuijian, null, false)           // 推荐商品
+        val view = LayoutInflater.from(this).inflate(R.layout.item_goods_detail_goodsdetail, null, false)   // 商品详情
+        viewList[2] = view
+        webView = view.goodsDetailWeb
+        addChildView()
 
         /**
-         * 看了又看适配器
+         * 商品信息初始化
          */
-        goodsTjView?.goodsDetailLookmoreRecycler.layoutManager = GridLayoutManager(this, 2)
-        goodsTjView?.goodsDetailLookmoreRecycler.adapter = GoodsDetailLookmoreAdapter()
+        AsyncLayoutInflater(this).inflate(R.layout.item_goods_detail_goodsinfo, null) { view, resid, parent ->
+            viewList[0] = view
 
-        goodsDetailView?.goodsDetailWeb.loadUrl("http://39.106.156.132/service.html")
+            val bind = DataBindingUtil.bind<ItemGoodsDetailGoodsinfoBinding>(view)
+            bind?.lifecycleOwner = this@GoodsDetailActivity
+            bind?.vm = mViewModel
+            bindList.add(bind)
+
+            addChildView()
+
+            //原价 字体画线
+            view?.tvInvalidate.paint.isAntiAlias = true
+            view?.tvInvalidate.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            banner = view?.findViewById(R.id.banner)
+            bannerAdapter = MultipleTypesAdapter(this@GoodsDetailActivity, arrayListOf<GoodDetailTopBarBean>())
+            banner!!.setAdapter(bannerAdapter!!)
+                    .setIndicator(NumIndicator(this@GoodsDetailActivity))
+                    .setIndicatorGravity(IndicatorConfig.Direction.RIGHT)
+        }
+
 
         /**
-         * 店铺推荐
+         * 店铺相关初始化
          */
-        shopTjBanner = shopInfoView?.findViewById(R.id.shopTjBanner)
-        var goodsDetailTjBannerAdapter = GoodsDetailTjBannerAdapter()
-        goodsDetailTjBannerAdapter.setDatas(arrayListOf<GoodsDetailTjBean>(
-                GoodsDetailTjBean(""),
-                GoodsDetailTjBean(""),
-                GoodsDetailTjBean("")
-        ))
-        shopTjBanner!!.setAdapter(goodsDetailTjBannerAdapter)
-                .setIndicator(CircleIndicator(this))
-                .setIndicatorGravity(IndicatorConfig.Direction.CENTER)
+        AsyncLayoutInflater(this).inflate(R.layout.item_goods_detail_shopinfo, null) { view, resid, parent ->
+            viewList[1] = view
 
+            shopTjBanner = view?.findViewById(R.id.shopTjBanner)
+            shopTjBanner!!.setAdapter(goodsDetailTjBannerAdapter)
+                    .setIndicator(CircleIndicator(this@GoodsDetailActivity))
+                    .setIndicatorGravity(IndicatorConfig.Direction.CENTER)
 
-        if (goodsInfoView != null) {
-//            goodsInfoLayout.addView(goodsInfoView)
-            detailLayout.addView(goodsInfoView)
+            view.pjRecyclerView.layoutManager = LinearLayoutManager(this@GoodsDetailActivity)
+            view.pjRecyclerView.adapter = pjAdapter
+
+            addChildView()
         }
 
-        if (shopInfoView != null) {
-//            shopInfoLayout.addView(shopInfoView)
-            detailLayout.addView(shopInfoView)
+        /**
+         * 商品推荐
+         */
+        AsyncLayoutInflater(this).inflate(R.layout.item_goods_detail_tuijian, null) { view, resid, parent ->
+            viewList[3] = view
+            view?.goodsDetailLookmoreRecycler?.layoutManager = GridLayoutManager(this@GoodsDetailActivity, 2)
+            view?.goodsDetailLookmoreRecycler?.adapter = lookMoreAdapter
+            addChildView()
         }
-
-        if (goodsDetailView != null) {
-//            goodsDetailLayout.addView(goodsDetailView)
-            detailLayout.addView(goodsDetailView)
-        }
-
-        if (goodsTjView != null) {
-            detailLayout.addView(goodsTjView)
-        }
-
 
         //scrollview滑动事件监听
         scrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            if (viewList.size != 4) {
+                return@OnScrollChangeListener
+            }
             scrollviewFlag = true
-            if (scrollY < shopInfoView.top) {
+            if (scrollY < viewList[1]!!.top) {
                 if (tabIndex != 0) { //增加判断，如果滑动的区域是tableIndex=0对应的区域，则不改变tablayout的状态
                     tabIndex = 0
                     topGoodsTop.setOnItemSelect(0)
                 }
-            } else if (scrollY >= shopInfoView.top && scrollY < goodsDetailView.top) {
+            } else if (scrollY >= viewList[1]!!.top && scrollY < viewList[2]!!.top) {
                 if (tabIndex != 1) {
                     tabIndex = 1
                     topGoodsTop.setOnItemSelect(1)
                 }
-            } else if (scrollY >= goodsDetailView.top && scrollY < goodsTjView.top) {
+            } else if (scrollY >= viewList[2]!!.top && scrollY < viewList[3]!!.top) {
                 if (tabIndex != 2) {
                     tabIndex = 2
                     topGoodsTop.setOnItemSelect(2)
                 }
-            } else if (scrollY >= goodsTjView.top) {
+            } else if (scrollY >= viewList[3]!!.top) {
                 if (tabIndex != 3) {
                     tabIndex = 3
                     topGoodsTop.setOnItemSelect(3)
@@ -133,12 +156,15 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
 
         topGoodsTop.setOnItemSelectListener(object : GoodDetailTopTitle.OnTabSelectListener {
             override fun onItemSelect(position: Int) {
+                if (viewList.size != 4) {
+                    return
+                }
                 if (!scrollviewFlag) {
                     when (position) {
-                        0 -> scrollView.scrollTo(0, goodsInfoView.top)
-                        1 -> scrollView.scrollTo(0, shopInfoView.top)
-                        2 -> scrollView.scrollTo(0, goodsDetailView.top)
-                        3 -> scrollView.scrollTo(0, goodsTjView.top)
+                        0 -> scrollView.scrollTo(0, viewList[0]!!.top)
+                        1 -> scrollView.scrollTo(0, viewList[1]!!.top)
+                        2 -> scrollView.scrollTo(0, viewList[2]!!.top)
+                        3 -> scrollView.scrollTo(0, viewList[3]!!.top)
                     }
                 }
                 //用户点击tablayout时，标记不是scrollview主动滑动
@@ -147,31 +173,157 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         })
     }
 
-
     /**
-     * 仿淘宝商品详情第一个是视频
-     * @return
+     * 添加子view
      */
-    private fun getTestDataVideo(): List<GoodDetailTopBarBean>? {
-        val list: MutableList<GoodDetailTopBarBean> = ArrayList<GoodDetailTopBarBean>()
-        list.add(GoodDetailTopBarBean(imageUrl = "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2534506313,1688529724&fm=26&gp=0.jpg", viewType = 1))
-        list.add(GoodDetailTopBarBean(imageUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586443031238&di=8a0c83dfd33916a3044c28fcd3685f29&imgtype=0&src=http%3A%2F%2Fa4.att.hudong.com%2F21%2F09%2F01200000026352136359091694357.jpg", viewType = 1))
-        list.add(GoodDetailTopBarBean(imageUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586443031237&di=1e7d85648997dbc9c6045a502d9c5e24&imgtype=0&src=http%3A%2F%2Fbbs.jooyoo.net%2Fattachment%2FMon_0905%2F24_65548_2835f8eaa933ff6.jpg", viewType = 1))
-        list.add(GoodDetailTopBarBean(imageUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586443031233&di=f6ad3d53ef63e76de9905859d1d4b865&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fspider202048%2F29%2Fw1093h536%2F20200408%2F05a4-iryninw6738585.png", viewType = 1))
-        list.add(GoodDetailTopBarBean(imageUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586443031231&di=3e78616ada111050b3763da6387aab9a&imgtype=0&src=http%3A%2F%2Fa3.att.hudong.com%2F16%2F18%2F300000932954129238184537620_950.jpg", viewType = 1))
-        return list
+    private fun addChildView() {
+        if (viewList.size == 4) {
+            detailLayout.addView(viewList[0])
+            detailLayout.addView(viewList[1])
+            detailLayout.addView(viewList[2])
+            detailLayout.addView(viewList[3])
+        }
     }
 
     /**
      * 初始化数据
      */
     override fun initData() {
-        mBinding.vm?.loadGoodsInfo()
+        goodsId = intent.getIntExtra("goodsId", 0)
+        mBinding.vm?.loadGoodsInfo(goodsId)
     }
 
+    /**
+     * 释放资源
+     */
     override fun onDestroy() {
         super.onDestroy()
         banner = null
         bannerAdapter = null
+
+        viewList.forEach {
+            it.value == null
+        }
+        bindList.forEach { it?.unbind() }
+    }
+
+    /**
+     * 绑定数据
+     */
+    private fun bindData(it: GoodsDetailBean) {
+        //商品信息
+        setGoodInfoData(it)
+        //评论信息
+        setShopInfo(it)
+        webView?.loadUrl(it.intro)
+        lookMoreAdapter.setList(it.reecommendGoods)
+    }
+
+    /**
+     * 设置商品信息
+     */
+    private fun setGoodInfoData(it: GoodsDetailBean) {
+        //商品轮播图
+        if (it.goods_img != null && it.goods_img.isNotEmpty()) {
+            topBannerDataList.clear()
+            it.goods_img.forEach { topBannerDataList.add(GoodDetailTopBarBean(imageUrl = it.url, viewType = 1)) }
+        }
+        bannerAdapter?.setDatas(topBannerDataList)
+        /******** 优惠券开始 *********/
+        val tvLable1 = viewList[0]?.tvLable1
+        val tvLable2 = viewList[0]?.tvLable2
+        if (it.discountList != null && it.discountList.isNotEmpty()) {
+            if (it.discountList[0] != null) {
+                var djqStr = mBinding.vm?.getYouhuiquanStr(it.discountList[0]!!)
+                if (djqStr.isNullOrEmpty()) tvLable1?.visibility = View.GONE else tvLable1?.visibility = View.VISIBLE
+                tvLable1?.text = "$djqStr"
+            } else {
+                tvLable1?.visibility = View.GONE
+            }
+            if (it.discountList[1] != null) {
+                var djqStr = mBinding.vm?.getYouhuiquanStr(it.discountList[1]!!)
+                if (djqStr.isNullOrEmpty()) tvLable2?.visibility = View.GONE else tvLable2?.visibility = View.VISIBLE
+                tvLable2?.text = "$djqStr"
+            } else {
+                tvLable2?.visibility = View.GONE
+            }
+            viewList[0]?.tvMoreAction?.visibility = View.VISIBLE
+        } else {
+            tvLable1?.visibility = View.GONE
+            tvLable2?.visibility = View.GONE
+//            viewList[0]?.tvMoreAction?.visibility = View.GONE
+        }
+        /******** 优惠券结束 *********/
+
+
+        /******** 规格 *********/
+        viewList[0]?.tvStandard?.text = "${mBinding.vm?.getStandardStr(it) ?: "请选择规格"}"
+        /******** 收货地址 *********/
+        viewList[0]?.tvShippingAddress?.text = "${it.address?.address ?: "请选择收货地址"}"
+
+    }
+
+    /**
+     * 设置店铺信息以及评论信息
+     */
+    private fun setShopInfo(it: GoodsDetailBean) {
+        val shopInfoView = viewList[1]
+        shopInfoView?.tvProductPjNum?.text = "(${it.comment_count})"
+//        shopInfoView?.tvPjMore?.text = "好评率${it.praise_count / it.comment_count}%"
+        /******** 评论列表 *********/
+        var appraiseInfo = it.appraiseInfo
+        if (appraiseInfo != null && appraiseInfo.isNotEmpty()) {
+            pjAdapter.setList(appraiseInfo)
+        }
+        /******** 店铺 *********/
+        shopInfoView?.ivShopPhoto?.loadImage(it.shop_info?.shop_avatar
+                ?: "", R.color.placeholder_color)
+        shopInfoView?.tvShopName?.text = it.shop_info?.name
+
+        /**
+         * 商铺推荐推荐添加数据
+         */
+        goodsDetailTjBannerAdapter.setDatas(getGoodsDetailTjBannerData(it))
+    }
+
+    /**
+     * 处理商铺推荐商品banner数据
+     */
+    private fun getGoodsDetailTjBannerData(it: GoodsDetailBean): ArrayList<GoodsDetailTjBean> {
+        var shopRecommend = it.shop_info?.shopRecommend
+
+//        shopRecommend = listOf(
+//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
+//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
+//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
+//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
+//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
+//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
+//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
+//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
+//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
+//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
+//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
+//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
+//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f)
+//        )
+
+        var currentItem = 1
+        val resultList = ArrayList<GoodsDetailTjBean>()
+        var list = arrayListOf<ReecommendGood?>()
+        if (shopRecommend != null && shopRecommend.isNotEmpty()) {
+            shopRecommend.forEachIndexed { index, item ->
+                if (index < currentItem * 6) {
+                    list.add(item)
+                } else {
+                    resultList.add(GoodsDetailTjBean(list))
+                    currentItem++
+                    list = arrayListOf<ReecommendGood?>()
+                    list.add(item)  // 把第7个加进去
+                }
+            }
+            resultList.add(GoodsDetailTjBean(list))
+        }
+        return resultList
     }
 }

@@ -1,6 +1,15 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">上医宝库</string>
     <string name="cancel">取消</string>
     <string name="image">image</string>
+
+
+    <!--  商品详情  -->
+    <string name="month_count" tools:ignore="ExtraTranslation">月销</string>
+    <string name="month_count_unit" tools:ignore="ExtraTranslation">件</string>
+    <string name="goods_price" tools:ignore="ExtraTranslation">价格 ¥</string>
+    <string name="send_address" tools:ignore="ExtraTranslation">发货地址：</string>
+
+
 
 </resources>
