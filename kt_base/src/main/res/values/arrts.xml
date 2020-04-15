@@ -47,4 +47,13 @@
     <declare-styleable name="TopBanner">
         <attr name="tb_height" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="CumSettingItemView">
+        <attr name="leftImg" format="reference" />
+        <attr name="leftText" format="string" />
+        <attr name="rightText" format="string" />
+        <attr name="rightImg" format="reference" />
+        <attr name="rightImgIsShow" format="boolean" />
+        <attr name="rightTextIsShow" format="boolean" />
+    </declare-styleable>
 </resources>
