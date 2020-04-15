@@ -14,23 +14,21 @@ data class GoodDetailTopBarBean(
         var viewType: Int
 )
 
-data class GoodsDetailTjProduce(
-        val str: String
-)
-
 data class GoodsListBean(
-        val comment_count: Double,
+        val comment_count: Int = 0,  // 总评论数
         val count: Int,
         val goods_img: List<GoodsImg?>,
+        val discountList: List<YouhuiquanBean?>,
         val id: Int,
         val intro: Any,
         val name: String,
-        val praise_count: Double,
+        val praise_count: Int = 0,   // 好评数
         val price: Double,
         val sale_count: Int,
         val sale_price: Double,
         val shop_id: Int,
         val unit: String,
+        val dealer: DealerBean?,
         val weight: Float
 )
 

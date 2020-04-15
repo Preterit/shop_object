@@ -15,6 +15,11 @@
         android:textSize="15sp"
         android:textStyle="bold" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/attrRecyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <com.sdxxtop.webview.remotewebview.BaseWebView
         android:id="@+id/goodsDetailWeb"
         android:layout_width="match_parent"

@@ -22,8 +22,9 @@ class GoodsDetailTjItemView : LinearLayout {
     }
 
     fun setData(data: ReecommendGood?) {
-        glideImageView.loadImage(data?.intro ?: "", R.color.placeholder_color)
+        glideImageView.loadImage(data?.goods_one_img?.url ?: "", R.color.placeholder_color)
         tvTitle.text = data?.name
         tvPrice.text = data?.sale_price.toString()
+        tvZhuanTx.text = data?.dealer?.cash_back.toString()
     }
 }

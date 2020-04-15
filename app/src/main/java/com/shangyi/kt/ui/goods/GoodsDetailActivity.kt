@@ -1,5 +1,6 @@
 package com.shangyi.kt.ui.goods
 
+import android.graphics.Color
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -49,6 +50,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     private var bindList = ArrayList<ViewDataBinding?>()  // 填充的DataBind
 
     private var pjAdapter = PjAdaper()  // 商品评价的信息适配器
+    private var attriAdapter = AttriAdapter(Color.parseColor("#ffffff"),Color.parseColor("#F8F8F8"))  // 商品详情属性适配器
     private var lookMoreAdapter = GoodsDetailLookmoreAdapter()  // 推荐查看更多适配器
 
     private var webView: BaseWebView? = null  // 商品详情的h5页面
@@ -71,6 +73,8 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         val view = LayoutInflater.from(this).inflate(R.layout.item_goods_detail_goodsdetail, null, false)   // 商品详情
         viewList[2] = view
         webView = view.goodsDetailWeb
+        view.attrRecyclerview.layoutManager = LinearLayoutManager(this@GoodsDetailActivity)
+        view.attrRecyclerview.adapter = attriAdapter
         addChildView()
 
         /**
@@ -204,6 +208,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         viewList.forEach {
             it.value == null
         }
+        viewList.clear()
         bindList.forEach { it?.unbind() }
     }
 
@@ -215,6 +220,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         setGoodInfoData(it)
         //评论信息
         setShopInfo(it)
+        attriAdapter.setList(it.goods_attribute)
         webView?.loadUrl(it.intro)
         lookMoreAdapter.setList(it.reecommendGoods)
     }
@@ -240,7 +246,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
             } else {
                 tvLable1?.visibility = View.GONE
             }
-            if (it.discountList[1] != null) {
+            if (it.discountList.size >= 2 && it.discountList[1] != null) {
                 var djqStr = mBinding.vm?.getYouhuiquanStr(it.discountList[1]!!)
                 if (djqStr.isNullOrEmpty()) tvLable2?.visibility = View.GONE else tvLable2?.visibility = View.VISIBLE
                 tvLable2?.text = "$djqStr"
@@ -251,7 +257,6 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         } else {
             tvLable1?.visibility = View.GONE
             tvLable2?.visibility = View.GONE
-//            viewList[0]?.tvMoreAction?.visibility = View.GONE
         }
         /******** 优惠券结束 *********/
 
@@ -268,8 +273,14 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
      */
     private fun setShopInfo(it: GoodsDetailBean) {
         val shopInfoView = viewList[1]
-        shopInfoView?.tvProductPjNum?.text = "(${it.comment_count})"
-//        shopInfoView?.tvPjMore?.text = "好评率${it.praise_count / it.comment_count}%"
+        if (it.comment_count == 0) {
+            shopInfoView?.tvProductPjNum?.text = "(${it.comment_count})"
+            shopInfoView?.tvPjMore?.text = "好评率0%"
+        } else {
+            shopInfoView?.tvProductPjNum?.text = "(${it.comment_count})"
+            shopInfoView?.tvPjMore?.text = "好评率${it.praise_count / it.comment_count}%"
+        }
+
         /******** 评论列表 *********/
         var appraiseInfo = it.appraiseInfo
         if (appraiseInfo != null && appraiseInfo.isNotEmpty()) {
@@ -291,22 +302,6 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
      */
     private fun getGoodsDetailTjBannerData(it: GoodsDetailBean): ArrayList<GoodsDetailTjBean> {
         var shopRecommend = it.shop_info?.shopRecommend
-
-//        shopRecommend = listOf(
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f)
-//        )
 
         var currentItem = 1
         val resultList = ArrayList<GoodsDetailTjBean>()

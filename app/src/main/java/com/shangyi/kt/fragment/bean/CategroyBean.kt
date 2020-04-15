@@ -13,7 +13,7 @@ data class CategroyLeftBean(
 )
 
 data class CategroyRightBean(
-        val category_img: List<CategoryImg>?, // 轮播图
+        val category_img: List<String?>?, // 轮播图
         val child_list: List<ChildBean>?,
         val father_id: Int,
         val id: Int,
@@ -37,7 +37,7 @@ data class ChildBean(
 )
 
 data class ChildItemBean(
-        val category_img: CategoryImg?,
+        val image: String?,
         val father_id: Int,
         val id: Int,
         val is_parent: Int,

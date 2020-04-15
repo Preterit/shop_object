@@ -23,6 +23,7 @@ data class GoodsDetailBean(
         val sale_price: Float,
         val shop_id: Int,
         val unit: String,
+        val goods_attribute: List<GoodsAttribute?>?,  // 商品属性
         val dealer: DealerBean?,  // 佣金 数据
         val spec: SpecBean?,  // 佣金 数据
         val goods_img: List<GoodsImgBean>?,  // 轮播图
@@ -46,18 +47,20 @@ data class ReecommendGood(
         val msales: Int,
         val name: String,
         val praise_count: Any,
-        val price: Int,
-        val sale_count: Int,
+        val price: Float,
+        val sale_count: Float,
         val sale_price: Double,
         val shop_id: Int,
         val unit: String,
+        val goods_one_img: GoodsOneImg?,
+        val dealer: DealerBean?,
         val weight: Float
 )
 
 data class DealerBean(
         val gid: Int,
-        val cash_back: String,
-        val dealer: String
+        val cash_back: Float,
+        val dealer: Float
 )
 
 data class SpecBean(
@@ -87,9 +90,18 @@ data class GoodsUnitBean(
         val name: String
 )
 
+data class GoodsAttribute(
+        val name: String,
+        val value: String
+)
+
+data class GoodsOneImg(
+        val url: String
+)
+
 data class CommentImgBean(
-        val id: Int,
-        val name: String
+        val url: String?,
+        val comment_id: Int
 )
 
 data class UserBean(

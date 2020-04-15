@@ -15,8 +15,10 @@ class GoodsDetailLookmoreAdapter constructor(layoutRes: Int? = R.layout.item_goo
         BaseQuickAdapter<ReecommendGood, BaseViewHolder>(layoutRes!!) {
 
     override fun convert(holder: BaseViewHolder, item: ReecommendGood) {
-        holder.itemView.glideImageView.loadImage(item.unit ?: "", R.color.placeholder_color)
+        holder.itemView.glideImageView.loadImage(item.goods_one_img?.url
+                ?: "", R.color.placeholder_color)
         holder.itemView.tvTitle.text = item.name
         holder.itemView.tvPrice.text = item.sale_price.toString()
+        holder.itemView.tvZhuanTx.text = "赚${item.dealer?.cash_back.toString()}"
     }
 }
