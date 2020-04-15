@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D6D6D6"
+    tools:context="com.shangyi.kt.ui.personal.SettingActivity">
+
+    <com.shangyi.business.weight.TitleView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleValue="设置"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintTop_toBottomOf="@id/title">
+
+
+   <com.shangyi.business.weight.CumSettingItemView
+       android:layout_marginTop="10dp"
+       android:layout_marginBottom="10dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       app:leftImg="@mipmap/anquan"
+       app:leftText="账号安全"
+       app:rightText="找回密码"
+       app:rightTextIsShow="true"
+       app:rightImgIsShow="true"
+       app:rightImg="@mipmap/right"
+       />
+
+    <com.shangyi.business.weight.CumSettingItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftImg="@mipmap/huiyuan"
+        app:leftText="会员信息"
+        app:rightTextIsShow="false"
+        app:rightImg="@mipmap/right"
+        app:rightImgIsShow="true"
+        />
+    <com.shangyi.business.weight.CumSettingItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftImg="@mipmap/message"
+        app:leftText="消息推送"
+        app:rightTextIsShow="false"
+        app:rightImg="@mipmap/right"
+        app:rightImgIsShow="true"
+        />
+
+    <com.shangyi.business.weight.CumSettingItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftImg="@mipmap/about"
+        app:leftText="关于上医宝库"
+        app:rightTextIsShow="false"
+        app:rightImg="@mipmap/right"
+        app:rightImgIsShow="true"
+        />
+
+    <com.shangyi.business.weight.CumSettingItemView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftImg="@mipmap/version"
+        app:leftText="当前版本"
+        app:rightTextIsShow="true"
+        app:rightText="V1.0"
+        app:rightImgIsShow="false"
+        />
+
+</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
