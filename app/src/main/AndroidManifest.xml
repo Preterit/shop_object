@@ -39,6 +39,7 @@
         <activity android:name="com.shangyi.kt.ui.userlogin.RegisterActivity" />
         <activity android:name="com.shangyi.kt.ui.userlogin.YzmActivity" />
         <activity android:name="com.shangyi.kt.ui.editaddress.EditAddressActivity" />
+        <activity android:name="com.shangyi.kt.ui.personal.SettingActivity" />
         <activity
             android:name="com.shangyi.kt.ui.WebActivity"
             android:hardwareAccelerated="true"
