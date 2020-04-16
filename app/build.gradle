@@ -86,6 +86,7 @@ dependencies {
     implementation project(path: ':kt_base')
     implementation project(path: ':syzx_webview')
     implementation project(path: ':glidemodel')
+    implementation project(path: ':sku_library')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$rootProject.appcompat"
@@ -111,5 +112,7 @@ dependencies {
     implementation 'com.youth.banner:banner:2.0.4'
     implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
 
+    // 微信
+    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
 
 }

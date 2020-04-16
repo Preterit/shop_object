@@ -10,6 +10,10 @@
             type="com.shangyi.kt.ui.goods.model.GoodDetailModel" />
 
         <variable
+            name="activity"
+            type="com.shangyi.kt.ui.goods.GoodsDetailActivity" />
+
+        <variable
             name="view"
             type="android.view.View" />
 
@@ -220,8 +224,10 @@
             android:background="#F8F8F8" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/standardLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="@{activity::onClick}"
             android:paddingTop="15dp"
             android:paddingBottom="15dp">
 
