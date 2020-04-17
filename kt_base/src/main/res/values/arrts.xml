@@ -56,4 +56,9 @@
         <attr name="rightImgIsShow" format="boolean" />
         <attr name="rightTextIsShow" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="CumAboutItemView">
+        <attr name="aboutleftText" format="string" />
+        <attr name="aboutrightImg" format="reference" />
+    </declare-styleable>
 </resources>
