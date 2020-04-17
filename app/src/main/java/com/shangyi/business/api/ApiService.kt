@@ -5,6 +5,7 @@ import com.shangyi.kt.fragment.bean.CategroyLeftBean
 import com.shangyi.kt.fragment.bean.CategroyRightBean
 import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
 import com.shangyi.kt.ui.goods.bean.GoodsListBean
+import com.shangyi.kt.ui.goods.bean.GoodsSpecBean
 import com.shangyi.kt.ui.splash.bean.GetSettingBean
 import com.shangyi.kt.ui.userlogin.bean.LoginSuccess
 import retrofit2.http.Field
@@ -94,4 +95,11 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/api/Goods/getGoodsInfo")
     suspend fun getGoodsInfo(@Field("data") data: String): BaseResponse<GoodsDetailBean?>
+
+    /**
+     * 商品详情——商品规格
+     */
+    @FormUrlEncoded
+    @POST("/api/goods/getGoodsSpec")
+    suspend fun getGoodsSpec(@Field("data") data: String): BaseResponse<GoodsSpecBean?>
 }

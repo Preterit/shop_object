@@ -9,6 +9,7 @@ import androidx.asynclayoutinflater.view.AsyncLayoutInflater
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sdxxtop.base.BaseKTActivity
@@ -62,11 +63,21 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     private var scrollviewFlag = false  // 滑动的标识
     private var tabIndex = -1  // 当前选中tab的下标
     private var goodsId = 0 // 商品ID
+    private var dialog: ProductSkuDialog? = null   // 规格弹框
 
     override fun initObserve() {
         mBinding.vm?.data?.observe(this, androidx.lifecycle.Observer {
             if (it != null) {
                 bindData(it)
+            }
+        })
+
+        mBinding.vm?.product?.observe(this, Observer {
+            if (dialog == null) {
+                dialog = ProductSkuDialog(this)
+                dialog?.setData(it, ProductSkuDialog.Callback { sku, quantity ->
+                    Log.e("Callback --- ", "${sku.toString()} --quantity--  $quantity")
+                })
             }
         })
     }
@@ -198,6 +209,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     override fun initData() {
         goodsId = intent.getIntExtra("goodsId", 0)
         mBinding.vm?.loadGoodsInfo(goodsId)
+        mBinding.vm?.loadGoodsSpec(goodsId)
     }
 
     /**
@@ -338,27 +350,9 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         when (v.id) {
             R.id.standardLayout -> {
                 // 规格
-                showSkuDialog()
+                dialog?.show()
             }
         }
-    }
-
-    private var dialog: ProductSkuDialog? = null
-    private fun showSkuDialog() {
-        if (dialog == null) {
-            dialog = ProductSkuDialog(this)
-            //            Product product = Product.get(this);
-            val product: Product = getProductData()
-            Log.e(TAG, "showSkuDialog:  ----  " + product.toString())
-            dialog?.setData(product) { sku, quantity ->
-                //                    // 获取SKU面板Logo拷贝
-                //                    ImageView logoImageView = new ImageView(SkuActivity.this);
-                //                    Bitmap bitmap = Bitmap.createBitmap(binding.ivAddCartAnim.getDrawingCache());
-                //                    logoImageView.setImageBitmap(bitmap);
-                //                    binding.ivAddCartAnim.setDrawingCacheEnabled(false);
-            }
-        }
-        dialog?.show()
     }
 
     fun getProductData(): Product {

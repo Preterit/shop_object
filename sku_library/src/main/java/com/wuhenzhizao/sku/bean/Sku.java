@@ -89,6 +89,14 @@ public class Sku implements Parcelable {
     public Sku() {
     }
 
+    public Sku(String id, String mainImage, int stockQuantity, long originPrice, List<SkuAttribute> attributes) {
+        this.id = id;
+        this.mainImage = mainImage;
+        this.stockQuantity = stockQuantity;
+        this.originPrice = originPrice;
+        this.attributes = attributes;
+    }
+
     @Override
     public int describeContents() {
         return 0;

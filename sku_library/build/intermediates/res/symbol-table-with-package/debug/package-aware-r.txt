@@ -395,6 +395,7 @@ color primary_text_default_material_dark
 color primary_text_default_material_light
 color primary_text_disabled_material_dark
 color primary_text_disabled_material_light
+color quantity_operator_text_selector
 color ripple_material_dark
 color ripple_material_light
 color secondary_text_default_material_dark
@@ -621,6 +622,11 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable com_sku_quantity_input_selector
+drawable com_sku_quantity_minus_selector
+drawable com_sku_quantity_plus_selector
+drawable comm_btn_red_selector
+drawable comm_close
 drawable notification_action_background
 drawable notification_bg
 drawable notification_bg_low
@@ -633,6 +639,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable product_sku_close_selector
 drawable sku_item_selector
 drawable tooltip_frame_dark
 drawable tooltip_frame_light

@@ -9,9 +9,11 @@ import com.shangyi.business.api.RetrofitClient
 import com.shangyi.business.network.Constants
 import com.shangyi.business.network.Params
 import com.shangyi.business.network.SpUtil
-import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
-import com.shangyi.kt.ui.goods.bean.GoodsListBean
-import com.shangyi.kt.ui.goods.bean.YouhuiquanBean
+import com.shangyi.kt.fragment.bean.ChildBean
+import com.shangyi.kt.ui.goods.bean.*
+import com.wuhenzhizao.sku.bean.Product
+import com.wuhenzhizao.sku.bean.Sku
+import com.wuhenzhizao.sku.bean.SkuAttribute
 
 /**
  * Date:2020/4/9
@@ -21,6 +23,7 @@ import com.shangyi.kt.ui.goods.bean.YouhuiquanBean
 class GoodDetailModel : BaseViewModel() {
 
     var data = MutableLiveData<GoodsDetailBean>()
+    val product = MutableLiveData<Product?>()
 
     /**
      * 商品信息
@@ -65,6 +68,78 @@ class GoodDetailModel : BaseViewModel() {
             "${it.spec.value},1${it.goods_unit?.name}"
         } else {
             ""
+        }
+    }
+
+    /**
+     * 加载商品规格。
+     */
+    fun loadGoodsSpec(goodsId: Int) {
+        loadOnUI({
+            val params = Params()
+            params.put("id", 4)
+            RetrofitClient.apiCusService.getGoodsSpec(params.aesData)
+        }, {
+            mIsLoadingShow.value = false
+            if (it != null) {
+                getGoodsSpecData(it)
+            }
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
+        })
+    }
+
+    private val sku = ArrayList<Sku>()
+
+    /**
+     * 处理规格数据
+     */
+    private fun getGoodsSpecData(data: GoodsSpecBean) {
+        val productResult = Product()
+        if (isListEmpty(data.list)) {
+            data.list?.forEach {
+                val skuAttr = ArrayList<SkuAttribute>()
+                var index = 0
+                skuAttr.add(SkuAttribute(data.keys[index], it?.name))
+                getChildData(it?.child, index, data, skuAttr, it)
+            }
+
+
+
+            productResult.id = "11"
+            productResult.name = "测试"
+            productResult.stockQuantity = 100000
+            productResult.skus = sku
+            product.value = productResult
+        }
+    }
+
+
+    /**
+     * 判断list是否为空
+     */
+    private fun isListEmpty(list: List<Any?>?): Boolean {
+        return !list.isNullOrEmpty()
+    }
+
+    private fun getChildData(childList: List<SkuBean?>?, _index: Int, data: GoodsSpecBean, skuAttr: ArrayList<SkuAttribute>, skuBean: SkuBean?) {
+        var index = _index
+        if (isListEmpty(childList)) {
+            index++
+            childList?.forEach {
+                // 第二次 型号
+                val listTemp = ArrayList<SkuAttribute>(skuAttr)
+                if (isListEmpty(it?.child)) {
+                    listTemp.add(SkuAttribute(data.keys[index], it?.name))
+                    getChildData(it?.child, index, data, listTemp, it)
+                } else {
+                    listTemp.add(SkuAttribute(data.keys[index], it?.name))
+                    sku.add(Sku(skuBean?.id.toString(), "", 20220, 22222, listTemp))
+                }
+            }
+        } else {
+            sku.add(Sku(skuBean?.id.toString(), "", 20220, 22222, skuAttr))
         }
     }
 }
