@@ -1,6 +1,8 @@
 package com.shangyi.kt.ui.goods
 
+import android.graphics.Color
 import android.graphics.Paint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.asynclayoutinflater.view.AsyncLayoutInflater
@@ -20,7 +22,11 @@ import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
 import com.shangyi.kt.ui.goods.bean.ReecommendGood
 import com.shangyi.kt.ui.goods.model.GoodDetailModel
 import com.shangyi.kt.ui.goods.weight.GoodDetailTopTitle
+import com.shangyi.kt.ui.goods.weight.ProductSkuDialog
 import com.shangyi.kt.ui.goods.weight.banner.indicator.NumIndicator
+import com.wuhenzhizao.sku.bean.Product
+import com.wuhenzhizao.sku.bean.Sku
+import com.wuhenzhizao.sku.bean.SkuAttribute
 import com.youth.banner.Banner
 import com.youth.banner.config.IndicatorConfig
 import com.youth.banner.indicator.CircleIndicator
@@ -49,6 +55,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     private var bindList = ArrayList<ViewDataBinding?>()  // 填充的DataBind
 
     private var pjAdapter = PjAdaper()  // 商品评价的信息适配器
+    private var attriAdapter = AttriAdapter(Color.parseColor("#ffffff"), Color.parseColor("#F8F8F8"))  // 商品详情属性适配器
     private var lookMoreAdapter = GoodsDetailLookmoreAdapter()  // 推荐查看更多适配器
 
     private var webView: BaseWebView? = null  // 商品详情的h5页面
@@ -65,12 +72,11 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     }
 
     override fun initView() {
-//        goodsInfoView = LayoutInflater.from(this).inflate(R.layout.item_goods_detail_goodsinfo, null, false)       // 商品信息
-//        shopInfoView = LayoutInflater.from(this).inflate(R.layout.item_goods_detail_shopinfo, null, false)         // 店铺信息
-//        goodsTjView = LayoutInflater.from(this).inflate(R.layout.item_goods_detail_tuijian, null, false)           // 推荐商品
         val view = LayoutInflater.from(this).inflate(R.layout.item_goods_detail_goodsdetail, null, false)   // 商品详情
         viewList[2] = view
         webView = view.goodsDetailWeb
+        view.attrRecyclerview.layoutManager = LinearLayoutManager(this@GoodsDetailActivity)
+        view.attrRecyclerview.adapter = attriAdapter
         addChildView()
 
         /**
@@ -82,6 +88,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
             val bind = DataBindingUtil.bind<ItemGoodsDetailGoodsinfoBinding>(view)
             bind?.lifecycleOwner = this@GoodsDetailActivity
             bind?.vm = mViewModel
+            bind?.activity = this@GoodsDetailActivity
             bindList.add(bind)
 
             addChildView()
@@ -204,6 +211,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         viewList.forEach {
             it.value == null
         }
+        viewList.clear()
         bindList.forEach { it?.unbind() }
     }
 
@@ -215,8 +223,17 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         setGoodInfoData(it)
         //评论信息
         setShopInfo(it)
+        attriAdapter.setList(it.goods_attribute)
         webView?.loadUrl(it.intro)
         lookMoreAdapter.setList(it.reecommendGoods)
+        bandBottomData(it)
+    }
+
+    /**
+     * 底部按钮绑定
+     */
+    private fun bandBottomData(it: GoodsDetailBean) {
+
     }
 
     /**
@@ -240,7 +257,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
             } else {
                 tvLable1?.visibility = View.GONE
             }
-            if (it.discountList[1] != null) {
+            if (it.discountList.size >= 2 && it.discountList[1] != null) {
                 var djqStr = mBinding.vm?.getYouhuiquanStr(it.discountList[1]!!)
                 if (djqStr.isNullOrEmpty()) tvLable2?.visibility = View.GONE else tvLable2?.visibility = View.VISIBLE
                 tvLable2?.text = "$djqStr"
@@ -251,7 +268,6 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         } else {
             tvLable1?.visibility = View.GONE
             tvLable2?.visibility = View.GONE
-//            viewList[0]?.tvMoreAction?.visibility = View.GONE
         }
         /******** 优惠券结束 *********/
 
@@ -268,8 +284,14 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
      */
     private fun setShopInfo(it: GoodsDetailBean) {
         val shopInfoView = viewList[1]
-        shopInfoView?.tvProductPjNum?.text = "(${it.comment_count})"
-//        shopInfoView?.tvPjMore?.text = "好评率${it.praise_count / it.comment_count}%"
+        if (it.comment_count == 0) {
+            shopInfoView?.tvProductPjNum?.text = "(${it.comment_count})"
+            shopInfoView?.tvPjMore?.text = "好评率0%"
+        } else {
+            shopInfoView?.tvProductPjNum?.text = "(${it.comment_count})"
+            shopInfoView?.tvPjMore?.text = "好评率${it.praise_count / it.comment_count}%"
+        }
+
         /******** 评论列表 *********/
         var appraiseInfo = it.appraiseInfo
         if (appraiseInfo != null && appraiseInfo.isNotEmpty()) {
@@ -292,22 +314,6 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     private fun getGoodsDetailTjBannerData(it: GoodsDetailBean): ArrayList<GoodsDetailTjBean> {
         var shopRecommend = it.shop_info?.shopRecommend
 
-//        shopRecommend = listOf(
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f),
-//                ReecommendGood(null, 1, 1, "", 1, "", 1, 1, 1, 1.11, 1, "", 1.11f)
-//        )
-
         var currentItem = 1
         val resultList = ArrayList<GoodsDetailTjBean>()
         var list = arrayListOf<ReecommendGood?>()
@@ -325,5 +331,72 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
             resultList.add(GoodsDetailTjBean(list))
         }
         return resultList
+    }
+
+
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.standardLayout -> {
+                // 规格
+                showSkuDialog()
+            }
+        }
+    }
+
+    private var dialog: ProductSkuDialog? = null
+    private fun showSkuDialog() {
+        if (dialog == null) {
+            dialog = ProductSkuDialog(this)
+            //            Product product = Product.get(this);
+            val product: Product = getProductData()
+            Log.e(TAG, "showSkuDialog:  ----  " + product.toString())
+            dialog?.setData(product) { sku, quantity ->
+                //                    // 获取SKU面板Logo拷贝
+                //                    ImageView logoImageView = new ImageView(SkuActivity.this);
+                //                    Bitmap bitmap = Bitmap.createBitmap(binding.ivAddCartAnim.getDrawingCache());
+                //                    logoImageView.setImageBitmap(bitmap);
+                //                    binding.ivAddCartAnim.setDrawingCacheEnabled(false);
+            }
+        }
+        dialog?.show()
+    }
+
+    fun getProductData(): Product {
+        val product = Product()
+        product.currencyUnit = "$"
+        product.measurementUnit = "千克"
+        product.sellingPrice = 99999
+        product.stockQuantity = 520
+        val skuList: MutableList<Sku> = java.util.ArrayList()
+        val sku1 = Sku()
+        sku1.stockQuantity = 1
+        sku1.sellingPrice = 25000
+        val attrList: MutableList<SkuAttribute> = java.util.ArrayList()
+        val skuAttribute1 = SkuAttribute("颜色", "粉色")
+        val skuAttribute2 = SkuAttribute("尺码", "M")
+        val skuAttribute3 = SkuAttribute("型号", "中")
+        val skuAttribute4 = SkuAttribute("内存", "18GB")
+        attrList.add(skuAttribute1)
+        attrList.add(skuAttribute2)
+        attrList.add(skuAttribute3)
+        attrList.add(skuAttribute4)
+        sku1.attributes = attrList
+        skuList.add(sku1)
+        val sku2 = Sku()
+        sku2.stockQuantity = 250
+        sku2.sellingPrice = 25000
+        val attrList2: MutableList<SkuAttribute> = java.util.ArrayList()
+        val skuAttribute5 = SkuAttribute("颜色", "绿色")
+        val skuAttribute6 = SkuAttribute("尺码", "XXL")
+        val skuAttribute7 = SkuAttribute("型号", "特小")
+        val skuAttribute8 = SkuAttribute("内存", "180GB180GB180GB180GB180GB180GB180GB180GB180GB180GB")
+        attrList2.add(skuAttribute5)
+        attrList2.add(skuAttribute6)
+        attrList2.add(skuAttribute7)
+        attrList2.add(skuAttribute8)
+        sku2.attributes = attrList2
+        skuList.add(sku2);
+        product.skus = skuList
+        return product
     }
 }

@@ -37,12 +37,10 @@ class CategroyRightFragment : BaseKTFragment<FragmentCategroyRightBinding, Categ
     private var banner: Banner<BannerDataBean, CategroyRightBanner>? = null  // 轮播图banner
     private var bannerAdapter = CategroyRightBanner()   // 轮播图适配器
 
-    private
-
-            /**
-             * banner数据
-             */
-    val list = arrayListOf<BannerDataBean>()
+    /**
+     * banner数据
+     */
+    private val list = arrayListOf<BannerDataBean>()
 
     override fun initObserve() {
         mBinding.vm?.categoryRightData?.observe(this, Observer {
@@ -52,7 +50,7 @@ class CategroyRightFragment : BaseKTFragment<FragmentCategroyRightBinding, Categ
 
                 list.clear()
                 it.category_img?.forEach { item ->
-                    list.add(BannerDataBean(item.img))
+                    list.add(BannerDataBean(item))
                 }
                 if (list.isEmpty()) {
                     banner?.visibility = View.GONE

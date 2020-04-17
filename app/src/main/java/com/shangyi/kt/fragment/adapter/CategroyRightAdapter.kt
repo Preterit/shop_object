@@ -14,12 +14,7 @@ import kotlinx.android.synthetic.main.item_categroy_right.view.*
  */
 class CategroyRightAdapter : BaseQuickAdapter<ChildBean, BaseViewHolder> {
 
-    constructor() : super(R.layout.item_categroy_right) {
-        val list = arrayListOf<String>(
-                "常用分类", "热门频道", "推荐活动",
-                "卫生棉条", "湿厕纸", "走路/止汗珠",
-                "免洗洗手液", "趣闻用品")
-    }
+    constructor() : super(R.layout.item_categroy_right) {}
 
     override fun convert(holder: BaseViewHolder, item: ChildBean) {
         holder.itemView.tvTitle.text = item.name

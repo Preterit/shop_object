@@ -62,7 +62,7 @@
             android:includeFontPadding="false"
             android:text="89"
             android:textColor="@color/color_333333"
-            android:textSize="18sp"
+            android:textSize="15sp"
             app:layout_constraintLeft_toRightOf="@+id/tvPriceTag"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -79,12 +79,13 @@
             app:layout_constraintTop_toTopOf="@+id/tvPrice" />
 
         <TextView
+            android:id="@+id/tvZhuanTx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="赚4.25"
             android:textColor="@color/color_F61630"
-            android:textSize="12sp"
+            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/tvPrice"
             app:layout_constraintLeft_toRightOf="@+id/tvLine"
             app:layout_constraintTop_toTopOf="@+id/tvPrice" />

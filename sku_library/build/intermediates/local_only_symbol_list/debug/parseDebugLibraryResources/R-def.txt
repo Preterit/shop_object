@@ -1,0 +1,40 @@
+R_DEF: Internal format may change without notice
+local
+anim slide_in_from_bottom
+anim slide_out_to_bottom
+attr? childSpacing
+attr? childSpacingForLastRow
+attr? flow
+attr? maxRows
+attr? rowSpacing
+attr? rtl
+color appColorAccent
+color appColorPrimary
+color appColorPrimaryDark
+color comm_bg
+color comm_black
+color comm_line
+color comm_price
+color comm_text_gray
+color comm_text_gray_dark
+color comm_text_gray_light
+color comm_transparent
+color comm_white
+color comm_yellow
+color sku_item_text_selector
+drawable sku_item_selector
+id align
+id auto
+string app_name
+string comm_price_format
+string product_detail
+string product_detail_sku_add_succeed
+string product_detail_sku_confirm
+string product_detail_sku_quantity
+string product_detail_sku_quantity_empty
+string product_detail_sku_quantity_over
+string product_detail_sku_recommend_price
+string product_detail_sku_stock
+style CommonBottomDialogAnim
+style CommonBottomDialogStyle
+styleable FlowLayout flow childSpacing childSpacingForLastRow rowSpacing rtl maxRows
