@@ -13,7 +13,7 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowFrame">@null</item>
-        <item name="android:windowAnimationStyle">@style/CommonBottomDialogAnim</item>
+<!--        <item name="android:windowAnimationStyle">@style/CommonBottomDialogAnim</item>-->
     </style>
     <!--  商品详情规格弹框动画  -->
     <style name="CommonBottomDialogAnim" parent="android:Animation">

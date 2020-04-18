@@ -106,9 +106,9 @@ class GoodDetailModel : BaseViewModel() {
             }
 
 
-
-            productResult.id = "11"
-            productResult.name = "测试"
+            productResult.id = "0"
+            productResult.name = ""
+            productResult.measurementUnit = ""
             productResult.stockQuantity = 100000
             productResult.skus = sku
             product.value = productResult
@@ -135,11 +135,13 @@ class GoodDetailModel : BaseViewModel() {
                     getChildData(it?.child, index, data, listTemp, it)
                 } else {
                     listTemp.add(SkuAttribute(data.keys[index], it?.name))
-                    sku.add(Sku(skuBean?.id.toString(), "", 20220, 22222, listTemp))
+                    sku.add(Sku(it?.id.toString(), it?.image ?: "", it?.stock
+                            ?: 0, it?.price ?: 0, listTemp))
                 }
             }
         } else {
-            sku.add(Sku(skuBean?.id.toString(), "", 20220, 22222, skuAttr))
+            sku.add(Sku(skuBean?.id.toString(), skuBean?.image ?: "", skuBean?.stock
+                    ?: 0, skuBean?.price ?: 0, skuAttr))
         }
     }
 }

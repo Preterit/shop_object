@@ -93,7 +93,7 @@ public class Sku implements Parcelable {
         this.id = id;
         this.mainImage = mainImage;
         this.stockQuantity = stockQuantity;
-        this.originPrice = originPrice;
+        this.sellingPrice = originPrice;
         this.attributes = attributes;
     }
 
