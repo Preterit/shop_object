@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.shangyi.kt.ui.personal.BackPwdActivity"></activity>
+        <activity android:name="com.shangyi.kt.ui.personal.SettingMessageActivity"></activity>
+        <activity android:name="com.shangyi.kt.ui.personal.AboutSyActivity" />
+        <activity android:name="com.shangyi.kt.ui.personal.BackPwdActivity" />
         <activity
             android:name="com.shangyi.kt.ui.goods.GoodsListActivity"
             android:windowSoftInputMode="stateHidden" />
