@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2F2"
+    tools:context="com.shangyi.kt.ui.personal.AboutSyActivity">
+
+    <com.shangyi.business.weight.TitleView
+        app:leftLayoutIconIsGray="true"
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:titleValue="关于上医宝库"/>
+
+    <com.shangyi.business.weight.CumAboutItemView
+        android:id="@+id/about_fw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:aboutleftText="上医宝库平台服务协议"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+    <com.shangyi.business.weight.CumAboutItemView
+        android:id="@+id/about_ys"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:aboutleftText="上医宝库隐私政策"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/about_fw"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
