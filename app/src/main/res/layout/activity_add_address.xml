@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.shangyi.kt.ui.address.model.AddAddressModel" />
+
+        <variable
+            name="activity"
+            type="com.shangyi.kt.ui.address.AddAddressActivity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context="com.shangyi.kt.ui.address.AddAddressActivity">
+
+        <com.shangyi.business.weight.TitleView
+            android:id="@+id/titleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:leftLayoutIconIsGray="true"
+            app:titleValue="添加收货地址" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/color_F0F0F0"
+            app:layout_constraintTop_toBottomOf="@+id/titleView" />
+
+        <EditText
+            android:id="@+id/edName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@null"
+            android:hint="收货人姓名"
+            android:padding="15dp"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/titleView" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/color_F0F0F0"
+            app:layout_constraintTop_toBottomOf="@+id/edName" />
+
+        <EditText
+            android:id="@+id/edNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@null"
+            android:hint="手机号+86"
+            android:padding="15dp"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/edName" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/color_F0F0F0"
+            app:layout_constraintTop_toBottomOf="@+id/edNumber" />
+
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/color_999999"
+            android:layout_marginTop="1dp"
+            android:background="@null"
+            android:drawableRight="@drawable/icon_arrows_right"
+            android:hint="所在地区"
+            android:textColor="@color/color_333333"
+            android:onClick="@{activity::onClick}"
+            android:padding="15dp"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/edNumber" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/color_F0F0F0"
+            app:layout_constraintTop_toBottomOf="@+id/tvAddress" />
+
+        <EditText
+            android:id="@+id/addressDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@null"
+            android:hint="详细地址：如道路、门牌号、小区、楼栋号、单元室等"
+            android:padding="15dp"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/tvAddress" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/color_F0F0F0"
+            app:layout_constraintTop_toBottomOf="@+id/addressDetail" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="设为默认地址"
+            android:textColor="@color/color_333333"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/checkbox"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/checkbox" />
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/select_address_isdefault_selector"
+            android:button="@null"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addressDetail" />
+
+        <TextView
+            android:id="@+id/saveAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="37dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="37dp"
+            android:background="@drawable/shape_add_address_red_bg"
+            android:gravity="center"
+            android:onClick="@{activity::onClick}"
+            android:padding="15dp"
+            android:text="保存地址"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

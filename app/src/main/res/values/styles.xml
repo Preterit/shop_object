@@ -73,11 +73,6 @@
         <!-- 不占用状态栏空间-->
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowIsFloating">false</item>
-        <!--进入和退出的动画-->
-        <item name="android:windowEnterAnimation">@anim/bottom_in</item>
-        <item name="android:windowExitAnimation">@anim/bottom_out</item>
-        <item name="android:windowAnimationStyle">@style/DialogAnima</item>
-
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:backgroundDimEnabled">true</item>
