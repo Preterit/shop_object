@@ -113,9 +113,9 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
 
     // 微信
-    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
 
-    // 支付宝
-    compile(name: 'alipaySdk-15.7.4-20200228192259', ext: 'aar')
+    // 支付宝支付
+    implementation(name: 'alipaySdk-15.7.4-20200228192259', ext: 'aar')
 
 }
