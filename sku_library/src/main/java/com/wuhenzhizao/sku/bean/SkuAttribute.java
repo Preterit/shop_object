@@ -34,12 +34,8 @@ public class SkuAttribute implements Parcelable {
         this.value = value;
     }
 
-    @Override
     public String toString() {
-        return "SkuAttribute{" +
-                "key='" + key + '\'' +
-                ", value='" + value + '\'' +
-                '}';
+        return value;
     }
 
     @Override

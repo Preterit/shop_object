@@ -1,5 +1,6 @@
 package com.shangyi.kt.ui.goods
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.Log
@@ -17,6 +18,7 @@ import com.sdxxtop.webview.remotewebview.BaseWebView
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityGoodsDetailBinding
 import com.shangyi.business.databinding.ItemGoodsDetailGoodsinfoBinding
+import com.shangyi.kt.ui.editaddress.EditAddressActivity
 import com.shangyi.kt.ui.goods.adapter.*
 import com.shangyi.kt.ui.goods.bean.GoodDetailTopBarBean
 import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
@@ -76,7 +78,8 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
             if (dialog == null) {
                 dialog = ProductSkuDialog(this)
                 dialog?.setData(it, ProductSkuDialog.Callback { sku, quantity ->
-                    Log.e("Callback --- ", "${sku.toString()} --quantity--  $quantity")
+                    dialog?.dismiss()
+                    viewList[0]?.tvStandard?.text = "${sku.attributes.toString().replace("[", "").replace("]", "")}"
                 })
             }
         })
@@ -352,45 +355,11 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
                 // 规格
                 dialog?.show()
             }
+            R.id.shAddressLayout -> {
+                // 收货地址
+                val intent = Intent(this@GoodsDetailActivity, EditAddressActivity::class.java)
+                startActivityForResult(intent, 11)
+            }
         }
-    }
-
-    fun getProductData(): Product {
-        val product = Product()
-        product.currencyUnit = "$"
-        product.measurementUnit = "千克"
-        product.sellingPrice = 99999
-        product.stockQuantity = 520
-        val skuList: MutableList<Sku> = java.util.ArrayList()
-        val sku1 = Sku()
-        sku1.stockQuantity = 1
-        sku1.sellingPrice = 25000
-        val attrList: MutableList<SkuAttribute> = java.util.ArrayList()
-        val skuAttribute1 = SkuAttribute("颜色", "粉色")
-        val skuAttribute2 = SkuAttribute("尺码", "M")
-        val skuAttribute3 = SkuAttribute("型号", "中")
-        val skuAttribute4 = SkuAttribute("内存", "18GB")
-        attrList.add(skuAttribute1)
-        attrList.add(skuAttribute2)
-        attrList.add(skuAttribute3)
-        attrList.add(skuAttribute4)
-        sku1.attributes = attrList
-        skuList.add(sku1)
-        val sku2 = Sku()
-        sku2.stockQuantity = 250
-        sku2.sellingPrice = 25000
-        val attrList2: MutableList<SkuAttribute> = java.util.ArrayList()
-        val skuAttribute5 = SkuAttribute("颜色", "绿色")
-        val skuAttribute6 = SkuAttribute("尺码", "XXL")
-        val skuAttribute7 = SkuAttribute("型号", "特小")
-        val skuAttribute8 = SkuAttribute("内存", "180GB180GB180GB180GB180GB180GB180GB180GB180GB180GB")
-        attrList2.add(skuAttribute5)
-        attrList2.add(skuAttribute6)
-        attrList2.add(skuAttribute7)
-        attrList2.add(skuAttribute8)
-        sku2.attributes = attrList2
-        skuList.add(sku2);
-        product.skus = skuList
-        return product
     }
 }

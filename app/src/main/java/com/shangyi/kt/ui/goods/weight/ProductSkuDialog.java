@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
 import androidx.databinding.DataBindingUtil;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.shangyi.business.R;
 import com.shangyi.business.databinding.DialogProductSkuBinding;
 import com.wuhenzhizao.sku.bean.Product;
@@ -124,8 +127,8 @@ public class ProductSkuDialog extends Dialog {
             @Override
             public void onUnselected(SkuAttribute unselectedAttribute) {
                 selectedSku = null;
-//                GImageLoader.displayUrl(context, binding.ivImgLogo, product.getMainImage());
-                binding.tvSkuQuantity.setText(String.format(stockQuantityFormat, product.getStockQuantity()));
+                setImaValue(context, product.getMainImage(), binding.ivImgLogo);
+                binding.tvSkuQuantity.setText(String.format(stockQuantityFormat, ""));
                 String firstUnselectedAttributeName = binding.scrollSkuList.getFirstUnelectedAttributeName();
                 binding.tvSkuInfo.setText("请选择：" + firstUnselectedAttributeName);
                 binding.btnSubmit.setEnabled(false);
@@ -146,7 +149,8 @@ public class ProductSkuDialog extends Dialog {
             @Override
             public void onSkuSelected(Sku sku) {
                 selectedSku = sku;
-//                GImageLoader.displayUrl(context, binding.ivImgLogo, selectedSku.getMainImage());
+
+                setImaValue(context, selectedSku.getMainImage(), binding.ivImgLogo);
                 List<SkuAttribute> attributeList = selectedSku.getAttributes();
                 StringBuilder builder = new StringBuilder();
                 for (int i = 0; i < attributeList.size(); i++) {
@@ -206,7 +210,7 @@ public class ProductSkuDialog extends Dialog {
             // 选中第一个sku
             binding.scrollSkuList.setSelectedSku(selectedSku);
 
-//            GImageLoader.displayUrl(context, binding.ivImgLogo, selectedSku.getMainImage());
+            setImaValue(context, selectedSku.getMainImage(), binding.ivImgLogo);
             binding.tvSkuSellingPrice.setText(String.format(priceFormat, selectedSku.getSellingPrice()));
             binding.tvSkuSellingPriceUnit.setText("/" + product.getMeasurementUnit());
             binding.tvSkuQuantity.setText(String.format(stockQuantityFormat, selectedSku.getStockQuantity()));
@@ -222,7 +226,7 @@ public class ProductSkuDialog extends Dialog {
             }
             binding.tvSkuInfo.setText("已选：" + builder.toString());
         } else {
-//            GImageLoader.displayUrl(context, binding.ivImgLogo, product.getMainImage());
+            setImaValue(context, selectedSku.getMainImage(), binding.ivImgLogo);
             binding.tvSkuSellingPrice.setText(String.format(priceFormat, product.getSellingPrice()));
             binding.tvSkuSellingPriceUnit.setText("/" + product.getMeasurementUnit());
             binding.tvSkuQuantity.setText(String.format(stockQuantityFormat, product.getStockQuantity()));
@@ -268,5 +272,13 @@ public class ProductSkuDialog extends Dialog {
 
     public interface Callback {
         void onAdded(Sku sku, int quantity);
+    }
+
+    RequestOptions requestOptions = new RequestOptions().placeholder(R.color.placeholder_color_F5);
+    public void setImaValue(Context context, String url, ImageView imageView) {
+        if (!TextUtils.isEmpty(url)) {
+            url = "";
+        }
+        Glide.with(context).load(url).apply(requestOptions).into(imageView);
     }
 }
