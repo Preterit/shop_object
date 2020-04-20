@@ -6,6 +6,7 @@ import com.sdxxtop.base.BaseKTFragment
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentHomeBinding
 import com.shangyi.kt.fragment.model.HomeModel
+import com.shangyi.kt.ui.pay.AliPayActivity
 import com.shangyi.kt.ui.personal.SettingActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -28,7 +29,7 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
 
     override fun initView() {
         mLoadService.showSuccess()
-        home.setOnClickListener { startActivity(Intent(context, SettingActivity::class.java)) }
+        home.setOnClickListener { startActivity(Intent(context, AliPayActivity::class.java)) }
 
     }
 
