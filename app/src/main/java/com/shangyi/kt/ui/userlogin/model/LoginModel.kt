@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import com.sdxxtop.base.BaseViewModel
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.api.RetrofitClient
+import com.shangyi.business.network.Constants
 import com.shangyi.business.network.Params
+import com.shangyi.business.network.SpUtil
 import com.shangyi.business.utils.FormatGson
 import com.shangyi.kt.ui.userlogin.bean.GetCodeBean
 import com.shangyi.kt.ui.userlogin.bean.LoginSuccess
@@ -43,6 +45,7 @@ class LoginModel : BaseViewModel() {
         }, {
             val bean = FormatGson.instance.forMatGson(it, LoginSuccess::class.java)
             if (bean?.userInfo != null) {
+                SpUtil.putInt(Constants.USER_ID, bean.userInfo.id)
                 loginSuccess.value = true
             } else {
                 mIsLoadingShow.value = false

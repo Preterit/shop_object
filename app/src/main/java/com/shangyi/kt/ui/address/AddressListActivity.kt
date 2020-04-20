@@ -40,4 +40,9 @@ class AddressListActivity : BaseKTActivity<ActivityAddressListBinding, AddAddres
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        mBinding.vm?.loadAddressList()
+    }
+
 }

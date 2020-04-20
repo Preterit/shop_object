@@ -4,6 +4,7 @@ import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.shangyi.business.R
+import com.shangyi.kt.ui.address.bean.AreaItemBean
 import kotlinx.android.synthetic.main.item_area_hor_text.view.*
 import kotlinx.android.synthetic.main.item_only_text.view.*
 import kotlinx.android.synthetic.main.item_only_text.view.txAddress
@@ -13,12 +14,12 @@ import kotlinx.android.synthetic.main.item_only_text.view.txAddress
  * author:lwb
  * Desc:
  */
-class AreaSelectHorAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_area_hor_text) {
+class AreaSelectHorAdapter : BaseQuickAdapter<AreaItemBean, BaseViewHolder>(R.layout.item_area_hor_text) {
 
     private var currentItem = 0
 
-    override fun convert(holder: BaseViewHolder, item: String) {
-        holder.itemView.txAddress.text = item
+    override fun convert(holder: BaseViewHolder, item: AreaItemBean) {
+        holder.itemView.txAddress.text = item.name
         if (currentItem == holder.layoutPosition) {
             holder.itemView.tvLine.visibility = View.VISIBLE
         } else {
@@ -32,7 +33,7 @@ class AreaSelectHorAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.i
 
     fun setSelectItem(str: String) {
         data.forEachIndexed { index, s ->
-            if (str == s) currentItem = index
+            if (str == s.name) currentItem = index
             notifyDataSetChanged()
             return@forEachIndexed
         }

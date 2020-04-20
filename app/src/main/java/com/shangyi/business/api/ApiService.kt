@@ -105,16 +105,23 @@ interface ApiService {
     suspend fun getGoodsSpec(@Field("data") data: String): BaseResponse<GoodsSpecBean?>
 
     /**
-     * 商品详情——商品规格
+     * 商品详情——获取地址
      */
     @FormUrlEncoded
     @POST("/api/user/getProviceCity")
     suspend fun getAreaData(@Field("data") data: String): BaseResponse<AreaBean?>
 
     /**
-     * 商品详情——商品规格
+     * 商品详情——添加地址
      */
     @FormUrlEncoded
     @POST("/api/user/addReceiveAddress")
     suspend fun saveAddress(@Field("data") data: String): BaseResponse<Any?>
+
+    /**
+     * 地址——列表
+     */
+    @FormUrlEncoded
+    @POST("/api/user/getAddressList")
+    suspend fun getAddressList(@Field("data") data: String): BaseResponse<Any?>
 }

@@ -3,42 +3,27 @@ package com.shangyi.kt.ui.address.weight;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.shangyi.business.R;
-import com.shangyi.business.utils.StatusBarUtil;
 import com.shangyi.kt.ui.address.adapter.AreaSelectAdapter;
 import com.shangyi.kt.ui.address.adapter.AreaSelectHorAdapter;
 import com.shangyi.kt.ui.address.bean.AreaBean;
 import com.shangyi.kt.ui.address.bean.AreaItemBean;
-import com.shangyi.kt.ui.address.bean.FatherData;
 import com.shangyi.kt.ui.address.model.AddAddressModel;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * data: 2020/3/30 15:38
@@ -51,7 +36,7 @@ public class AddressSelectDialog extends Dialog implements View.OnClickListener,
     private RecyclerView recyclerview1, recyclerview;  // 地址列表
     private AreaSelectAdapter adapter;
     private AreaSelectHorAdapter adapterHor;
-    private List<String> dataHor = new ArrayList<String>();
+    private List<AreaItemBean> dataHor = new ArrayList<>();
 
     private AddAddressModel model;
 
@@ -99,14 +84,14 @@ public class AddressSelectDialog extends Dialog implements View.OnClickListener,
         //创建适配器
         recyclerview1 = findViewById(R.id.recyclerview1);
         recyclerview = findViewById(R.id.recyclerview);
-//        findViewById(R.id.top_guideline).setOnClickListener(this);
+        findViewById(R.id.top_guideline).setOnClickListener(this);
 
         recyclerview1.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
 
         adapterHor = new AreaSelectHorAdapter();
         recyclerview.setAdapter(adapterHor);
-        dataHor.add("请选择");
+        dataHor.add(new AreaItemBean(0, 0, "请选择"));
         adapterHor.replaceData(dataHor);
 
         adapter = new AreaSelectAdapter();
@@ -142,23 +127,22 @@ public class AddressSelectDialog extends Dialog implements View.OnClickListener,
                     model.getAreaData(item.getId(), item.getType() + 1);
 
                     if (dataHor.size() > 0) {
-                        if (dataHor.get(0).equals("请选择")) {
+                        if (dataHor.get(0).getName().equals("请选择")) {
                             dataHor.clear();
                         }
                     }
-                    if (!dataHor.contains(item.getName())){
-                        dataHor.add(item.getName());
+                    if (!isInList(item)) {
+                        dataHor.add(item);
                     }
-
                 } else if (item.getType() == 2 && dataHor.size() == 2) {
-                    if (!dataHor.contains(item.getName())){
-                        dataHor.add(item.getName());
+                    if (!isInList(item)) {
+                        dataHor.add(item);
                     }
                     refreshList();
                     dismiss();
                 } else if (item.getType() == 2 && dataHor.size() == 3) {
-                    if (!dataHor.contains(item.getName())){
-                        dataHor.set(dataHor.size() - 1, item.getName());
+                    if (!isInList(item)) {
+                        dataHor.set(dataHor.size() - 1, item);
                     }
                     refreshList();
                     dismiss();
@@ -184,9 +168,9 @@ public class AddressSelectDialog extends Dialog implements View.OnClickListener,
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.top_guideline:
-//                dismiss();
-//                break;
+            case R.id.top_guideline:
+                dismiss();
+                break;
             default:
                 //nothing
                 break;
@@ -237,16 +221,46 @@ public class AddressSelectDialog extends Dialog implements View.OnClickListener,
         if (mListener != null) {
             if (adapterHor != null) {
                 StringBuilder sb = new StringBuilder();
-                for (String item : adapterHor.getData()) {
-                    sb.append(item);
+                List<AreaItemBean> data = adapterHor.getData();
+                int id1 = 0;
+                int id2 = 0;
+                int id3 = 0;
+                switch (data.size()) {
+                    case 1:
+                        sb.append(data.get(0).getName()).append("-");
+                        id1 = data.get(0).getId();
+                        break;
+                    case 2:
+                        sb.append(data.get(0).getName()).append("-");
+                        id1 = data.get(0).getId();
+                        sb.append(data.get(1).getName()).append("-");
+                        id2 = data.get(1).getId();
+                        break;
+                    case 3:
+                        sb.append(data.get(0).getName()).append("-");
+                        id1 = data.get(0).getId();
+                        sb.append(data.get(1).getName()).append("-");
+                        id2 = data.get(1).getId();
+                        sb.append(data.get(2).getName());
+                        id3 = data.get(2).getId();
+                        break;
                 }
-                mListener.addressSelectListener(sb.toString());
+                mListener.addressSelectListener(sb.toString(), id1, id2, id3);
             }
         }
     }
 
     public interface OnAddressSelectListener {
-        void addressSelectListener(String address);
+        void addressSelectListener(String address, int id1, int id2, int id3);
+    }
+
+    public boolean isInList(AreaItemBean item) {
+        for (AreaItemBean bean : dataHor) {
+            if (bean.getName().equals(item.getName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

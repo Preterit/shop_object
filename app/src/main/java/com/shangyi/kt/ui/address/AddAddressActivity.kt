@@ -1,6 +1,7 @@
 package com.shangyi.kt.ui.address
 
 import android.view.View
+import androidx.lifecycle.Observer
 import com.sdxxtop.base.BaseKTActivity
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
@@ -19,19 +20,31 @@ class AddAddressActivity : BaseKTActivity<ActivityAddAddressBinding, AddAddressM
         mBinding.activity = this
     }
 
+
+    private var id1 = 0
+    private var id2 = 0
+    private var id3 = 0
+
     /**
      * 位置选择弹框
      */
     private val addressdialog: AddressSelectDialog by lazy {
         val dialog = AddressSelectDialog(this@AddAddressActivity)
-        dialog.setOnAddressSelectListener {
-            tvAddress.text = it
+        dialog.setOnAddressSelectListener { address, _id1, _id2, _id3 ->
+            tvAddress.text = address
+            id1 = _id1
+            id2 = _id2
+            id3 = _id3
         }
         dialog
     }
 
     override fun initObserve() {
-
+        mBinding.vm?.isAddSuccess?.observe(this, Observer {
+            if (it) {
+                finish()
+            }
+        })
     }
 
 
@@ -72,9 +85,12 @@ class AddAddressActivity : BaseKTActivity<ActivityAddAddressBinding, AddAddressM
         mBinding.vm?.saveAddress(
                 edName.text.toString().trim(),
                 edNumber.text.toString().trim(),
-                tvAddress.text.toString().trim(),
-                addressDetail.text.toString().trim()
-                )
+                addressDetail.text.toString().trim(),
+                id1,
+                id2,
+                id3,
+                if (checkbox.isChecked) 1 else 0
+        )
     }
 
     override fun onDestroy() {

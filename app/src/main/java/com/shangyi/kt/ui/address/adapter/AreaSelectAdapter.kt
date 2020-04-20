@@ -12,10 +12,6 @@ import kotlinx.android.synthetic.main.item_only_text.view.*
  * Desc:
  */
 class AreaSelectAdapter : BaseQuickAdapter<AreaItemBean, BaseViewHolder>(R.layout.item_only_text) {
-    init {
-        val list = arrayListOf<String>("", "", "", "", "", "", "", "", "", "")
-//        setList(list)
-    }
 
     override fun convert(holder: BaseViewHolder, item: AreaItemBean) {
         holder.itemView.txAddress.text = item.name
