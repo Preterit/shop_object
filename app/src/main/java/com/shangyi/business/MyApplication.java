@@ -1,5 +1,6 @@
 package com.shangyi.business;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import androidx.multidex.MultiDex;
@@ -27,6 +28,8 @@ import sing.util.ToastUtil;
  */
 public class MyApplication extends BaseApplication {
 
+    @SuppressLint("StaticFieldLeak")
+    private static Context context;
 
     @Override
     public void onCreate() {
@@ -48,6 +51,9 @@ public class MyApplication extends BaseApplication {
         return instance;
     }
 
+    public static Context getContext() {
+        return context;
+    }
 
     @Override
     public boolean isDebug() {
