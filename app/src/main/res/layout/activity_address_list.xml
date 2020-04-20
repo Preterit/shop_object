@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.shangyi.kt.ui.address.model.AddAddressModel" />
+
+        <variable
+            name="activity"
+            type="com.shangyi.kt.ui.address.AddressListActivity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context="com.shangyi.kt.ui.address.AddressListActivity">
+
+        <com.shangyi.business.weight.TitleView
+            android:id="@+id/titleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:leftLayoutIconIsGray="true"
+            app:titleValue="地址管理" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/color_999999"
+            app:layout_constraintTop_toBottomOf="@+id/titleView" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/noAddressLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            app:layout_constraintBottom_toTopOf="@+id/addAddress"
+            app:layout_constraintTop_toBottomOf="@+id/titleView">
+
+            <ImageView
+                android:id="@+id/ivNoAddress"
+                android:layout_width="145dp"
+                android:layout_height="145dp"
+                android:src="@drawable/no_address_bg"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp"
+                android:text="暂无收获地址"
+                android:textColor="@color/color_DDDDDD"
+                android:textSize="17sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivNoAddress" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="1dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/addAddress"
+            app:layout_constraintTop_toBottomOf="@+id/titleView"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/addAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginBottom="6dp"
+            android:background="@drawable/shape_add_address_red_bg"
+            android:gravity="center"
+            android:onClick="@{activity::onClick}"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="新建地址"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

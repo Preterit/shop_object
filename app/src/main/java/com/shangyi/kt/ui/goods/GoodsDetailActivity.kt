@@ -3,7 +3,6 @@ package com.shangyi.kt.ui.goods
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Paint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.asynclayoutinflater.view.AsyncLayoutInflater
@@ -18,7 +17,7 @@ import com.sdxxtop.webview.remotewebview.BaseWebView
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityGoodsDetailBinding
 import com.shangyi.business.databinding.ItemGoodsDetailGoodsinfoBinding
-import com.shangyi.kt.ui.editaddress.EditAddressActivity
+import com.shangyi.kt.ui.address.AddressListActivity
 import com.shangyi.kt.ui.goods.adapter.*
 import com.shangyi.kt.ui.goods.bean.GoodDetailTopBarBean
 import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
@@ -27,9 +26,6 @@ import com.shangyi.kt.ui.goods.model.GoodDetailModel
 import com.shangyi.kt.ui.goods.weight.GoodDetailTopTitle
 import com.shangyi.kt.ui.goods.weight.ProductSkuDialog
 import com.shangyi.kt.ui.goods.weight.banner.indicator.NumIndicator
-import com.wuhenzhizao.sku.bean.Product
-import com.wuhenzhizao.sku.bean.Sku
-import com.wuhenzhizao.sku.bean.SkuAttribute
 import com.youth.banner.Banner
 import com.youth.banner.config.IndicatorConfig
 import com.youth.banner.indicator.CircleIndicator
@@ -357,7 +353,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
             }
             R.id.shAddressLayout -> {
                 // 收货地址
-                val intent = Intent(this@GoodsDetailActivity, EditAddressActivity::class.java)
+                val intent = Intent(this@GoodsDetailActivity, AddressListActivity::class.java)
                 startActivityForResult(intent, 11)
             }
         }
