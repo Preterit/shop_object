@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/goodsyuanjiao"
+        android:background="@drawable/payitem"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/goodsyuanjiao"
+        android:background="@drawable/payitem"
         app:layout_constraintBottom_toBottomOf="parent">
 
     <ImageView
