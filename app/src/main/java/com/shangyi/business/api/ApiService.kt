@@ -7,6 +7,7 @@ import com.shangyi.kt.ui.address.bean.AreaBean
 import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
 import com.shangyi.kt.ui.goods.bean.GoodsListBean
 import com.shangyi.kt.ui.goods.bean.GoodsSpecBean
+import com.shangyi.kt.ui.pingjia.OrderBean
 import com.shangyi.kt.ui.splash.bean.GetSettingBean
 import com.shangyi.kt.ui.userlogin.bean.LoginSuccess
 import retrofit2.http.Field
@@ -117,4 +118,12 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/api/user/addReceiveAddress")
     suspend fun saveAddress(@Field("data") data: String): BaseResponse<Any?>
+
+    /**
+     * 支付成功  商品推荐
+     */
+    @FormUrlEncoded
+    @POST("/api/goods/getShopRecommend")
+    suspend fun successOrdertuijian(@Field("data") data: String): BaseResponse<List<OrderBean>?>
+
 }

@@ -43,6 +43,10 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
     private long countdownTime;//倒计时的总时间(单位:毫秒)
     private String timefromServer;//从服务器获取的订单生成时间
     private long chaoshitime;//从服务器获取订单有效时长(单位:毫秒)
+    private boolean isStop;
+    private View mDialogView;
+    private PayBottomDialog mDialog;
+    private TextView mTvNum;
 
 
     private static class MyHandler extends Handler {
@@ -71,30 +75,33 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-
+private float price = 3000.98f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
-        mBtn_pay = findViewById(R.id.btn_pay);
 
+        price = getIntent().getFloatExtra("price", 0f);
+
+        mBtn_pay = findViewById(R.id.btn_pay);
         mBtn_pay.setOnClickListener(this);
+        mDialogView = getLayoutInflater().inflate(R.layout.dialog_pay_type, null);
+        mDialog = new PayBottomDialog(OrderActivity.this, mDialogView, new int[]{R.id.ll_pay_weichat, R.id.ll_pay_ali, R.id.tv_confirm, R.id.img_cancel});
+        //倒计时
+        mPayDjs = mDialogView.findViewById(R.id.pay_djs);
+
+        mTvNum = mDialogView.findViewById(R.id.tv_num);
+        getTimeDuring();
+        //微信支付的选择
+        mIvWeichatSelect = mDialogView.findViewById(R.id.iv_buy_weichat_select);
+        //支付宝的选择
+        mIvAliSelect = mDialogView.findViewById(R.id.iv_buy_alipay_select);
     }
 
     private void pay() {
-        View dialogView = getLayoutInflater().inflate(R.layout.dialog_pay_type, null);
-
-        //倒计时
-        mPayDjs = dialogView.findViewById(R.id.pay_djs);
-        getTimeDuring();
-        //微信支付的选择
-        mIvWeichatSelect = dialogView.findViewById(R.id.iv_buy_weichat_select);
-        //支付宝的选择
-        mIvAliSelect = dialogView.findViewById(R.id.iv_buy_alipay_select);
-
-        PayBottomDialog dialog = new PayBottomDialog(OrderActivity.this, dialogView, new int[]{R.id.ll_pay_weichat, R.id.ll_pay_ali, R.id.tv_confirm, R.id.img_cancel});
-        dialog.bottmShow();
-        dialog.setOnBottomItemClickListener(new PayBottomDialog.OnBottomItemClickListener() {
+        mTvNum.setText(price+"");
+        mDialog.bottmShow();
+        mDialog.setOnBottomItemClickListener(new PayBottomDialog.OnBottomItemClickListener() {
             @Override
             public void onBottomItemClick(PayBottomDialog dialog, View view) {
                 switch (view.getId()) {
@@ -118,7 +125,9 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
                     case R.id.tv_confirm:  //确认支付
                         //TODO 支付
                         showToast("确认支付");
+
                         Intent intent = new Intent(OrderActivity.this,OrderSuccessActivity.class);
+                        intent.putExtra("price",price);
                         startActivity(intent);
                         finish();
                        /* if (payType == PAY_TYPE_ALIPAY){
@@ -170,6 +179,9 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
+            if (isStop){
+                return;
+            }
             countdownTime -= 1000;//倒计时总时间减1
 
             SimpleDateFormat minforamt = new SimpleDateFormat("mm:ss");
@@ -207,7 +219,7 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btn_pay:
+            case R.id.btn_pay://下单支付
                 pay();
                 break;
             default:
@@ -296,5 +308,8 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
     protected void onDestroy() {
         super.onDestroy();
         handler.removeMessages(1);
+        isStop = true;
+        runnable = null;
+        handler = null;
     }
 }

@@ -1,153 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
-            type="com.shangyi.kt.ui.order.OrderSuccessActivity" />
+            type="com.shangyi.kt.ui.order.OrderSuccessModel" />
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.shangyi.kt.ui.order.OrderSuccessActivity">
-
-    <com.shangyi.business.weight.TitleView
-        app:leftLayoutIconIsGray="true"
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleValue="支付成功" />
-
-    <ImageView
-        android:id="@+id/success_img"
-        android:layout_width="98dp"
-        android:layout_height="95dp"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:src="@drawable/success_img"
-        android:layout_marginTop="40dp"
-        />
-
-    <TextView
-        android:id="@+id/tv_success"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="订单支付成功"
-        android:textSize="17sp"
-        android:textColor="#333333"
-        app:layout_constraintTop_toBottomOf="@+id/success_img"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="10dp"
-        />
-
-    <TextView
-        android:id="@+id/tv_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="￥347383.00"
-        android:textSize="21sp"
-        android:textColor="#333333"
-        app:layout_constraintTop_toBottomOf="@+id/tv_success"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="30dp"
-        />
-
-    <TextView
-        android:id="@+id/tv_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="商家已接单，仓库正在为您备货中"
-        android:textSize="12sp"
-        android:textColor="#999999"
-        app:layout_constraintTop_toBottomOf="@+id/tv_price"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="15dp"
-        />
-
     <LinearLayout
-        android:id="@+id/ll_order"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="44dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginRight="27dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_item">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/order_success"
-            app:layout_constraintBottom_toBottomOf="parent">
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_gravity="center"
-                android:src="@drawable/success_cart"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="继续支付"
-                android:layout_marginLeft="10dp"
-                android:textColor="#FF2942"
-                android:textSize="17sp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/order_success"
-            app:layout_constraintBottom_toBottomOf="parent">
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_gravity="center"
-                android:src="@drawable/success_order"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:text="查看订单"
-                android:textColor="#FF2942"
-                android:textSize="17sp"/>
-        </LinearLayout>
+        <com.shangyi.business.weight.TitleView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:leftLayoutIconIsGray="true"
+            app:titleValue="支付成功" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.shangyi.kt.ui.order.OrderSuccessActivity">
+
+                <ImageView
+                    android:id="@+id/success_img"
+                    android:layout_width="98dp"
+                    android:layout_height="95dp"
+                    android:layout_marginTop="40dp"
+                    android:src="@drawable/success_img"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_success"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="订单支付成功"
+                    android:textColor="#333333"
+                    android:textSize="17sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/success_img" />
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="￥347383.00"
+                    android:textColor="#333333"
+                    android:textSize="21sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_success" />
+
+                <TextView
+                    android:id="@+id/tv_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="商家已接单，仓库正在为您备货中"
+                    android:textColor="#999999"
+                    android:textSize="12sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_price" />
+
+                <LinearLayout
+                    android:id="@+id/ll_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="27dp"
+                    android:layout_marginTop="44dp"
+                    android:layout_marginRight="27dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_item">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/order_success"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/success_cart" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:text="继续购物"
+                            android:textColor="#FF2942"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/order_success"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/success_order" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:text="查看订单"
+                            android:textColor="#FF2942"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/img_order_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@color/color_eeeeee"
+                    app:layout_constraintTop_toBottomOf="@id/ll_order" />
+
+                <ImageView
+                    android:id="@+id/img_order_tuijian"
+                    android:layout_width="107dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="29dp"
+                    android:src="@drawable/success_recommend"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_order_item" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/success_order_tuijian_rcy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintTop_toBottomOf="@id/img_order_tuijian" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/img_order_item"
-        app:layout_constraintTop_toBottomOf="@id/ll_order"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginTop="40dp"
-        android:background="@color/color_eeeeee"/>
-
-    <ImageView
-        android:layout_width="107dp"
-        android:layout_height="24dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="29dp"
-        app:layout_constraintTop_toBottomOf="@id/img_order_item"
-        android:src="@drawable/success_recommend"
-        />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
