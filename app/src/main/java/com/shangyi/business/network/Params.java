@@ -23,9 +23,10 @@ public class Params {
     }
 
     private void defaultValue() {
-        put("ui", SpUtil.getInt(Constants.USER_ID, 0));
-        put("pi", SpUtil.getInt(Constants.PART_ID, 0));
-        put("plid", "1");
+        put("uid", SpUtil.getInt(Constants.USER_ID, 0));
+//        put("ui", SpUtil.getInt(Constants.USER_ID, 0));
+//        put("pi", SpUtil.getInt(Constants.PART_ID, 0));
+//        put("plid", "1");
     }
 
     public String getUserId() {

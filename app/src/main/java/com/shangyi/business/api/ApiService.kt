@@ -4,6 +4,7 @@ import com.sdxxtop.network.helper.data.BaseResponse
 import com.shangyi.kt.fragment.bean.CategroyLeftBean
 import com.shangyi.kt.fragment.bean.CategroyRightBean
 import com.shangyi.kt.ui.address.bean.AreaBean
+import com.shangyi.kt.ui.address.bean.AreaListBean
 import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
 import com.shangyi.kt.ui.goods.bean.GoodsListBean
 import com.shangyi.kt.ui.goods.bean.GoodsSpecBean
@@ -106,18 +107,31 @@ interface ApiService {
     suspend fun getGoodsSpec(@Field("data") data: String): BaseResponse<GoodsSpecBean?>
 
     /**
-     * 商品详情——商品规格
+     * 商品详情——获取地址
      */
     @FormUrlEncoded
     @POST("/api/user/getProviceCity")
     suspend fun getAreaData(@Field("data") data: String): BaseResponse<AreaBean?>
 
     /**
-     * 商品详情——商品规格
+     * 商品详情——添加地址
      */
     @FormUrlEncoded
     @POST("/api/user/addReceiveAddress")
     suspend fun saveAddress(@Field("data") data: String): BaseResponse<Any?>
+
+    /**
+     * 地址——列表
+     */
+    @FormUrlEncoded
+    @POST("/api/user/getAddressList")
+    suspend fun getAddressList(@Field("data") data: String): BaseResponse<List<AreaListBean>?>
+    /**
+     * 地址——列表
+     */
+    @FormUrlEncoded
+    @POST("/api/user/delReceiveAddress")
+    suspend fun deleteAddress(@Field("data") data: String): BaseResponse<Any?>
 
     /**
      * 支付成功  商品推荐

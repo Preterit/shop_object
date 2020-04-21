@@ -31,7 +31,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/color_999999"
+            android:background="@color/color_E0E0E0"
             app:layout_constraintTop_toBottomOf="@+id/titleView" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            app:layout_constraintBottom_toTopOf="@+id/addAddress"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleView">
 
             <ImageView
@@ -68,8 +68,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="1dp"
+            android:paddingBottom="80dp"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/addAddress"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleView"
             tools:visibility="visible" />
 

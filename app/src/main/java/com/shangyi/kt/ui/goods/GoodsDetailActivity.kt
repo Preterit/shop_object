@@ -61,7 +61,9 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     private var scrollviewFlag = false  // 滑动的标识
     private var tabIndex = -1  // 当前选中tab的下标
     private var goodsId = 0 // 商品ID
+    private var addressId = 0 // 地址ID
     private var dialog: ProductSkuDialog? = null   // 规格弹框
+
 
     override fun initObserve() {
         mBinding.vm?.data?.observe(this, androidx.lifecycle.Observer {
@@ -356,6 +358,19 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
                 val intent = Intent(this@GoodsDetailActivity, AddressListActivity::class.java)
                 startActivityForResult(intent, 11)
             }
+        }
+    }
+
+    /**
+     * 开启activity收到的结果。
+     */
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (data == null) return
+        if (requestCode == 11) {
+            val address = data.getStringExtra("address")
+            addressId = data.getIntExtra("addressId", 0)
+            viewList[0]?.tvShippingAddress?.text = address
         }
     }
 }
