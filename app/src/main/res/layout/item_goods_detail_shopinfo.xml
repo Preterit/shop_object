@@ -38,15 +38,17 @@
         <TextView
             android:id="@+id/tvPjMore"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="13dp"
             android:layout_marginBottom="2dp"
+            android:gravity="center"
             android:text="好评率98% >"
             android:textColor="@color/color_F61630"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tvProductPJ"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/pjRecyclerView"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <androidx.recyclerview.widget.RecyclerView
