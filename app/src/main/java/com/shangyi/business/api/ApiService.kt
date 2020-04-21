@@ -4,6 +4,7 @@ import com.sdxxtop.network.helper.data.BaseResponse
 import com.shangyi.kt.fragment.bean.CategroyLeftBean
 import com.shangyi.kt.fragment.bean.CategroyRightBean
 import com.shangyi.kt.ui.address.bean.AreaBean
+import com.shangyi.kt.ui.address.bean.AreaListBean
 import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
 import com.shangyi.kt.ui.goods.bean.GoodsListBean
 import com.shangyi.kt.ui.goods.bean.GoodsSpecBean
@@ -123,5 +124,11 @@ interface ApiService {
      */
     @FormUrlEncoded
     @POST("/api/user/getAddressList")
-    suspend fun getAddressList(@Field("data") data: String): BaseResponse<Any?>
+    suspend fun getAddressList(@Field("data") data: String): BaseResponse<List<AreaListBean>?>
+    /**
+     * 地址——列表
+     */
+    @FormUrlEncoded
+    @POST("/api/user/delReceiveAddress")
+    suspend fun deleteAddress(@Field("data") data: String): BaseResponse<Any?>
 }

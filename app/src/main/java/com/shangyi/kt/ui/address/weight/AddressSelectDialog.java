@@ -233,7 +233,7 @@ public class AddressSelectDialog extends Dialog implements View.OnClickListener,
                     case 2:
                         sb.append(data.get(0).getName()).append("-");
                         id1 = data.get(0).getId();
-                        sb.append(data.get(1).getName()).append("-");
+                        sb.append(data.get(1).getName());
                         id2 = data.get(1).getId();
                         break;
                     case 3:

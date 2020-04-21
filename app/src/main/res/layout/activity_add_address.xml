@@ -76,14 +76,14 @@
             android:id="@+id/tvAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/color_999999"
             android:layout_marginTop="1dp"
             android:background="@null"
             android:drawableRight="@drawable/icon_arrows_right"
             android:hint="所在地区"
-            android:textColor="@color/color_333333"
             android:onClick="@{activity::onClick}"
             android:padding="15dp"
+            android:textColor="@color/color_333333"
+            android:textColorHint="@color/color_999999"
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@+id/edNumber" />
 
@@ -152,5 +152,22 @@
             android:textSize="17sp"
             app:layout_constraintTop_toBottomOf="@+id/checkbox" />
 
+        <TextView
+            android:id="@+id/deleteAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="37dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="37dp"
+            android:background="@drawable/shape_add_address_gray_bg"
+            android:gravity="center"
+            android:onClick="@{activity::onClick}"
+            android:padding="15dp"
+            android:text="删除地址"
+            android:textColor="#0CBF75"
+            android:textSize="17sp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/saveAddress"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

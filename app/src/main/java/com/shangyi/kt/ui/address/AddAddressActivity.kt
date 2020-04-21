@@ -6,6 +6,7 @@ import com.sdxxtop.base.BaseKTActivity
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityAddAddressBinding
+import com.shangyi.kt.ui.address.bean.AreaListBean
 import com.shangyi.kt.ui.address.model.AddAddressModel
 import com.shangyi.kt.ui.address.weight.AddressSelectDialog
 import kotlinx.android.synthetic.main.activity_add_address.*
@@ -24,6 +25,8 @@ class AddAddressActivity : BaseKTActivity<ActivityAddAddressBinding, AddAddressM
     private var id1 = 0
     private var id2 = 0
     private var id3 = 0
+    private var areaBean: AreaListBean? = null
+    private var adsId = -1  // 修改地址的ID，该ID存在，则为修改，不存在，则是新建。
 
     /**
      * 位置选择弹框
@@ -49,7 +52,21 @@ class AddAddressActivity : BaseKTActivity<ActivityAddAddressBinding, AddAddressM
 
 
     override fun initView() {
-
+        areaBean = intent.getParcelableExtra<AreaListBean>("areaBean")
+        if (areaBean != null) {
+            edName.setText(areaBean?.recipient ?: "")
+            edNumber.setText(areaBean?.mobile ?: "")
+            tvAddress.text = "${areaBean?.provice?.name}-${areaBean?.city?.name}-${areaBean?.county?.name}"
+            addressDetail.setText(areaBean?.detail)
+            checkbox.isChecked = areaBean?.is_default == 1
+            adsId = areaBean?.id ?: -1
+            id1 = areaBean?.province_id ?: 0
+            id2 = areaBean?.city_id ?: 0
+            id3 = areaBean?.county_id ?: 0
+            deleteAddress.visibility = View.VISIBLE
+        } else {
+            deleteAddress.visibility = View.GONE
+        }
     }
 
     override fun onClick(v: View) {
@@ -62,6 +79,11 @@ class AddAddressActivity : BaseKTActivity<ActivityAddAddressBinding, AddAddressM
             R.id.saveAddress -> {
                 // 保存地址
                 commitAddress()
+            }
+
+            R.id.deleteAddress ->{
+                // 删除地址
+                mBinding.vm?.deleteAddress(adsId)
             }
         }
     }
@@ -89,7 +111,8 @@ class AddAddressActivity : BaseKTActivity<ActivityAddAddressBinding, AddAddressM
                 id1,
                 id2,
                 id3,
-                if (checkbox.isChecked) 1 else 0
+                if (checkbox.isChecked) 1 else 0,
+                adsId
         )
     }
 

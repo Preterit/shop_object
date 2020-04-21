@@ -10,6 +10,7 @@ import com.shangyi.business.network.Constants
 import com.shangyi.business.network.Params
 import com.shangyi.business.network.SpUtil
 import com.shangyi.kt.ui.address.bean.AreaBean
+import com.shangyi.kt.ui.address.bean.AreaListBean
 
 /**
  * Date:2020/4/19
@@ -20,6 +21,7 @@ class AddAddressModel : BaseViewModel() {
 
     private var mRefreshListener: OnAreaRefresh? = null
     var isAddSuccess = MutableLiveData<Boolean>()
+    var areaBean = MutableLiveData<List<AreaListBean>>()
 
     /**
      * 默认查询省份。city查询城市，county查询区县（type为city或county，id必须存在）
@@ -61,14 +63,15 @@ class AddAddressModel : BaseViewModel() {
             id1: Int,
             id2: Int,
             id3: Int,
-            default: Int
+            default: Int,
+            adsId: Int
     ) {
         loadOnUI({
             showLoadingDialog(true)
             val params = Params()
-//            if (id != -1) {
-//                params.put("id", id)
-//            }
+            if (adsId != -1) {
+                params.put("id", adsId)
+            }
             params.put("uid", SpUtil.getInt(Constants.USER_ID, 0))
             params.put("name", name)
             params.put("mobile", number)
@@ -102,6 +105,27 @@ class AddAddressModel : BaseViewModel() {
             RetrofitClient.apiCusService.getAddressList(params.aesData)
         }, {
             mIsLoadingShow.value = false
+            if (it != null) {
+                areaBean.value = it
+            }
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
+        })
+    }
+
+    /**
+     * 删除地址
+     */
+    fun deleteAddress(adsId: Int) {
+        loadOnUI({
+            showLoadingDialog(true)
+            val params = Params()
+            params.put("id", adsId)
+            RetrofitClient.apiCusService.deleteAddress(params.aesData)
+        }, {
+            mIsLoadingShow.value = false
+            isAddSuccess.value = true
         }, { code, msg, t ->
             UIUtils.showToast(msg)
             mIsLoadingShow.value = false

@@ -2,9 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingLeft="15dp">
 
     <TextView
         android:id="@+id/tvName"
@@ -31,16 +30,17 @@
 
     <TextView
         android:id="@+id/tvAddressStr"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:text="北京市海淀区皂君庙甲4号北京开放大学北校区"
         android:textColor="@color/color_999999"
         android:textSize="12sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/edit"
         app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
     <TextView
@@ -63,8 +63,33 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_marginTop="15dp"
-        android:background="@color/color_999999"
+        android:layout_marginTop="12dp"
+        android:background="@color/color_F0F0F0"
         app:layout_constraintTop_toBottomOf="@+id/tvAddressStr" />
+
+    <TextView
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/color_DDDDDD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/edit"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/edit"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="编辑"
+        android:textColor="@color/color_999999"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
