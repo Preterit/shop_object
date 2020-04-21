@@ -8,6 +8,7 @@ import com.shangyi.kt.ui.address.bean.AreaListBean
 import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
 import com.shangyi.kt.ui.goods.bean.GoodsListBean
 import com.shangyi.kt.ui.goods.bean.GoodsSpecBean
+import com.shangyi.kt.ui.pingjia.bean.PingjiaDataBean
 import com.shangyi.kt.ui.splash.bean.GetSettingBean
 import com.shangyi.kt.ui.userlogin.bean.LoginSuccess
 import retrofit2.http.Field
@@ -30,44 +31,44 @@ interface ApiService {
     }
 
     @FormUrlEncoded
-    @POST("api/sys_config/getConfigInfo")
+    @POST("/api/sys_config/getConfigInfo")
     suspend fun getSetting(@Field("data") data: String): BaseResponse<GetSettingBean?>
 
     @FormUrlEncoded
-    @POST("api/sys_config/getConfigInfo")
+    @POST("/api/sys_config/getConfigInfo")
     suspend fun getAESSetting(@Field("data") data: String): BaseResponse<GetSettingBean?>
 
 
     @FormUrlEncoded
-    @POST("api/login/login")
+    @POST("/api/login/login")
     suspend fun login(@Field("data") data: String): BaseResponse<String?>
 
     /**
      * 获取验证码
      */
     @FormUrlEncoded
-    @POST("api/login/send_code")
+    @POST("/api/login/send_code")
     suspend fun getCode(@Field("data") data: String): BaseResponse<String?>
 
     /**
      * 注册
      */
     @FormUrlEncoded
-    @POST("api/login/register")
+    @POST("/api/login/register")
     suspend fun register(@Field("data") data: String): BaseResponse<String?>
 
     /**
      * 完善个人信息
      */
     @FormUrlEncoded
-    @POST("api/login/improveInfo")
+    @POST("/api/login/improveInfo")
     suspend fun commitInfo(@Field("data") data: String): BaseResponse<String?>
 
     /**
      * 找回密码
      */
     @FormUrlEncoded
-    @POST("api/login/findPwd")
+    @POST("/api/login/findPwd")
     suspend fun findpwd(@Field("data") data: String): BaseResponse<String?>
 
     /**
@@ -125,10 +126,18 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/api/user/getAddressList")
     suspend fun getAddressList(@Field("data") data: String): BaseResponse<List<AreaListBean>?>
+
     /**
-     * 地址——列表
+     * 地址——删除地址
      */
     @FormUrlEncoded
     @POST("/api/user/delReceiveAddress")
     suspend fun deleteAddress(@Field("data") data: String): BaseResponse<Any?>
+
+    /**
+     * 评论——列表
+     */
+    @FormUrlEncoded
+    @POST("/api/goods_comment/commentList")
+    suspend fun pinglunList(@Field("data") data: String): BaseResponse<PingjiaDataBean?>
 }

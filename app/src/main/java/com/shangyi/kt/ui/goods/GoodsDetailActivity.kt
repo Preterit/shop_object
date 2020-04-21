@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
 import androidx.asynclayoutinflater.view.AsyncLayoutInflater
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
@@ -26,6 +27,7 @@ import com.shangyi.kt.ui.goods.model.GoodDetailModel
 import com.shangyi.kt.ui.goods.weight.GoodDetailTopTitle
 import com.shangyi.kt.ui.goods.weight.ProductSkuDialog
 import com.shangyi.kt.ui.goods.weight.banner.indicator.NumIndicator
+import com.shangyi.kt.ui.pingjia.PingjiaActivity
 import com.youth.banner.Banner
 import com.youth.banner.config.IndicatorConfig
 import com.youth.banner.indicator.CircleIndicator
@@ -123,6 +125,11 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
             viewList[1] = view
 
             shopTjBanner = view?.findViewById(R.id.shopTjBanner)
+            view?.findViewById<TextView>(R.id.tvPjMore).setOnClickListener {
+                var intent = Intent(this@GoodsDetailActivity, PingjiaActivity::class.java)
+                intent.putExtra("goodId",goodsId)
+                startActivity(intent)
+            }
             shopTjBanner!!.setAdapter(goodsDetailTjBannerAdapter)
                     .setIndicator(CircleIndicator(this@GoodsDetailActivity))
                     .setIndicatorGravity(IndicatorConfig.Direction.CENTER)
