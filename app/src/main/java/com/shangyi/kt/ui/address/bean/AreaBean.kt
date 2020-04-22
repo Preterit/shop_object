@@ -12,7 +12,6 @@ data class AreaBean(
 
 data class AreaItemBean(
         val id: Int,
-        val type: Int,
         val name: String
 )
 

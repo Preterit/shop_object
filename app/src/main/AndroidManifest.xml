@@ -35,7 +35,8 @@
         <activity android:name="com.shangyi.kt.ui.userlogin.SetUserinfoActivity" />
         <activity android:name="com.shangyi.kt.ui.userlogin.SetPwdActivity" />
         <activity android:name="com.shangyi.kt.ui.poster.PosterActivity" />
-        <activity android:name="com.shangyi.kt.ui.MainActivity" />
+        <activity android:name="com.shangyi.kt.ui.MainActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".base.NetWorkActivity" />
         <activity
             android:name="com.shangyi.kt.ui.userlogin.LoginActivity"

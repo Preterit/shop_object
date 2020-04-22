@@ -5,6 +5,8 @@ import android.graphics.Color
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.scwang.smartrefresh.layout.api.RefreshLayout
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.sdxxtop.base.BaseKTActivity
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityPingjiaBinding
@@ -26,6 +28,7 @@ class PingjiaActivity : BaseKTActivity<ActivityPingjiaBinding, PingjiaModel>() {
     private var page = 0  //  从第几条开始取数据
     private var type = 0  // 筛选类型(1-好评，2-中评，3-差评)
     private var img = 0 // 等于1时筛选有图评论
+    private var isFirst = true // 是否是第一次加载
     private var topAdapterList = ArrayList<String>()
 
     private val topAdapter = PingjiaSelecterAdapter(Color.parseColor("#FF2942"), Color.parseColor("#333333"))  //  筛选条件适配器
@@ -33,6 +36,9 @@ class PingjiaActivity : BaseKTActivity<ActivityPingjiaBinding, PingjiaModel>() {
 
     override fun initObserve() {
         mBinding.vm?.pingjiaData?.observe(this, Observer {
+            if (isFirst) {
+                isFirst = false
+            }
             bandData(it)
         })
     }
@@ -53,16 +59,32 @@ class PingjiaActivity : BaseKTActivity<ActivityPingjiaBinding, PingjiaModel>() {
                 img = 0
                 type = position
             }
-            mBinding.vm?.loadPingjiaData(goodId, page, type, img)
+            initData()
             topAdapter.setItemSelect(position)
             if (position == 0) {
                 startActivity(Intent(this@PingjiaActivity, AddPinglunActivity::class.java))
             }
         }
+
+        smartLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
+            override fun onLoadMore(refreshLayout: RefreshLayout) {
+                page = contentAdapter.data.size
+                initData()
+                refreshLayout.finishLoadMore()
+                refreshLayout.finishRefresh()
+            }
+
+            override fun onRefresh(refreshLayout: RefreshLayout) {
+                page = 0
+                initData()
+                refreshLayout.finishLoadMore()
+                refreshLayout.finishRefresh()
+            }
+        })
     }
 
     override fun initData() {
-        mBinding.vm?.loadPingjiaData(goodId, page, type, img)
+        mBinding.vm?.loadPingjiaData(goodId, page, type, img,isFirst)
     }
 
     /**

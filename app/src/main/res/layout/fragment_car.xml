@@ -4,7 +4,7 @@
     <data>
         <variable
             name="vm"
-            type="com.shangyi.kt.fragment.model.HomeModel" />
+            type="com.shangyi.kt.fragment.model.CarModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="分类"
+            android:text="购物车"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />

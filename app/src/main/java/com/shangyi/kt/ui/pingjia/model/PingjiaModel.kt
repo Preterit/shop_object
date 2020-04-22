@@ -23,9 +23,11 @@ class PingjiaModel : BaseViewModel() {
     /**
      * 评价列表
      */
-    fun loadPingjiaData(goodId: Int, page: Int, type: Int, img: Int) {
+    fun loadPingjiaData(goodId: Int, page: Int, type: Int, img: Int, isFirst: Boolean) {
         loadOnUI({
-            showLoadingDialog(true)
+            if (isFirst) {
+                showLoadingDialog(true)
+            }
             val params = Params()
             params.put("gid", goodId)
             params.put("page", page)

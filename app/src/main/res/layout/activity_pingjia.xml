@@ -42,12 +42,19 @@
             android:background="@color/color_F0F0F0"
             app:layout_constraintTop_toBottomOf="@+id/recyclerSelect" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:background="@color/white"
-            android:id="@+id/recyclerviewContent"
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/smartLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvLine" />
+            app:layout_constraintTop_toBottomOf="@+id/tvLine">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerviewContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white" />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
