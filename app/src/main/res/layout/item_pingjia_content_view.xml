@@ -43,8 +43,7 @@
         app:starImageHeight="10dp"
         app:starImagePadding="5dp"
         app:starImageWidth="10dp"
-        app:starNum="2"
-        app:touchable="true" />
+        app:starNum="2" />
 
     <TextView
         android:id="@+id/tvTime"

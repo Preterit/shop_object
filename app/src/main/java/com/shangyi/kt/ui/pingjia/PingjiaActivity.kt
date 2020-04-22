@@ -1,5 +1,6 @@
 package com.shangyi.kt.ui.pingjia
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -54,6 +55,9 @@ class PingjiaActivity : BaseKTActivity<ActivityPingjiaBinding, PingjiaModel>() {
             }
             mBinding.vm?.loadPingjiaData(goodId, page, type, img)
             topAdapter.setItemSelect(position)
+            if (position == 0) {
+                startActivity(Intent(this@PingjiaActivity, AddPinglunActivity::class.java))
+            }
         }
     }
 
