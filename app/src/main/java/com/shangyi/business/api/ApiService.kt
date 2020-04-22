@@ -1,6 +1,7 @@
 package com.shangyi.business.api
 
 import com.sdxxtop.network.helper.data.BaseResponse
+import com.shangyi.kt.fragment.bean.CarDataBean
 import com.shangyi.kt.fragment.bean.CategroyLeftBean
 import com.shangyi.kt.fragment.bean.CategroyRightBean
 import com.shangyi.kt.ui.address.bean.AreaBean
@@ -154,6 +155,12 @@ interface ApiService {
      */
     @FormUrlEncoded
     @POST("/api/cart/cartList")
-    suspend fun getCarList(@Field("data") data: String): BaseResponse<Any?>
+    suspend fun getCarList(@Field("data") data: String): BaseResponse<List<CarDataBean?>?>
 
+    /**
+     * 购物车 -- 列表
+     */
+    @FormUrlEncoded
+    @POST("/api/cart/addCart")
+    suspend fun addCar(@Field("data") data: String): BaseResponse<Any?>
 }

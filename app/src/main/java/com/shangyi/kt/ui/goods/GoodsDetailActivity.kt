@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sdxxtop.base.BaseKTActivity
+import com.sdxxtop.base.utils.UIUtils
 import com.sdxxtop.webview.remotewebview.BaseWebView
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityGoodsDetailBinding
@@ -44,6 +45,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     override fun layoutId() = R.layout.activity_goods_detail
     override fun bindVM() {
         mBinding.vm = mViewModel
+        mBinding.activity = this
     }
 
     private var bannerAdapter: MultipleTypesAdapter? = null   // 轮播图适配器
@@ -64,6 +66,8 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     private var tabIndex = -1  // 当前选中tab的下标
     private var goodsId = 0 // 商品ID
     private var addressId = 0 // 地址ID
+    private var skuId = "" // 商品规格ID
+    private var number = 1 // 商品数量
     private var dialog: ProductSkuDialog? = null   // 规格弹框
 
 
@@ -79,7 +83,11 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
                 dialog = ProductSkuDialog(this)
                 dialog?.setData(it, ProductSkuDialog.Callback { sku, quantity ->
                     dialog?.dismiss()
-                    viewList[0]?.tvStandard?.text = "${sku.attributes.toString().replace("[", "").replace("]", "")}"
+                    skuId = sku.id
+                    number = quantity
+                    viewList[0]?.tvStandard?.text = "${sku.attributes.toString().replace("[", "").replace("]", "")} $quantity 部"
+
+                    mBinding.vm?.addCar(goodsId, skuId, number)
                 })
             }
         })
@@ -127,7 +135,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
             shopTjBanner = view?.findViewById(R.id.shopTjBanner)
             view?.findViewById<TextView>(R.id.tvPjMore).setOnClickListener {
                 var intent = Intent(this@GoodsDetailActivity, PingjiaActivity::class.java)
-                intent.putExtra("goodId",goodsId)
+                intent.putExtra("goodId", goodsId)
                 startActivity(intent)
             }
             shopTjBanner!!.setAdapter(goodsDetailTjBannerAdapter)
@@ -364,6 +372,23 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
                 // 收货地址
                 val intent = Intent(this@GoodsDetailActivity, AddressListActivity::class.java)
                 startActivityForResult(intent, 11)
+            }
+
+            R.id.tvCar -> {
+                // 加入购物车
+                dialog?.show()
+            }
+
+            R.id.tvService -> {
+                UIUtils.showToast("在线客服")
+            }
+
+            R.id.layoutLeft -> {
+                UIUtils.showToast("立即购买")
+            }
+
+            R.id.layoutRight -> {
+                UIUtils.showToast("分享")
             }
         }
     }

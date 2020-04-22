@@ -90,6 +90,28 @@ class GoodDetailModel : BaseViewModel() {
         })
     }
 
+    /**
+     * 添加到购物车
+     */
+    fun addCar(goodsId: Int, skuId: String?, number: Int) {
+        loadOnUI({
+            showLoadingDialog(true)
+            val params = Params()
+            params.put("gid", goodsId)
+            params.put("sid", skuId)
+            params.put("number", number)
+            Log.e("data --- ", "${AESUtils.decrypt(params.aesData, SpUtil.getString(Constants.API_KEY))}")
+            RetrofitClient.apiCusService.addCar(params.aesData)
+        }, {
+            mIsLoadingShow.value = false
+            UIUtils.showToast("添加成功")
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
+        })
+    }
+
+
     private val sku = ArrayList<Sku>()
 
     /**

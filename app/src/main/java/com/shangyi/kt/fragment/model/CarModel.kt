@@ -5,6 +5,7 @@ import com.sdxxtop.base.BaseViewModel
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.api.RetrofitClient
 import com.shangyi.business.network.Params
+import com.shangyi.kt.fragment.bean.CarDataBean
 
 /**
  * Date:2020/4/22
@@ -13,7 +14,7 @@ import com.shangyi.business.network.Params
  */
 class CarModel : BaseViewModel() {
 
-    var carList = MutableLiveData<Boolean>()
+    var carList = MutableLiveData<List<CarDataBean?>>()
 
     /**
      * 获取购物车列表
@@ -23,7 +24,7 @@ class CarModel : BaseViewModel() {
             val params = Params()
             RetrofitClient.apiCusService.getCarList(params.aesData)
         }, {
-            carList.value = true
+            carList.value = it
         }, { code, msg, t ->
             UIUtils.showToast(msg)
         })
