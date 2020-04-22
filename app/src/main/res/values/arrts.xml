@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <declare-styleable name="TitleView">
         <attr name="titleValue" format="string" />
         <attr name="titleColor" format="color" />
@@ -60,5 +60,19 @@
     <declare-styleable name="CumAboutItemView">
         <attr name="aboutleftText" format="string" />
         <attr name="aboutrightImg" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="RatingBar" tools:ignore="ResourceName">
+        <attr name="starImageWidth" format="dimension"/>
+        <attr name="starImageHeight" format="dimension"/>
+        <attr name="starImagePadding" format="dimension"/>
+        <attr name="starCount" format="integer"/>
+        <attr name="starNum" format="integer"/>
+        <attr name="starEmpty" format="reference"/>
+        <attr name="starFill" format="reference"/>
+        <attr name="starHalf" format="reference"/>
+        <attr name="clickable" format="boolean"/>
+        <attr name="touchable" format="boolean"/>
+        <attr name="halfstart" format="boolean"/>
     </declare-styleable>
 </resources>

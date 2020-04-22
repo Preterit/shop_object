@@ -43,6 +43,18 @@ class PingjiaActivity : BaseKTActivity<ActivityPingjiaBinding, PingjiaModel>() {
 
         recyclerviewContent.layoutManager = LinearLayoutManager(this)
         recyclerviewContent.adapter = contentAdapter
+
+        topAdapter.setOnItemClickListener { adapter, view, position ->
+            if (position == adapter.data.size - 1) {
+                img = 1
+                type = 0
+            } else {
+                img = 0
+                type = position
+            }
+            mBinding.vm?.loadPingjiaData(goodId, page, type, img)
+            topAdapter.setItemSelect(position)
+        }
     }
 
     override fun initData() {
@@ -61,7 +73,6 @@ class PingjiaActivity : BaseKTActivity<ActivityPingjiaBinding, PingjiaModel>() {
             topAdapterList.add("差评 (${it.count?.inreview}) ")
             topAdapterList.add("有图 (${it.count?.hasimg}) ")
             topAdapter.setList(topAdapterList)
-
 
             if (it.list != null) {
                 if (page == 0) {

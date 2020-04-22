@@ -6,7 +6,6 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.shangyi.business.R
 import com.shangyi.kt.ui.pingjia.bean.ContentBean
 import kotlinx.android.synthetic.main.item_pingjia_content_view.view.*
-import java.text.SimpleDateFormat
 
 /**
  * Date:2020/4/21
@@ -18,13 +17,15 @@ class PingjiaContentAdapter : BaseQuickAdapter<ContentBean?, BaseViewHolder>(R.l
         if (item == null) {
             return
         }
-
-        holder.itemView.imgRecycler.layoutManager = GridLayoutManager(context, 4)
-        val commentImg = item.comment_img as ArrayList
-        holder.itemView.imgRecycler.adapter = PinglunImgAdapter(commentImg)
+        if (!item.comment_img.isNullOrEmpty()) {
+            val commentImg = item.comment_img as ArrayList
+            holder.itemView.imgRecycler.layoutManager = GridLayoutManager(context, 4)
+            holder.itemView.imgRecycler.adapter = PinglunImgAdapter(commentImg)
+        }
 
         holder.itemView.tvName.text = item.user?.nickname
         holder.itemView.tvTime.text = if (item.create_time?.isNotEmpty()!!) item.create_time.split(" ")[0] else ""
         holder.itemView.tvContent.text = item.content
+        holder.itemView.bar2.setStar((item.star_level).toFloat())
     }
 }

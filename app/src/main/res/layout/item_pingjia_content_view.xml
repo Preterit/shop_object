@@ -26,6 +26,26 @@
         app:layout_constraintLeft_toRightOf="@+id/glideImageView"
         app:layout_constraintTop_toTopOf="@+id/glideImageView" />
 
+    <com.shangyi.kt.ui.pingjia.weight.MyRatingBar
+        android:id="@+id/bar2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        app:clickable="false"
+        app:halfstart="true"
+        app:layout_constraintBottom_toBottomOf="@+id/glideImageView"
+        app:layout_constraintLeft_toRightOf="@+id/tvName"
+        app:layout_constraintTop_toTopOf="@+id/glideImageView"
+        app:starCount="5"
+        app:starEmpty="@drawable/fat_star_empty"
+        app:starFill="@drawable/fat_star_full"
+        app:starHalf="@drawable/fat_star_half"
+        app:starImageHeight="10dp"
+        app:starImagePadding="5dp"
+        app:starImageWidth="10dp"
+        app:starNum="2"
+        app:touchable="true" />
+
     <TextView
         android:id="@+id/tvTime"
         android:layout_width="wrap_content"

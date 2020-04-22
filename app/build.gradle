@@ -116,6 +116,9 @@ dependencies {
     implementation 'com.youth.banner:banner:2.0.4'
     implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
 
+    // 图片查看选择框架
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.2'
+
     // 微信
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
 
