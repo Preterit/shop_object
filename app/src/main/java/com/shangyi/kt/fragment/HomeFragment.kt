@@ -6,9 +6,7 @@ import com.sdxxtop.base.BaseKTFragment
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentHomeBinding
 import com.shangyi.kt.fragment.model.HomeModel
-import com.shangyi.kt.ui.order.ConfirmOrderActivity
 import com.shangyi.kt.ui.order.OrderActivity
-import com.shangyi.kt.ui.personal.SettingActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -30,8 +28,9 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
 
     override fun initView() {
         mLoadService.showSuccess()
-        home.setOnClickListener {
-            startActivity(Intent(context, ConfirmOrderActivity::class.java)) }
+        /*home.setOnClickListener {
+           // startActivity(Intent(context, OrderActivity::class.java))
+            }*/
 
     }
 

@@ -17,14 +17,14 @@
         <activity android:name="com.shangyi.kt.ui.pingjia.AddPinglunActivity"></activity>
         <activity android:name="com.shangyi.kt.ui.pingjia.PingjiaActivity" />
         <activity android:name="com.shangyi.kt.ui.order.OrderSuccessActivity" />
-        <activity android:name="com.shangyi.kt.ui.order.ConfirmOrderActivity" />
-        <activity android:name="com.shangyi.kt.ui.order.OrderActivity" />
         <activity android:name="com.shangyi.kt.ui.wxapi.WXPayEntryActivity" /> <!-- <activity android:name="com.shangyi.kt.ui.personal.SettingMessageActivity"></activity> -->
+        <activity android:name="com.shangyi.kt.ui.order.OrderActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"/><!-- <activity android:name="com.shangyi.kt.ui.personal.SettingMessageActivity"></activity> -->
         <!-- <activity android:name="com.shangyi.kt.ui.personal.AboutSyActivity" /> -->
         <activity android:name="com.shangyi.kt.ui.address.AddAddressActivity" />
         <activity android:name="com.shangyi.kt.ui.address.AddressListActivity" /> <!-- <activity android:name="com.shangyi.kt.ui.personal.SettingMessageActivity"></activity> -->
         <!-- <activity android:name="com.shangyi.kt.ui.personal.AboutSyActivity" /> -->
-        <activity android:name="com.shangyi.kt.ui.personal.BackPwdActivity" />
+        <activity android:name="com.shangyi.kt.ui.setting.BackPwdActivity" />
         <activity
             android:name="com.shangyi.kt.ui.goods.GoodsListActivity"
             android:windowSoftInputMode="stateHidden" />
@@ -50,7 +50,7 @@
         </activity>
         <activity android:name="com.shangyi.kt.ui.userlogin.RegisterActivity" />
         <activity android:name="com.shangyi.kt.ui.userlogin.YzmActivity" />
-        <activity android:name="com.shangyi.kt.ui.personal.SettingActivity" />
+        <activity android:name="com.shangyi.kt.ui.setting.SettingActivity" />
         <activity
             android:name="com.shangyi.kt.ui.WebActivity"
             android:hardwareAccelerated="true"

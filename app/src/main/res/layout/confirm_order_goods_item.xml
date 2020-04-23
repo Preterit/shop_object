@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/payitem"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -57,7 +58,6 @@
             android:id="@+id/confirm_goods_img"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/dialog_loading"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="25dp"
             app:layout_constraintLeft_toLeftOf="parent"

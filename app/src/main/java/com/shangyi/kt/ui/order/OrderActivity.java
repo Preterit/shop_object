@@ -1,33 +1,55 @@
 package com.shangyi.kt.ui.order;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
-import com.sdxxtop.network.Data;
+import com.sdxxtop.base.BaseKTActivity;
 import com.shangyi.business.MyApplication;
 import com.shangyi.business.R;
+import com.shangyi.business.databinding.ActivityConfirmOrderBinding;
+import com.shangyi.kt.ui.address.AddressListActivity;
+import com.shangyi.kt.ui.address.bean.AreaListBean;
+import com.shangyi.kt.ui.order.adapter.Arith;
+import com.shangyi.kt.ui.order.adapter.ConfirmOrderGoodsAdapter;
+import com.shangyi.kt.ui.order.bean.GoodsOrderBean;
+import com.shangyi.kt.ui.order.bean.OrderDataBean;
+import com.shangyi.kt.ui.order.model.OrderSuccessModel;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.ref.WeakReference;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class OrderActivity extends AppCompatActivity implements View.OnClickListener{
+/**
+ * 确认订单页面
+ */
+public class OrderActivity extends BaseKTActivity<ActivityConfirmOrderBinding, OrderSuccessModel>{
+
+    private RecyclerView mConfirmOrderGoodsRcy;
+    private ConfirmOrderGoodsAdapter mConfirmOrderGoodsAdapter;
+    private TextView mTvCommitOrder;
+
 
     private ImageView mIvWeichatSelect;
     private ImageView mIvAliSelect;
@@ -35,7 +57,6 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
     private static final int PAY_TYPE_WXPAY = 0;  //微信支付,默认支付方式
     private static final int PAY_TYPE_ALIPAY = 1;  //支付宝支付
     private int payType = -1;
-    private Button mBtn_pay;
     private MyHandler mHandler = new MyHandler(this);
     private IWXAPI iwxapi;
     private String from = "app_id=2021001155645530&biz_content=%7B%22timeout_express%22%3A%2230m%22%2C%22seller_id%22%3A%22%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%2C%22total_amount%22%3A%220.02%22%2C%22subject%22%3A%221%22%2C%22body%22%3A%22%E6%88%91%E6%98%AF%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%22%2C%22out_trade_no%22%3A%22314VYGIAGG7ZOYY%22%7D&charset=utf-8&method=alipay.trade.app.pay&sign_type=RSA2&timestamp=2016-08-15%2012%3A12%3A15&version=1.0&sign=MsbylYkCzlfYLy9PeRwUUIg9nZPeN9SfXPNavUCroGKR5Kqvx0nEnd3eRmKxJuthNUx4ERCXe552EV9PfwexqW%2B1wbKOdYtDIb4%2B7PL3Pc94RZL0zKaWcaY3tSL89%2FuAVUsQuFqEJdhIukuKygrXucvejOUgTCfoUdwTi7z%2BZzQ%3D";
@@ -47,6 +68,21 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
     private View mDialogView;
     private PayBottomDialog mDialog;
     private TextView mTvNum;
+    private ConstraintLayout mOrderAddress;
+    private int addressId = 0 ;// 地址ID
+    private TextView mOrderAddressItem;
+    private TextView mOrderAddressName;
+    private TextView mOrderAddressPhone;
+    private String mGoodsPrice;
+    private TextView mOrderGoodsPrice;
+    private TextView mOrderGoodsFuPrice;
+    private String mDianpuName;
+    private String mGoodsYunfei;
+    private TextView mOrderGoodsYunfei;
+    private TextView mOrderGoodsFanZongPrice;
+    private String mGoodsFanPrice;
+    private double mValue;
+    private ArrayList<GoodsOrderBean> mGoodsOrderBeans;
 
 
     private static class MyHandler extends Handler {
@@ -75,31 +111,120 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-private float price = 3000.98f;
+    @NotNull
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order);
+    public Class<OrderSuccessModel> vmClazz() {
+        return OrderSuccessModel.class;
+    }
 
-        price = getIntent().getFloatExtra("price", 0f);
+    @Override
+    public void bindVM() {
+        getMBinding().setVm(getMViewModel());
+    }
 
-        mBtn_pay = findViewById(R.id.btn_pay);
-        mBtn_pay.setOnClickListener(this);
+    @Override
+    public void initObserve() {
+        getMBinding().getVm().getOrderData().observe(this, new Observer<Object>() {
+            @Override
+            public void onChanged(Object o) {
+
+            }
+        });
+    }
+
+    @Override
+    public void initData() {
+        getMBinding().getVm().querenOrder(1,1,1,1,1,"数量");
+    }
+
+    @Override
+    public int layoutId() {
+        return R.layout.activity_confirm_order;
+    }
+
+    @Override
+    public void initView() {
+
+        mGoodsOrderBeans = new ArrayList<>();
+
+        mOrderAddress = findViewById(R.id.confirm_order_address_con);
+        mConfirmOrderGoodsRcy = findViewById(R.id.confirm_order_goods_rcy);
+        mTvCommitOrder = findViewById(R.id.tv_commit_order);
+        mOrderAddressItem = findViewById(R.id.confirm_order_address_item);
+        mOrderAddressName = findViewById(R.id.confirm_order_address_name);
+        mOrderAddressPhone = findViewById(R.id.confirm_order_address_phone);
+        mOrderGoodsPrice = findViewById(R.id.confirm_order_goods_price);//商品金额
+        mOrderGoodsFuPrice = findViewById(R.id.order_goods_fu_price);//下单付费价格
+        mOrderGoodsYunfei = findViewById(R.id.order_goods_yunfei);//运费
+        //下单返利总金额
+        mOrderGoodsFanZongPrice = findViewById(R.id.confirm_goods_fan_zong_price);
+
         mDialogView = getLayoutInflater().inflate(R.layout.dialog_pay_type, null);
         mDialog = new PayBottomDialog(OrderActivity.this, mDialogView, new int[]{R.id.ll_pay_weichat, R.id.ll_pay_ali, R.id.tv_confirm, R.id.img_cancel});
+
         //倒计时
         mPayDjs = mDialogView.findViewById(R.id.pay_djs);
-
         mTvNum = mDialogView.findViewById(R.id.tv_num);
-        getTimeDuring();
+
+
         //微信支付的选择
         mIvWeichatSelect = mDialogView.findViewById(R.id.iv_buy_weichat_select);
         //支付宝的选择
         mIvAliSelect = mDialogView.findViewById(R.id.iv_buy_alipay_select);
+
+        getTimeDuring();
+
+        mTvCommitOrder.setOnClickListener(this);
+        mOrderAddress.setOnClickListener(this);
+
+        mDianpuName = getIntent().getStringExtra("name");
+        mGoodsPrice = getIntent().getStringExtra("goodsPrice");
+        mGoodsYunfei = getIntent().getStringExtra("goodsYunfei");
+        mGoodsFanPrice = getIntent().getStringExtra("goodsFanPrice");
+
+
+
+        mConfirmOrderGoodsAdapter = new ConfirmOrderGoodsAdapter(this);
+        mConfirmOrderGoodsRcy.setAdapter(mConfirmOrderGoodsAdapter);
+        mConfirmOrderGoodsAdapter.setData(mGoodsOrderBeans);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        mConfirmOrderGoodsRcy.setLayoutManager(linearLayoutManager);
+
+
+        mOrderGoodsPrice.setText("￥"+mGoodsPrice);//商品金额
+        mOrderGoodsYunfei.setText("+"+mGoodsYunfei);//运费
+        mOrderGoodsFanZongPrice.setText("返"+mGoodsFanPrice);
+
+       // mValue = Arith.add(mGoodsPrice, mGoodsYunfei);
+        //mOrderGoodsFuPrice.setText("￥:"+ mValue);
     }
 
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_commit_order://确认下单
+                pay();
+                break;
+            case R.id.confirm_order_address_con://选择收货地址
+                // 收货地址
+                Intent intent = new Intent(OrderActivity.this, AddressListActivity.class);
+                startActivityForResult(intent, 11);
+                break;
+            default:
+                //nothing
+                break;
+        }
+    }
+
+    //private float price = 3000.98f;
+
+    /**
+     * 下单结算
+     */
     private void pay() {
-        mTvNum.setText(price+"");
+        mTvNum.setText(mValue+"");
         mDialog.bottmShow();
         mDialog.setOnBottomItemClickListener(new PayBottomDialog.OnBottomItemClickListener() {
             @Override
@@ -125,16 +250,15 @@ private float price = 3000.98f;
                     case R.id.tv_confirm:  //确认支付
                         //TODO 支付
                         showToast("确认支付");
-
-                        Intent intent = new Intent(OrderActivity.this,OrderSuccessActivity.class);
-                        intent.putExtra("price",price);
+                       /* Intent intent = new Intent(OrderActivity.this,OrderSuccessActivity.class);
+                        intent.putExtra("price",mValue);
                         startActivity(intent);
-                        finish();
-                       /* if (payType == PAY_TYPE_ALIPAY){
+                        finish();*/
+                        if (payType == PAY_TYPE_ALIPAY){
                             startZfb();
                         }else if (payType == PAY_TYPE_WXPAY){
                             startWx();
-                        }*/
+                        }
                         dialog.cancel();
                         break;
                     case R.id.img_cancel:  //取消支付
@@ -216,17 +340,6 @@ private float price = 3000.98f;
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btn_pay://下单支付
-                pay();
-                break;
-            default:
-                //nothing
-                break;
-        }
-    }
 
 
     //调用支付宝支付接口
@@ -303,6 +416,26 @@ private float price = 3000.98f;
         Toast.makeText(MyApplication.getContext(), result, Toast.LENGTH_LONG).show();
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data == null) {
+            return;
+        }
+        if (requestCode == 11) {
+            String address = data.getStringExtra("address");
+            String name = data.getStringExtra("recipient");
+            String mobile = data.getStringExtra("mobile");
+            addressId = data.getIntExtra("addressId", 0);
+            mOrderAddressItem.setText(address);
+            mOrderAddressName.setText(name);
+            mOrderAddressPhone.setText(mobile);
+        }
+        if (requestCode == 12){
+            mOrderGoodsPrice.setText(mGoodsPrice);
+        }
+    }
 
     @Override
     protected void onDestroy() {

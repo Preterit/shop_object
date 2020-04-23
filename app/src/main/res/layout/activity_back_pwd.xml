@@ -7,14 +7,14 @@
     <data>
         <variable
             name="vm"
-            type="com.shangyi.kt.ui.personal.BackPwdModel" />
+            type="com.shangyi.kt.ui.setting.BackPwdModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#D6D6D6"
-        tools:context="com.shangyi.kt.ui.personal.BackPwdActivity">
+        tools:context="com.shangyi.kt.ui.setting.BackPwdActivity">
 
         <com.shangyi.business.weight.TitleView
             app:leftLayoutIconIsGray="true"

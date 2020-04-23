@@ -20,6 +20,7 @@ import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityGoodsDetailBinding
 import com.shangyi.business.databinding.ItemGoodsDetailGoodsinfoBinding
 import com.shangyi.kt.ui.address.AddressListActivity
+import com.shangyi.kt.ui.address.bean.AreaListBean
 import com.shangyi.kt.ui.goods.adapter.*
 import com.shangyi.kt.ui.goods.bean.GoodDetailTopBarBean
 import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
@@ -28,6 +29,9 @@ import com.shangyi.kt.ui.goods.model.GoodDetailModel
 import com.shangyi.kt.ui.goods.weight.GoodDetailTopTitle
 import com.shangyi.kt.ui.goods.weight.ProductSkuDialog
 import com.shangyi.kt.ui.goods.weight.banner.indicator.NumIndicator
+import com.shangyi.kt.ui.order.OrderActivity
+import com.shangyi.kt.ui.order.bean.OrderDataBean
+import com.shangyi.kt.ui.pingjia.OrderBean
 import com.shangyi.kt.ui.pingjia.PingjiaActivity
 import com.youth.banner.Banner
 import com.youth.banner.config.IndicatorConfig
@@ -66,9 +70,14 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     private var tabIndex = -1  // 当前选中tab的下标
     private var goodsId = 0 // 商品ID
     private var addressId = 0 // 地址ID
-    private var skuId = "" // 商品规格ID
+    private var skuId = "0" // 商品规格ID
     private var number = 1 // 商品数量
     private var dialog: ProductSkuDialog? = null   // 规格弹框
+
+    /**
+     * dzEdit、
+     */
+    val orderBean = OrderDataBean()
 
 
     override fun initObserve() {
@@ -255,6 +264,19 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         webView?.loadUrl(it.intro)
         lookMoreAdapter.setList(it.reecommendGoods)
         bandBottomData(it)
+
+
+        orderBean.gid = goodsId
+        orderBean.sid = skuId.toInt()
+        orderBean.number = number
+        orderBean.goodsName = it.name
+        orderBean.dianpuName = it.shop_info?.name
+        orderBean.goodsImg = it.goods_img!![0].url
+        orderBean.goodsColor = it.spec?.value
+        orderBean.goodsPrice = it.price.toString()
+        orderBean.goodsFanPrice = it.dealer?.cash_back.toString()
+
+
     }
 
     /**
@@ -384,6 +406,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
             }
 
             R.id.layoutLeft -> {
+                initOrder()
                 UIUtils.showToast("立即购买")
             }
 
@@ -391,6 +414,18 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
                 UIUtils.showToast("分享")
             }
         }
+    }
+
+    private fun initOrder() {
+        val intentOrder = Intent(this@GoodsDetailActivity, OrderActivity::class.java)
+        intentOrder.putExtra("name", orderBean.dianpuName)
+        intentOrder.putExtra("goodsTitle", orderBean.goodsName)
+        intentOrder.putExtra("goodsColor", orderBean.goodsColor)
+        intentOrder.putExtra("goodsSize", orderBean.goodsSize)
+        intentOrder.putExtra("goodsPrice", orderBean.goodsPrice)
+        intentOrder.putExtra("goodsFanPrice", orderBean.goodsFanPrice)
+        intentOrder.putExtra("goodsYunfei", "3.45")
+        startActivityForResult(intentOrder,12)
     }
 
     /**
@@ -406,3 +441,4 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         }
     }
 }
+

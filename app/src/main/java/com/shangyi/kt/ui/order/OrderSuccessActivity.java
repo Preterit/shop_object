@@ -1,18 +1,18 @@
 package com.shangyi.kt.ui.order;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sdxxtop.base.BaseKTActivity;
 import com.shangyi.business.R;
 import com.shangyi.business.databinding.ActivityOrderSuccessBinding;
+import com.shangyi.kt.ui.order.adapter.SuccessOrderTuijianAdapter;
+import com.shangyi.kt.ui.order.model.OrderSuccessModel;
 import com.shangyi.kt.ui.pingjia.OrderBean;
 
 import org.jetbrains.annotations.NotNull;
@@ -22,12 +22,14 @@ import java.util.List;
 /**
  * 订单支付成功页面
  */
-public class OrderSuccessActivity extends BaseKTActivity<ActivityOrderSuccessBinding,OrderSuccessModel> {
+public class OrderSuccessActivity extends BaseKTActivity<ActivityOrderSuccessBinding, OrderSuccessModel> {
 
 
     private RecyclerView mSuccessOrderTuijianRcy;
     private SuccessOrderTuijianAdapter mSuccessOrderTuijianAdapter;
     private TextView mTvPrice;
+    private LinearLayout mLlShopping;
+    private String mPrice;
 
     @NotNull
     @Override
@@ -59,19 +61,33 @@ public class OrderSuccessActivity extends BaseKTActivity<ActivityOrderSuccessBin
 
     @Override
     public void initView() {
-        mTvPrice = findViewById(R.id.tv_price);
-        price= getIntent().getFloatExtra("price",0f);
+        mPrice = getIntent().getStringExtra("price");
         mSuccessOrderTuijianRcy = findViewById(R.id.success_order_tuijian_rcy);
 
-        mTvPrice.setText("￥"+price+"");
+        mLlShopping = findViewById(R.id.ll_shopping);
+        mTvPrice.setText("￥"+ mPrice);
         mSuccessOrderTuijianAdapter = new SuccessOrderTuijianAdapter();
         mSuccessOrderTuijianRcy.setLayoutManager(new GridLayoutManager(OrderSuccessActivity.this,2));
         mSuccessOrderTuijianRcy.setAdapter(mSuccessOrderTuijianAdapter);
+
+        mLlShopping.setOnClickListener(this);
 
     }
 
     @Override
     public void initData() {
         getMBinding().getVm().successOrderTuijian(000);
+    }
+
+    @Override
+    public void onClick(@NotNull View v) {
+        switch (v.getId()){
+            case R.id.ll_shopping://继续购物
+                finish();
+                break;
+            default:
+                //nothing
+                break;
+        }
     }
 }
