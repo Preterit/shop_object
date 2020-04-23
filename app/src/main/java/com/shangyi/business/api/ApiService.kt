@@ -149,4 +149,12 @@ interface ApiService {
     @POST("/api/goods/getShopRecommend")
     suspend fun successOrdertuijian(@Field("data") data: String): BaseResponse<List<OrderBean>?>
 
+
+    /**
+     * 订单提交
+     */
+    @FormUrlEncoded
+    @POST("/api/Orders/placeOrder")
+    suspend fun querenOrder(@Field("data") data: String): BaseResponse<List<OrderBean>?>
+
 }

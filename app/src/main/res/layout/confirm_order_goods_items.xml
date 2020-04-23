@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/payitem"
@@ -14,7 +13,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <ImageView
-            android:id="@+id/img_item_goods"
+            android:id="@+id/img_item_two_goods"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:src="@drawable/xuanzhong_item"
@@ -24,11 +23,11 @@
             app:layout_constraintTop_toTopOf="parent"
             />
         <TextView
-            android:id="@+id/confirm_order_dianpu_name"
+            android:id="@+id/confirm_order_dianpu_names"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="店铺名称"
-            app:layout_constraintLeft_toRightOf="@id/img_item_goods"
+            app:layout_constraintLeft_toRightOf="@id/img_item_two_goods"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="16dp"
             android:layout_marginLeft="10dp"
@@ -50,98 +49,33 @@
         android:id="@+id/confirm_con_item_two"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/confirm_con_item">
 
-        <ImageView
-            android:id="@+id/confirm_goods_img"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="25dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/confirm_goods_img_rcy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <TextView
-            android:id="@+id/confirm_goods_name"
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            android:layout_marginTop="25dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:layout_marginLeft="15dp"
-            android:text="涉及到很多空间上的开始看觉得好看"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/confirm_goods_img"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
 
         <TextView
-            android:id="@+id/confirm_goods_color"
+            android:id="@+id/confirm_goods_nums"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="颜色:浅紫色"
-            android:layout_marginTop="7dp"
-            android:textColor="#999999"
-            android:textSize="10sp"
-            android:layout_marginLeft="15dp"
-            app:layout_constraintLeft_toRightOf="@id/confirm_goods_img"
-            app:layout_constraintTop_toBottomOf="@id/confirm_goods_name"
-            />
-        <TextView
-            android:id="@+id/confirm_goods_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="尺码:XL"
-            android:layout_marginTop="7dp"
-            android:textColor="#999999"
-            android:textSize="10sp"
-            android:layout_marginLeft="15dp"
-            app:layout_constraintLeft_toRightOf="@id/confirm_goods_color"
-            app:layout_constraintTop_toBottomOf="@id/confirm_goods_name"
-            />
-        <TextView
-            android:id="@+id/confirm_goods_biaoqian"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="限时特卖"
-            android:layout_marginTop="4dp"
-            android:textColor="#FF2942"
-            android:textSize="10sp"
-            android:layout_marginLeft="15dp"
-            android:background="#FFF2E1"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            app:layout_constraintLeft_toRightOf="@id/confirm_goods_img"
-            app:layout_constraintTop_toBottomOf="@id/confirm_goods_color"
-            />
-        <TextView
-            android:id="@+id/confirm_goods_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="￥69"
-            android:layout_marginTop="5dp"
-            android:textColor="#333333"
-            android:textSize="15sp"
-            android:layout_marginLeft="15dp"
-            app:layout_constraintLeft_toRightOf="@id/confirm_goods_img"
-            app:layout_constraintTop_toBottomOf="@id/confirm_goods_biaoqian"
-            />
-        <TextView
-            android:id="@+id/confirm_goods_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="X1"
-            android:layout_marginTop="5dp"
-            android:textColor="#999999"
-            android:textSize="12sp"
+            android:text="共2件"
             android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/confirm_goods_biaoqian"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -157,7 +91,7 @@
         app:layout_constraintTop_toBottomOf="@id/confirm_con_item_two"
         />
     <EditText
-        android:id="@+id/et_confirm_order_beizhu"
+        android:id="@+id/et_confirm_order_beizhus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -197,12 +131,12 @@
         android:textColor="#FF2942"
         android:textSize="12sp"
         android:layout_marginRight="5dp"
-        app:layout_constraintBottom_toBottomOf="@id/confirm_goods_fu_price"
-        app:layout_constraintRight_toLeftOf="@id/confirm_goods_fu_price"
+        app:layout_constraintBottom_toBottomOf="@id/confirm_goods_fu_prices"
+        app:layout_constraintRight_toLeftOf="@id/confirm_goods_fu_prices"
         />
 
     <TextView
-        android:id="@+id/confirm_goods_fu_price"
+        android:id="@+id/confirm_goods_fu_prices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="69"
@@ -224,10 +158,10 @@
         android:padding="2dp"
         android:textColor="#FFFFFF"
         app:layout_constraintTop_toTopOf="@id/tv_xiao"
-        app:layout_constraintRight_toLeftOf="@+id/confirm_goods_fan_price"
+        app:layout_constraintRight_toLeftOf="@+id/confirm_goods_fan_prices"
         />
     <TextView
-        android:id="@+id/confirm_goods_fan_price"
+        android:id="@+id/confirm_goods_fan_prices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="￥3.22"

@@ -1,4 +1,4 @@
-package com.shangyi.kt.ui.personal;
+package com.shangyi.kt.ui.setting;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,6 @@ import com.sdxxtop.webview.utils.WebConstants;
 import com.shangyi.business.R;
 import com.shangyi.business.weight.CumAboutItemView;
 import com.shangyi.kt.ui.WebActivity;
-import com.shangyi.kt.ui.userlogin.LoginActivity;
 
 /**
  * 关于上医宝库相关页面

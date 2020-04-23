@@ -1,33 +1,47 @@
 package com.shangyi.kt.ui.order;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
-import com.sdxxtop.network.Data;
+import com.sdxxtop.base.BaseKTActivity;
 import com.shangyi.business.MyApplication;
 import com.shangyi.business.R;
+import com.shangyi.business.databinding.ActivityConfirmOrderBinding;
+import com.shangyi.kt.ui.order.adapter.ConfirmOrderGoodsAdapter;
+import com.shangyi.kt.ui.order.model.OrderSuccessModel;
+import com.shangyi.kt.ui.pingjia.OrderDataBean;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
-public class OrderActivity extends AppCompatActivity implements View.OnClickListener{
+/**
+ * 确认订单页面
+ */
+public class OrderActivity extends BaseKTActivity<ActivityConfirmOrderBinding, OrderSuccessModel>{
+
+    private RecyclerView mConfirmOrderGoodsRcy;
+    private ConfirmOrderGoodsAdapter mConfirmOrderGoodsAdapter;
+    private TextView mTvCommitOrder;
+
 
     private ImageView mIvWeichatSelect;
     private ImageView mIvAliSelect;
@@ -35,7 +49,6 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
     private static final int PAY_TYPE_WXPAY = 0;  //微信支付,默认支付方式
     private static final int PAY_TYPE_ALIPAY = 1;  //支付宝支付
     private int payType = -1;
-    private Button mBtn_pay;
     private MyHandler mHandler = new MyHandler(this);
     private IWXAPI iwxapi;
     private String from = "app_id=2021001155645530&biz_content=%7B%22timeout_express%22%3A%2230m%22%2C%22seller_id%22%3A%22%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%2C%22total_amount%22%3A%220.02%22%2C%22subject%22%3A%221%22%2C%22body%22%3A%22%E6%88%91%E6%98%AF%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%22%2C%22out_trade_no%22%3A%22314VYGIAGG7ZOYY%22%7D&charset=utf-8&method=alipay.trade.app.pay&sign_type=RSA2&timestamp=2016-08-15%2012%3A12%3A15&version=1.0&sign=MsbylYkCzlfYLy9PeRwUUIg9nZPeN9SfXPNavUCroGKR5Kqvx0nEnd3eRmKxJuthNUx4ERCXe552EV9PfwexqW%2B1wbKOdYtDIb4%2B7PL3Pc94RZL0zKaWcaY3tSL89%2FuAVUsQuFqEJdhIukuKygrXucvejOUgTCfoUdwTi7z%2BZzQ%3D";
@@ -47,6 +60,65 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
     private View mDialogView;
     private PayBottomDialog mDialog;
     private TextView mTvNum;
+
+    @NotNull
+    @Override
+    public Class<OrderSuccessModel> vmClazz() {
+        return OrderSuccessModel.class;
+    }
+
+    @Override
+    public void bindVM() {
+        getMBinding().setVm(getMViewModel());
+    }
+
+    @Override
+    public void initObserve() {
+        getMBinding().getVm().getOrderData().observe(this, new Observer<List<OrderDataBean>>() {
+            @Override
+            public void onChanged(List<OrderDataBean> orderDataBeans) {
+                mConfirmOrderGoodsAdapter.setData(orderDataBeans);
+            }
+        });
+    }
+
+    @Override
+    public void initData() {
+        getMBinding().getVm().querenOrder(1,1);
+    }
+
+    @Override
+    public int layoutId() {
+        return R.layout.activity_confirm_order;
+    }
+
+    @Override
+    public void initView() {
+        price = getIntent().getFloatExtra("price", 0f);
+
+
+        mConfirmOrderGoodsRcy = findViewById(R.id.confirm_order_goods_rcy);
+        mTvCommitOrder = findViewById(R.id.tv_commit_order);
+        mConfirmOrderGoodsAdapter = new ConfirmOrderGoodsAdapter(this);
+        mConfirmOrderGoodsRcy.setAdapter(mConfirmOrderGoodsAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        mConfirmOrderGoodsRcy.setLayoutManager(linearLayoutManager);
+
+        mTvCommitOrder.setOnClickListener(this);
+
+
+        mDialogView = getLayoutInflater().inflate(R.layout.dialog_pay_type, null);
+        mDialog = new PayBottomDialog(OrderActivity.this, mDialogView, new int[]{R.id.ll_pay_weichat, R.id.ll_pay_ali, R.id.tv_confirm, R.id.img_cancel});
+        //倒计时
+        mPayDjs = mDialogView.findViewById(R.id.pay_djs);
+
+        mTvNum = mDialogView.findViewById(R.id.tv_num);
+        getTimeDuring();
+        //微信支付的选择
+        mIvWeichatSelect = mDialogView.findViewById(R.id.iv_buy_weichat_select);
+        //支付宝的选择
+        mIvAliSelect = mDialogView.findViewById(R.id.iv_buy_alipay_select);
+    }
 
 
     private static class MyHandler extends Handler {
@@ -75,28 +147,7 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-private float price = 3000.98f;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order);
-
-        price = getIntent().getFloatExtra("price", 0f);
-
-        mBtn_pay = findViewById(R.id.btn_pay);
-        mBtn_pay.setOnClickListener(this);
-        mDialogView = getLayoutInflater().inflate(R.layout.dialog_pay_type, null);
-        mDialog = new PayBottomDialog(OrderActivity.this, mDialogView, new int[]{R.id.ll_pay_weichat, R.id.ll_pay_ali, R.id.tv_confirm, R.id.img_cancel});
-        //倒计时
-        mPayDjs = mDialogView.findViewById(R.id.pay_djs);
-
-        mTvNum = mDialogView.findViewById(R.id.tv_num);
-        getTimeDuring();
-        //微信支付的选择
-        mIvWeichatSelect = mDialogView.findViewById(R.id.iv_buy_weichat_select);
-        //支付宝的选择
-        mIvAliSelect = mDialogView.findViewById(R.id.iv_buy_alipay_select);
-    }
+    private float price = 3000.98f;
 
     private void pay() {
         mTvNum.setText(price+"");
@@ -219,7 +270,7 @@ private float price = 3000.98f;
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btn_pay://下单支付
+            case R.id.tv_commit_order://确认下单
                 pay();
                 break;
             default:

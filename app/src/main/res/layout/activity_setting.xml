@@ -6,7 +6,7 @@
     <data>
 <variable
     name="vm"
-    type="com.shangyi.kt.ui.personal.SettingModel" />
+    type="com.shangyi.kt.ui.setting.SettingModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

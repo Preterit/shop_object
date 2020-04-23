@@ -1,4 +1,4 @@
-package com.shangyi.kt.ui.order;
+package com.shangyi.kt.ui.order.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;

@@ -1,4 +1,4 @@
-package com.shangyi.kt.ui.personal;
+package com.shangyi.kt.ui.setting;
 
 import com.sdxxtop.base.BaseViewModel;
 

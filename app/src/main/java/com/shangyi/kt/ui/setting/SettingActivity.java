@@ -1,7 +1,6 @@
-package com.shangyi.kt.ui.personal;
+package com.shangyi.kt.ui.setting;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 
