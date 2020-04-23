@@ -1,18 +1,18 @@
 package com.shangyi.business.api
 
 import com.sdxxtop.network.helper.data.BaseResponse
-import com.shangyi.kt.fragment.bean.CarDataBean
 import com.shangyi.kt.fragment.bean.CategroyLeftBean
 import com.shangyi.kt.fragment.bean.CategroyRightBean
+import com.shangyi.kt.fragment.car.entity.CartInfo
 import com.shangyi.kt.ui.address.bean.AreaBean
 import com.shangyi.kt.ui.address.bean.AreaListBean
 import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
 import com.shangyi.kt.ui.goods.bean.GoodsListBean
 import com.shangyi.kt.ui.goods.bean.GoodsSpecBean
+import com.shangyi.kt.ui.goods.bean.ReecommendGood
 import com.shangyi.kt.ui.pingjia.OrderBean
 import com.shangyi.kt.ui.pingjia.bean.PingjiaDataBean
 import com.shangyi.kt.ui.splash.bean.GetSettingBean
-import com.shangyi.kt.ui.userlogin.bean.LoginSuccess
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -155,12 +155,19 @@ interface ApiService {
      */
     @FormUrlEncoded
     @POST("/api/cart/cartList")
-    suspend fun getCarList(@Field("data") data: String): BaseResponse<List<CarDataBean?>?>
+    suspend fun getCarList(@Field("data") data: String): BaseResponse<List<CartInfo?>?>
 
     /**
-     * 购物车 -- 列表
+     * 购物车 -- 添加购物车
      */
     @FormUrlEncoded
     @POST("/api/cart/addCart")
     suspend fun addCar(@Field("data") data: String): BaseResponse<Any?>
+
+    /**
+     * 购物车 -- 添加购物车
+     */
+    @FormUrlEncoded
+    @POST("/api/user/getUserRecommendGoods")
+    suspend fun getLookMoreData(@Field("data") data: String): BaseResponse<List<ReecommendGood?>?>
 }

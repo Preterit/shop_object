@@ -7,7 +7,7 @@ import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityMainBinding
 import com.shangyi.business.network.Constants
 import com.shangyi.business.network.SpUtil
-import com.shangyi.kt.fragment.CarFragment
+import com.shangyi.kt.fragment.car.CarFragment
 import com.shangyi.kt.fragment.CategroyFragment
 import com.shangyi.kt.fragment.HomeFragment
 import com.shangyi.kt.fragment.MineFragment

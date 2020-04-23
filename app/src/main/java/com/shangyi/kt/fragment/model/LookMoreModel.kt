@@ -5,29 +5,29 @@ import com.sdxxtop.base.BaseViewModel
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.api.RetrofitClient
 import com.shangyi.business.network.Params
-import com.shangyi.kt.fragment.car.entity.CartInfo
+import com.shangyi.kt.ui.goods.bean.ReecommendGood
 
 /**
- * Date:2020/4/22
+ * Date:2020/4/23
  * author:lwb
  * Desc:
  */
-class CarModel : BaseViewModel() {
+class LookMoreModel : BaseViewModel() {
 
-    var carList = MutableLiveData<List<CartInfo?>>()
+    val lookMoreData = MutableLiveData<List<ReecommendGood?>?>()
 
     /**
-     * 获取购物车列表
+     * 查看更多
      */
-    fun getCarList() {
+    fun loadLookMoreData() {
         loadOnUI({
             val params = Params()
-            RetrofitClient.apiCusService.getCarList(params.aesData)
+            RetrofitClient.apiCusService.getLookMoreData(params.aesData)
         }, {
-            carList.value = it
+            lookMoreData.value = it
         }, { code, msg, t ->
             UIUtils.showToast(msg)
-            carList.value = null
         })
     }
+
 }

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.shangyi.kt.fragment.car.weight.SwipeMenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:paddingLeft="10dp"
+    android:paddingBottom="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/checkboxLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/glideImageView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/glideImageView">
+
+            <ImageView
+                android:id="@+id/checkbox"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/select_goods_item_selector"
+                android:button="@null" />
+        </LinearLayout>
+
+        <com.study.glidemodel.GlideImageView
+            android:id="@+id/glideImageView"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintLeft_toRightOf="@+id/checkboxLayout"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvGoodsName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="纪梵希轻盈无痕明星四色散粉1号（四宫格 定妆粉 细腻粉质粉质 控油）"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toRightOf="@+id/glideImageView"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/glideImageView" />
+
+        <TextView
+            android:id="@+id/tvGoodsTag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="¥"
+            android:textColor="@color/color_F61630"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/glideImageView"
+            app:layout_constraintLeft_toLeftOf="@+id/tvGoodsName"
+            app:layout_constraintTop_toBottomOf="@+id/glideImageView" />
+
+        <TextView
+            android:id="@+id/tvGoodsPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="429.00"
+            android:textColor="@color/color_F61630"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/glideImageView"
+            app:layout_constraintLeft_toRightOf="@+id/tvGoodsTag"
+            app:layout_constraintTop_toBottomOf="@+id/glideImageView" />
+
+        <ImageView
+            android:id="@+id/ivAdd"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/icon_car_count_add"
+            app:layout_constraintBottom_toBottomOf="@+id/tvGoodsPrice"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvGoodsPrice" />
+
+        <TextView
+            android:id="@+id/tvNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:text="1"
+            android:textColor="@color/color_666666"
+            app:layout_constraintBottom_toBottomOf="@+id/tvGoodsPrice"
+            app:layout_constraintRight_toLeftOf="@+id/ivAdd"
+            app:layout_constraintTop_toTopOf="@+id/tvGoodsPrice" />
+
+        <ImageView
+            android:id="@+id/ivCut"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/icon_car_count_cut"
+            app:layout_constraintBottom_toBottomOf="@+id/tvGoodsPrice"
+            app:layout_constraintRight_toLeftOf="@+id/tvNumber"
+            app:layout_constraintTop_toTopOf="@+id/tvGoodsPrice" />
+
+        <LinearLayout
+            android:id="@+id/fanLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/translate"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="@+id/tvGoodsName"
+            app:layout_constraintTop_toBottomOf="@+id/tvGoodsPrice">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_car_goods_item_fan_red_bg"
+                android:paddingLeft="3dp"
+                android:paddingTop="1dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="1dp"
+                android:text="返"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tvFanPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:padding="2dp"
+                android:text="下单返￥2.99"
+                android:textColor="@color/color_999999"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fanLayout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:background="@color/red"
+        android:text="删除"
+        android:textColor="@android:color/white" />
+</com.shangyi.kt.fragment.car.weight.SwipeMenuLayout>

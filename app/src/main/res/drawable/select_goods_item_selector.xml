@@ -2,8 +2,8 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--按下状态的显示图片-->
-    <item android:drawable="@drawable/icon_car_goods_select" android:state_checked="true" />
+    <item android:drawable="@drawable/icon_car_goods_select" android:state_enabled="true" />
     <!--平时状态的显示图片-->
-    <item android:drawable="@drawable/icon_car_goods_normal" android:state_checked="false" />
+    <item android:drawable="@drawable/icon_car_goods_normal" android:state_enabled="false" />
 
 </selector>
