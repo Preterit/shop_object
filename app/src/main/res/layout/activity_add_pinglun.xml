@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.shangyi.kt.ui.pingjia.model.PingjiaModel" />
+
+        <variable
+            name="activity"
+            type="com.shangyi.kt.ui.pingjia.AddPinglunActivity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context="com.shangyi.kt.ui.pingjia.AddPinglunActivity">
+
+        <com.shangyi.business.weight.TitleView
+            android:id="@+id/titleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:leftLayoutIconIsGray="true"
+            app:titleValue="发表评价" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/color_F0F0F0"
+            app:layout_constraintTop_toBottomOf="@+id/titleView" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.study.glidemodel.GlideImageView
+                    android:id="@+id/glideImageView"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:siv_radius="5dp" />
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="产品名称产品名称产品名称产品名称产品名称产产品名称"
+                    android:textColor="@color/color_333333"
+                    android:textSize="12sp"
+                    app:layout_constraintLeft_toRightOf="@+id/glideImageView"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/glideImageView" />
+
+                <TextView
+                    android:id="@+id/tvStandard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="浅紫色  XL"
+                    android:textColor="@color/color_999999"
+                    android:textSize="10sp"
+                    app:layout_constraintLeft_toRightOf="@+id/glideImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+                <TextView
+                    android:id="@+id/tvLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/color_DDDDDD"
+                    app:layout_constraintTop_toBottomOf="@+id/glideImageView" />
+
+                <TextView
+                    android:id="@+id/tvTx1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:text="描述相符"
+                    android:textColor="@color/color_333333"
+                    android:textSize="15sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvLine" />
+
+                <com.shangyi.kt.ui.pingjia.weight.MyRatingBar
+                    android:id="@+id/bar1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    app:clickable="false"
+                    app:halfstart="false"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvTx1"
+                    app:layout_constraintLeft_toRightOf="@+id/tvTx1"
+                    app:layout_constraintTop_toTopOf="@+id/tvTx1"
+                    app:starCount="5"
+                    app:starEmpty="@drawable/fat_star_empty"
+                    app:starFill="@drawable/fat_star_full"
+                    app:starHalf="@drawable/fat_star_half"
+                    app:starImageHeight="22dp"
+                    app:starImagePadding="16dp"
+                    app:starImageWidth="22dp"
+                    app:touchable="true" />
+
+                <TextView
+                    android:id="@+id/tvTx2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:text="功能效果"
+                    android:textColor="@color/color_333333"
+                    android:textSize="15sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTx1" />
+
+                <com.shangyi.kt.ui.pingjia.weight.MyRatingBar
+                    android:id="@+id/bar2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    app:clickable="false"
+                    app:halfstart="false"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvTx2"
+                    app:layout_constraintLeft_toRightOf="@+id/tvTx2"
+                    app:layout_constraintTop_toTopOf="@+id/tvTx2"
+                    app:starCount="5"
+                    app:starEmpty="@drawable/fat_star_empty"
+                    app:starFill="@drawable/fat_star_full"
+                    app:starHalf="@drawable/fat_star_half"
+                    app:starImageHeight="22dp"
+                    app:starImagePadding="16dp"
+                    app:starImageWidth="22dp"
+                    app:touchable="true" />
+
+                <TextView
+                    android:id="@+id/tvTx3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:text="商品质量"
+                    android:textColor="@color/color_333333"
+                    android:textSize="15sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTx2" />
+
+                <com.shangyi.kt.ui.pingjia.weight.MyRatingBar
+                    android:id="@+id/bar3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    app:clickable="false"
+                    app:halfstart="false"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvTx3"
+                    app:layout_constraintLeft_toRightOf="@+id/tvTx3"
+                    app:layout_constraintTop_toTopOf="@+id/tvTx3"
+                    app:starCount="5"
+                    app:starEmpty="@drawable/fat_star_empty"
+                    app:starFill="@drawable/fat_star_full"
+                    app:starHalf="@drawable/fat_star_half"
+                    app:starImageHeight="22dp"
+                    app:starImagePadding="16dp"
+                    app:starImageWidth="22dp"
+                    app:touchable="true" />
+
+                <EditText
+                    android:id="@+id/edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="15dp"
+                    android:background="#F7F7F7"
+                    android:gravity="left|top"
+                    android:hint="请填写评价"
+                    android:padding="5dp"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/bar3" />
+
+                <TextView
+                    android:id="@+id/tv_img_num"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/green"
+                    android:gravity="center"
+                    android:text="买家秀照片"
+                    android:textColor="@color/white"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit" />
+
+                <TextView
+                    android:id="@+id/tvLine2"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/color_f5f5f5"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_img_num" />
+
+                <TextView
+                    android:id="@+id/tvShopName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:text="店铺名称店铺名称店铺名"
+                    android:textColor="@color/color_333333"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvLine2" />
+
+                <TextView
+                    android:id="@+id/tvTx4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:text="物流服务"
+                    android:textColor="@color/color_333333"
+                    android:textSize="15sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvShopName" />
+
+                <com.shangyi.kt.ui.pingjia.weight.MyRatingBar
+                    android:id="@+id/bar4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    app:clickable="false"
+                    app:halfstart="false"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvTx4"
+                    app:layout_constraintLeft_toRightOf="@+id/tvTx4"
+                    app:layout_constraintTop_toTopOf="@+id/tvTx4"
+                    app:starCount="5"
+                    app:starEmpty="@drawable/fat_star_empty"
+                    app:starFill="@drawable/fat_star_full"
+                    app:starHalf="@drawable/fat_star_half"
+                    app:starImageHeight="22dp"
+                    app:starImagePadding="16dp"
+                    app:starImageWidth="22dp"
+                    app:touchable="true" />
+
+                <TextView
+                    android:id="@+id/tvTx5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:text="物流服务"
+                    android:textColor="@color/color_333333"
+                    android:textSize="15sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTx4" />
+
+                <com.shangyi.kt.ui.pingjia.weight.MyRatingBar
+                    android:id="@+id/bar5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    app:clickable="false"
+                    app:halfstart="false"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvTx5"
+                    app:layout_constraintLeft_toRightOf="@+id/tvTx5"
+                    app:layout_constraintTop_toTopOf="@+id/tvTx5"
+                    app:starCount="5"
+                    app:starEmpty="@drawable/fat_star_empty"
+                    app:starFill="@drawable/fat_star_full"
+                    app:starHalf="@drawable/fat_star_half"
+                    app:starImageHeight="22dp"
+                    app:starImagePadding="16dp"
+                    app:starImageWidth="22dp"
+                    app:touchable="true" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    app:layout_constraintTop_toBottomOf="@+id/bar5" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/tvAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/shape_add_pingjia_red_bg"
+            android:gravity="center"
+            android:onClick="@{activity::onClick}"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="评价"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

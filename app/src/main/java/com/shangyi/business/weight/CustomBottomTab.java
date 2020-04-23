@@ -83,9 +83,11 @@ public class CustomBottomTab extends LinearLayout implements View.OnClickListene
         switch (v.getId()) {
             case R.id.conHome:
                 mCurrentItem = 0;
+                setViewEnable();
                 break;
             case R.id.conCategroy:
                 mCurrentItem = 1;
+                setViewEnable();
                 break;
             case R.id.conCar:
                 mCurrentItem = 2;
@@ -94,14 +96,14 @@ public class CustomBottomTab extends LinearLayout implements View.OnClickListene
                 mCurrentItem = 3;
                 break;
         }
-        setViewEnable();
+//        setViewEnable();
+        if (null != mListener) {
+            mListener.nextResult(mCurrentItem);
+        }
     }
 
 
     public void setViewEnable() {
-        if ((mCurrentItem == 2 || mCurrentItem == 3) && (!isLogin())) {
-            return;
-        }
         tvHome.setEnabled(false);
         tvCategroy.setEnabled(false);
         tvCar.setEnabled(false);
@@ -128,9 +130,6 @@ public class CustomBottomTab extends LinearLayout implements View.OnClickListene
                 imgMine.setEnabled(true);
                 break;
         }
-        if (null!=mListener){
-            mListener.nextResult(mCurrentItem);
-        }
     }
 
     public interface OnMenuClickListener {
@@ -141,21 +140,5 @@ public class CustomBottomTab extends LinearLayout implements View.OnClickListene
 
     public void setOnMenuClickListener(OnMenuClickListener listener) {
         this.mListener = listener;
-    }
-
-    /**
-     * 判断是否登陆过。
-     *
-     * @return
-     */
-    public boolean isLogin() {
-        boolean isLogin = false;
-        int userID = SpUtil.getInt(Constants.USER_ID, -1);
-        if (userID != -1) {
-            isLogin = true;
-        } else {
-            getContext().startActivity(new Intent(getContext(), LoginActivity.class));
-        }
-        return isLogin;
     }
 }

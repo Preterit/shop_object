@@ -12,10 +12,6 @@ import kotlinx.android.synthetic.main.item_pingjia_selecter_view.view.*
  */
 class PingjiaSelecterAdapter constructor(private val selectColor: Int, private val normalColor: Int) : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_pingjia_selecter_view) {
 
-    init {
-        setList(arrayListOf<String>("全部 (29万+) ", "全部 (29万+) ", "全部 (29万+) ", "全部 (29万+) ", "全部 (29万+) "))
-    }
-
     private var currentItem = 0
     override fun convert(holder: BaseViewHolder, item: String) {
         holder.itemView.tvStr.text = item
@@ -26,5 +22,13 @@ class PingjiaSelecterAdapter constructor(private val selectColor: Int, private v
             holder.itemView.tvStr.setBackgroundResource(R.drawable.shape_pinglun_unselect_bg)
             holder.itemView.tvStr.setTextColor(normalColor)
         }
+    }
+
+    /**
+     * 设置选中的item
+     */
+    fun setItemSelect(position: Int) {
+        currentItem = position
+        notifyDataSetChanged()
     }
 }

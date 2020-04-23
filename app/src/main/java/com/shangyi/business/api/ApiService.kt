@@ -157,4 +157,17 @@ interface ApiService {
     @POST("/api/Orders/placeOrder")
     suspend fun querenOrder(@Field("data") data: String): BaseResponse<List<OrderBean>?>
 
+    /**
+     * 购物车 -- 列表
+     */
+    @FormUrlEncoded
+    @POST("/api/cart/cartList")
+    suspend fun getCarList(@Field("data") data: String): BaseResponse<List<CarDataBean?>?>
+
+    /**
+     * 购物车 -- 列表
+     */
+    @FormUrlEncoded
+    @POST("/api/cart/addCart")
+    suspend fun addCar(@Field("data") data: String): BaseResponse<Any?>
 }

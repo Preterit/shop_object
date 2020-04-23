@@ -41,8 +41,9 @@ public class AddressSelectDialog extends Dialog implements View.OnClickListener,
     private AddAddressModel model;
 
     private Map<Integer, List<AreaItemBean>> addressData = new LinkedHashMap<>();
-    private int currentitem = 0;
-    private int isTopClickPosition = -1;
+    private Map<Integer, AreaItemBean> topData = new LinkedHashMap<>();
+
+    private int currentitem = 0;  // 顶部recyclerview 选中的条目
     private boolean isFirst = true;
 
     public AddressSelectDialog(@NonNull Context context) {
@@ -71,7 +72,6 @@ public class AddressSelectDialog extends Dialog implements View.OnClickListener,
 
     private void initData() {
         if (isFirst) {
-            fatherMap.put("请选择", 0);
             model.getAreaData(-1, 0);
             isFirst = false;
         }
@@ -91,7 +91,7 @@ public class AddressSelectDialog extends Dialog implements View.OnClickListener,
 
         adapterHor = new AreaSelectHorAdapter();
         recyclerview.setAdapter(adapterHor);
-        dataHor.add(new AreaItemBean(0, 0, "请选择"));
+        dataHor.add(new AreaItemBean(0, "请选择"));
         adapterHor.replaceData(dataHor);
 
         adapter = new AreaSelectAdapter();
@@ -100,66 +100,20 @@ public class AddressSelectDialog extends Dialog implements View.OnClickListener,
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 AreaItemBean item = (AreaItemBean) adapter.getItem(position);
-                if (isTopClickPosition != -1) {
-                    currentitem = isTopClickPosition;
-                    switch (isTopClickPosition) {
-                        case 0:
-                            dataHor.clear();
-
-                            addressData.remove(1);
-                            addressData.remove(2);
-                            break;
-                        case 1:
-                            addressData.remove(2);
-                            dataHor.remove(1);
-                            dataHor.remove(1);
-                            break;
-                    }
-                    adapterHor.notifyDataSetChanged();
-                    isTopClickPosition = -1;
-                }
-
-                if (item.getType() < 2) {
-                    if (addressData.size() == 3) {
-                        return;
-                    }
-                    currentitem++;
-                    model.getAreaData(item.getId(), item.getType() + 1);
-
-                    if (dataHor.size() > 0) {
-                        if (dataHor.get(0).getName().equals("请选择")) {
-                            dataHor.clear();
-                        }
-                    }
-                    if (!isInList(item)) {
-                        dataHor.add(item);
-                    }
-                } else if (item.getType() == 2 && dataHor.size() == 2) {
-                    if (!isInList(item)) {
-                        dataHor.add(item);
-                    }
-                    refreshList();
-                    dismiss();
-                } else if (item.getType() == 2 && dataHor.size() == 3) {
-                    if (!isInList(item)) {
-                        dataHor.set(dataHor.size() - 1, item);
-                    }
-                    refreshList();
-                    dismiss();
-                }
+                topData.put(currentitem, item);
+                model.getAreaData(item.getId(), currentitem);
             }
         });
 
         adapterHor.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter _adapter, @NonNull View view, int position) {
-                String item = (String) _adapter.getItem(position);
+                AreaItemBean item = (AreaItemBean) _adapter.getItem(position);
+                currentitem = position + 1;
 
-                adapterHor.setSelectItem(item);
-                List<AreaItemBean> areaItemBeans = addressData.get(position);
+                adapterHor.setSelectItem(item.getName());
+                List<AreaItemBean> areaItemBeans = addressData.get(currentitem);
                 adapter.replaceData(areaItemBeans);
-
-                isTopClickPosition = position;
             }
         });
 
@@ -183,9 +137,6 @@ public class AddressSelectDialog extends Dialog implements View.OnClickListener,
         }
     }
 
-
-    private Map<String, Integer> fatherMap = new LinkedHashMap<>();
-
     /**
      * 设置数据
      *
@@ -194,12 +145,24 @@ public class AddressSelectDialog extends Dialog implements View.OnClickListener,
     @Override
     public void refresh(AreaBean area) {
         List<AreaItemBean> list = area.getList();
+        //father 如果为空表示 第一次请求，则将顶部Recyclerview数据清空
+        if (area.getFather() != null) {
+            dataHor.clear();
+        }
+        for (int i = 1; i <= topData.entrySet().size(); i++) {
+            if (i <= currentitem) {
+                dataHor.add(topData.get(i));
+            }
+        }
+        refreshList();
+
         if (!list.isEmpty()) {
+            currentitem++;
             addressData.put(currentitem, list);
             adapter.replaceData(list);
-            refreshList();
+        } else {
+            dismiss();
         }
-
     }
 
     public void refreshList() {

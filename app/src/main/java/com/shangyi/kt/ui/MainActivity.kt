@@ -1,13 +1,17 @@
 package com.shangyi.kt.ui
 
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import com.sdxxtop.base.BaseKTActivity
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityMainBinding
+import com.shangyi.business.network.Constants
+import com.shangyi.business.network.SpUtil
 import com.shangyi.kt.fragment.CarFragment
 import com.shangyi.kt.fragment.CategroyFragment
 import com.shangyi.kt.fragment.HomeFragment
 import com.shangyi.kt.fragment.MineFragment
+import com.shangyi.kt.ui.userlogin.LoginActivity
 import com.shangyi.kt.ui.userlogin.model.MainModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -33,7 +37,7 @@ class MainActivity : BaseKTActivity<ActivityMainBinding, MainModel>() {
     override fun initView() {
         initFirstFragment()
         cusomBottomTab.setOnMenuClickListener {
-           switchFragment(it)
+            switchFragment(it)
         }
     }
 
@@ -58,27 +62,37 @@ class MainActivity : BaseKTActivity<ActivityMainBinding, MainModel>() {
                     homeFragment = HomeFragment.newInstance()
                 }
                 newFragment = homeFragment
+                setCurrentFragment()
             }
             1 -> {
                 if (categroyFragment == null) {
                     categroyFragment = CategroyFragment.newInstance()
                 }
                 newFragment = categroyFragment
+                setCurrentFragment()
             }
             2 -> {
                 if (carFragment == null) {
                     carFragment = CarFragment.newInstance()
                 }
                 newFragment = carFragment
+                if (isLogin()) {
+                    setCurrentFragment()
+                    cusomBottomTab.setViewEnable()
+                }
             }
             3 -> {
                 if (mineFragment == null) {
                     mineFragment = MineFragment.newInstance()
                 }
                 newFragment = mineFragment
+                if (isLogin()) {
+                    setCurrentFragment()
+                    cusomBottomTab.setViewEnable()
+                }
             }
         }
-        setCurrentFragment()
+
     }
 
     //设置底部按钮被选中
@@ -96,4 +110,28 @@ class MainActivity : BaseKTActivity<ActivityMainBinding, MainModel>() {
         }
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        // 登陆成功 进行状态切换
+        if (SpUtil.getInt(Constants.USER_ID, -1) != -1) {
+            setCurrentFragment()
+            cusomBottomTab.setViewEnable()
+        }
+    }
+
+    /**
+     * 判断是否登陆过。
+     *
+     * @return
+     */
+    fun isLogin(): Boolean {
+        var isLogin = false
+        val userID = SpUtil.getInt(Constants.USER_ID, -1)
+        if (userID != -1) {
+            isLogin = true
+        } else {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+        return isLogin
+    }
 }
