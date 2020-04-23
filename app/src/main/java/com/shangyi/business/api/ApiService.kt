@@ -1,6 +1,7 @@
 package com.shangyi.business.api
 
 import com.sdxxtop.network.helper.data.BaseResponse
+import com.shangyi.kt.fragment.bean.CarDataBean
 import com.shangyi.kt.fragment.bean.CategroyLeftBean
 import com.shangyi.kt.fragment.bean.CategroyRightBean
 import com.shangyi.kt.ui.address.bean.AreaBean
