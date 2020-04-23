@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.shangyi.business.R;
+import com.shangyi.kt.ui.order.bean.GoodsOrderBean;
 import com.shangyi.kt.ui.pingjia.OrderDataBean;
 
 import java.util.ArrayList;
@@ -34,15 +35,15 @@ public class ConfirmOrderGoodsAdapter extends RecyclerView.Adapter {
     private Context mContext;
 
 
-    private ArrayList<OrderDataBean> mDataBeans;
+    private ArrayList<GoodsOrderBean> mDataBeans;
 
     public ConfirmOrderGoodsAdapter(Context context) {
         mContext = context;
-        mDataBeans = new ArrayList<OrderDataBean>();
+        mDataBeans = new ArrayList<GoodsOrderBean>();
     }
 
 
-    public void setData(List<OrderDataBean> orderDataBeans) {
+    public void setData(ArrayList<GoodsOrderBean> orderDataBeans) {
         this.mDataBeans.clear();
         if (orderDataBeans != null){
             this.mDataBeans.addAll(orderDataBeans);
@@ -184,5 +185,9 @@ public class ConfirmOrderGoodsAdapter extends RecyclerView.Adapter {
                     break;
             }
         }
+    }
+
+    public interface OnClickListener {
+        public void setSelectedPrice(int price);
     }
 }

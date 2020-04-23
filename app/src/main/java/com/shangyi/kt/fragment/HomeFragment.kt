@@ -28,8 +28,9 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
 
     override fun initView() {
         mLoadService.showSuccess()
-        home.setOnClickListener {
-            startActivity(Intent(context, OrderActivity::class.java)) }
+        /*home.setOnClickListener {
+           // startActivity(Intent(context, OrderActivity::class.java))
+            }*/
 
     }
 

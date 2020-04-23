@@ -9,6 +9,7 @@ import com.shangyi.kt.ui.address.bean.AreaListBean
 import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
 import com.shangyi.kt.ui.goods.bean.GoodsListBean
 import com.shangyi.kt.ui.goods.bean.GoodsSpecBean
+import com.shangyi.kt.ui.order.bean.OrderDataBean
 import com.shangyi.kt.ui.pingjia.OrderBean
 import com.shangyi.kt.ui.pingjia.bean.PingjiaDataBean
 import com.shangyi.kt.ui.splash.bean.GetSettingBean
@@ -156,7 +157,7 @@ interface ApiService {
      */
     @FormUrlEncoded
     @POST("/api/Orders/placeOrder")
-    suspend fun querenOrder(@Field("data") data: String): BaseResponse<List<OrderBean>?>
+    suspend fun querenOrder(@Field("data") data: String): BaseResponse<Any?>
 
     /**
      * 购物车 -- 列表

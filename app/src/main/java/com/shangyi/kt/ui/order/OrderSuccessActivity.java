@@ -29,6 +29,7 @@ public class OrderSuccessActivity extends BaseKTActivity<ActivityOrderSuccessBin
     private SuccessOrderTuijianAdapter mSuccessOrderTuijianAdapter;
     private TextView mTvPrice;
     private LinearLayout mLlShopping;
+    private String mPrice;
 
     @NotNull
     @Override
@@ -60,12 +61,11 @@ public class OrderSuccessActivity extends BaseKTActivity<ActivityOrderSuccessBin
 
     @Override
     public void initView() {
-        mTvPrice = findViewById(R.id.tv_price);
-        price= getIntent().getFloatExtra("price",0f);
+        mPrice = getIntent().getStringExtra("price");
         mSuccessOrderTuijianRcy = findViewById(R.id.success_order_tuijian_rcy);
 
         mLlShopping = findViewById(R.id.ll_shopping);
-        mTvPrice.setText("￥"+price+"");
+        mTvPrice.setText("￥"+ mPrice);
         mSuccessOrderTuijianAdapter = new SuccessOrderTuijianAdapter();
         mSuccessOrderTuijianRcy.setLayoutManager(new GridLayoutManager(OrderSuccessActivity.this,2));
         mSuccessOrderTuijianRcy.setAdapter(mSuccessOrderTuijianAdapter);

@@ -44,8 +44,12 @@ class AddressListActivity : BaseKTActivity<ActivityAddressListBinding, AddAddres
             val intent = Intent()
             var address = "${item.provice?.name}${item.city?.name}${item.county?.name}${item.detail}"
             var addressId = item?.id
+            var mobile = item.mobile
+            var recipient = item.recipient
             intent.putExtra("address", address)
             intent.putExtra("addressId", addressId)
+            intent.putExtra("mobile", mobile)
+            intent.putExtra("recipient", recipient)
             setResult(2, intent)
             finish()
         }

@@ -188,6 +188,7 @@
                         app:layout_constraintTop_toBottomOf="@id/tv_item_top" />
 
                     <TextView
+                        android:id="@+id/order_goods_yunfei"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
@@ -258,6 +259,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/order_goods_fu_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="￥：8438"
