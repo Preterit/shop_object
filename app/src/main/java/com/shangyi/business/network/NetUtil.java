@@ -45,7 +45,7 @@ public class NetUtil {
     }
 
 
-    public static String getBase64Data(Map<String, String> map) {
+    public static String getBase64Data(Map<String, Object> map) {
         if (map == null || map.size() == 0)
             return "";
         map.put("v", getVersionCode() + "");
@@ -69,7 +69,7 @@ public class NetUtil {
         return NetUtil.getBase64(jsonStr);
     }
 
-    public static String getNormalData(Map<String, String> map) {
+    public static String getNormalData(Map<String, Object> map) {
         if (map == null || map.size() == 0)
             return "";
         JSONObject json = new JSONObject(map);

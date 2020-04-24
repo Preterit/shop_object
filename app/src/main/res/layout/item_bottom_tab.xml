@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    app:yc_cornerRadius="5dp"
     app:yc_dx="0dp"
     app:yc_dy="0dp"
     app:yc_shadowColor="#2a000000"

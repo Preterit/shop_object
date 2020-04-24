@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ExpandableListView
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -18,6 +19,10 @@ import com.shangyi.kt.fragment.LookMoreFragment
 import com.shangyi.kt.fragment.car.entity.CartInfo
 import com.shangyi.kt.fragment.car.weight.NestedExpandaleListView
 import com.shangyi.kt.fragment.model.CarModel
+import com.shangyi.kt.fragment.model.OnCarDataRefresh
+import io.reactivex.internal.operators.maybe.MaybeIsEmpty
+import kotlinx.android.synthetic.main.car_bottom_buy_layout.view.*
+import kotlinx.android.synthetic.main.car_bottom_caozuo_layout.view.*
 import kotlinx.android.synthetic.main.fragment_car.*
 import kotlinx.android.synthetic.main.item_car_nogoods_layout.view.*
 
@@ -27,7 +32,7 @@ import kotlinx.android.synthetic.main.item_car_nogoods_layout.view.*
  * author:lwb
  * Desc:
  */
-class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>() {
+class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRefresh {
 
     override fun vmClazz() = CarModel::class.java
     override fun layoutId() = R.layout.fragment_car
@@ -35,23 +40,10 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>() {
         mBinding.vm = mViewModel
     }
 
+    private var carListData: List<CartInfo?>? = null  // 购物车数据
+    private var exAdapter: CartExpandAdapter? = null  // 购物车列表
+
     override fun initObserve() {
-        mBinding.vm?.carList?.observe(this, Observer {
-            if (it != null) {
-                if (it.isEmpty()) {
-                    linearLayout.removeView(expandableListView)
-                    linearLayout.addView(noGoodsLayout, 0)
-                    mLoadService.showSuccess()
-                } else {
-                    bandData(it)
-                    linearLayout.removeView(noGoodsLayout)
-                    linearLayout.addView(expandableListView, 0)
-                    mLoadService.showSuccess()
-                }
-            } else {
-                mLoadService.showCallback(ErrorCallback::class.java)
-            }
-        })
     }
 
     /**
@@ -59,6 +51,28 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>() {
      */
     private val lookMoreFragment: LookMoreFragment by lazy {
         LookMoreFragment()
+    }
+
+    /**
+     * 购买的layout
+     */
+    private val bottomBuyLayout: View by lazy {
+        val view = LayoutInflater.from(context).inflate(R.layout.car_bottom_buy_layout, null, false)
+        view.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
+        view.tvPay.setOnClickListener(this)
+        view.checkboxLayout.setOnClickListener(this)
+
+        view
+    }
+
+    /**
+     * 操作的layout
+     */
+    private val bottomCzLayout: View by lazy {
+        val view = LayoutInflater.from(context).inflate(R.layout.car_bottom_caozuo_layout, null, true)
+        view.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
+        view.tvDelete.setOnClickListener(this)
+        view
     }
 
     /**
@@ -84,6 +98,12 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>() {
     override fun initView() {
         val beginTransaction = childFragmentManager.beginTransaction()
         beginTransaction.add(R.id.frameLayout, lookMoreFragment).commit()
+
+        bottomLayout.removeAllViews()
+        bottomLayout.addView(bottomBuyLayout)
+
+        mBinding.vm?.setOnCarDataRefreshListener(this)
+        titleView.tvRight.setOnClickListener(this)
     }
 
     companion object {
@@ -113,34 +133,60 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>() {
         }
     }
 
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.tview_right -> {
+                bottomLayout.removeAllViews()
+                // 管理
+                if (titleView.tvRight.text == "管理") {
+                    frameLayout.visibility = View.GONE
+                    titleView.tvRight.text = "完成"
+                    bottomLayout.addView(bottomCzLayout)
+                } else {
+                    frameLayout.visibility = View.VISIBLE
+                    titleView.tvRight.text = "管理"
+                    bottomLayout.addView(bottomBuyLayout)
+                }
+            }
+            R.id.tvPay -> {
+                // 提交订单
+                UIUtils.showToast("提交订单")
+            }
+            R.id.checkboxLayout -> {
+                // 购买全选
+                UIUtils.showToast("购买全选")
+            }
+            R.id.tvDelete -> {
+                // 清空
+                UIUtils.showToast("清空")
+                editDel()
+            }
+        }
+    }
 
-    private var exAdapter: CartExpandAdapter? = null
+    /**
+     * 管理清楚
+     */
+    private fun editDel() {
+        val selectId = exAdapter?.selectId
+        if (selectId?.size == 0) {
+            UIUtils.showToast("选择需要删除的商品")
+            return
+        }
+        mBinding.vm?.delGoods(selectId, true)
+    }
 
     /**
      * 绑定数据
      */
-    private fun bandData(it: List<CartInfo?>) {
+    private fun bandData() {
         if (exAdapter == null) {
-//            val list = arrayListOf<CartInfo>()
-//            for (i in 1..10) {
-//                val childList = arrayListOf<CartInfo.ItemsBean>()
-//                for (j in 1..2) {
-//                    childList.add(CartInfo.ItemsBean())
-//                }
-//                val carInfo = CartInfo()
-//                carInfo.items = childList
-//                list.add(carInfo)
-//            }
-            exAdapter = CartExpandAdapter(context, it)
+            exAdapter = CartExpandAdapter(context, carListData)
             expandableListView.setAdapter(exAdapter)
-            val intgroupCount: Int = expandableListView.count
-            for (i in 0 until intgroupCount) {
-                expandableListView.expandGroup(i)
-            }
             expandableListView.setOnGroupClickListener { _, _, _, _ -> true }
             exAdapter?.setAdapterClickListener(object : CartExpandAdapter.OnAdapterClickListener {
                 override fun moneyRefresh(money: Float) {
-                    tvPrice.text = "$money"
+                    bottomBuyLayout.tvPrice.text = "$money"
                 }
 
                 override fun childAddCutClick(type: Int, groupPosition: Int, childPosition: Int, count: Int) {
@@ -151,12 +197,44 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>() {
                     }
                 }
 
-                override fun delectClick(groupPosition: Int, childPosition: Int) {
-                    UIUtils.showToast("删除第$groupPosition 组中第 $childPosition 个")
+                override fun delectClick(isEmpty: Boolean, cid: IntArray?) {
+                    mBinding.vm?.delGoods(cid?.asList(), false)
+                    if (isEmpty) {
+                        linearLayout.removeView(expandableListView)
+                        linearLayout.addView(noGoodsLayout, 0)
+                    }
                 }
             })
         } else {
-            exAdapter?.notifyDataSetChanged()
+            exAdapter?.refreshData(carListData)
+            exAdapter?.refreshMoney()
+        }
+        val intgroupCount: Int = carListData?.size ?: 0
+        for (i in 0 until intgroupCount) {
+            expandableListView.collapseGroup(i)
+            expandableListView.expandGroup(i)
+        }
+        exAdapter?.notifyDataSetChanged()
+    }
+
+    /**
+     * 更新购物车数据的回掉
+     */
+    override fun carDataRefresh(it: List<CartInfo?>?) {
+        if (it != null) {
+            if (it.isEmpty()) {
+                linearLayout.removeAllViews()
+                linearLayout.addView(noGoodsLayout, 0)
+                mLoadService.showSuccess()
+            } else {
+                carListData = it
+                bandData()
+                linearLayout.removeAllViews()
+                linearLayout.addView(expandableListView, 0)
+                mLoadService.showSuccess()
+            }
+        } else {
+            mLoadService.showCallback(ErrorCallback::class.java)
         }
     }
 }

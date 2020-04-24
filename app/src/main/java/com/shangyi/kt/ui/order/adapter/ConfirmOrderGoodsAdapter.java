@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.shangyi.business.R;
 import com.shangyi.kt.ui.order.bean.GoodsOrderBean;
-import com.shangyi.kt.ui.pingjia.OrderDataBean;
 
 import java.util.ArrayList;
 import java.util.List;

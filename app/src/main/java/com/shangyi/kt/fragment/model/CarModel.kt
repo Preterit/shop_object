@@ -1,10 +1,15 @@
 package com.shangyi.kt.fragment.model
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import com.sdxxtop.base.BaseViewModel
 import com.sdxxtop.base.utils.UIUtils
+import com.sdxxtop.network.utils.AESUtils
 import com.shangyi.business.api.RetrofitClient
+import com.shangyi.business.network.Constants
 import com.shangyi.business.network.Params
+import com.shangyi.business.network.SpUtil
 import com.shangyi.kt.fragment.car.entity.CartInfo
 
 /**
@@ -13,8 +18,12 @@ import com.shangyi.kt.fragment.car.entity.CartInfo
  * Desc:
  */
 class CarModel : BaseViewModel() {
+    private var mListener: OnCarDataRefresh? = null
+    val delSuccess = MutableLiveData<Boolean>()
 
-    var carList = MutableLiveData<List<CartInfo?>>()
+    fun setOnCarDataRefreshListener(listener: OnCarDataRefresh) {
+        this.mListener = listener
+    }
 
     /**
      * 获取购物车列表
@@ -24,10 +33,42 @@ class CarModel : BaseViewModel() {
             val params = Params()
             RetrofitClient.apiCusService.getCarList(params.aesData)
         }, {
-            carList.value = it
+            if (it == null) {
+                mListener?.carDataRefresh(listOf())
+            } else {
+                mListener?.carDataRefresh(it)
+            }
         }, { code, msg, t ->
             UIUtils.showToast(msg)
-            carList.value = null
+            mListener?.carDataRefresh(null)
         })
     }
+
+    /**
+     * 删除商品
+     */
+    fun delGoods(cid: List<Int>?, isRefresh: Boolean) {
+        loadOnUI({
+            showLoadingDialog(true)
+            val params = Params()
+            params.put("cid", cid)
+            Log.e("data --- ", "${AESUtils.decrypt(params.aesData, SpUtil.getString(Constants.API_KEY))}")
+            RetrofitClient.apiCusService.delCarGoods(params.aesData)
+        }, {
+            mIsLoadingShow.value = false
+            if (isRefresh) {
+                getCarList()
+            }
+            delSuccess.value = true
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
+            delSuccess.value = false
+        })
+    }
+
+}
+
+interface OnCarDataRefresh {
+    fun carDataRefresh(it: List<CartInfo?>?)
 }

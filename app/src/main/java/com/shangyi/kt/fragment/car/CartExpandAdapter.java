@@ -1,11 +1,11 @@
 package com.shangyi.kt.fragment.car;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +15,7 @@ import com.shangyi.business.R;
 import com.shangyi.kt.fragment.car.entity.CartInfo;
 import com.study.glidemodel.GlideImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -57,7 +58,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
         }
         CartInfo.ItemsBean item = getChild(groupPosition, position);
         childViewHolder.checkBox.setEnabled(item.ischeck);
-        childViewHolder.glideImageView.loadImage("", R.color.placeholder_color);
+        childViewHolder.glideImageView.loadImage(item.goods_img.get(0).url, R.color.placeholder_color);
         childViewHolder.tvGoodsName.setText(item.name);
         childViewHolder.tvGoodsPrice.setText(String.valueOf(item.sale_price));
         childViewHolder.tvNumber.setText(String.valueOf(item.number));
@@ -76,6 +77,18 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
 
         return convertView;
     }
+
+    public void refreshData(List<CartInfo> data) {
+        this.list = data;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+        Log.e("notifyDataSetChanged", "notifyDataSetChanged: " + list.toString());
+    }
+
 
     class ChildViewHolder implements View.OnClickListener {
         private int groupPosition;
@@ -123,9 +136,14 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
                     break;
                 case R.id.btnDelete:
                     if (mListener != null) {
+                        int[] cid = {list.get(groupPosition).child.get(position).cid};
                         list.get(groupPosition).child.remove(position);
+                        if (list.get(groupPosition).child.size() == 0) {
+                            list.remove(groupPosition);
+                        }
+                        mListener.delectClick(list.size() == 0, cid);
                         notifyDataSetChanged();
-                        mListener.delectClick(groupPosition, position);
+                        refreshMoney();
                     }
                     break;
             }
@@ -210,7 +228,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
 
         void childAddCutClick(int type, int groupPosition, int childPosition, int count);
 
-        void delectClick(int groupPosition, int childPosition);
+        void delectClick(boolean isEmpty, int[] cid);
 
         void moneyRefresh(float money);
     }
@@ -283,7 +301,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
     /**
      * 选中商品价格显示更新
      */
-    private void refreshMoney() {
+    public void refreshMoney() {
         float money = 0;
         for (CartInfo cartInfo : list) {
             for (CartInfo.ItemsBean item : cartInfo.child) {
@@ -310,5 +328,22 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
             }
         }
         return true;
+    }
+
+    /**
+     * 获取选中多个要删除的ID
+     *
+     * @return
+     */
+    public List<Integer> getSelectId() {
+        List result = new ArrayList<Integer>();
+        for (CartInfo cartInfo : list) {
+            for (CartInfo.ItemsBean itemsBean : cartInfo.child) {
+                if (itemsBean.ischeck) {
+                    result.add(itemsBean.cid);
+                }
+            }
+        }
+        return result;
     }
 }

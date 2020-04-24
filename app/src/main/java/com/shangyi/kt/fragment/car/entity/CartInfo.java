@@ -15,6 +15,16 @@ public class CartInfo {
     public List<ItemsBean> child;
     public boolean ischeck = false;
 
+    @Override
+    public String toString() {
+        return "CartInfo{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", child=" + child +
+                ", ischeck=" + ischeck +
+                '}';
+    }
+
     public static class ItemsBean {
         public int goods_id;
         public int cid;
@@ -27,6 +37,17 @@ public class CartInfo {
         public List<GoodsImg> goods_img;
 
         public boolean ischeck = false;
+
+        @Override
+        public String toString() {
+            return "ItemsBean{" +
+                    "goods_id=" + goods_id +
+                    ", cid=" + cid +
+                    ", name='" + name + '\'' +
+                    ", price=" + price +
+                    ", sale_price=" + sale_price +
+                    '}';
+        }
     }
 
     public static class GoodsUnit {

@@ -7,6 +7,7 @@ import com.sdxxtop.network.utils.AESUtils;
 import com.shangyi.business.api.Constom;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/5/7.
@@ -14,7 +15,7 @@ import java.util.HashMap;
 
 public class Params {
     protected Context context;
-    protected HashMap<String, String> map;
+    protected HashMap<String, Object> map;
 
     public Params() {
         map = new HashMap<>();
@@ -30,7 +31,7 @@ public class Params {
     }
 
     public String getUserId() {
-        String ui = map.get("ui");
+        String ui = (String) map.get("ui");
         if (TextUtils.isEmpty(ui)) {
             ui = String.valueOf(SpUtil.getInt(Constants.USER_ID, 0));
         }
@@ -38,7 +39,7 @@ public class Params {
     }
 
     public String getPartId() {
-        String pi = map.get("ci");
+        String pi = (String) map.get("ci");
         if (TextUtils.isEmpty(pi)) {
             pi = String.valueOf(SpUtil.getInt(Constants.PART_ID, 0));
         }
@@ -61,6 +62,10 @@ public class Params {
 
     public void put(String key, int value) {
         map.put(key, value + "");
+    }
+
+    public void put(String key, Object value) {
+        map.put(key, value);
     }
 
     public String getData() {

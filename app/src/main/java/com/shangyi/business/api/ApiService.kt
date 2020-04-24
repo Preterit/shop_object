@@ -174,9 +174,16 @@ interface ApiService {
     suspend fun addCar(@Field("data") data: String): BaseResponse<Any?>
 
     /**
-     * 购物车 -- 添加购物车
+     * 购物车 -- 购物车推荐
      */
     @FormUrlEncoded
     @POST("/api/user/getUserRecommendGoods")
     suspend fun getLookMoreData(@Field("data") data: String): BaseResponse<List<ReecommendGood?>?>
+
+    /**
+     * 购物车 -- 删除商品
+     */
+    @FormUrlEncoded
+    @POST("/api/cart/cartDelete")
+    suspend fun delCarGoods(@Field("data") data: String): BaseResponse<Any?>
 }
