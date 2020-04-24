@@ -1,7 +1,5 @@
 package com.shangyi.kt.fragment.car.entity;
 
-import com.shangyi.kt.ui.goods.bean.GoodsImg;
-
 import java.util.List;
 
 /**
@@ -35,6 +33,7 @@ public class CartInfo {
         public int count;//库存量
         public int number;//购物车数量
         public List<GoodsImg> goods_img;
+        public SpecBean spec;
 
         public boolean ischeck = false;
 
@@ -48,6 +47,15 @@ public class CartInfo {
                     ", sale_price=" + sale_price +
                     '}';
         }
+    }
+
+    public static class SpecBean {
+        public String value;
+        public float price;
+        public float market_price;
+        public String image;
+        public int stock;
+        public int id;
     }
 
     public static class GoodsUnit {

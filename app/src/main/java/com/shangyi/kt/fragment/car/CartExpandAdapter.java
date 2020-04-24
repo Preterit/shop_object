@@ -1,7 +1,6 @@
 package com.shangyi.kt.fragment.car;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,8 @@ import android.widget.TextView;
 import com.sdxxtop.base.utils.UIUtils;
 import com.shangyi.business.R;
 import com.shangyi.kt.fragment.car.entity.CartInfo;
+import com.shangyi.kt.fragment.car.entity.CommitOrderBean;
+import com.shangyi.kt.fragment.car.entity.GoodsInfoBean;
 import com.study.glidemodel.GlideImageView;
 
 import java.util.ArrayList;
@@ -67,10 +68,6 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
         childViewHolder.checkboxLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (mListener != null) {
-//                    mListener.childCheckBoxClick(childViewHolder.checkBox.isEnabled(), groupPosition, position);
-//                }
-
                 childCheckClick(childViewHolder.checkBox.isEnabled(), groupPosition, position);
             }
         });
@@ -82,13 +79,6 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
         this.list = data;
         notifyDataSetChanged();
     }
-
-    @Override
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
-        Log.e("notifyDataSetChanged", "notifyDataSetChanged: " + list.toString());
-    }
-
 
     class ChildViewHolder implements View.OnClickListener {
         private int groupPosition;
@@ -124,15 +114,9 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
             switch (v.getId()) {
                 case R.id.ivAdd:
                     childAddCutClick(1, groupPosition, position, Integer.valueOf(tvNumber.getText().toString()));
-//                    if (mListener != null) {
-//                        mListener.childAddCutClick(1, groupPosition, position, Integer.valueOf(tvNumber.getText().toString()));
-//                    }
                     break;
                 case R.id.ivCut:
                     childAddCutClick(2, groupPosition, position, Integer.valueOf(tvNumber.getText().toString()));
-//                    if (mListener != null) {
-//                        mListener.childAddCutClick(2, groupPosition, position, Integer.valueOf(tvNumber.getText().toString()));
-//                    }
                     break;
                 case R.id.btnDelete:
                     if (mListener != null) {
@@ -222,9 +206,6 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
     }
 
     interface OnAdapterClickListener {
-//        void groupCheckBoxClick(boolean isChecked, int groupPosition);
-//
-//        void childCheckBoxClick(boolean isChecked, int groupPosition, int childPosition);
 
         void childAddCutClick(int type, int groupPosition, int childPosition, int count);
 
@@ -274,12 +255,12 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
 
     private void childAddCutClick(int type, int groupPosition, int childPosition, int count) {
         CartInfo.ItemsBean item = list.get(groupPosition).child.get(childPosition);
-        if (item.count == 0) {
+        if (item.spec.stock == 0) {
             UIUtils.showToast("该商品暂时无货。。");
             return;
         }
         if (type == 1) {
-            if (count >= item.count) {
+            if (count >= item.spec.stock) {
                 UIUtils.showToast("库存没有那么多");
                 return;
             }
@@ -343,6 +324,64 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
                     result.add(itemsBean.cid);
                 }
             }
+        }
+        return result;
+    }
+
+    /**
+     * 全选
+     *
+     * @param enabled
+     */
+    public void selectAll(boolean enabled) {
+        for (CartInfo cartInfo : list) {
+            cartInfo.ischeck = enabled;
+            for (CartInfo.ItemsBean itemsBean : cartInfo.child) {
+                itemsBean.ischeck = enabled;
+            }
+        }
+        notifyDataSetChanged();
+        refreshMoney();
+    }
+
+    /**
+     * 清除选中状态
+     */
+    public void clearSelect() {
+        for (CartInfo cartInfo : list) {
+            cartInfo.ischeck = false;
+            for (CartInfo.ItemsBean itemsBean : cartInfo.child) {
+                itemsBean.ischeck = false;
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 获取选中的商品进行订单提交
+     */
+    public ArrayList<CommitOrderBean> getSelectGoods() {
+        ArrayList result = new ArrayList<CommitOrderBean>();
+        for (CartInfo cartInfo : list) {
+            List<GoodsInfoBean> productBean = new ArrayList();
+            float fanPrice = 0f;
+            float totalPrice = 0f;
+            for (CartInfo.ItemsBean itemsBean : cartInfo.child) {
+                if (itemsBean.ischeck) {
+                    GoodsInfoBean goodsInfoBean = new GoodsInfoBean(
+                            itemsBean.goods_id,
+                            itemsBean.spec.stock,
+                            itemsBean.sale_price,
+                            itemsBean.name,
+                            itemsBean.spec.value,
+                            itemsBean.goods_img.get(0).url
+                    );
+                    productBean.add(goodsInfoBean);
+                    totalPrice += itemsBean.sale_price * itemsBean.number;
+                }
+            }
+            CommitOrderBean goodsInfo = new CommitOrderBean(cartInfo.id, "", cartInfo.name, productBean, fanPrice, totalPrice);
+            result.add(goodsInfo);
         }
         return result;
     }

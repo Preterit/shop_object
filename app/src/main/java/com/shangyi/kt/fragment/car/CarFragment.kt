@@ -1,5 +1,6 @@
 package com.shangyi.kt.fragment.car
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,9 +21,12 @@ import com.shangyi.kt.fragment.car.entity.CartInfo
 import com.shangyi.kt.fragment.car.weight.NestedExpandaleListView
 import com.shangyi.kt.fragment.model.CarModel
 import com.shangyi.kt.fragment.model.OnCarDataRefresh
+import com.shangyi.kt.ui.order.AffirmOrderActivity
 import io.reactivex.internal.operators.maybe.MaybeIsEmpty
 import kotlinx.android.synthetic.main.car_bottom_buy_layout.view.*
+import kotlinx.android.synthetic.main.car_bottom_caozuo_layout.*
 import kotlinx.android.synthetic.main.car_bottom_caozuo_layout.view.*
+import kotlinx.android.synthetic.main.car_bottom_caozuo_layout.view.cbCaozuo
 import kotlinx.android.synthetic.main.fragment_car.*
 import kotlinx.android.synthetic.main.item_car_nogoods_layout.view.*
 
@@ -44,6 +48,7 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
     private var exAdapter: CartExpandAdapter? = null  // 购物车列表
 
     override fun initObserve() {
+
     }
 
     /**
@@ -60,8 +65,11 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
         val view = LayoutInflater.from(context).inflate(R.layout.car_bottom_buy_layout, null, false)
         view.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
         view.tvPay.setOnClickListener(this)
-        view.checkboxLayout.setOnClickListener(this)
-
+        view.cbLayoutBuy.setOnClickListener {
+            view.cbBuy.isEnabled = !view.cbBuy.isEnabled
+            exAdapter?.selectAll(view.cbBuy.isEnabled)
+        }
+        view.cbBuy.isEnabled = false
         view
     }
 
@@ -72,6 +80,11 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
         val view = LayoutInflater.from(context).inflate(R.layout.car_bottom_caozuo_layout, null, true)
         view.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
         view.tvDelete.setOnClickListener(this)
+        view.cbLayoutCz.setOnClickListener {
+            view.cbCaozuo.isEnabled = !view.cbCaozuo.isEnabled
+            exAdapter?.selectAll(view.cbCaozuo.isEnabled)
+        }
+        view.cbCaozuo.isEnabled = false
         view
     }
 
@@ -137,6 +150,9 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
         when (v.id) {
             R.id.tview_right -> {
                 bottomLayout.removeAllViews()
+                bottomCzLayout.cbCaozuo.isEnabled = false
+                bottomBuyLayout.cbBuy.isEnabled = false
+                exAdapter?.clearSelect()
                 // 管理
                 if (titleView.tvRight.text == "管理") {
                     frameLayout.visibility = View.GONE
@@ -150,11 +166,7 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
             }
             R.id.tvPay -> {
                 // 提交订单
-                UIUtils.showToast("提交订单")
-            }
-            R.id.checkboxLayout -> {
-                // 购买全选
-                UIUtils.showToast("购买全选")
+                commitOrder()
             }
             R.id.tvDelete -> {
                 // 清空
@@ -162,6 +174,16 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
                 editDel()
             }
         }
+    }
+
+    /**
+     * 确认订单
+     */
+    private fun commitOrder() {
+        var selectGoods = exAdapter?.selectGoods
+        var intent = Intent(context, AffirmOrderActivity::class.java)
+        intent.putExtra("orderData", selectGoods)
+        startActivity(intent)
     }
 
     /**

@@ -14,16 +14,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.shangyi.kt.ui.pingjia.AddPinglunActivity"></activity>
+        <activity android:name="com.shangyi.kt.ui.order.AffirmOrderActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name="com.shangyi.kt.ui.pingjia.AddPinglunActivity" />
         <activity android:name="com.shangyi.kt.ui.pingjia.PingjiaActivity" />
         <activity android:name="com.shangyi.kt.ui.order.OrderSuccessActivity" />
-        <activity android:name="com.shangyi.kt.ui.wxapi.WXPayEntryActivity" /> <!-- <activity android:name="com.shangyi.kt.ui.personal.SettingMessageActivity"></activity> -->
-        <activity android:name="com.shangyi.kt.ui.order.OrderActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan"/><!-- <activity android:name="com.shangyi.kt.ui.personal.SettingMessageActivity"></activity> -->
-        <!-- <activity android:name="com.shangyi.kt.ui.personal.AboutSyActivity" /> -->
+        <activity android:name="com.shangyi.kt.ui.wxapi.WXPayEntryActivity" />
+        <activity
+            android:name="com.shangyi.kt.ui.order.OrderActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name="com.shangyi.kt.ui.address.AddAddressActivity" />
-        <activity android:name="com.shangyi.kt.ui.address.AddressListActivity" /> <!-- <activity android:name="com.shangyi.kt.ui.personal.SettingMessageActivity"></activity> -->
-        <!-- <activity android:name="com.shangyi.kt.ui.personal.AboutSyActivity" /> -->
+        <activity android:name="com.shangyi.kt.ui.address.AddressListActivity" />
         <activity android:name="com.shangyi.kt.ui.setting.BackPwdActivity" />
         <activity
             android:name="com.shangyi.kt.ui.goods.GoodsListActivity"
@@ -35,8 +36,9 @@
         <activity android:name="com.shangyi.kt.ui.userlogin.SetUserinfoActivity" />
         <activity android:name="com.shangyi.kt.ui.userlogin.SetPwdActivity" />
         <activity android:name="com.shangyi.kt.ui.poster.PosterActivity" />
-        <activity android:name="com.shangyi.kt.ui.MainActivity"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name="com.shangyi.kt.ui.MainActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".base.NetWorkActivity" />
         <activity
             android:name="com.shangyi.kt.ui.userlogin.LoginActivity"
