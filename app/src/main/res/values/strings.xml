@@ -9,6 +9,9 @@
     <string name="month_count_unit" tools:ignore="ExtraTranslation">件</string>
     <string name="goods_price" tools:ignore="ExtraTranslation">价格 ¥</string>
     <string name="send_address" tools:ignore="ExtraTranslation">发货地址：</string>
+    <string name="order_add" tools:ignore="ExtraTranslation">+ </string>
+    <string name="order_yf_free" tools:ignore="ExtraTranslation">免运费</string>
+    <string name="order_yf_price" tools:ignore="ExtraTranslation">运费: </string>
 
 
 </resources>

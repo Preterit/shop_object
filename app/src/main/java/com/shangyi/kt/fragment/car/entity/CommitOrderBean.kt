@@ -15,6 +15,7 @@ data class CommitOrderBean(
         val shopName: String?,
         val goodsInfos: List<GoodsInfoBean>?,
         val fanPrice: Float = 0f,
+        var psText: String?,
         val totalPrice: Float = 0f
 ) : Parcelable
 
@@ -26,5 +27,6 @@ data class GoodsInfoBean(
         val goodsPrice: Float,
         val goodsName: String,
         val SpecStr: String,
-        val GoodsImg: String?
+        val goodsImg: String?,
+        val goodsSpecId: Int
 ) : Parcelable

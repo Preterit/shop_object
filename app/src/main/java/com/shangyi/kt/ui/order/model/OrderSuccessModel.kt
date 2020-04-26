@@ -11,7 +11,7 @@ import com.shangyi.business.network.Constants
 import com.shangyi.business.network.Params
 import com.shangyi.business.network.SpUtil
 import com.shangyi.kt.ui.order.bean.OrderDataBean
-import com.shangyi.kt.ui.pingjia.OrderBean
+import com.shangyi.kt.ui.order.bean.OrderBean
 
 /**
  * data: 2020/4/21 11:39

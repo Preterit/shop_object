@@ -1,5 +1,8 @@
 package com.shangyi.kt.ui.order.adapter
 
+import android.text.Editable
+import android.text.TextWatcher
+import androidx.core.widget.addTextChangedListener
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.shangyi.business.R
@@ -26,5 +29,18 @@ class OrderGoodsAdapter(data: ArrayList<CommitOrderBean>?) : BaseQuickAdapter<Co
             orderGoodsItemView.setData(it)
             holder.itemView.goodsLayout.addView(orderGoodsItemView)
         }
+
+        holder.itemView.editPs.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                item.psText = s.toString().trim()
+            }
+
+        })
     }
 }

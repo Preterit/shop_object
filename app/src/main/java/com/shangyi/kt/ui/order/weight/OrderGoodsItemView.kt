@@ -18,7 +18,7 @@ class OrderGoodsItemView : LinearLayout {
     }
 
     fun setData(data: GoodsInfoBean?) {
-        glideImageView.loadImage(data?.GoodsImg ?: "", R.color.placeholder_color)
+        glideImageView.loadImage(data?.goodsImg ?: "", R.color.placeholder_color)
         tvGoodsName.text = data?.goodsName
         tvGoodsSpec.text = data?.SpecStr
         tvGoodsPrice.text = data?.goodsPrice.toString()

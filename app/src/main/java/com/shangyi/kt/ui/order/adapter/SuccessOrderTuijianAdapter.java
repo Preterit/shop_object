@@ -1,13 +1,9 @@
 package com.shangyi.kt.ui.order.adapter;
 
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.shangyi.business.R;
-import com.shangyi.kt.ui.pingjia.OrderBean;
+import com.shangyi.kt.ui.order.bean.OrderBean;
 import com.study.glidemodel.GlideImageView;
 
 import org.jetbrains.annotations.NotNull;

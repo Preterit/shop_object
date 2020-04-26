@@ -31,7 +31,6 @@ import com.shangyi.kt.ui.goods.weight.ProductSkuDialog
 import com.shangyi.kt.ui.goods.weight.banner.indicator.NumIndicator
 import com.shangyi.kt.ui.order.OrderActivity
 import com.shangyi.kt.ui.order.bean.OrderDataBean
-import com.shangyi.kt.ui.pingjia.OrderBean
 import com.shangyi.kt.ui.pingjia.PingjiaActivity
 import com.youth.banner.Banner
 import com.youth.banner.config.IndicatorConfig
@@ -425,7 +424,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         intentOrder.putExtra("goodsPrice", orderBean.goodsPrice)
         intentOrder.putExtra("goodsFanPrice", orderBean.goodsFanPrice)
         intentOrder.putExtra("goodsYunfei", "3.45")
-        startActivityForResult(intentOrder,12)
+        startActivityForResult(intentOrder, 12)
     }
 
     /**
@@ -435,9 +434,9 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         super.onActivityResult(requestCode, resultCode, data)
         if (data == null) return
         if (requestCode == 11) {
-            val address = data.getStringExtra("address")
-            addressId = data.getIntExtra("addressId", 0)
-            viewList[0]?.tvShippingAddress?.text = address
+            val item = data.getParcelableExtra<AreaListBean?>("areaBean")
+            addressId = item!!.id
+            viewList[0]?.tvShippingAddress?.text = "${item.provice?.name}${item.city?.name}${item.county?.name}${item.detail}"
         }
     }
 }

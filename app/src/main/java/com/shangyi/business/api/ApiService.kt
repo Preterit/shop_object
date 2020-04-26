@@ -10,8 +10,8 @@ import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
 import com.shangyi.kt.ui.goods.bean.GoodsListBean
 import com.shangyi.kt.ui.goods.bean.GoodsSpecBean
 import com.shangyi.kt.ui.goods.bean.ReecommendGood
-import com.shangyi.kt.ui.order.bean.OrderDataBean
-import com.shangyi.kt.ui.pingjia.OrderBean
+import com.shangyi.kt.ui.order.bean.OrderBean
+import com.shangyi.kt.ui.order.bean.YfDataBean
 import com.shangyi.kt.ui.pingjia.bean.PingjiaDataBean
 import com.shangyi.kt.ui.splash.bean.GetSettingBean
 import retrofit2.http.Field
@@ -153,7 +153,7 @@ interface ApiService {
 
 
     /**
-     * 订单提交
+     * 订单 -- 提交
      */
     @FormUrlEncoded
     @POST("/api/Orders/placeOrder")
@@ -186,4 +186,11 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/api/cart/cartDelete")
     suspend fun delCarGoods(@Field("data") data: String): BaseResponse<Any?>
+
+    /**
+     * 订单 -- 获取运费
+     */
+    @FormUrlEncoded
+    @POST("/api/Orders/getGoodsFreight")
+    suspend fun loadYunfei(@Field("data") data: String): BaseResponse<YfDataBean?>
 }

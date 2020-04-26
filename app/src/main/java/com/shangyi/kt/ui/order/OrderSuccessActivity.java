@@ -13,7 +13,7 @@ import com.shangyi.business.R;
 import com.shangyi.business.databinding.ActivityOrderSuccessBinding;
 import com.shangyi.kt.ui.order.adapter.SuccessOrderTuijianAdapter;
 import com.shangyi.kt.ui.order.model.OrderSuccessModel;
-import com.shangyi.kt.ui.pingjia.OrderBean;
+import com.shangyi.kt.ui.order.bean.OrderBean;
 
 import org.jetbrains.annotations.NotNull;
 

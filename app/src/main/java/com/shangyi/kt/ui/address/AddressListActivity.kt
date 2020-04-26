@@ -42,14 +42,7 @@ class AddressListActivity : BaseKTActivity<ActivityAddressListBinding, AddAddres
         adapter.setOnItemClickListener { adapter, view, position ->
             val item = adapter.data[position] as AreaListBean
             val intent = Intent()
-            var address = "${item.provice?.name}${item.city?.name}${item.county?.name}${item.detail}"
-            var addressId = item?.id
-            var mobile = item.mobile
-            var recipient = item.recipient
-            intent.putExtra("address", address)
-            intent.putExtra("addressId", addressId)
-            intent.putExtra("mobile", mobile)
-            intent.putExtra("recipient", recipient)
+            intent.putExtra("areaBean", item)
             setResult(2, intent)
             finish()
         }
