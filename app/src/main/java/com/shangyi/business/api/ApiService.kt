@@ -216,4 +216,11 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/api/orders/orderCheckStatus")
     suspend fun getOrderStatus(@Field("data") data: String): BaseResponse<Any?>
+
+    /**
+     * 订单 -- 查询订单支付状态
+     */
+    @FormUrlEncoded
+    @POST("/api/user/getUserList")
+    suspend fun getUserInfo(@Field("data") data: String): BaseResponse<Any?>
 }
