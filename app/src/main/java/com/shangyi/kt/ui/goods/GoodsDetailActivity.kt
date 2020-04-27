@@ -19,6 +19,8 @@ import com.sdxxtop.webview.remotewebview.BaseWebView
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityGoodsDetailBinding
 import com.shangyi.business.databinding.ItemGoodsDetailGoodsinfoBinding
+import com.shangyi.kt.fragment.car.entity.CommitOrderBean
+import com.shangyi.kt.fragment.car.entity.GoodsInfoBean
 import com.shangyi.kt.ui.address.AddressListActivity
 import com.shangyi.kt.ui.address.bean.AreaListBean
 import com.shangyi.kt.ui.goods.adapter.*
@@ -29,8 +31,7 @@ import com.shangyi.kt.ui.goods.model.GoodDetailModel
 import com.shangyi.kt.ui.goods.weight.GoodDetailTopTitle
 import com.shangyi.kt.ui.goods.weight.ProductSkuDialog
 import com.shangyi.kt.ui.goods.weight.banner.indicator.NumIndicator
-import com.shangyi.kt.ui.order.OrderActivity
-import com.shangyi.kt.ui.order.bean.OrderDataBean
+import com.shangyi.kt.ui.order.AffirmOrderActivity
 import com.shangyi.kt.ui.pingjia.PingjiaActivity
 import com.youth.banner.Banner
 import com.youth.banner.config.IndicatorConfig
@@ -72,11 +73,13 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     private var skuId = "0" // 商品规格ID
     private var number = 1 // 商品数量
     private var dialog: ProductSkuDialog? = null   // 规格弹框
+    private var carSelect = false   // 是否添加到购物车
 
     /**
-     * dzEdit、
+     * 购买跳转传参
      */
-    val orderBean = OrderDataBean()
+    private var goodBean: GoodsInfoBean? = null  // 商品信息
+    private var orderInfo: CommitOrderBean? = null  // 商品信息
 
 
     override fun initObserve() {
@@ -94,8 +97,12 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
                     skuId = sku.id
                     number = quantity
                     viewList[0]?.tvStandard?.text = "${sku.attributes.toString().replace("[", "").replace("]", "")} $quantity 部"
-
-                    mBinding.vm?.addCar(goodsId, skuId, number)
+                    // 切换规格， 切换商品图片
+                    goodBean?.goodsImg = sku.mainImage
+                    if (carSelect) {
+                        carSelect = false
+                        mBinding.vm?.addCar(goodsId, skuId, number)
+                    }
                 })
             }
         })
@@ -264,17 +271,27 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         lookMoreAdapter.setList(it.reecommendGoods)
         bandBottomData(it)
 
+        goodBean = GoodsInfoBean(
+                it.id,
+                1,
+                it.sale_price,
+                it.name,
+                it.spec?.value ?: "",
+                it.spec?.image,
+                it.spec?.product_id ?: 0
+        )
 
-        orderBean.gid = goodsId
-        orderBean.sid = skuId.toInt()
-        orderBean.number = number
-        orderBean.goodsName = it.name
-        orderBean.dianpuName = it.shop_info?.name
-        orderBean.goodsImg = it.goods_img!![0].url
-        orderBean.goodsColor = it.spec?.value
-        orderBean.goodsPrice = it.price.toString()
-        orderBean.goodsFanPrice = it.dealer?.cash_back.toString()
-
+        if (goodBean != null) {
+            orderInfo = CommitOrderBean(
+                    it.shop_id,
+                    it.shop_info?.shop_avatar,
+                    it.shop_info?.name,
+                    arrayListOf(goodBean!!),
+                    it.dealer?.cash_back ?: 0f,
+                    "",
+                    it.sale_price
+            )
+        }
 
     }
 
@@ -282,7 +299,8 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
      * 底部按钮绑定
      */
     private fun bandBottomData(it: GoodsDetailBean) {
-
+        tvReduceTx.text = "返${it.dealer?.cash_back}"
+        tvZhuanMoneyTx.text = "${it.dealer?.dealer}"
     }
 
     /**
@@ -397,6 +415,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
 
             R.id.tvCar -> {
                 // 加入购物车
+                carSelect = true
                 dialog?.show()
             }
 
@@ -405,8 +424,8 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
             }
 
             R.id.layoutLeft -> {
-                initOrder()
                 UIUtils.showToast("立即购买")
+                buyGoods()
             }
 
             R.id.layoutRight -> {
@@ -415,16 +434,13 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         }
     }
 
-    private fun initOrder() {
-        val intentOrder = Intent(this@GoodsDetailActivity, OrderActivity::class.java)
-        intentOrder.putExtra("name", orderBean.dianpuName)
-        intentOrder.putExtra("goodsTitle", orderBean.goodsName)
-        intentOrder.putExtra("goodsColor", orderBean.goodsColor)
-        intentOrder.putExtra("goodsSize", orderBean.goodsSize)
-        intentOrder.putExtra("goodsPrice", orderBean.goodsPrice)
-        intentOrder.putExtra("goodsFanPrice", orderBean.goodsFanPrice)
-        intentOrder.putExtra("goodsYunfei", "3.45")
-        startActivityForResult(intentOrder, 12)
+    /**
+     * 购买商品
+     */
+    private fun buyGoods() {
+        val intent = Intent(this, AffirmOrderActivity::class.java)
+        intent.putExtra("orderData", arrayListOf(orderInfo))
+        startActivity(intent)
     }
 
     /**

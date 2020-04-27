@@ -23,6 +23,8 @@ public class Constom {
     //获取存在sp中的加密key
     public static String API_KEY = !TextUtils.isEmpty(SpUtil.getString(Constants.API_KEY)) ? SpUtil.getString(Constants.API_KEY) : "1234567890123456";
 
+    //微信的appID
+    public static final String WXAPP_ID = "wx8c512b137c836be1";
 
     /**
      * 判断是debug还是release

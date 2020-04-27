@@ -1,13 +1,19 @@
 package com.shangyi.kt.ui.order.model
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.sdxxtop.base.BaseViewModel
 import com.sdxxtop.base.utils.UIUtils
+import com.sdxxtop.network.utils.AESUtils
 import com.shangyi.business.api.RetrofitClient
+import com.shangyi.business.network.Constants
 import com.shangyi.business.network.Params
+import com.shangyi.business.network.SpUtil
 import com.shangyi.kt.ui.address.bean.AreaListBean
+import com.shangyi.kt.ui.order.bean.OrderInfo
 import com.shangyi.kt.ui.order.bean.OrderListJsonBean
+import com.shangyi.kt.ui.order.bean.OrderPayBefore
 import java.util.ArrayList
 
 /**
@@ -20,13 +26,14 @@ class CommitOrderModel : BaseViewModel() {
     private val gson = Gson()
     var areaBean = MutableLiveData<AreaListBean?>()
     var yfData = MutableLiveData<Float>()
+    var querenOrders = MutableLiveData<OrderPayBefore>()
+    var orderInfo = MutableLiveData<String?>()
 
     /**
      * 获取默认地址
      */
     fun loadAddress() {
         loadOnUI({
-            showLoadingDialog(true)
             val params = Params()
             RetrofitClient.apiCusService.getAddressList(params.aesData)
         }, { it ->
@@ -52,7 +59,6 @@ class CommitOrderModel : BaseViewModel() {
             addressId: Int
     ) {
         loadOnUI({
-            showLoadingDialog(true)
             val params = Params()
             params.put("list", gson.fromJson(gson.toJson(goodsList), List::class.java))
             params.put("address_id", addressId)
@@ -75,9 +81,48 @@ class CommitOrderModel : BaseViewModel() {
             val params = Params()
             params.put("list", gson.fromJson(gson.toJson(goodsList), List::class.java))
             params.put("address_id", addressId)
-            RetrofitClient.apiCusService.querenOrder(params.aesData)
+            Log.e("data --- ", "${AESUtils.decrypt(params.aesData, SpUtil.getString(Constants.API_KEY))}")
+            RetrofitClient.apiCusService.querenOrders(params.aesData)
         }, { it ->
             mIsLoadingShow.value = false
+            querenOrders.value = it
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
+        })
+    }
+
+    /**
+     * 获取支付前的支付信息
+     */
+    fun getPayInfo(orderId: String, payType: Int) {
+        loadOnUI({
+            val params = Params()
+            params.put("order_id", orderId)
+            params.put("pay_type", if (payType == 1) "zfb" else "wx")
+            Log.e("data --- ", "${AESUtils.decrypt(params.aesData, SpUtil.getString(Constants.API_KEY))}")
+            RetrofitClient.apiCusService.getPayInfo(params.aesData)
+        }, { it ->
+            mIsLoadingShow.value = false
+            orderInfo.value = it?.info
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
+        })
+    }
+
+    /**
+     * 查询订单是否支付成功
+     */
+    fun notifyOrder(orderNumber: String) {
+        loadOnUI({
+            val params = Params()
+            params.put("order_num", orderNumber)
+            Log.e("data --- ", "${AESUtils.decrypt(params.aesData, SpUtil.getString(Constants.API_KEY))}")
+            RetrofitClient.apiCusService.getOrderStatus(params.aesData)
+        }, { it ->
+            mIsLoadingShow.value = false
+            UIUtils.showToast("支付成功")
         }, { code, msg, t ->
             UIUtils.showToast(msg)
             mIsLoadingShow.value = false

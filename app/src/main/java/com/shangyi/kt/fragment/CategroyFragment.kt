@@ -60,6 +60,7 @@ class CategroyFragment : BaseKTFragment<FragmentCategroyBinding, CategroyModel>(
     }
 
     override fun initView() {
+        topViewPadding(topLine)
         /**
          * 左侧分类点击事件
          */

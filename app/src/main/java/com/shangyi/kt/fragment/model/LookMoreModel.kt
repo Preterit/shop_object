@@ -27,6 +27,7 @@ class LookMoreModel : BaseViewModel() {
             lookMoreData.value = it
         }, { code, msg, t ->
             UIUtils.showToast(msg)
+            lookMoreData.value = null
         })
     }
 

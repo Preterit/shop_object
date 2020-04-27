@@ -1,25 +1,37 @@
 package com.shangyi.kt.ui.order
 
 import android.content.Intent
+import android.graphics.Color
+import android.os.Handler
+import android.os.Message
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alipay.sdk.app.PayTask
 import com.sdxxtop.base.BaseKTActivity
+import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
+import com.shangyi.business.api.Constom.WXAPP_ID
 import com.shangyi.business.databinding.ActivityAffirmOrderBinding
+import com.shangyi.business.weight.dialog.IosAlertDialog
 import com.shangyi.kt.fragment.car.entity.CommitOrderBean
 import com.shangyi.kt.ui.address.AddressListActivity
 import com.shangyi.kt.ui.address.bean.AreaListBean
 import com.shangyi.kt.ui.order.adapter.OrderGoodsAdapter
 import com.shangyi.kt.ui.order.bean.OrderListJsonBean
 import com.shangyi.kt.ui.order.model.CommitOrderModel
+import com.tencent.mm.opensdk.modelpay.PayReq
+import com.tencent.mm.opensdk.openapi.IWXAPI
+import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import kotlinx.android.synthetic.main.activity_affirm_order.*
-import kotlinx.android.synthetic.main.item_goods_detail_goodsinfo.view.*
-import java.util.ArrayList
+import kotlinx.android.synthetic.main.dialog_pay_type.view.*
+import java.lang.ref.WeakReference
+import java.util.*
 
-class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrderModel>() {
+
+class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrderModel>(), PayBottomDialog.OnBottomItemClickListener {
     override fun vmClazz() = CommitOrderModel::class.java
     override fun layoutId() = R.layout.activity_affirm_order
 
@@ -36,17 +48,82 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
                 mBinding.vm?.loadYunfei(list, addressId)
             }
         })
+        mBinding.vm?.querenOrders?.observe(this, Observer {
+            orderNumber = it.order_num
+            orderId = it.order_id
+            payBottomDialog.bottmShow()
+        })
+
+        mBinding.vm?.orderInfo?.observe(this, Observer {
+            if (!it.isNullOrEmpty()) {
+                startZfb(it)
+            }
+        })
     }
 
     private var orderData: ArrayList<CommitOrderBean>? = null  // 商品的数据
     private var addressId = 0   // 地址ID
     private var list = ArrayList<OrderListJsonBean>()  // 请求接口的商品列表
+    private val mHandler = MyHandler(this)
+    private var orderNumber = ""  // 订单编号
+    private var orderId = ""  // 订单Id
+    private var payType = 1 // 1 -- 支付宝  2 -- 微信  默认选中支付宝
+    private var totalPrice = 0f // 总金额
+
+    /**
+     * 微信支付api
+     */
+    private val api: IWXAPI by lazy {
+        var api = WXAPIFactory.createWXAPI(this@AffirmOrderActivity, null)
+        api.registerApp(WXAPP_ID)
+        api
+    }
+
+    /**
+     * 取消的弹框
+     */
+    private val cancelPay: IosAlertDialog by lazy {
+        val dialog = IosAlertDialog(this)
+                .builder()
+                .setTitle("确认放弃付款吗？")
+                .setMsg(" ")
+                .setMsg2("超过支付时效后，订单会被取消哦")
+                .setMsg3(" ")
+                .setPositiveButton("继续支付", Color.parseColor("#FF2942"), {})
+                .setNegativeButton("确定离开", Color.parseColor("#333333"), {
+                    finish()
+                })
+        dialog
+    }
+
+    /**
+     * 支付类型的选择框
+     */
+    private val payBottomDialog: PayBottomDialog by lazy {
+        val mDialogView = layoutInflater.inflate(R.layout.dialog_pay_type, null)
+        mDialogView.iv_buy_alipay_select.isEnabled = true
+        mDialogView.iv_buy_weichat_select.isEnabled = false
+        mDialogView.tv_num.text = "¥${totalPrice}"
+        val mDialog = PayBottomDialog(this@AffirmOrderActivity, mDialogView, intArrayOf(R.id.tv_confirm, R.id.img_cancel))
+        mDialogView.ll_pay_weichat.setOnClickListener {
+            //wechat
+            payType = 2
+            mDialogView.iv_buy_alipay_select.isEnabled = false
+            mDialogView.iv_buy_weichat_select.isEnabled = true
+        }
+        mDialogView.ll_pay_ali.setOnClickListener {
+            //ali
+            payType = 1
+            mDialogView.iv_buy_alipay_select.isEnabled = true
+            mDialogView.iv_buy_weichat_select.isEnabled = false
+        }
+        mDialog.setOnBottomItemClickListener(this)
+        mDialog
+    }
 
     override fun initView() {
+        titleView.resetBackListener(this)
         orderData = intent.getSerializableExtra("orderData") as ArrayList<CommitOrderBean>
-                ?: ArrayList()
-
-        Log.e("orderData --- ", "${orderData.toString()}")
 
         if (orderData == null) {
             return
@@ -54,7 +131,6 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.adapter = OrderGoodsAdapter(orderData)
 
-        var totalPrice = 0f
         for (item in orderData!!) {
             item.goodsInfos?.forEach {
                 val goodsItem = OrderListJsonBean(it.goodsId, it.goodsSpecId, it.goodsCount, it.goodsImg
@@ -83,6 +159,10 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
                 // 提交订单
                 commitOrder()
             }
+            R.id.ll_back -> {
+                // 放弃支付
+                cancelPay.show()
+            }
         }
     }
 
@@ -90,16 +170,11 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
      * 提交订单
      */
     private fun commitOrder() {
-//        list.clear()
-//        for (item in orderData!!) {
-//            item.goodsInfos?.forEach {
-//                val goodsItem = OrderListJsonBean(it.goodsId, it.goodsSpecId, it.goodsCount, it.goodsImg
-//                        ?: "")
-//                list.add(goodsItem)
-//            }
-//            list[list.size - 1].remark = item.psText ?: ""
-//        }
-        mBinding.vm?.commitOrder(list, addressId)
+        if (!orderNumber.isNullOrEmpty() && !orderId.isNullOrEmpty()) {
+            payBottomDialog.bottmShow()
+        } else {
+            mBinding.vm?.commitOrder(list, addressId)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -109,5 +184,101 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
             val item = data.getParcelableExtra<AreaListBean?>("areaBean")
             mBinding.vm?.areaBean?.value = item
         }
+    }
+
+    /**
+     * 调用支付宝支付接口
+     */
+    private fun startZfb(from: String) {
+        Thread(Runnable { //调用支付宝
+            val payTask = PayTask(this)
+            val result = payTask.pay(from, true)
+            Log.e("支付宝处理回掉 ---- ", "${result}")
+            val msg = Message()
+            msg.what = 0
+            msg.obj = result
+            mHandler.sendMessage(msg)
+        }).start()
+    }
+
+    /**
+     * 处理支付宝支付的Handler
+     */
+    inner class MyHandler(mActivity: AffirmOrderActivity) : Handler() {
+        private val mActivity: WeakReference<AffirmOrderActivity> = WeakReference(mActivity)
+
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            val activity = mActivity.get()
+            if (activity != null) {
+                when (msg.what) {
+                    0 -> {
+                        val result = (msg.obj as String).replace("{", "")
+                                .replace("}", "").replace("resultStatus=", "")
+                                .replace("memo=", "").replace("result=", "")
+                        Log.d("MainActivity:", result)
+                        val num = result.split(";").toTypedArray()[0]
+                        showPayDialog(num)
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * 支付宝支付订单查询
+     */
+    fun showPayDialog(num: String) {
+        var result = when (num) {
+            "9000" -> {
+                mBinding.vm?.notifyOrder(orderNumber)
+                ""
+            }
+            "8000" -> "支付结果未知，请联系客服"
+            "4000" -> "订单支付失败"
+            "5000" -> "重复请求"
+            "6001" -> "订单取消成功"
+            "6002" -> "网络连接出错"
+            "6004" -> "支付结果未知，请联系客服"
+            else -> "支付失败，请联系客服"
+        }
+        if (!result.isNullOrEmpty()) {
+            UIUtils.showToast(result)
+        }
+    }
+
+    override fun onBottomItemClick(payBottomDialog: PayBottomDialog?, view: View?) {
+        when (view?.id) {
+            R.id.tv_confirm -> {
+                if (payType == 1) {
+                    // aliPay
+                    mBinding.vm?.getPayInfo(orderId, payType)
+                } else {
+                    //wechatPay
+                    weChatPay()
+                }
+            }
+
+            R.id.img_cancel -> {
+                payBottomDialog?.dismiss()
+            }
+        }
+    }
+
+    /**
+     * 微信支付
+     */
+    private fun weChatPay() {
+        val req = PayReq()
+        req.appId = WXAPP_ID
+        req.partnerId = "partnerid"
+        req.prepayId = "prepayid"
+        req.nonceStr = "noncestr"
+        req.timeStamp = "timestamp"
+        req.packageValue = "package"
+        req.sign = "sign"
+        req.extData = "app data"; // optional
+        Toast.makeText(this, "正常调起支付", Toast.LENGTH_SHORT).show()
+        api.sendReq(req)
     }
 }

@@ -1,5 +1,7 @@
 package com.sdxxtop.base
 
+import android.annotation.SuppressLint
+import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -55,8 +57,10 @@ abstract class BaseKTActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppCom
         LoadingDialog(this)
     }
 
+    @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
 
         lifecycle.addObserver(ActivityLifecycleImpl(this))
 

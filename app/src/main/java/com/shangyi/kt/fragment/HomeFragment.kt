@@ -1,13 +1,10 @@
 package com.shangyi.kt.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import com.sdxxtop.base.BaseKTFragment
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentHomeBinding
 import com.shangyi.kt.fragment.model.HomeModel
-import com.shangyi.kt.ui.order.OrderActivity
-import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * Date:2020/4/7
@@ -28,10 +25,6 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
 
     override fun initView() {
         mLoadService.showSuccess()
-        /*home.setOnClickListener {
-           // startActivity(Intent(context, OrderActivity::class.java))
-            }*/
-
     }
 
     companion object {

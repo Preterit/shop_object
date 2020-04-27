@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ExpandableListView
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.view.marginBottom
 import androidx.lifecycle.Observer
 import com.sdxxtop.base.BaseKTFragment
@@ -23,11 +24,13 @@ import com.shangyi.kt.fragment.model.CarModel
 import com.shangyi.kt.fragment.model.OnCarDataRefresh
 import com.shangyi.kt.ui.order.AffirmOrderActivity
 import io.reactivex.internal.operators.maybe.MaybeIsEmpty
+import kotlinx.android.synthetic.main.activity_pingjia.*
 import kotlinx.android.synthetic.main.car_bottom_buy_layout.view.*
 import kotlinx.android.synthetic.main.car_bottom_caozuo_layout.*
 import kotlinx.android.synthetic.main.car_bottom_caozuo_layout.view.*
 import kotlinx.android.synthetic.main.car_bottom_caozuo_layout.view.cbCaozuo
 import kotlinx.android.synthetic.main.fragment_car.*
+import kotlinx.android.synthetic.main.fragment_car.titleView
 import kotlinx.android.synthetic.main.item_car_nogoods_layout.view.*
 
 
@@ -109,6 +112,7 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
     }
 
     override fun initView() {
+        topViewPadding(topLine)
         val beginTransaction = childFragmentManager.beginTransaction()
         beginTransaction.add(R.id.frameLayout, lookMoreFragment).commit()
 
@@ -132,12 +136,16 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
         mBinding.vm?.getCarList()
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (isVisible) {
-            initData1()
-        }
+    override fun initData() {
+        initData1()
     }
+
+//    override fun onResume() {
+//        super.onResume()
+//        if (isVisible) {
+//            initData1()
+//        }
+//    }
 
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
@@ -181,6 +189,10 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
      */
     private fun commitOrder() {
         var selectGoods = exAdapter?.selectGoods
+        if (selectGoods.isNullOrEmpty()){
+            Toast.makeText(context,"请选择需要支付的商品",Toast.LENGTH_SHORT).show()
+            return
+        }
         var intent = Intent(context, AffirmOrderActivity::class.java)
         intent.putExtra("orderData", selectGoods)
         startActivity(intent)
@@ -236,6 +248,7 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
             expandableListView.collapseGroup(i)
             expandableListView.expandGroup(i)
         }
+        expandableListView.divider = null
         exAdapter?.notifyDataSetChanged()
     }
 
@@ -258,5 +271,9 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
         } else {
             mLoadService.showCallback(ErrorCallback::class.java)
         }
+    }
+
+    override fun preLoad() {
+        initData1()
     }
 }

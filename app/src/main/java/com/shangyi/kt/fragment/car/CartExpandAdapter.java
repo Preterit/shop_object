@@ -381,8 +381,10 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
                     totalPrice += itemsBean.sale_price * itemsBean.number;
                 }
             }
-            CommitOrderBean goodsInfo = new CommitOrderBean(cartInfo.id, "https://img.alicdn.com/tps/i4/TB1O6rGx1H2gK0jSZFESuwqMpXa.jpg_400x400q90.jpg", cartInfo.name, productBean, fanPrice, "", totalPrice);
-            result.add(goodsInfo);
+            if (productBean.size() != 0) {
+                CommitOrderBean goodsInfo = new CommitOrderBean(cartInfo.id, "https://img.alicdn.com/tps/i4/TB1O6rGx1H2gK0jSZFESuwqMpXa.jpg_400x400q90.jpg", cartInfo.name, productBean, fanPrice, "", totalPrice);
+                result.add(goodsInfo);
+            }
         }
         return result;
     }

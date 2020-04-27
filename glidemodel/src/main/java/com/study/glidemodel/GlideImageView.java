@@ -68,6 +68,11 @@ public class GlideImageView extends ShapeImageView {
         return this;
     }
 
+    public GlideImageView loadImage(String url) {
+        getImageLoader().loadImage(url, R.color.placeholder_color);
+        return this;
+    }
+
     public GlideImageView loadImage(String url, int placeholderResId) {
         getImageLoader().loadImage(url, placeholderResId);
         return this;

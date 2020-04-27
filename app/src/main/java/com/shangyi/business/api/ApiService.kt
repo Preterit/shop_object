@@ -11,6 +11,8 @@ import com.shangyi.kt.ui.goods.bean.GoodsListBean
 import com.shangyi.kt.ui.goods.bean.GoodsSpecBean
 import com.shangyi.kt.ui.goods.bean.ReecommendGood
 import com.shangyi.kt.ui.order.bean.OrderBean
+import com.shangyi.kt.ui.order.bean.OrderInfo
+import com.shangyi.kt.ui.order.bean.OrderPayBefore
 import com.shangyi.kt.ui.order.bean.YfDataBean
 import com.shangyi.kt.ui.pingjia.bean.PingjiaDataBean
 import com.shangyi.kt.ui.splash.bean.GetSettingBean
@@ -193,4 +195,25 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/api/Orders/getGoodsFreight")
     suspend fun loadYunfei(@Field("data") data: String): BaseResponse<YfDataBean?>
+
+    /**
+     * 订单 -- 提交
+     */
+    @FormUrlEncoded
+    @POST("/api/Orders/placeOrder")
+    suspend fun querenOrders(@Field("data") data: String): BaseResponse<OrderPayBefore?>
+
+    /**
+     * 订单 -- 获取支付宝支付的订单信息
+     */
+    @FormUrlEncoded
+    @POST("/api/orders/getPayInfo")
+    suspend fun getPayInfo(@Field("data") data: String): BaseResponse<OrderInfo?>
+
+    /**
+     * 订单 -- 查询订单支付状态
+     */
+    @FormUrlEncoded
+    @POST("/api/orders/orderCheckStatus")
+    suspend fun getOrderStatus(@Field("data") data: String): BaseResponse<Any?>
 }

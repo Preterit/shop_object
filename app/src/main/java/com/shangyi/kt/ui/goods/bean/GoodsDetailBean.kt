@@ -49,7 +49,7 @@ data class ReecommendGood(
         val praise_count: Any,
         val price: Float,
         val sale_count: Float,
-        val sale_price: Double,
+        val sale_price: Float,
         val shop_id: Int,
         val unit: String,
         val goods_one_img: GoodsOneImg?,
@@ -59,8 +59,8 @@ data class ReecommendGood(
 
 data class DealerBean(
         val gid: Int,
-        val cash_back: Float,
-        val dealer: Float
+        val cash_back: Float,  //购买返现金额
+        val dealer: Float    //分享购买赚取金额
 )
 
 data class SpecBean(

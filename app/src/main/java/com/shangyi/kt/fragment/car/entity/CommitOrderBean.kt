@@ -27,6 +27,6 @@ data class GoodsInfoBean(
         val goodsPrice: Float,
         val goodsName: String,
         val SpecStr: String,
-        val goodsImg: String?,
+        var goodsImg: String?,
         val goodsSpecId: Int
 ) : Parcelable

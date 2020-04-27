@@ -11,14 +11,23 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:descendantFocusability="blocksDescendants">
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/topLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.shangyi.business.weight.TitleView
             android:id="@+id/titleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            app:clipToPadding="false"
+            app:fitsSystemWindows="false"
+            app:layout_constraintTop_toBottomOf="@+id/topLine"
             app:rightTextColor="#FF4242"
             app:rightTextValue="管理"
             app:titleValue="购物车" />

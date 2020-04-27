@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.shangyi.business">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
 
     <application
         android:name=".MyApplication"
@@ -19,10 +23,6 @@
         <activity android:name="com.shangyi.kt.ui.pingjia.AddPinglunActivity" />
         <activity android:name="com.shangyi.kt.ui.pingjia.PingjiaActivity" />
         <activity android:name="com.shangyi.kt.ui.order.OrderSuccessActivity" />
-        <activity android:name="com.shangyi.kt.ui.wxapi.WXPayEntryActivity" />
-        <activity
-            android:name="com.shangyi.kt.ui.order.OrderActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name="com.shangyi.kt.ui.address.AddAddressActivity" />
         <activity android:name="com.shangyi.kt.ui.address.AddressListActivity" />
         <activity android:name="com.shangyi.kt.ui.setting.BackPwdActivity" />
@@ -57,6 +57,11 @@
             android:name="com.shangyi.kt.ui.WebActivity"
             android:hardwareAccelerated="true"
             android:process=":remoteweb" />
+
+        <activity
+            android:name="com.shangyi.business.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"/>
     </application>
 
 </manifest>

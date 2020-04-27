@@ -1,13 +1,17 @@
 package com.shangyi.kt.ui.goods.adapter
 
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.luck.picture.lib.PictureSelector
+import com.luck.picture.lib.entity.LocalMedia
 import com.shangyi.business.R
 import com.shangyi.kt.ui.goods.bean.AppraiseInfoBean
 import com.shangyi.kt.ui.goods.bean.CommentImgBean
+import com.shangyi.kt.ui.pingjia.weight.GlideEngine
 import kotlinx.android.synthetic.main.item_only_img.view.*
 import kotlinx.android.synthetic.main.item_shopinfo_pj.view.*
 
@@ -37,9 +41,26 @@ class PjAdaper : BaseQuickAdapter<AppraiseInfoBean, BaseViewHolder>(R.layout.ite
 
 
 class PjImgAdaper constructor(data: List<CommentImgBean?>?) : BaseQuickAdapter<CommentImgBean?, BaseViewHolder>(R.layout.item_only_img, ArrayList<CommentImgBean?>(data)) {
+    val imgData = arrayListOf<LocalMedia>()
+
+    init {
+        imgData.clear()
+        data?.forEach {
+            imgData.add(LocalMedia(it?.url ?: "", 0, 0, ""))
+        }
+    }
+
     override fun convert(holder: BaseViewHolder, item: CommentImgBean?) {
         if (holder.layoutPosition > 2) return
         holder.itemView.glideImageView.loadImage(item?.url ?: "", R.color.placeholder_color)
+
+        holder.itemView.setOnClickListener {
+            PictureSelector.create(context as AppCompatActivity)
+                    .themeStyle(R.style.picture_default_style)
+                    .isNotPreviewDownload(true)
+                    .loadImageEngine(GlideEngine.createGlideEngine()) // 请参考Demo GlideEngine.java
+                    .openExternalPreview(holder.layoutPosition, imgData)
+        }
     }
 
 }

@@ -14,4 +14,5 @@ public interface Constants {
     String BASEURL = "baseurl";
 
     String API_KEY = "api_key"; // 加密的key
+    public static final String APP_ID = "wxd930ea5d5a258f4f";
 }

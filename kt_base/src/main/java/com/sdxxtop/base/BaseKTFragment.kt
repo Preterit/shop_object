@@ -1,5 +1,6 @@
 package com.sdxxtop.base
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +14,7 @@ import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
 import com.sdxxtop.base.dialog.LoadingDialog
 import com.sdxxtop.base.load.IPreLoad
-import com.sdxxtop.base.loadsir.EmptyCallback
-import com.sdxxtop.base.loadsir.ErrorCallback
+import com.sdxxtop.base.utils.SystemUtil
 
 /**
  * Email: sdxxtop@163.com
@@ -115,4 +115,11 @@ abstract class BaseKTFragment<DB : ViewDataBinding, VM : BaseViewModel> : Fragme
     override fun loadData() {
     }
 
+    open fun topViewPadding(view: View) {
+        if (isVersionMoreKitkat()) {
+            view.setPadding(0, SystemUtil.getStatusHeight(context), 0, 0)
+        }
+    }
+
+    open fun isVersionMoreKitkat() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
 }

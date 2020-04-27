@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.shangyi.kt.ui.wxapi.WXPayEntryActivity">
+    tools:context=".wxapi.WXPayEntryActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

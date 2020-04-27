@@ -22,16 +22,26 @@ data class OrderBean(
 )
 
 data class Dealer(
-    val cash_back: Int,
-    val dealer: Int,
-    val gid: Int
+        val cash_back: Int,
+        val dealer: Int,
+        val gid: Int
 )
 
 data class GoodsOneImg(
-    val good_id: Int,
-    val url: String
+        val good_id: Int,
+        val url: String
 )
 
 data class YfDataBean(
-        val delivery:Float
+        val delivery: Float
+)
+
+data class OrderPayBefore(
+        val order_id: String,
+        val order_num: String,
+        val pay_amount: Int
+)
+
+data class OrderInfo(
+        val info: String
 )
