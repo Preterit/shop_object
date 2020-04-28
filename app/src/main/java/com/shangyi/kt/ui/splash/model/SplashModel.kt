@@ -1,11 +1,13 @@
 package com.shangyi.kt.ui.splash.model
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.sdxxtop.base.BaseViewModel
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.api.RetrofitClient
 import com.shangyi.business.network.Constants
 import com.shangyi.business.network.SpUtil
+import com.shangyi.kt.ui.splash.bean.GetSettingBean
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.IOException
@@ -17,6 +19,9 @@ import java.io.IOException
  * Desc:
  */
 class SplashModel : BaseViewModel() {
+
+    val settingData = MutableLiveData(false)
+
     /**
      * 动态获取域名
      */
@@ -49,12 +54,16 @@ class SplashModel : BaseViewModel() {
 
     fun getSetting() {
         loadOnUI({
+            settingData.value = false
             RetrofitClient.apiService.getSetting("")
         }, {
+            settingData.value = it != null
             mIsLoadingShow.value = false
             SpUtil.putString(Constants.API_KEY, it?.api_key)
         }, { code, msg, t ->
             UIUtils.showToast(msg)
+            Log.e("getSetting -- ", "${t.message}")
+            settingData.value = false
         })
     }
 

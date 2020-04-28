@@ -9,7 +9,6 @@ import com.shangyi.business.api.RetrofitClient
 import com.shangyi.business.network.Constants
 import com.shangyi.business.network.Params
 import com.shangyi.business.network.SpUtil
-import com.shangyi.kt.fragment.bean.ChildBean
 import com.shangyi.kt.ui.goods.bean.*
 import com.wuhenzhizao.sku.bean.Product
 import com.wuhenzhizao.sku.bean.Sku

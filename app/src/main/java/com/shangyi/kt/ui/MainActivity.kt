@@ -8,9 +8,9 @@ import com.shangyi.business.databinding.ActivityMainBinding
 import com.shangyi.business.network.Constants
 import com.shangyi.business.network.SpUtil
 import com.shangyi.kt.fragment.car.CarFragment
-import com.shangyi.kt.fragment.CategroyFragment
-import com.shangyi.kt.fragment.HomeFragment
-import com.shangyi.kt.fragment.MineFragment
+import com.shangyi.kt.fragment.categroy.CategroyFragment
+import com.shangyi.kt.fragment.home.HomeFragment
+import com.shangyi.kt.fragment.mine.MineFragment
 import com.shangyi.kt.ui.userlogin.LoginActivity
 import com.shangyi.kt.ui.userlogin.model.MainModel
 import kotlinx.android.synthetic.main.activity_main.*
