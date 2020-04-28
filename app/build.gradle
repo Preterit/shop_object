@@ -5,11 +5,11 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.shangyi.business"
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -90,6 +90,8 @@ dependencies {
     implementation project(path: ':syzx_webview')
     implementation project(path: ':glidemodel')
     implementation project(path: ':sku_library')
+    implementation project(path: ':scrollerlayout')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$rootProject.appcompat"
     implementation "androidx.core:core-ktx:$rootProject.corektx"
@@ -128,4 +130,5 @@ dependencies {
     // 支付宝支付
     implementation(name: 'alipaySdk-15.7.4-20200228192259', ext: 'aar')
     implementation files('libs/wechat-sdk-android-with-mta-1.0.2.jar')
+
 }

@@ -3,6 +3,8 @@ package com.shangyi.kt.fragment.other.lookmore
 import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.scwang.smartrefresh.layout.api.RefreshLayout
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.sdxxtop.base.BaseKTFragment
 import com.sdxxtop.base.loadsir.EmptyCallback
 import com.sdxxtop.base.loadsir.ErrorCallback

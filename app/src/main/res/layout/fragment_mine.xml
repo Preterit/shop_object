@@ -32,6 +32,7 @@
             android:id="@+id/topLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
             app:layout_constraintTop_toBottomOf="@+id/topLine">
 
             <TextView
@@ -65,16 +66,34 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.core.widget.NestedScrollView
+        <LinearLayout
+            android:id="@+id/stopTopLayout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:elevation="3dp"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/topLayout">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/green"
+                android:gravity="center"
+                android:text="悬停布局"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:overScrollMode="never"
+            android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/topLayout">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -144,7 +163,7 @@
                         android:layout_width="100dp"
                         android:layout_height="50dp"
                         android:layout_marginTop="23dp"
-                        android:layout_marginRight="3dp"
+                        android:layout_marginRight="4dp"
                         android:src="@drawable/icon_vip_pt_logo"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -296,6 +315,45 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvVipCenterTx" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/stopLayout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="vertical"
+                app:layout_isSticky="true">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/green"
+                    android:gravity="center"
+                    android:text="悬停布局"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <com.shangyi.kt.fragment.mine.weight.MyViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout>
+
+        <com.shangyi.kt.fragment.mine.weight.JudgeNestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topLayout">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
 
                 <FrameLayout
                     android:id="@+id/frameLayout"
@@ -303,11 +361,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:focusable="false"
-                    android:focusableInTouchMode="false" />
+                    android:focusableInTouchMode="false"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
-        </androidx.core.widget.NestedScrollView>
+        </com.shangyi.kt.fragment.mine.weight.JudgeNestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

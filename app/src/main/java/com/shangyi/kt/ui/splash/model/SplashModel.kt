@@ -35,7 +35,7 @@ class SplashModel : BaseViewModel() {
         val newCall = okHttpClient.newCall(request)
         newCall.enqueue(object : okhttp3.Callback {
             override fun onFailure(call: okhttp3.Call, e: IOException) {
-                Log.e("SplashModel --1-- ", "onFailure: ")
+                loadSettingInfo()
             }
 
             override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
@@ -62,7 +62,7 @@ class SplashModel : BaseViewModel() {
             SpUtil.putString(Constants.API_KEY, it?.api_key)
         }, { code, msg, t ->
             UIUtils.showToast(msg)
-            Log.e("getSetting -- ", "${t.message}")
+            getSetting()
             settingData.value = false
         })
     }

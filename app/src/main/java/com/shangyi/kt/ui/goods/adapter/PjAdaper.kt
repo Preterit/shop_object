@@ -40,7 +40,8 @@ class PjAdaper : BaseQuickAdapter<AppraiseInfoBean, BaseViewHolder>(R.layout.ite
 }
 
 
-class PjImgAdaper constructor(data: List<CommentImgBean?>?) : BaseQuickAdapter<CommentImgBean?, BaseViewHolder>(R.layout.item_only_img, ArrayList<CommentImgBean?>(data)) {
+class PjImgAdaper constructor(data: ArrayList<CommentImgBean?>?)
+    : BaseQuickAdapter<CommentImgBean?, BaseViewHolder>(R.layout.item_only_img, data) {
     val imgData = arrayListOf<LocalMedia>()
 
     init {

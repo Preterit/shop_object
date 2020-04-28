@@ -14,8 +14,8 @@ import kotlinx.android.synthetic.main.item_categroy_right_child.view.*
  * author:lwb
  * Desc:
  */
-class CategroyRightChildAdapter constructor(data: List<ChildItemBean>?) :
-        BaseQuickAdapter<ChildItemBean?, BaseViewHolder>(R.layout.item_categroy_right_child, ArrayList<ChildItemBean?>(data)) {
+class CategroyRightChildAdapter constructor(data: ArrayList<ChildItemBean?>?) :
+        BaseQuickAdapter<ChildItemBean?, BaseViewHolder>(R.layout.item_categroy_right_child, data) {
 
     @SuppressLint("CheckResult")
     override fun convert(holder: BaseViewHolder, item: ChildItemBean?) {
