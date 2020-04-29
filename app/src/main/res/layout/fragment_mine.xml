@@ -8,6 +8,10 @@
         <variable
             name="vm"
             type="com.shangyi.kt.fragment.mine.model.MineModel" />
+
+        <variable
+            name="fragment"
+            type="com.shangyi.kt.fragment.mine.MineFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,6 +49,7 @@
                 android:id="@+id/ivSetting"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:onClick="@{fragment::onClick}"
                 android:padding="8dp"
                 android:src="@drawable/icon_mine_setting"
                 app:layout_constraintRight_toLeftOf="@+id/ivMessage"
@@ -55,6 +60,7 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginRight="5dp"
+                android:onClick="@{fragment::onClick}"
                 android:padding="8dp"
                 android:src="@drawable/icon_mine_message"
                 app:layout_constraintRight_toRightOf="parent"
@@ -71,7 +77,7 @@
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#F0F0F0"
+                android:background="@color/color_F9F9F9"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -157,12 +163,12 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:background="@drawable/mine_yj_black_bg"
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
                         android:layout_marginLeft="13dp"
                         android:layout_marginTop="-30dp"
-                        android:layout_marginRight="13dp">
+                        android:layout_marginRight="13dp"
+                        android:background="@drawable/mine_yj_black_bg">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -214,6 +220,7 @@
                             android:layout_marginRight="15dp"
                             android:layout_marginBottom="10dp"
                             android:background="@drawable/shape_car_shop_nogoods_red_bg"
+                            android:onClick="@{fragment::onClick}"
                             android:paddingLeft="20dp"
                             android:paddingTop="5dp"
                             android:paddingRight="20dp"
@@ -303,28 +310,24 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/stopLayout"
+                <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical"
-                    app:layout_isSticky="true">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/icon_mine_tj_logo" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/green"
-                        android:gravity="center"
-                        android:text="悬停布局"
-                        android:textColor="@color/white" />
-                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvHorTj"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
+
             </com.google.android.material.appbar.AppBarLayout>
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#F9F9F9"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

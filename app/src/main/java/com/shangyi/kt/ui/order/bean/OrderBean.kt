@@ -1,5 +1,7 @@
 package com.shangyi.kt.ui.order.bean
 
+import android.util.Log
+
 /**
  * Date:2020/4/21
  * author:lwb
@@ -45,3 +47,21 @@ data class OrderPayBefore(
 data class OrderInfo(
         val info: String
 )
+
+data class WxOrderInfo(
+        val info: WxRequest
+)
+
+data class WxRequest(
+        val appid: String,
+        val nonce_str: String,
+        val `package`: String,
+        val partnerid: String,
+        val prepayid: String,
+        val sign: String,
+        val timestamp: Long
+) {
+    override fun toString(): String {
+        return "WxRequest(appid='$appid', nonce_str='$nonce_str', `package`='$`package`', partnerid='$partnerid', prepayid='$prepayid', sign='$sign', timestamp='$timestamp')"
+    }
+}

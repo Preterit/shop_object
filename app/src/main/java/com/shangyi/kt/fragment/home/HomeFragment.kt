@@ -1,9 +1,11 @@
 package com.shangyi.kt.fragment.home
 
+import android.content.Intent
 import android.os.Bundle
 import com.sdxxtop.base.BaseKTFragment
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentHomeBinding
+import com.shangyi.business.wxapi.PayDemoActivity
 import com.shangyi.kt.fragment.home.model.HomeModel
 
 /**
@@ -25,6 +27,7 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
 
     override fun initView() {
         mLoadService.showSuccess()
+        mBinding.home.setOnClickListener { startActivity(Intent(context,PayDemoActivity::class.java)) }
     }
 
     companion object {

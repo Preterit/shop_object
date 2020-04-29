@@ -41,8 +41,6 @@ public class MyApplication extends BaseApplication {
 
         ToastUtil.init(this);
         LogUtil.init(true, "111");
-        SharedPreferencesUtil.init(this, "");
-
     }
 
     private static MyApplication instance;

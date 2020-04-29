@@ -28,8 +28,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.signconfig
         }
@@ -92,7 +92,6 @@ dependencies {
     implementation project(path: ':syzx_webview')
     implementation project(path: ':glidemodel')
     implementation project(path: ':sku_library')
-    implementation project(path: ':scrollerlayout')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$rootProject.appcompat"
@@ -126,11 +125,9 @@ dependencies {
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.2'
 
     // 微信
-
-    //    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
 
     // 支付宝支付
     implementation(name: 'alipaySdk-15.7.4-20200228192259', ext: 'aar')
-    implementation files('libs/wechat-sdk-android-with-mta-1.0.2.jar')
 
 }

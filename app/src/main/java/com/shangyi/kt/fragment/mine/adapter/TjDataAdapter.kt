@@ -10,13 +10,8 @@ import kotlinx.android.synthetic.main.item_mine_bottom_layout.view.*
  * author:lwb
  * Desc:
  */
-class BottomAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_mine_bottom_layout) {
-
-    init {
-        setList(arrayListOf("", "", "", "", "", "", "", "", "", "", ""))
-    }
+class TjDataAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_mine_bottom_layout) {
 
     override fun convert(holder: BaseViewHolder, item: String) {
-        holder.itemView.tvItem.text = "第${holder.layoutPosition}个条目"
     }
 }

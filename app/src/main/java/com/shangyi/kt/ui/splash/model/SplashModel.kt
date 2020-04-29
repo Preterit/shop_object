@@ -1,13 +1,11 @@
 package com.shangyi.kt.ui.splash.model
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.sdxxtop.base.BaseViewModel
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.api.RetrofitClient
 import com.shangyi.business.network.Constants
 import com.shangyi.business.network.SpUtil
-import com.shangyi.kt.ui.splash.bean.GetSettingBean
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.IOException
@@ -35,7 +33,11 @@ class SplashModel : BaseViewModel() {
         val newCall = okHttpClient.newCall(request)
         newCall.enqueue(object : okhttp3.Callback {
             override fun onFailure(call: okhttp3.Call, e: IOException) {
-                loadSettingInfo()
+                if (SpUtil.getString(Constants.API_KEY).isEmpty() || SpUtil.getString(Constants.BASEURL).isEmpty()) {
+                    loadSettingInfo()
+                } else {
+                    settingData.value = true
+                }
             }
 
             override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
@@ -55,15 +57,14 @@ class SplashModel : BaseViewModel() {
     fun getSetting() {
         loadOnUI({
             settingData.value = false
-            RetrofitClient.apiService.getSetting("")
+            RetrofitClient.apiService.getSetting(" ")
         }, {
             settingData.value = it != null
             mIsLoadingShow.value = false
             SpUtil.putString(Constants.API_KEY, it?.api_key)
         }, { code, msg, t ->
             UIUtils.showToast(msg)
-            getSetting()
-            settingData.value = false
+            settingData.value = SpUtil.getString(Constants.API_KEY).isNotEmpty() && SpUtil.getString(Constants.BASEURL).isNotEmpty()
         })
     }
 

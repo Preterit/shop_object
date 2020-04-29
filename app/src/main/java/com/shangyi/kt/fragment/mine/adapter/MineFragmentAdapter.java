@@ -11,10 +11,10 @@ import java.util.List;
  * author:lwb
  * Desc:
  */
-public class AdapterFragment extends FragmentPagerAdapter {
+public class MineFragmentAdapter extends FragmentPagerAdapter {
     private List<Fragment> mFragments;
 
-    public AdapterFragment(FragmentManager fm, List<Fragment> mFragments) {
+    public MineFragmentAdapter(FragmentManager fm, List<Fragment> mFragments) {
         super(fm);
         this.mFragments = mFragments;
     }

@@ -1,2 +1,2 @@
-include ':app', ':kt_base', ':kt_network', ':syzx_webview', ':sku_library', ':scrollerlayout'
+include ':app', ':kt_base', ':kt_network', ':syzx_webview', ':sku_library'
 include ':glidemodel'

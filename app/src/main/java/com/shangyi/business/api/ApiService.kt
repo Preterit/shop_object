@@ -11,10 +11,7 @@ import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
 import com.shangyi.kt.ui.goods.bean.GoodsListBean
 import com.shangyi.kt.ui.goods.bean.GoodsSpecBean
 import com.shangyi.kt.ui.goods.bean.ReecommendGood
-import com.shangyi.kt.ui.order.bean.OrderBean
-import com.shangyi.kt.ui.order.bean.OrderInfo
-import com.shangyi.kt.ui.order.bean.OrderPayBefore
-import com.shangyi.kt.ui.order.bean.YfDataBean
+import com.shangyi.kt.ui.order.bean.*
 import com.shangyi.kt.ui.pingjia.bean.PingjiaDataBean
 import com.shangyi.kt.ui.splash.bean.GetSettingBean
 import retrofit2.http.Field
@@ -212,6 +209,13 @@ interface ApiService {
     suspend fun getPayInfo(@Field("data") data: String): BaseResponse<OrderInfo?>
 
     /**
+     * 订单 -- 获取微信支付的订单信息
+     */
+    @FormUrlEncoded
+    @POST("/api/orders/getPayInfo")
+    suspend fun getWxPayInfo(@Field("data") data: String): BaseResponse<WxOrderInfo?>
+
+    /**
      * 订单 -- 查询订单支付状态
      */
     @FormUrlEncoded
@@ -224,4 +228,11 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/api/user/getUserList")
     suspend fun getUserInfo(@Field("data") data: String): BaseResponse<MineBean?>
+
+    /**
+     * 订单 -- 查询订单支付状态
+     */
+    @FormUrlEncoded
+    @POST("/api/user/getGoodsRecommend")
+    suspend fun getCateTjData(@Field("data") data: String): BaseResponse<List<ReecommendGood?>?>
 }

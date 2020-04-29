@@ -10,17 +10,20 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alipay.sdk.app.PayTask
+import com.google.gson.Gson
 import com.sdxxtop.base.BaseKTActivity
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
 import com.shangyi.business.api.Constom.WXAPP_ID
 import com.shangyi.business.databinding.ActivityAffirmOrderBinding
+import com.shangyi.business.utils.CheckUtil
 import com.shangyi.business.weight.dialog.IosAlertDialog
 import com.shangyi.kt.fragment.car.entity.CommitOrderBean
 import com.shangyi.kt.ui.address.AddressListActivity
 import com.shangyi.kt.ui.address.bean.AreaListBean
 import com.shangyi.kt.ui.order.adapter.OrderGoodsAdapter
 import com.shangyi.kt.ui.order.bean.OrderListJsonBean
+import com.shangyi.kt.ui.order.bean.WxRequest
 import com.shangyi.kt.ui.order.model.CommitOrderModel
 import com.tencent.mm.opensdk.modelpay.PayReq
 import com.tencent.mm.opensdk.openapi.IWXAPI
@@ -29,6 +32,7 @@ import kotlinx.android.synthetic.main.activity_affirm_order.*
 import kotlinx.android.synthetic.main.dialog_pay_type.view.*
 import java.lang.ref.WeakReference
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrderModel>(), PayBottomDialog.OnBottomItemClickListener {
@@ -57,6 +61,11 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
         mBinding.vm?.orderInfo?.observe(this, Observer {
             if (!it.isNullOrEmpty()) {
                 startZfb(it)
+            }
+        })
+        mBinding.vm?.wxPayInfo?.observe(this, Observer {
+            if (it != null) {
+                weChatPay(it)
             }
         })
     }
@@ -130,19 +139,7 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
         }
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.adapter = OrderGoodsAdapter(orderData)
-
-        for (item in orderData!!) {
-            item.goodsInfos?.forEach {
-                val goodsItem = OrderListJsonBean(it.goodsId, it.goodsSpecId, it.goodsCount, it.goodsImg
-                        ?: "")
-                list.add(goodsItem)
-            }
-            list[list.size - 1].remark = item.psText ?: ""
-            // 总金额相加
-            totalPrice += item.totalPrice
-        }
-        tvPrice.text = "¥$totalPrice"
-        tvTotalPrice.text = "¥$totalPrice"
+        setCommitData()
     }
 
     override fun initData() {
@@ -173,6 +170,7 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
         if (!orderNumber.isNullOrEmpty() && !orderId.isNullOrEmpty()) {
             payBottomDialog.bottmShow()
         } else {
+            setCommitData()
             mBinding.vm?.commitOrder(list, addressId)
         }
     }
@@ -255,7 +253,11 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
                     mBinding.vm?.getPayInfo(orderId, payType)
                 } else {
                     //wechatPay
-                    weChatPay()
+                    if (CheckUtil.isWeixinAvilible(this)) {
+                        mBinding.vm?.getWxPayInfo(orderId, payType)
+                    } else {
+                        Toast.makeText(this, "检测到未安装微信支付取消。。。", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
 
@@ -268,17 +270,47 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
     /**
      * 微信支付
      */
-    private fun weChatPay() {
+    private fun weChatPay(it: WxRequest) {
+        val str = "{\"appid\":\"wxb4ba3c02aa476ea1\",\"partnerid\":" +
+                "\"1900006771\",\"package\":\"Sign=WXPay\",\"noncestr\":\"5d6e2c9fd111de5c27b7aa5f072d1233\"," +
+                "\"timestamp\":1588148277,\"prepayid\":\"wx2916175767156917c2529b841538607932\"," +
+                "\"sign\":\"D24F4B174F2EA72619621661D47BC8CC\"}"
+        //{"appid":"wxb4ba3c02aa476ea1","partnerid":"1900006771","package":"Sign=WXPay","noncestr":"5d6e2c9fd111de5c27b7aa5f072d1233","timestamp":1588148277,"prepayid":"wx2916175767156917c2529b841538607932","sign":"D24F4B174F2EA72619621661D47BC8CC"}
         val req = PayReq()
-        req.appId = WXAPP_ID
-        req.partnerId = "partnerid"
-        req.prepayId = "prepayid"
-        req.nonceStr = "noncestr"
-        req.timeStamp = "timestamp"
-        req.packageValue = "package"
-        req.sign = "sign"
-        req.extData = "app data"; // optional
-        Toast.makeText(this, "正常调起支付", Toast.LENGTH_SHORT).show()
+        req.appId = it.appid
+        req.partnerId = it.partnerid
+        req.prepayId = it.prepayid
+        req.nonceStr = it.nonce_str
+        req.timeStamp = "${it.timestamp}"
+        req.packageValue = it.`package`
+        req.sign = it.sign
+        req.extData = "app data" // optional
+        Log.e("wxpaydata -- ","${it.toString()}")
+//        req.appId = "wx8c512b137c836be1"
+//        req.partnerId = "1900006771"
+//        req.prepayId = "wx2916175767156917c2529b841538607932"
+//        req.nonceStr = "5d6e2c9fd111de5c27b7aa5f072d1233"
+//        req.timeStamp = "1588148277"
+//        req.packageValue = "Sign=WXPay"
+//        req.sign = "D24F4B174F2EA72619621661D47BC8CC"
+//        req.extData = "app data" // optional
         api.sendReq(req)
+    }
+
+    private fun setCommitData() {
+        list.clear()
+        totalPrice = 0f
+        for (item in orderData!!) {
+            item.goodsInfos?.forEach {
+                val goodsItem = OrderListJsonBean(it.goodsId, it.goodsSpecId, it.goodsCount, it.goodsImg
+                        ?: "")
+                list.add(goodsItem)
+            }
+            list[list.size - 1].remark = item.psText ?: ""
+            // 总金额相加
+            totalPrice += item.totalPrice
+        }
+        tvPrice.text = "¥$totalPrice"
+        tvTotalPrice.text = "¥$totalPrice"
     }
 }

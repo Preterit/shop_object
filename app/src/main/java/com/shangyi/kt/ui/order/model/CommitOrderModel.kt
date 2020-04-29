@@ -14,6 +14,7 @@ import com.shangyi.kt.ui.address.bean.AreaListBean
 import com.shangyi.kt.ui.order.bean.OrderInfo
 import com.shangyi.kt.ui.order.bean.OrderListJsonBean
 import com.shangyi.kt.ui.order.bean.OrderPayBefore
+import com.shangyi.kt.ui.order.bean.WxRequest
 import java.util.ArrayList
 
 /**
@@ -28,6 +29,7 @@ class CommitOrderModel : BaseViewModel() {
     var yfData = MutableLiveData<Float>()
     var querenOrders = MutableLiveData<OrderPayBefore>()
     var orderInfo = MutableLiveData<String?>()
+    var wxPayInfo = MutableLiveData<WxRequest?>()
 
     /**
      * 获取默认地址
@@ -123,6 +125,25 @@ class CommitOrderModel : BaseViewModel() {
         }, { it ->
             mIsLoadingShow.value = false
             UIUtils.showToast("支付成功")
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
+        })
+    }
+
+    /**
+     * 获取微信支付的订单信息
+     */
+    fun getWxPayInfo(orderId: String, payType: Int) {
+        loadOnUI({
+            val params = Params()
+            params.put("order_id", orderId)
+            params.put("pay_type", "wx")
+            Log.e("data --- ", "${AESUtils.decrypt(params.aesData, SpUtil.getString(Constants.API_KEY))}")
+            RetrofitClient.apiCusService.getWxPayInfo(params.aesData)
+        }, { it ->
+            mIsLoadingShow.value = false
+            wxPayInfo.value = it?.info
         }, { code, msg, t ->
             UIUtils.showToast(msg)
             mIsLoadingShow.value = false

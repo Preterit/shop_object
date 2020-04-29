@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -18,14 +17,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.shangyi.kt.ui.order.AffirmOrderActivity"
+        <activity android:name=".wxapi.PayDemoActivity"></activity>
+        <activity
+            android:name="com.shangyi.kt.ui.order.AffirmOrderActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name="com.shangyi.kt.ui.pingjia.AddPinglunActivity" />
         <activity android:name="com.shangyi.kt.ui.pingjia.PingjiaActivity" />
         <activity android:name="com.shangyi.kt.ui.order.OrderSuccessActivity" />
         <activity android:name="com.shangyi.kt.ui.address.AddAddressActivity" />
         <activity android:name="com.shangyi.kt.ui.setting.SettingMessageActivity" />
-        <activity android:name="com.shangyi.kt.ui.setting.AboutSyActivity"/>
+        <activity android:name="com.shangyi.kt.ui.setting.AboutSyActivity" />
         <activity android:name="com.shangyi.kt.ui.address.AddressListActivity" />
         <activity android:name="com.shangyi.kt.ui.setting.BackPwdActivity" />
         <activity
@@ -59,11 +60,26 @@
             android:name="com.shangyi.kt.ui.WebActivity"
             android:hardwareAccelerated="true"
             android:process=":remoteweb" />
-
         <activity
-            android:name="com.shangyi.business.wxapi.WXPayEntryActivity"
+            android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop" />
+
+        <receiver android:name=".wxapi.util.AppRegister">
+            <intent-filter>
+                <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

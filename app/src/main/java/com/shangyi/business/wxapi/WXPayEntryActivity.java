@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.sdxxtop.base.utils.UIUtils;
 import com.shangyi.business.R;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
@@ -33,7 +34,6 @@ public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEvent
 
     @Override
     public void onReq(BaseReq baseReq) {
-        Log.e(TAG, "onResp: " + baseReq.toString());
     }
 
     /**
@@ -44,13 +44,12 @@ public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEvent
     @Override
     public void onResp(BaseResp baseResp) {
         if (baseResp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
-            Log.e(TAG, "onResp: " + baseResp.toString());
             if (baseResp.errCode == 0) {
-                //ToastUtils.showToast("支付成功");
+                UIUtils.showToast("支付成功");
             } else if (baseResp.errCode == -1) {
-                //  ToastUtils.showToast("支付失败，请联系客服！");
+                UIUtils.showToast("支付失败，请联系客服！");
             } else {
-                //  ToastUtils.showToast("支付取消！");
+                UIUtils.showToast("支付取消！");
             }
             finish();
         }

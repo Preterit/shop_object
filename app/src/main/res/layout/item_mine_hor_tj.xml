@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:paddingLeft="13dp"
+    android:background="@color/translate"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_height="40dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="精选推荐"
+        android:textColor="#F1190D"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_marginTop="3dp"
+        android:id="@+id/tvLine"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@drawable/shape_login_red_cirle_bg" />
+
+</LinearLayout>
