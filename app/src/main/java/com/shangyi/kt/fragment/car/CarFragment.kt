@@ -180,8 +180,8 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
      */
     private fun commitOrder() {
         var selectGoods = exAdapter?.selectGoods
-        if (selectGoods.isNullOrEmpty()){
-            Toast.makeText(context,"请选择需要支付的商品",Toast.LENGTH_SHORT).show()
+        if (selectGoods.isNullOrEmpty()) {
+            Toast.makeText(context, "请选择需要支付的商品", Toast.LENGTH_SHORT).show()
             return
         }
         var intent = Intent(context, AffirmOrderActivity::class.java)
@@ -239,7 +239,6 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
             expandableListView.collapseGroup(i)
             expandableListView.expandGroup(i)
         }
-        expandableListView.divider = null
         exAdapter?.notifyDataSetChanged()
     }
 

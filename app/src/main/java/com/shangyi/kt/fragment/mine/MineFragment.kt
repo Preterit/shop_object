@@ -49,16 +49,6 @@ class MineFragment : BaseKTFragment<FragmentMineBinding, MineModel>() {
         })
     }
 
-    private var isAddTj = false  //  推荐列表是否添加到布局中
-    private var toolBarPositionY = 0  //  推荐列表是否添加到布局中
-
-    /**
-     * 查看更多的fragment
-     */
-    private val lookMoreFragment: LookMoreFragment by lazy {
-        LookMoreFragment()
-    }
-
     override fun initView() {
         topViewPadding(topLine)
         rvOrdercenter.layoutManager = GridLayoutManager(context, 5)
@@ -70,31 +60,6 @@ class MineFragment : BaseKTFragment<FragmentMineBinding, MineModel>() {
 
         viewPager.adapter = AdapterFragment(parentFragmentManager, getFragments())
         viewPager.offscreenPageLimit = 10
-
-//        nestedScrollView.setOnScrollChangeListener { v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
-//            val location = IntArray(2)
-//            stopLayout.getLocationOnScreen(location)
-//            val xPosition = location[0]
-//            val yPosition = location[1]
-//            if (yPosition < topLayout.bottom) {
-//                stopTopLayout.visibility = View.VISIBLE
-//                nestedScrollView.setNeedScroll(false)
-//                Log.e("stopTopLayout--false---", "stopTopLayout == visibility")
-//            } else {
-//                Log.e("stopTopLayout--true---", "stopTopLayout == INVISIBLE")
-//                stopTopLayout.visibility = View.INVISIBLE
-//                nestedScrollView.setNeedScroll(true)
-//            }
-//        }
-//
-//        stopLayout.post(Runnable { dealWithViewPager() })
-    }
-
-    private fun dealWithViewPager() {
-        toolBarPositionY = stopTopLayout.bottom
-        val params = viewPager.layoutParams
-        params.height = getScreenHeightPx(context) - toolBarPositionY + 1
-        viewPager.layoutParams = params
     }
 
     companion object {
@@ -128,12 +93,6 @@ class MineFragment : BaseKTFragment<FragmentMineBinding, MineModel>() {
      * 绑定数据
      */
     private fun bandData(it: MineBean) {
-        if (!isAddTj) {
-            val beginTransaction = childFragmentManager.beginTransaction()
-            beginTransaction.add(R.id.frameLayout, lookMoreFragment).commit()
-            isAddTj = true
-        }
-
         glideImageView.loadImage(it.avatar ?: "")
         when (it.grade) {
             1 -> ivLevel.setImageResource(R.drawable.icon_vip_zs_logo)
@@ -141,21 +100,6 @@ class MineFragment : BaseKTFragment<FragmentMineBinding, MineModel>() {
             3 -> ivLevel.setImageResource(R.drawable.icon_vip_pt_logo)
             else -> ivLevel.setImageResource(R.drawable.icon_vip_pt_logo)
         }
-    }
-
-
-    /**
-     * @return 获取屏幕的高 单位：px
-     */
-    fun getScreenHeightPx(context: Context?): Int {
-        val windowManager = context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val dm = DisplayMetrics()
-        if (windowManager != null) {
-//            windowManager.getDefaultDisplay().getMetrics(dm);
-            windowManager.defaultDisplay.getRealMetrics(dm)
-            return dm.heightPixels
-        }
-        return 0
     }
 
     private fun getFragments(): List<Fragment>? {
