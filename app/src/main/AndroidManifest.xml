@@ -24,6 +24,8 @@
         <activity android:name="com.shangyi.kt.ui.pingjia.PingjiaActivity" />
         <activity android:name="com.shangyi.kt.ui.order.OrderSuccessActivity" />
         <activity android:name="com.shangyi.kt.ui.address.AddAddressActivity" />
+        <activity android:name="com.shangyi.kt.ui.setting.SettingMessageActivity" />
+        <activity android:name="com.shangyi.kt.ui.setting.AboutSyActivity"/>
         <activity android:name="com.shangyi.kt.ui.address.AddressListActivity" />
         <activity android:name="com.shangyi.kt.ui.setting.BackPwdActivity" />
         <activity

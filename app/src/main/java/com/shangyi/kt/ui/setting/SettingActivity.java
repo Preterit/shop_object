@@ -62,12 +62,12 @@ public class SettingActivity extends BaseKTActivity<ActivitySettingBinding,Setti
                 startActivity(intent);
                 break;
             case R.id.setting_message:
-//                Intent intentMessage = new Intent(SettingActivity.this,SettingMessageActivity.class);
-//                startActivity(intentMessage);
+                Intent intentMessage = new Intent(SettingActivity.this,SettingMessageActivity.class);
+                startActivity(intentMessage);
                 break;
             case R.id.setting_about://关于上医宝库
-//                Intent intent1 = new Intent(SettingActivity.this, AboutSyActivity.class);
-//                startActivity(intent1);
+                Intent intent1 = new Intent(SettingActivity.this, AboutSyActivity.class);
+                startActivity(intent1);
                 break;
             default:
                 //nothing

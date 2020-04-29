@@ -1,6 +1,7 @@
 package com.shangyi.kt.fragment.mine
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
@@ -21,6 +22,7 @@ import com.shangyi.kt.fragment.mine.bean.MineBean
 import com.shangyi.kt.fragment.mine.bean.MineImgTxBean
 import com.shangyi.kt.fragment.mine.model.MineModel
 import com.shangyi.kt.fragment.other.lookmore.LookMoreFragment
+import com.shangyi.kt.ui.setting.SettingActivity
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 
@@ -56,6 +58,7 @@ class MineFragment : BaseKTFragment<FragmentMineBinding, MineModel>() {
         rvVipCenter.layoutManager = GridLayoutManager(context, 4)
         rvVipCenter.adapter = MineVipCenterAdapter(MineImgTxBean.getVipData())
 
+        ivSetting.setOnClickListener { startActivity(Intent(context,SettingActivity::class.java)) }
         glideImageView.loadImage("")
 
         viewPager.adapter = AdapterFragment(parentFragmentManager, getFragments())

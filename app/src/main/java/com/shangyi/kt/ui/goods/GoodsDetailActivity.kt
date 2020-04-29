@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.asynclayoutinflater.view.AsyncLayoutInflater
 import androidx.core.widget.NestedScrollView
@@ -156,6 +157,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
             shopTjBanner!!.setAdapter(goodsDetailTjBannerAdapter)
                     .setIndicator(CircleIndicator(this@GoodsDetailActivity))
                     .setIndicatorGravity(IndicatorConfig.Direction.CENTER)
+
 
             view.pjRecyclerView.layoutManager = LinearLayoutManager(this@GoodsDetailActivity)
             view.pjRecyclerView.adapter = pjAdapter

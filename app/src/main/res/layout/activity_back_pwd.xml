@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#D6D6D6"
+        android:background="#F2F2F2"
         tools:context="com.shangyi.kt.ui.setting.BackPwdActivity">
 
         <com.shangyi.business.weight.TitleView
