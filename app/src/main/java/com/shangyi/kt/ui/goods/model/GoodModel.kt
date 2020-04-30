@@ -76,7 +76,7 @@ class GoodDetailModel : BaseViewModel() {
     fun loadGoodsSpec(goodsId: Int) {
         loadOnUI({
             val params = Params()
-            params.put("id", 4)
+            params.put("id", goodsId)
             RetrofitClient.apiCusService.getGoodsSpec(params.aesData)
         }, {
             mIsLoadingShow.value = false
@@ -157,12 +157,12 @@ class GoodDetailModel : BaseViewModel() {
                 } else {
                     listTemp.add(SkuAttribute(data.keys[index], it?.name))
                     sku.add(Sku(it?.id.toString(), it?.image ?: "", it?.stock
-                            ?: 0, it?.price ?: 0, listTemp))
+                            ?: 0, it?.price, listTemp))
                 }
             }
         } else {
             sku.add(Sku(skuBean?.id.toString(), skuBean?.image ?: "", skuBean?.stock
-                    ?: 0, skuBean?.price ?: 0, skuAttr))
+                    ?: 0, skuBean?.price, skuAttr))
         }
     }
 }

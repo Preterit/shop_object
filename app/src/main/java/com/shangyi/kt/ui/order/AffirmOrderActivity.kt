@@ -83,8 +83,8 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
      * 微信支付api
      */
     private val api: IWXAPI by lazy {
-        var api = WXAPIFactory.createWXAPI(this@AffirmOrderActivity, null)
-        api.registerApp(WXAPP_ID)
+        var api = WXAPIFactory.createWXAPI(this@AffirmOrderActivity, "wx8c512b137c836be1")
+        api.registerApp("wx8c512b137c836be1")
         api
     }
 
@@ -133,6 +133,8 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
     override fun initView() {
         titleView.resetBackListener(this)
         orderData = intent.getSerializableExtra("orderData") as ArrayList<CommitOrderBean>
+
+        Log.e("orderData -- ","${orderData.toString()}")
 
         if (orderData == null) {
             return
@@ -191,7 +193,6 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
         Thread(Runnable { //调用支付宝
             val payTask = PayTask(this)
             val result = payTask.pay(from, true)
-            Log.e("支付宝处理回掉 ---- ", "${result}")
             val msg = Message()
             msg.what = 0
             msg.obj = result
@@ -271,29 +272,15 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
      * 微信支付
      */
     private fun weChatPay(it: WxRequest) {
-        val str = "{\"appid\":\"wxb4ba3c02aa476ea1\",\"partnerid\":" +
-                "\"1900006771\",\"package\":\"Sign=WXPay\",\"noncestr\":\"5d6e2c9fd111de5c27b7aa5f072d1233\"," +
-                "\"timestamp\":1588148277,\"prepayid\":\"wx2916175767156917c2529b841538607932\"," +
-                "\"sign\":\"D24F4B174F2EA72619621661D47BC8CC\"}"
-        //{"appid":"wxb4ba3c02aa476ea1","partnerid":"1900006771","package":"Sign=WXPay","noncestr":"5d6e2c9fd111de5c27b7aa5f072d1233","timestamp":1588148277,"prepayid":"wx2916175767156917c2529b841538607932","sign":"D24F4B174F2EA72619621661D47BC8CC"}
         val req = PayReq()
         req.appId = it.appid
         req.partnerId = it.partnerid
         req.prepayId = it.prepayid
-        req.nonceStr = it.nonce_str
+        req.nonceStr = it.noncestr
         req.timeStamp = "${it.timestamp}"
         req.packageValue = it.`package`
         req.sign = it.sign
         req.extData = "app data" // optional
-        Log.e("wxpaydata -- ","${it.toString()}")
-//        req.appId = "wx8c512b137c836be1"
-//        req.partnerId = "1900006771"
-//        req.prepayId = "wx2916175767156917c2529b841538607932"
-//        req.nonceStr = "5d6e2c9fd111de5c27b7aa5f072d1233"
-//        req.timeStamp = "1588148277"
-//        req.packageValue = "Sign=WXPay"
-//        req.sign = "D24F4B174F2EA72619621661D47BC8CC"
-//        req.extData = "app data" // optional
         api.sendReq(req)
     }
 

@@ -14,7 +14,7 @@ public class Sku implements Parcelable {
     private int stockQuantity;
     private boolean inStock;
     private long originPrice;
-    private long sellingPrice;
+    private Float sellingPrice;
     private List<SkuAttribute> attributes;
 
     public String getId() {
@@ -57,11 +57,11 @@ public class Sku implements Parcelable {
         this.originPrice = originPrice;
     }
 
-    public long getSellingPrice() {
+    public Float getSellingPrice() {
         return sellingPrice;
     }
 
-    public void setSellingPrice(long sellingPrice) {
+    public void setSellingPrice(Float sellingPrice) {
         this.sellingPrice = sellingPrice;
     }
 
@@ -89,7 +89,7 @@ public class Sku implements Parcelable {
     public Sku() {
     }
 
-    public Sku(String id, String mainImage, int stockQuantity, long originPrice, List<SkuAttribute> attributes) {
+    public Sku(String id, String mainImage, int stockQuantity, Float originPrice, List<SkuAttribute> attributes) {
         this.id = id;
         this.mainImage = mainImage;
         this.stockQuantity = stockQuantity;
@@ -109,7 +109,7 @@ public class Sku implements Parcelable {
         dest.writeInt(this.stockQuantity);
         dest.writeByte(this.inStock ? (byte) 1 : (byte) 0);
         dest.writeLong(this.originPrice);
-        dest.writeLong(this.sellingPrice);
+        dest.writeFloat(this.sellingPrice);
         dest.writeTypedList(this.attributes);
     }
 
@@ -119,7 +119,7 @@ public class Sku implements Parcelable {
         this.stockQuantity = in.readInt();
         this.inStock = in.readByte() != 0;
         this.originPrice = in.readLong();
-        this.sellingPrice = in.readLong();
+        this.sellingPrice = in.readFloat();
         this.attributes = in.createTypedArrayList(SkuAttribute.CREATOR);
     }
 

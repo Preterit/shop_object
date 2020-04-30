@@ -18,5 +18,8 @@ class MineOrderCenterAdapter constructor(data: ArrayList<MineImgTxBean>)
     override fun convert(holder: BaseViewHolder, item: MineImgTxBean) {
         holder.itemView.tvTitle.text = item.title
         holder.itemView.ivOrderCenter.setImageResource(item.img)
+        holder.itemView.setOnClickListener {
+
+        }
     }
 }

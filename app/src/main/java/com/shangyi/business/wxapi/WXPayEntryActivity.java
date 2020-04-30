@@ -34,6 +34,7 @@ public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEvent
 
     @Override
     public void onReq(BaseReq baseReq) {
+
     }
 
     /**
@@ -46,6 +47,7 @@ public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEvent
         if (baseResp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
             if (baseResp.errCode == 0) {
                 UIUtils.showToast("支付成功");
+
             } else if (baseResp.errCode == -1) {
                 UIUtils.showToast("支付失败，请联系客服！");
             } else {

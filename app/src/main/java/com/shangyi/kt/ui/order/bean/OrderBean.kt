@@ -41,7 +41,7 @@ data class YfDataBean(
 data class OrderPayBefore(
         val order_id: String,
         val order_num: String,
-        val pay_amount: Int
+        val pay_amount: Float
 )
 
 data class OrderInfo(
@@ -54,7 +54,7 @@ data class WxOrderInfo(
 
 data class WxRequest(
         val appid: String,
-        val nonce_str: String,
+        val noncestr: String,
         val `package`: String,
         val partnerid: String,
         val prepayid: String,
@@ -62,6 +62,6 @@ data class WxRequest(
         val timestamp: Long
 ) {
     override fun toString(): String {
-        return "WxRequest(appid='$appid', nonce_str='$nonce_str', `package`='$`package`', partnerid='$partnerid', prepayid='$prepayid', sign='$sign', timestamp='$timestamp')"
+        return "WxRequest(appid='$appid', nonce_str='$noncestr', `package`='$`package`', partnerid='$partnerid', prepayid='$prepayid', sign='$sign', timestamp='$timestamp')"
     }
 }

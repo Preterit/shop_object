@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -72,6 +73,21 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
             }
         });
 
+        childViewHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    int[] cid = {list.get(groupPosition).child.get(position).cid};
+                    list.get(groupPosition).child.remove(position);
+                    if (list.get(groupPosition).child.size() == 0) {
+                        list.remove(groupPosition);
+                    }
+                    mListener.delectClick(list.size() == 0, cid);
+                    notifyDataSetChanged();
+                    refreshMoney();
+                }
+            }
+        });
         return convertView;
     }
 
@@ -90,6 +106,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
         private TextView tvFanPrice;
         private TextView tvNumber;
         private LinearLayout fanLayout;
+        private Button btnDelete;
         private LinearLayout checkboxLayout;
 
         public ChildViewHolder(View view, int groupPosition, int position) {
@@ -103,10 +120,10 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
             tvNumber = view.findViewById(R.id.tvNumber);
             fanLayout = view.findViewById(R.id.fanLayout);
             checkboxLayout = view.findViewById(R.id.checkboxLayout);
+            btnDelete = view.findViewById(R.id.btnDelete);
 
             view.findViewById(R.id.ivCut).setOnClickListener(this);
             view.findViewById(R.id.ivAdd).setOnClickListener(this);
-            view.findViewById(R.id.btnDelete).setOnClickListener(this);
         }
 
         @Override
@@ -121,10 +138,10 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
                 case R.id.btnDelete:
                     if (mListener != null) {
                         int[] cid = {list.get(groupPosition).child.get(position).cid};
-                        list.get(groupPosition).child.remove(position);
-                        if (list.get(groupPosition).child.size() == 0) {
-                            list.remove(groupPosition);
-                        }
+//                        list.get(groupPosition).child.remove(position);
+//                        if (list.get(groupPosition).child.size() == 0) {
+//                            list.remove(groupPosition);
+//                        }
                         mListener.delectClick(list.size() == 0, cid);
                         notifyDataSetChanged();
                         refreshMoney();

@@ -13,7 +13,7 @@ data class GoodsSpecBean(
 data class SkuBean(
     val child: List<SkuBean?>?,
     val name: String,
-    val price: Long,
+    val price: Float,
     val stock: Int,
     val image: String,
     val id: Int

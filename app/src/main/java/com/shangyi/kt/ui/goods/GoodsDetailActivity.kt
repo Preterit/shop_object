@@ -100,6 +100,10 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
                     viewList[0]?.tvStandard?.text = "${sku.attributes.toString().replace("[", "").replace("]", "")} $quantity 部"
                     // 切换规格， 切换商品图片
                     goodBean?.goodsImg = sku.mainImage
+                    goodBean?.goodsSpecId = skuId.toInt()
+                    goodBean?.SpecStr = "${sku.attributes.toString().replace("[", "").replace("]", "")} $quantity 部"
+                    goodBean?.goodsPrice = sku.sellingPrice
+
                     if (carSelect) {
                         carSelect = false
                         mBinding.vm?.addCar(goodsId, skuId, number)

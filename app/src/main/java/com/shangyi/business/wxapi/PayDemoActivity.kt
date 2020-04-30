@@ -26,7 +26,7 @@ class PayDemoActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.pay).setOnClickListener {
 //            getOrderInfo()
-            shareWebpage("上医在线分享","测试上医在线分享功能。。","www.baidu.com",SendMessageToWX.Req.WXSceneSession)
+            shareWebpage("上医在线分享", "测试上医在线分享功能。。", "www.baidu.com", SendMessageToWX.Req.WXSceneSession)
         }
         api.registerApp(Constom.WXAPP_ID)
     }
@@ -42,45 +42,15 @@ class PayDemoActivity : AppCompatActivity() {
 
     fun getOrderInfo() {
         val req = PayReq()
-//        req.appId = it.appid
-//        req.partnerId = it.partnerid
-//        req.prepayId = it.prepayid
-//        req.nonceStr = it.nonce_str
-//        req.timeStamp = "${it.timestamp}"
-//        req.packageValue = it.`package`
-//        req.sign = it.sign
-//        req.extData = "app data" // optional
-        req.appId = "wxb4ba3c02aa476ea1"
-        req.partnerId = "1900006771"
-        req.prepayId = "wx2916175767156917c2529b841538607932"
-        req.nonceStr = "5d6e2c9fd111de5c27b7aa5f072d1233"
-        req.timeStamp = "1588148277"
+        req.appId = "wx8c512b137c836be1"
+        req.partnerId = "1560159451"
+        req.prepayId = "wx301420486944175b739779901328851800"
+        req.nonceStr = "wnkx6c7gc598muyrgdr4x7pfvs9ak67b"
+        req.timeStamp = "1588227648"
         req.packageValue = "Sign=WXPay"
-        req.sign = "D24F4B174F2EA72619621661D47BC8CC"
+        req.sign = "259BB5618FFDE2F5C5641EE5F863505C"
         req.extData = "app data" // optional
         api.sendReq(req)
-    }
-
-    fun shareWx() {
-//        val bmp = BitmapFactory.decodeResource(resources, R.drawable.duck)
-//        //初始化 WXImageObject 和 WXMediaMessage 对象
-//        val imgObj = WXImageObject(bmp)
-//        val msg = WXMediaMessage()
-//        msg.mediaObject = imgObj
-//
-//        //设置缩略图
-//        val thumbBmp = Bitmap.createScaledBitmap(bmp, 50, 50, true)
-//        bmp.recycle()
-//        msg.thumbData = bmpToByteArray(thumbBmp, true)
-//
-//        //构造一个Req
-//        val req = SendMessageToWX.Req()
-//        req.transaction = buildTransaction("img")
-//        req.message = msg
-//        req.scene = mTargetScene
-//        req.userOpenId = getOpenId()
-//        //调用api接口，发送数据到微信
-//        api.sendReq(req)
     }
 
     fun bmpToByteArray(bmp: Bitmap, needRecycle: Boolean): ByteArray? {

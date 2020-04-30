@@ -24,9 +24,9 @@ data class CommitOrderBean(
 data class GoodsInfoBean(
         var goodsId: Int,
         val goodsCount: Int,
-        val goodsPrice: Float,
+        var goodsPrice: Float,
         val goodsName: String,
-        val SpecStr: String,
+        var SpecStr: String,
         var goodsImg: String?,
-        val goodsSpecId: Int
+        var goodsSpecId: Int
 ) : Parcelable

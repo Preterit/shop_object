@@ -55,9 +55,7 @@ class CarModel : BaseViewModel() {
             RetrofitClient.apiCusService.delCarGoods(params.aesData)
         }, {
             mIsLoadingShow.value = false
-            if (isRefresh) {
-                getCarList()
-            }
+            getCarList()
             delSuccess.value = true
         }, { code, msg, t ->
             UIUtils.showToast(msg)

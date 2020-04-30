@@ -35,8 +35,6 @@ class SplashModel : BaseViewModel() {
             override fun onFailure(call: okhttp3.Call, e: IOException) {
                 if (SpUtil.getString(Constants.API_KEY).isEmpty() || SpUtil.getString(Constants.BASEURL).isEmpty()) {
                     loadSettingInfo()
-                } else {
-                    settingData.value = true
                 }
             }
 
