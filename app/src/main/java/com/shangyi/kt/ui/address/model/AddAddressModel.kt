@@ -9,6 +9,7 @@ import com.shangyi.business.api.RetrofitClient
 import com.shangyi.business.network.Constants
 import com.shangyi.business.network.Params
 import com.shangyi.business.network.SpUtil
+import com.shangyi.business.utils.LogUtils
 import com.shangyi.kt.ui.address.bean.AreaBean
 import com.shangyi.kt.ui.address.bean.AreaListBean
 
@@ -35,7 +36,7 @@ class AddAddressModel : BaseViewModel() {
             }
             params.put("type", type)
 
-            Log.e("data --- ", "${AESUtils.decrypt(params.aesData, SpUtil.getString(Constants.API_KEY))}")
+            LogUtils.deCodeParams(params)
             RetrofitClient.apiCusService.getAreaData(params.aesData)
         }, {
             mIsLoadingShow.value = false
@@ -81,7 +82,7 @@ class AddAddressModel : BaseViewModel() {
             params.put("address", addresDetail)
             params.put("default", default)
 
-            Log.e("data --- ", "${AESUtils.decrypt(params.aesData, SpUtil.getString(Constants.API_KEY))}")
+            LogUtils.deCodeParams(params)
             RetrofitClient.apiCusService.saveAddress(params.aesData)
         }, {
             mIsLoadingShow.value = false
@@ -101,7 +102,7 @@ class AddAddressModel : BaseViewModel() {
             showLoadingDialog(true)
             val params = Params()
 
-            Log.e("data --- ", "${AESUtils.decrypt(params.aesData, SpUtil.getString(Constants.API_KEY))}")
+            LogUtils.deCodeParams(params)
             RetrofitClient.apiCusService.getAddressList(params.aesData)
         }, {
             mIsLoadingShow.value = false

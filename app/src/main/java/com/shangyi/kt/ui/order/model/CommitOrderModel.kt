@@ -10,6 +10,7 @@ import com.shangyi.business.api.RetrofitClient
 import com.shangyi.business.network.Constants
 import com.shangyi.business.network.Params
 import com.shangyi.business.network.SpUtil
+import com.shangyi.business.utils.LogUtils
 import com.shangyi.kt.ui.address.bean.AreaListBean
 import com.shangyi.kt.ui.order.bean.OrderInfo
 import com.shangyi.kt.ui.order.bean.OrderListJsonBean
@@ -83,7 +84,7 @@ class CommitOrderModel : BaseViewModel() {
             val params = Params()
             params.put("list", gson.fromJson(gson.toJson(goodsList), List::class.java))
             params.put("address_id", addressId)
-            Log.e("data --- ", "${AESUtils.decrypt(params.aesData, SpUtil.getString(Constants.API_KEY))}")
+            LogUtils.deCodeParams(params)
             RetrofitClient.apiCusService.querenOrders(params.aesData)
         }, { it ->
             mIsLoadingShow.value = false
@@ -102,7 +103,7 @@ class CommitOrderModel : BaseViewModel() {
             val params = Params()
             params.put("order_id", orderId)
             params.put("pay_type", if (payType == 1) "zfb" else "wx")
-            Log.e("data --- ", "${AESUtils.decrypt(params.aesData, SpUtil.getString(Constants.API_KEY))}")
+            LogUtils.deCodeParams(params)
             RetrofitClient.apiCusService.getPayInfo(params.aesData)
         }, { it ->
             mIsLoadingShow.value = false
@@ -120,7 +121,7 @@ class CommitOrderModel : BaseViewModel() {
         loadOnUI({
             val params = Params()
             params.put("order_num", orderNumber)
-            Log.e("data --- ", "${AESUtils.decrypt(params.aesData, SpUtil.getString(Constants.API_KEY))}")
+            LogUtils.deCodeParams(params)
             RetrofitClient.apiCusService.getOrderStatus(params.aesData)
         }, { it ->
             mIsLoadingShow.value = false
@@ -139,7 +140,7 @@ class CommitOrderModel : BaseViewModel() {
             val params = Params()
             params.put("order_id", orderId)
             params.put("pay_type", "wx")
-            Log.e("data --- ", "${AESUtils.decrypt(params.aesData, SpUtil.getString(Constants.API_KEY))}")
+            LogUtils.deCodeParams(params)
             RetrofitClient.apiCusService.getWxPayInfo(params.aesData)
         }, { it ->
             mIsLoadingShow.value = false

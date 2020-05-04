@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.multidex.MultiDexApplication
 import com.kingja.loadsir.core.LoadSir
 import com.sdxxtop.base.loadsir.*
-import com.sdxxtop.common.receiver.ConnectivityReceiver
 import com.sdxxtop.network.NetworkSession
 import kotlin.properties.Delegates
 

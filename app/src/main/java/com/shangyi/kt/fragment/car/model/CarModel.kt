@@ -1,14 +1,11 @@
 package com.shangyi.kt.fragment.car.model
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.sdxxtop.base.BaseViewModel
 import com.sdxxtop.base.utils.UIUtils
-import com.sdxxtop.network.utils.AESUtils
 import com.shangyi.business.api.RetrofitClient
-import com.shangyi.business.network.Constants
 import com.shangyi.business.network.Params
-import com.shangyi.business.network.SpUtil
+import com.shangyi.business.utils.LogUtils
 import com.shangyi.kt.fragment.car.entity.CartInfo
 
 /**
@@ -51,7 +48,7 @@ class CarModel : BaseViewModel() {
             showLoadingDialog(true)
             val params = Params()
             params.put("cid", cid)
-            Log.e("data --- ", "${AESUtils.decrypt(params.aesData, SpUtil.getString(Constants.API_KEY))}")
+            LogUtils.deCodeParams(params)
             RetrofitClient.apiCusService.delCarGoods(params.aesData)
         }, {
             mIsLoadingShow.value = false

@@ -14,12 +14,10 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.sdxxtop.base.BaseApplication;
-import com.sdxxtop.webview.remotewebview.ProgressWebView;
 import com.shangyi.business.network.NetWorkSession;
-
 import sing.util.LogUtil;
-import sing.util.SharedPreferencesUtil;
 import sing.util.ToastUtil;
+
 
 /**
  * data: 2020/3/17 17:37

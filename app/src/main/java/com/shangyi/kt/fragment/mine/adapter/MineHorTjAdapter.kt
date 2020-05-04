@@ -12,7 +12,8 @@ import kotlinx.android.synthetic.main.item_mine_hor_tj.view.*
  * author:lwb
  * Desc:
  */
-class MineHorTjAdapter constructor(val selectedColor: Int, val normalColor: Int) : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_mine_hor_tj) {
+class MineHorTjAdapter constructor(val selectedColor: Int, val normalColor: Int)
+    : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_mine_hor_tj) {
     private var currentSelectItem = 0  // 选中的条目
 
     override fun convert(holder: BaseViewHolder, item: String) {

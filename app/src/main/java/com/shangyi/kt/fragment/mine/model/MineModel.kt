@@ -1,14 +1,11 @@
 package com.shangyi.kt.fragment.mine.model
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.sdxxtop.base.BaseViewModel
 import com.sdxxtop.base.utils.UIUtils
-import com.sdxxtop.network.utils.AESUtils
 import com.shangyi.business.api.RetrofitClient
-import com.shangyi.business.network.Constants
 import com.shangyi.business.network.Params
-import com.shangyi.business.network.SpUtil
+import com.shangyi.business.utils.LogUtils
 import com.shangyi.kt.fragment.mine.bean.MineBean
 import com.shangyi.kt.ui.goods.bean.ReecommendGood
 
@@ -28,7 +25,7 @@ class MineModel : BaseViewModel() {
     fun loadMineInfo() {
         loadOnUI({
             val params = Params()
-            Log.e("data -- ", "${AESUtils.decrypt(params.aesData, SpUtil.getString(Constants.API_KEY))}")
+            LogUtils.deCodeParams(params)
             RetrofitClient.apiCusService.getUserInfo(params.aesData)
         }, {
             mineInfo.value = it
@@ -45,7 +42,7 @@ class MineModel : BaseViewModel() {
         loadOnUI({
             val params = Params()
             params.put("cid", itemId)
-            Log.e("data -- ", "${AESUtils.decrypt(params.aesData, SpUtil.getString(Constants.API_KEY))}")
+            LogUtils.deCodeParams(params)
             RetrofitClient.apiCusService.getCateTjData(params.aesData)
         }, {
             itemListData.value = it

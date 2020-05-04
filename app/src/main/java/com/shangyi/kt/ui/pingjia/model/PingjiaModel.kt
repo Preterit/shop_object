@@ -1,14 +1,11 @@
 package com.shangyi.kt.ui.pingjia.model
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.sdxxtop.base.BaseViewModel
 import com.sdxxtop.base.utils.UIUtils
-import com.sdxxtop.network.utils.AESUtils
 import com.shangyi.business.api.RetrofitClient
-import com.shangyi.business.network.Constants
 import com.shangyi.business.network.Params
-import com.shangyi.business.network.SpUtil
+import com.shangyi.business.utils.LogUtils
 import com.shangyi.kt.ui.pingjia.bean.PingjiaDataBean
 
 /**
@@ -35,7 +32,7 @@ class PingjiaModel : BaseViewModel() {
                 params.put("type", type)
             }
             params.put("img", img)
-            Log.e("data --- ", "${AESUtils.decrypt(params.aesData, SpUtil.getString(Constants.API_KEY))}")
+            LogUtils.deCodeParams(params)
             RetrofitClient.apiCusService.pinglunList(params.aesData)
         }, {
             mIsLoadingShow.value = false

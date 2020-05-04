@@ -90,7 +90,7 @@ public class GlideImageLoader {
         Context context = getImageView().getContext();
         if (context instanceof Activity) {
             boolean destroy = ActivityDestroy.isDestroy((Activity) context);
-            if (!destroy){
+            if (!destroy) {
                 requestBuilder(uri, options).into(getImageView());
             }
         }
@@ -98,10 +98,11 @@ public class GlideImageLoader {
 
     public void load(String url, RequestOptions options) {
         if (url == null || getContext() == null) return;
+        url = url.replace(" ", "");
         Context context = getImageView().getContext();
         if (context instanceof Activity) {
             boolean destroy = ActivityDestroy.isDestroy((Activity) context);
-            if (!destroy){
+            if (!destroy) {
                 requestBuilder(url, options).into(getImageView());
             }
         }

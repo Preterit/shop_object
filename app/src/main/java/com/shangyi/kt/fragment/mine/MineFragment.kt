@@ -18,6 +18,7 @@ import com.shangyi.kt.fragment.mine.bean.MineBean
 import com.shangyi.kt.fragment.mine.bean.MineImgTxBean
 import com.shangyi.kt.fragment.mine.model.MineModel
 import com.shangyi.kt.fragment.mine.weight.CenterLayoutManager
+import com.shangyi.kt.ui.mine.collect.CollectActivity
 import com.shangyi.kt.ui.setting.SettingActivity
 import kotlinx.android.synthetic.main.fragment_mine.*
 
@@ -66,6 +67,8 @@ class MineFragment : BaseKTFragment<FragmentMineBinding, MineModel>() {
         mineHorTjAdapter?.setOnItemScroClick(object : MineHorTjAdapter.OnItemScroClick {
             override fun itemSelect(position: Int) {
                 centerLayoutManager.smoothScrollToPosition(rvHorTj, RecyclerView.State(), position)
+                viewPager.currentItem = position
+                startActivity(Intent(context, CollectActivity::class.java))
             }
         })
 
