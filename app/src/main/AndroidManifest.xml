@@ -17,7 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.shangyi.kt.ui.mine.collect.CollectActivity"></activity>
+        <activity android:name="com.shangyi.kt.ui.mine.order.OrderInfoActivity"></activity>
+        <activity android:name="com.shangyi.kt.ui.order.PaySuccessActivity" />
+        <activity android:name="com.shangyi.kt.ui.mine.collect.CollectActivity" />
         <activity android:name=".wxapi.PayDemoActivity" />
         <activity
             android:name="com.shangyi.kt.ui.order.AffirmOrderActivity"

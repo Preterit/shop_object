@@ -1,22 +1,17 @@
 package com.shangyi.kt.ui.order.model
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.sdxxtop.base.BaseViewModel
 import com.sdxxtop.base.utils.UIUtils
-import com.sdxxtop.network.utils.AESUtils
 import com.shangyi.business.api.RetrofitClient
-import com.shangyi.business.network.Constants
 import com.shangyi.business.network.Params
-import com.shangyi.business.network.SpUtil
 import com.shangyi.business.utils.LogUtils
 import com.shangyi.kt.ui.address.bean.AreaListBean
-import com.shangyi.kt.ui.order.bean.OrderInfo
 import com.shangyi.kt.ui.order.bean.OrderListJsonBean
 import com.shangyi.kt.ui.order.bean.OrderPayBefore
 import com.shangyi.kt.ui.order.bean.WxRequest
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Date:2020/4/24
@@ -31,6 +26,7 @@ class CommitOrderModel : BaseViewModel() {
     var querenOrders = MutableLiveData<OrderPayBefore>()
     var orderInfo = MutableLiveData<String?>()
     var wxPayInfo = MutableLiveData<WxRequest?>()
+    var aliPaySuccess = MutableLiveData<Boolean>()
 
     /**
      * 获取默认地址
@@ -125,10 +121,11 @@ class CommitOrderModel : BaseViewModel() {
             RetrofitClient.apiCusService.getOrderStatus(params.aesData)
         }, { it ->
             mIsLoadingShow.value = false
-            UIUtils.showToast("支付成功")
+            aliPaySuccess.value = true
         }, { code, msg, t ->
             UIUtils.showToast(msg)
             mIsLoadingShow.value = false
+            aliPaySuccess.value = false
         })
     }
 

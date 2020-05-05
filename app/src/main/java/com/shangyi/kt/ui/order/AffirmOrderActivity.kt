@@ -10,14 +10,13 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alipay.sdk.app.PayTask
-import com.google.gson.Gson
 import com.sdxxtop.base.BaseKTActivity
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
-import com.shangyi.business.api.Constom.WXAPP_ID
 import com.shangyi.business.databinding.ActivityAffirmOrderBinding
 import com.shangyi.business.utils.CheckUtil
 import com.shangyi.business.weight.dialog.IosAlertDialog
+import com.shangyi.business.weight.dialog.YhqDialog
 import com.shangyi.kt.fragment.car.entity.CommitOrderBean
 import com.shangyi.kt.ui.address.AddressListActivity
 import com.shangyi.kt.ui.address.bean.AreaListBean
@@ -30,9 +29,10 @@ import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import kotlinx.android.synthetic.main.activity_affirm_order.*
 import kotlinx.android.synthetic.main.dialog_pay_type.view.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.lang.ref.WeakReference
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrderModel>(), PayBottomDialog.OnBottomItemClickListener {
@@ -68,6 +68,21 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
                 weChatPay(it)
             }
         })
+
+        /**
+         * 支付包支付成功，跳转
+         */
+        mBinding.vm?.aliPaySuccess?.observe(this, Observer {
+            if (it) {
+                payBottomDialog.dismiss()
+                UIUtils.showToast("支付成功")
+                val intent = Intent(this@AffirmOrderActivity, PaySuccessActivity::class.java)
+                intent.putExtra("orderId", orderId)
+                intent.putExtra("totalPrice", totalPrice)
+                startActivity(intent)
+                finish()
+            }
+        })
     }
 
     private var orderData: ArrayList<CommitOrderBean>? = null  // 商品的数据
@@ -78,6 +93,14 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
     private var orderId = ""  // 订单Id
     private var payType = 1 // 1 -- 支付宝  2 -- 微信  默认选中支付宝
     private var totalPrice = 0f // 总金额
+
+    /**
+     * 优惠券对话框
+     */
+    private val yhqDialog: YhqDialog by lazy {
+        val dialog = YhqDialog.newInstance("优惠券")
+        dialog
+    }
 
     /**
      * 微信支付api
@@ -133,8 +156,7 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
     override fun initView() {
         titleView.resetBackListener(this)
         orderData = intent.getSerializableExtra("orderData") as ArrayList<CommitOrderBean>
-
-        Log.e("orderData -- ","${orderData.toString()}")
+        Log.e("orderData -- ", "${orderData.toString()}")
 
         if (orderData == null) {
             return
@@ -161,6 +183,9 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
             R.id.ll_back -> {
                 // 放弃支付
                 cancelPay.show()
+            }
+            R.id.yhqLayout -> {
+                yhqDialog.show(supportFragmentManager, "")
             }
         }
     }
@@ -217,7 +242,7 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
                                 .replace("memo=", "").replace("result=", "")
                         Log.d("MainActivity:", result)
                         val num = result.split(";").toTypedArray()[0]
-                        showPayDialog(num)
+                        showAliPayInfo(num)
                     }
                 }
             }
@@ -227,7 +252,7 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
     /**
      * 支付宝支付订单查询
      */
-    fun showPayDialog(num: String) {
+    fun showAliPayInfo(num: String) {
         var result = when (num) {
             "9000" -> {
                 mBinding.vm?.notifyOrder(orderNumber)
@@ -284,6 +309,9 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
         api.sendReq(req)
     }
 
+    /**
+     * 处理提交订单提交的数据
+     */
     private fun setCommitData() {
         list.clear()
         totalPrice = 0f
@@ -300,4 +328,34 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
         tvPrice.text = "¥$totalPrice"
         tvTotalPrice.text = "¥$totalPrice"
     }
+
+    /**************** 微信支付成功 ****************/
+    override fun onStart() {
+        super.onStart()
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this)
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: String?) {
+        Log.e("onMessageEvent -- ", event)
+        if (event.equals("0")) {
+            payBottomDialog.dismiss()
+            UIUtils.showToast("支付成功")
+            val intent = Intent(this@AffirmOrderActivity, PaySuccessActivity::class.java)
+            intent.putExtra("orderId", orderId)
+            intent.putExtra("totalPrice", totalPrice)
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this)
+        }
+    }
+    /**************** 微信支付成功 ****************/
 }

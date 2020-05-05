@@ -59,4 +59,13 @@
         android:src="@drawable/next_step3"
         android:visibility="gone"
         tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tvBottomLine"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="#DDDDDD"
+        android:visibility="invisible" />
+
 </RelativeLayout>

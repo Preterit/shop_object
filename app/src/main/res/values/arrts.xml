@@ -10,6 +10,7 @@
         <attr name="leftLayoutIconIsGray" format="boolean" />
         <attr name="fitsSystemWindows" format="boolean" />
         <attr name="clipToPadding" format="boolean" />
+        <attr name="bottom_line_show" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="TextAndEditView">

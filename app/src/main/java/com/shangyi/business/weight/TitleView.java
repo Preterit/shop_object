@@ -32,6 +32,8 @@ public class TitleView extends RelativeLayout {
     private boolean layoutIsShow;
     private boolean fitsSystemWindows;
     private boolean clipToPadding;
+    private boolean bottomLineIsShow;
+    private TextView tvBottomLine;
 
     public TitleView(Context context) {
         this(context, null);
@@ -54,6 +56,7 @@ public class TitleView extends RelativeLayout {
         layoutIconIsGray = a.getBoolean(R.styleable.TitleView_leftLayoutIconIsGray, false);
         fitsSystemWindows = a.getBoolean(R.styleable.TitleView_fitsSystemWindows, true);
         clipToPadding = a.getBoolean(R.styleable.TitleView_clipToPadding, true);
+        bottomLineIsShow = a.getBoolean(R.styleable.TitleView_bottom_line_show, false);
 
         a.recycle();
         init();
@@ -67,6 +70,10 @@ public class TitleView extends RelativeLayout {
         setBackgroundColor(bgColor);
 
         LayoutInflater.from(getContext()).inflate(R.layout.view_title, this, true);
+
+        tvBottomLine = findViewById(R.id.tvBottomLine);
+        tvBottomLine.setVisibility(bottomLineIsShow ? View.VISIBLE : View.INVISIBLE);
+
         tvTitle = findViewById(R.id.tview_title);
         tvTitle.setText(titleValue);
         tvTitle.setTextColor(titleColor);
@@ -104,6 +111,7 @@ public class TitleView extends RelativeLayout {
     public void setBgColor(int bgColor) {
         setBackgroundColor(bgColor);
     }
+
     public void setWhiteTheme() {
         tvTitle.setTextColor(getResources().getColor(R.color.white));
 

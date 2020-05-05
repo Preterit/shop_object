@@ -7,6 +7,7 @@ import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentHomeBinding
 import com.shangyi.business.wxapi.PayDemoActivity
 import com.shangyi.kt.fragment.home.model.HomeModel
+import com.shangyi.kt.ui.order.PaySuccessActivity
 
 /**
  * Date:2020/4/7
@@ -27,7 +28,10 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
 
     override fun initView() {
         mLoadService.showSuccess()
-        mBinding.home.setOnClickListener { startActivity(Intent(context,PayDemoActivity::class.java)) }
+        mBinding.home.setOnClickListener {
+//            startActivity(Intent(context, PayDemoActivity::class.java))
+            startActivity(Intent(context, PaySuccessActivity::class.java))
+        }
     }
 
     companion object {

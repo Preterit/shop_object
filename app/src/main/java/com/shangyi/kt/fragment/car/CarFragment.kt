@@ -131,13 +131,6 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
         initData1()
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        if (isVisible) {
-//            initData1()
-//        }
-//    }
-
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         if (!hidden) {

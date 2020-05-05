@@ -108,7 +108,8 @@ dependencies {
     //地址三级联动
     implementation 'liji.library.dev:citypickerview:5.2.2'
     implementation 'com.contrarywind:Android-PickerView:4.1.9'
-
+    // 添加进来，只用到微信支付成功回掉结果处理。 开发过程中尽量不要使用，不好管理
+    implementation 'org.greenrobot:eventbus:3.2.0'
     //SmartRefreshLayout下拉刷新
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
 
@@ -125,7 +126,6 @@ dependencies {
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.2'
 
     // 微信
-//    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.3.1'
 
     // 支付宝支付

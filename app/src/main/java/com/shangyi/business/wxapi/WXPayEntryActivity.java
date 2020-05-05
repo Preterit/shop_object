@@ -15,6 +15,8 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
+import org.greenrobot.eventbus.EventBus;
+
 import static com.shangyi.business.api.Constom.WXAPP_ID;
 
 public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEventHandler {
@@ -47,7 +49,7 @@ public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEvent
         if (baseResp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
             if (baseResp.errCode == 0) {
                 UIUtils.showToast("支付成功");
-
+                EventBus.getDefault().post("" + baseResp.errCode);
             } else if (baseResp.errCode == -1) {
                 UIUtils.showToast("支付失败，请联系客服！");
             } else {
