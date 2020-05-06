@@ -28,10 +28,6 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
 
     override fun initView() {
         mLoadService.showSuccess()
-        mBinding.home.setOnClickListener {
-//            startActivity(Intent(context, PayDemoActivity::class.java))
-            startActivity(Intent(context, PaySuccessActivity::class.java))
-        }
     }
 
     companion object {
