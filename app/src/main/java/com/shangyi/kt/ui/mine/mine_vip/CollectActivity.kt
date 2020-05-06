@@ -1,4 +1,4 @@
-package com.shangyi.kt.ui.mine.collect
+package com.shangyi.kt.ui.mine.mine_vip
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

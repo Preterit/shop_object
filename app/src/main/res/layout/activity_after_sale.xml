@@ -4,27 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.shangyi.kt.ui.mine.mine_vip.CollectActivity">
+    tools:context="com.shangyi.kt.ui.mine.order.AfterSaleActivity">
 
     <com.shangyi.business.weight.TitleView
         android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:bottom_line_show="true"
         app:layout_constraintTop_toTopOf="parent"
-        app:rightTextColor="#FF4242"
-        app:rightTextValue="管理"
-        app:titleValue="收藏" />
+        app:leftLayoutIconIsGray="true"
+        app:titleValue="退款/售后" />
 
-    <ImageView
-        android:id="@+id/ivImg1"
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.study.glidemodel.GlideImageView
-        android:id="@+id/GlideImageView"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:layout_constraintTop_toBottomOf="@+id/ivImg1" />
-
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
