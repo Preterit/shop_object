@@ -1,30 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.shangyi.kt.ui.mine.mine_vip.CollectActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.shangyi.business.weight.TitleView
-        android:id="@+id/titleView"
+    <data>
+
+        <variable
+            name="vm"
+            type="com.shangyi.kt.ui.mine.mine_vip.model.CollectModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:rightTextColor="#FF4242"
-        app:rightTextValue="管理"
-        app:titleValue="收藏" />
+        android:layout_height="match_parent"
+        tools:context="com.shangyi.kt.ui.mine.mine_vip.CollectActivity">
 
-    <ImageView
-        android:id="@+id/ivImg1"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:layout_constraintTop_toTopOf="parent" />
+        <com.shangyi.business.weight.TitleView
+            android:id="@+id/titleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:bottom_line_show="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:leftLayoutIconIsGray="true"
+            app:rightTextColor="#FF4242"
+            app:rightTextValue="管理"
+            app:titleValue="收藏" />
 
-    <com.study.glidemodel.GlideImageView
-        android:id="@+id/GlideImageView"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:layout_constraintTop_toBottomOf="@+id/ivImg1" />
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/smartLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/bottomLayout"
+            app:layout_constraintTop_toBottomOf="@+id/titleView">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomLayout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="#F9F9F9"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/checkboxLayout"
+                android:layout_width="70dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/checkboxActivity"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/select_goods_item_selector"
+                    android:button="@null" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/delectAll"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:padding="25dp"
+                android:src="@drawable/icon_collect_del_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

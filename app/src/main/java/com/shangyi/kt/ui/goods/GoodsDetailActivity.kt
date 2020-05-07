@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.asynclayoutinflater.view.AsyncLayoutInflater
 import androidx.core.widget.NestedScrollView
@@ -224,6 +223,10 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
                 }
                 //用户点击tablayout时，标记不是scrollview主动滑动
                 scrollviewFlag = false
+            }
+
+            override fun clooectClick() {
+                mBinding.vm?.collectGoods(goodsId)
             }
         })
     }

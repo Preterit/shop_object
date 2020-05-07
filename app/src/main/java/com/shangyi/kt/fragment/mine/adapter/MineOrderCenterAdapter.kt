@@ -40,6 +40,7 @@ class MineOrderCenterAdapter constructor(data: ArrayList<MineImgTxBean>)
                 "退款/售后" -> {
                     context.startActivity(Intent(context, AfterSaleActivity::class.java))
                     Toast.makeText(context, "退款/售后", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
                 }
             }
             if (null != intent) {
