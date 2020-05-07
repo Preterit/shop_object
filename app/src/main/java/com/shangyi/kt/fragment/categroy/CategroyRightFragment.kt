@@ -78,7 +78,6 @@ class CategroyRightFragment : BaseKTFragment<FragmentCategroyRightBinding, Categ
         recyclerview.layoutManager = LinearLayoutManager(activity)
         recyclerview.adapter = adapter
 
-
         banner = mBinding.root.findViewById(R.id.banner)
         if (banner != null && bannerAdapter != null) {
             bannerAdapter?.setDatas(list)

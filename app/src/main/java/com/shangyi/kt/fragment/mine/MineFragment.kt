@@ -56,7 +56,7 @@ class MineFragment : BaseKTFragment<FragmentMineBinding, MineModel>() {
 
     override fun initView() {
         topViewPadding(topLine)
-        rvOrdercenter.layoutManager = GridLayoutManager(context, 5)
+        rvOrdercenter.layoutManager = GridLayoutManager(context, 5) as RecyclerView.LayoutManager?
         rvOrdercenter.adapter = MineOrderCenterAdapter(MineImgTxBean.getOrderData())
         rvVipCenter.layoutManager = GridLayoutManager(context, 4)
         rvVipCenter.adapter = MineVipCenterAdapter(MineImgTxBean.getVipData())

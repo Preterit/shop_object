@@ -21,6 +21,7 @@ class CategroyFragment : BaseKTFragment<FragmentCategroyBinding, CategroyModel>(
 
     override fun vmClazz() = CategroyModel::class.java
     override fun layoutId() = R.layout.fragment_categroy
+
     override fun bindVM() {
         mBinding.vm = mViewModel
     }
