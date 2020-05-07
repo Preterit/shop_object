@@ -24,8 +24,8 @@ data class HomeDataBean(
 )
 
 data class Dealer(
-        val cash_back: Int,
-        val dealer: Int,
+        val cash_back: Float,
+        val dealer: Float,
         val gid: Int
 )
 
