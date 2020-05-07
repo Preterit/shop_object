@@ -9,6 +9,7 @@ import com.sdxxtop.base.BaseKTActivity
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityCollectBinding
 import com.shangyi.kt.ui.mine.bean.Good
+import com.shangyi.kt.ui.mine.mine_vip.adapter.CollectListAdapter
 import com.shangyi.kt.ui.mine.mine_vip.model.CollectModel
 import kotlinx.android.synthetic.main.activity_collect.*
 

@@ -1,4 +1,4 @@
-package com.shangyi.kt.ui.mine.mine_vip
+package com.shangyi.kt.ui.mine.mine_vip.adapter
 
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter

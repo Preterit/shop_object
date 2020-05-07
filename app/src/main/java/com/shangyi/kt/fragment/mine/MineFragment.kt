@@ -20,6 +20,7 @@ import com.shangyi.kt.fragment.mine.model.MineModel
 import com.shangyi.kt.fragment.mine.weight.CenterLayoutManager
 import com.shangyi.kt.ui.mine.mine_vip.CollectActivity
 import com.shangyi.kt.ui.mine.order.AllOrderActivity
+import com.shangyi.kt.ui.mine.order.TxActivity
 import com.shangyi.kt.ui.setting.SettingActivity
 import kotlinx.android.synthetic.main.fragment_mine.*
 
@@ -147,7 +148,7 @@ class MineFragment : BaseKTFragment<FragmentMineBinding, MineModel>() {
         when (v.id) {
             R.id.txText -> {
                 // 提现
-
+                startActivity(Intent(context, TxActivity::class.java))
             }
             R.id.ivSetting -> {
                 // 设置
