@@ -20,7 +20,7 @@ public class LogUtils {
     private static final String TAG = "LogUtils";
 
     public static void e(String msg) {  //信息太长,分段打印
-        if (BuildConfig.DEBUG) {
+        if (!BuildConfig.DEBUG) {
             return;
         }
 
@@ -29,11 +29,11 @@ public class LogUtils {
         int max_str_length = 2001 - TAG.length();
         //大于4000时
         while (msg.length() > max_str_length) {
-            Log.i(TAG, msg.substring(0, max_str_length));
+            Log.e(TAG, msg.substring(0, max_str_length));
             msg = msg.substring(max_str_length);
         }
         //剩余部分
-        Log.i(TAG, msg);
+        Log.e(TAG, msg);
     }
 
     /**

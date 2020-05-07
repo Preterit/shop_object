@@ -18,7 +18,8 @@ import com.shangyi.kt.fragment.mine.bean.MineBean
 import com.shangyi.kt.fragment.mine.bean.MineImgTxBean
 import com.shangyi.kt.fragment.mine.model.MineModel
 import com.shangyi.kt.fragment.mine.weight.CenterLayoutManager
-import com.shangyi.kt.ui.mine.collect.CollectActivity
+import com.shangyi.kt.ui.mine.mine_vip.CollectActivity
+import com.shangyi.kt.ui.mine.order.AllOrderActivity
 import com.shangyi.kt.ui.setting.SettingActivity
 import kotlinx.android.synthetic.main.fragment_mine.*
 
@@ -154,6 +155,10 @@ class MineFragment : BaseKTFragment<FragmentMineBinding, MineModel>() {
             }
             R.id.ivMessage -> {
                 // 消息
+            }
+            R.id.tvCheckMoreOrder -> {
+                // 查看全部订单
+                startActivity(Intent(context, AllOrderActivity::class.java))
             }
         }
     }

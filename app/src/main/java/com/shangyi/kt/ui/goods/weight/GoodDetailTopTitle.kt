@@ -39,6 +39,11 @@ class GoodDetailTopTitle : FrameLayout, View.OnClickListener {
         tvPinjia.setOnClickListener(this)
         tvDetail.setOnClickListener(this)
         tvTuijian.setOnClickListener(this)
+        ivMore.setOnClickListener{
+            if (mListener != null) {
+                mListener?.clooectClick()
+            }
+        }
         ivBack.setOnClickListener {
             if (context is GoodsDetailActivity) {
                 val activity = context as GoodsDetailActivity
@@ -118,6 +123,7 @@ class GoodDetailTopTitle : FrameLayout, View.OnClickListener {
 
     interface OnTabSelectListener {
         fun onItemSelect(position: Int)
+        fun clooectClick()
     }
 
 }

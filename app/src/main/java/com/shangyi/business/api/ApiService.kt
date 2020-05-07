@@ -11,6 +11,8 @@ import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
 import com.shangyi.kt.ui.goods.bean.GoodsListBean
 import com.shangyi.kt.ui.goods.bean.GoodsSpecBean
 import com.shangyi.kt.ui.goods.bean.ReecommendGood
+import com.shangyi.kt.ui.mine.bean.CollectListBean
+import com.shangyi.kt.ui.mine.bean.OrderListBean
 import com.shangyi.kt.ui.order.bean.*
 import com.shangyi.kt.ui.pingjia.bean.PingjiaDataBean
 import com.shangyi.kt.ui.splash.bean.GetSettingBean
@@ -235,4 +237,53 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/api/user/getGoodsRecommend")
     suspend fun getCateTjData(@Field("data") data: String): BaseResponse<List<ReecommendGood?>?>
+
+    /**
+     * 订单 -- 查询订单支付状态
+     */
+    @FormUrlEncoded
+    @POST("/api/Orders/getCouponByGoods")
+    suspend fun getYhqList(@Field("data") data: String): BaseResponse<Any>
+
+    /**
+     * 订单 -- 获取全部订单
+     */
+    @FormUrlEncoded
+    @POST("/api/user/getAllOrders")
+    suspend fun getAllOrders(@Field("data") data: String): BaseResponse<List<OrderListBean>?>
+
+    /**
+     * 订单 -- 延迟收货
+     */
+    @FormUrlEncoded
+    @POST("/api/user/delayUserOrder")
+    suspend fun postYcsh(@Field("data") data: String): BaseResponse<Any>
+
+    /**
+     * 订单 -- 取消订单 -- 未支付
+     */
+    @FormUrlEncoded
+    @POST("/api/user/cancelUserOrder")
+    suspend fun postCancelOrder(@Field("data") data: String): BaseResponse<Any?>
+
+    /**
+     * 订单 -- 收藏
+     */
+    @FormUrlEncoded
+    @POST("/api/user/CollectionGoods")
+    suspend fun collectGoods(@Field("data") data: String): BaseResponse<Any?>
+
+    /**
+     * 订单 -- 收藏列表
+     */
+    @FormUrlEncoded
+    @POST("/api/user/CollectionList")
+    suspend fun getCollectList(@Field("data") data: String): BaseResponse<List<CollectListBean>?>
+    /**
+     * 订单 -- 收藏列表
+     */
+    @FormUrlEncoded
+    @POST("/api/user/delCollectionGoods")
+    suspend fun delCollect(@Field("data") data: String): BaseResponse<Any?>
+
 }

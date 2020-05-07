@@ -33,6 +33,7 @@ abstract class BaseApplication : MultiDexApplication() {
                 .addCallback(LoadingCallback())
                 .addCallback(TimeoutCallback())
                 .addCallback(CustomCallback())
+                .addCallback(OrderListEmptyCallback())
                 .setDefaultCallback(LoadingCallback::class.java)
                 .commit()
     }

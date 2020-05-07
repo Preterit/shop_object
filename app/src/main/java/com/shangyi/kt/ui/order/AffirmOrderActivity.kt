@@ -15,6 +15,7 @@ import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityAffirmOrderBinding
 import com.shangyi.business.utils.CheckUtil
+import com.shangyi.business.utils.LogUtils
 import com.shangyi.business.weight.dialog.IosAlertDialog
 import com.shangyi.business.weight.dialog.YhqDialog
 import com.shangyi.kt.fragment.car.entity.CommitOrderBean
@@ -98,7 +99,7 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
      * 优惠券对话框
      */
     private val yhqDialog: YhqDialog by lazy {
-        val dialog = YhqDialog.newInstance("优惠券")
+        val dialog = YhqDialog.newInstance(list)
         dialog
     }
 
@@ -122,9 +123,9 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
                 .setMsg2("超过支付时效后，订单会被取消哦")
                 .setMsg3(" ")
                 .setPositiveButton("继续支付", Color.parseColor("#FF2942"), {})
-                .setNegativeButton("确定离开", Color.parseColor("#333333"), {
+                .setNegativeButton("确定离开", Color.parseColor("#333333")) {
                     finish()
-                })
+                }
         dialog
     }
 
@@ -188,6 +189,13 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
                 yhqDialog.show(supportFragmentManager, "")
             }
         }
+    }
+
+    /**
+     * 选择优惠券的回掉
+     */
+    fun selectYhq(){
+        LogUtils.e("选择优惠券的回掉")
     }
 
     /**

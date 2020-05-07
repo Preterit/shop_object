@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.shangyi.kt.ui.mine.order.model.MineOrderModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.shangyi.kt.ui.mine.order.AllOrderActivity">
+
+        <com.shangyi.business.weight.TitleView
+            android:id="@+id/titleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:bottom_line_show="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:leftLayoutIconIsGray="true"
+            app:titleValue="订单中心" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/translate"
+            app:layout_constraintTop_toBottomOf="@+id/titleView"
+            app:tabIndicatorColor="#FF2942"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="#FF2942"
+            app:tabTextColor="@color/color_333333" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tablayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

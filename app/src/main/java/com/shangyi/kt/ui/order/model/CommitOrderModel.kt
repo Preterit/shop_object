@@ -147,4 +147,33 @@ class CommitOrderModel : BaseViewModel() {
             mIsLoadingShow.value = false
         })
     }
+
+    /**
+     * 获取下单的优惠券信息
+     */
+    fun getYhqList(goodsList: List<OrderListJsonBean>) {
+        loadOnUI({
+            val params = Params()
+            params.put("list", gson.fromJson(gson.toJson(goodsList), List::class.java))
+            LogUtils.deCodeParams(params)
+            RetrofitClient.apiCusService.getYhqList(params.aesData)
+        }, { it ->
+            mIsLoadingShow.value = false
+            mListener?.yhqList()
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
+        })
+    }
+
+
+    private var mListener: OnYhqLoad? = null
+
+    interface OnYhqLoad {
+        fun yhqList()
+    }
+    fun setYhqListener(listener: OnYhqLoad) {
+        this.mListener = listener
+    }
+
 }

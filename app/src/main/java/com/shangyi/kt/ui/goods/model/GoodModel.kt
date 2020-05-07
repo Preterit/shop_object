@@ -107,6 +107,24 @@ class GoodDetailModel : BaseViewModel() {
         })
     }
 
+    /**
+     * 收藏
+     */
+    fun collectGoods(goodsId: Int) {
+        loadOnUI({
+            showLoadingDialog(true)
+            val params = Params()
+            params.put("gid", goodsId)
+            LogUtils.deCodeParams(params)
+            RetrofitClient.apiCusService.collectGoods(params.aesData)
+        }, {
+            mIsLoadingShow.value = false
+            UIUtils.showToast("收藏成功")
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
+        })
+    }
 
     private val sku = ArrayList<Sku>()
 
