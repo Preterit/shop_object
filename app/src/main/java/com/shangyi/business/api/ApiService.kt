@@ -5,6 +5,8 @@ import com.shangyi.kt.fragment.categroy.bean.CategroyLeftBean
 import com.shangyi.kt.fragment.categroy.bean.CategroyRightBean
 import com.shangyi.kt.fragment.mine.bean.MineBean
 import com.shangyi.kt.fragment.car.entity.CartInfo
+import com.shangyi.kt.fragment.home.model.HomeBanner
+import com.shangyi.kt.fragment.home.model.HomeDataBean
 import com.shangyi.kt.ui.address.bean.AreaBean
 import com.shangyi.kt.ui.address.bean.AreaListBean
 import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
@@ -294,5 +296,19 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/api/user/getUserCoupon")
     suspend fun getYhqData(@Field("data") data: String): BaseResponse<YhqListBean?>
+
+    /**
+     * 首页 -- banner
+     */
+    @FormUrlEncoded
+    @POST("/api/index/bannerList")
+    suspend fun getHomeBanner(@Field("data") data: String): BaseResponse<List<HomeBanner>?>
+
+    /**
+     * 首页 -- banner
+     */
+    @FormUrlEncoded
+    @POST("/api/index/recommendGoods")
+    suspend fun getListData(@Field("data") data: String): BaseResponse<List<HomeDataBean>?>
 
 }
