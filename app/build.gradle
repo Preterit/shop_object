@@ -132,4 +132,6 @@ dependencies {
     // 支付宝支付
     implementation(name: 'alipaySdk-15.7.4-20200228192259', ext: 'aar')
 
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.7'
+
 }
