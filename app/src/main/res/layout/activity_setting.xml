@@ -43,6 +43,7 @@
                 app:rightImg="@mipmap/right" />
 
             <com.shangyi.business.weight.CumSettingItemView
+                android:id="@+id/huiyuan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:leftImg="@mipmap/huiyuan"

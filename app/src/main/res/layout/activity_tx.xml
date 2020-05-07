@@ -1,11 +1,261 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F2F2F2"
     tools:context="com.shangyi.kt.ui.mine.order.TxActivity">
 
+    <com.shangyi.business.weight.TitleView
+        app:leftLayoutIconIsGray="true"
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleValue="佣金提现" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        >
+
+        <TextView
+            android:id="@+id/tv01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:text="提现金额"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:id="@+id/tvv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥"
+            android:textColor="#333333"
+            android:textSize="24sp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv01"
+            />
+        <EditText
+            android:id="@+id/et_num"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="（最低为￥200）"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@null"
+            app:layout_constraintBottom_toBottomOf="@id/tvv"
+            app:layout_constraintTop_toBottomOf="@id/tv01"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/tvv"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F2F2F2"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintTop_toBottomOf="@id/et_num"
+            app:layout_constraintRight_toLeftOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tv02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="可提现余额￥200.00"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="#999999"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/et_num"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全部金额"
+            android:textSize="14sp"
+            android:textColor="#FF99A4"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintTop_toBottomOf="@id/et_num"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="服务费0.7%"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="25dp"
+            app:layout_constraintTop_toBottomOf="@id/tv02"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/con"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constra">
+
+        <ImageView
+            android:id="@+id/img_wx"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/wechatpay"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            />
+        <TextView
+            android:id="@+id/tv_wx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="提现微信"
+            android:textSize="16sp"
+            android:layout_marginLeft="13dp"
+            android:textColor="#333333"
+            android:layout_marginTop="31dp"
+            app:layout_constraintLeft_toRightOf="@id/img_wx"
+            app:layout_constraintTop_toTopOf="@id/con"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="132*****986"
+            android:textColor="#999999"
+            android:textSize="14sp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintTop_toTopOf="@id/imgwx01"
+            app:layout_constraintRight_toLeftOf="@id/imgwx01"
+            />
+        <ImageView
+            android:id="@+id/imgwx01"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintTop_toTopOf="@id/con"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/weixuan_item"
+            />
+
+        <TextView
+            android:id="@+id/tv_item"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F2F2F2"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="25dp"
+            app:layout_constraintTop_toBottomOf="@id/img_wx"
+            app:layout_constraintRight_toLeftOf="parent"
+            />
+
+        <ImageView
+            android:id="@+id/img_ali"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/alipay"
+            app:layout_constraintTop_toBottomOf="@id/tv_item"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toBottomOf="@id/con"
+            android:layout_marginLeft="20dp"
+            />
+        <TextView
+            android:id="@+id/tv_ali"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="提现支付宝"
+            android:textSize="16sp"
+            android:layout_marginLeft="13dp"
+            android:textColor="#333333"
+            android:layout_marginTop="31dp"
+            app:layout_constraintLeft_toRightOf="@id/img_ali"
+            app:layout_constraintTop_toTopOf="@id/tv_item"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="132*****986"
+            android:textColor="#999999"
+            android:textSize="14sp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintTop_toTopOf="@id/imgali01"
+            app:layout_constraintRight_toLeftOf="@id/imgali01"
+            />
+        <ImageView
+            android:id="@+id/imgali01"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintTop_toTopOf="@id/tv_item"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/weixuan_item"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#DFDFDF"
+        android:layout_marginLeft="34dp"
+        android:layout_marginRight="34dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/con"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="预计1-7个工作日到账，确认提现"
+            android:textColor="#999999"
+            android:textSize="14sp"
+            />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

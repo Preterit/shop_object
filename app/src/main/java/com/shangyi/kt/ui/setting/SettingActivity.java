@@ -8,6 +8,7 @@ import com.sdxxtop.base.BaseKTActivity;
 import com.shangyi.business.R;
 import com.shangyi.business.databinding.ActivitySettingBinding;
 import com.shangyi.business.weight.CumSettingItemView;
+import com.shangyi.kt.ui.mine.order.TxActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -19,6 +20,7 @@ public class SettingActivity extends BaseKTActivity<ActivitySettingBinding,Setti
     private CumSettingItemView mBackPwd;
     private CumSettingItemView mSettingAbout;
     private CumSettingItemView mSettingMessage;
+    private CumSettingItemView mHuiYuan;
 
     @NotNull
     @Override
@@ -47,10 +49,12 @@ public class SettingActivity extends BaseKTActivity<ActivitySettingBinding,Setti
         mBackPwd = findViewById(R.id.backpwd);
         mSettingAbout = findViewById(R.id.setting_about);
         mSettingMessage = findViewById(R.id.setting_message);
+        mHuiYuan = findViewById(R.id.huiyuan);
 
         mBackPwd.setOnClickListener(this);
         mSettingAbout.setOnClickListener(this);
         mSettingMessage.setOnClickListener(this);
+        mHuiYuan.setOnClickListener(this);
 
     }
 
@@ -68,6 +72,10 @@ public class SettingActivity extends BaseKTActivity<ActivitySettingBinding,Setti
             case R.id.setting_about://关于上医宝库
                 Intent intent1 = new Intent(SettingActivity.this, AboutSyActivity.class);
                 startActivity(intent1);
+                break;
+            case R.id.huiyuan://会员中心
+                Intent intentHuiYan = new Intent(SettingActivity.this, TxActivity.class);
+                startActivity(intentHuiYan);
                 break;
             default:
                 //nothing
