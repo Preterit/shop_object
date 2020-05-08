@@ -8,19 +8,29 @@ package com.shangyi.kt.fragment.home.model
 data class HomeDataBean(
         val count: Int,
         val dealer: Dealer,
-        val discountList: List<Any>,
+        val discountList: List<DisCountListBean>?,
         val goods_one_img: GoodsOneImg,
         val goods_unit: GoodsUnit,
         val id: Int,
         val intro: String,
         val msales: Int,
         val name: String,
-        val price: Int,
+        val price: Float,
         val sale_count: Int,
         val sale_price: Float,
         val shop_id: Int,
         val unit_id: Int,
         val weight: Float
+)
+
+data class DisCountListBean(
+        val id: Int,
+        val type: Int,
+        val shop_id: Any?,
+        val price: Float?,
+        val full_price: Float?,
+        val start_time: String?,
+        val end_time: String?
 )
 
 data class Dealer(

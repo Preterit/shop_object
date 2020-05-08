@@ -1,9 +1,12 @@
 package com.shangyi.kt.fragment.home.adapter
 
+import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.shangyi.business.R
+import com.shangyi.kt.fragment.home.model.DisCountListBean
 import com.shangyi.kt.fragment.home.model.HomeDataBean
+import com.shangyi.kt.ui.mine.weight.HomeYhqItemView
 import kotlinx.android.synthetic.main.item_home_list_view.view.*
 
 /**
@@ -23,6 +26,34 @@ class HomeBottomAdapter : BaseQuickAdapter<HomeDataBean?, BaseViewHolder>(R.layo
         /**
          * 优惠券
          */
-        //TODO 优惠券
+        holder.itemView.flowLayout.removeAllViewsInLayout()
+        item?.discountList?.forEach {
+            val item = HomeYhqItemView(context)
+            item.text = getYouhuiquanStr(it)
+            holder.itemView.flowLayout.addView(item)
+        }
+        if (!item?.discountList.isNullOrEmpty()) {
+            holder.itemView.flowLayout.visibility = View.VISIBLE
+        } else {
+            holder.itemView.flowLayout.visibility = View.GONE
+        }
+    }
+
+    /**
+     * 获取代金券的描述信息
+     */
+    fun getYouhuiquanStr(bean: DisCountListBean): String {
+        return when (bean.type) {
+            1 -> {  // 满减
+                "${"领券满" + bean.full_price + "减" + bean.price}"
+            }
+            2 -> {   // 代金券
+                "${"领券立减" + bean.price}"
+            }
+            3 -> {
+                "兑换券"
+            }
+            else -> ""
+        }
     }
 }

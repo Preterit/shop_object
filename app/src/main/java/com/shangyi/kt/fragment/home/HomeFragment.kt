@@ -39,7 +39,7 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
                 it.forEach { bannerItem ->
                     bannerList.add(BannerDataBean(bannerItem.img_url))
                 }
-                bannerAdapter.setDatas(bannerList)
+//                bannerAdapter.setDatas(bannerList)
             }
         })
 
@@ -73,7 +73,7 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
         adapter.addHeaderView(topView)
 
         appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-            topSearchLayout.setBackgroundColor(changeAlpha(resources.getColor(R.color.red), abs(verticalOffset * 1.0f) / appBarLayout.totalScrollRange))
+            topSearchLayout.setBackgroundColor(changeAlpha(resources.getColor(R.color.color_ff2941), abs(verticalOffset * 1.0f) / appBarLayout.totalScrollRange))
         })
 
         banner = mBinding.root.findViewById(R.id.banner)
