@@ -1,6 +1,7 @@
 package com.shangyi.kt.ui.goods.model
 
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import com.sdxxtop.base.BaseViewModel
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.api.RetrofitClient
@@ -35,6 +36,7 @@ class GoodDetailModel : BaseViewModel() {
         }, {
             mIsLoadingShow.value = false
             data.value = it
+            LogUtils.e(Gson().toJson(it))
         }, { code, msg, t ->
             UIUtils.showToast(msg)
             mIsLoadingShow.value = false
@@ -52,6 +54,9 @@ class GoodDetailModel : BaseViewModel() {
             2 -> {   // 代金券
                 "${"领券立减" + bean.price}"
             }
+            3 -> {
+                "兑换券"
+            }
             else -> ""
         }
     }
@@ -65,6 +70,21 @@ class GoodDetailModel : BaseViewModel() {
         } else {
             ""
         }
+    }
+
+    fun getYhqData(id: Int) {
+        loadOnUI({
+            showLoadingDialog(true)
+            val params = Params()
+            params.put("cid", id)
+            LogUtils.deCodeParams(params)
+            RetrofitClient.apiCusService.getYhq(params.aesData)
+        }, {
+            mIsLoadingShow.value = false
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
+        })
     }
 
     /**
@@ -215,5 +235,4 @@ class GoodsListModel : BaseViewModel() {
             mIsLoadingShow.value = false
         })
     }
-
 }

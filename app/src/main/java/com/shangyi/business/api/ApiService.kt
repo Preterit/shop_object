@@ -311,4 +311,11 @@ interface ApiService {
     @POST("/api/index/recommendGoods")
     suspend fun getListData(@Field("data") data: String): BaseResponse<List<HomeDataBean>?>
 
+    /**
+     * 首页 -- banner
+     */
+    @FormUrlEncoded
+    @POST("/api/user/CollectCoupon")
+    suspend fun getYhq(@Field("data") data: String): BaseResponse<Any?>
+
 }

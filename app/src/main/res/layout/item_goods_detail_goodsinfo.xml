@@ -154,6 +154,7 @@
                 android:layout_height="0dp"
                 android:layout_marginRight="12dp"
                 android:gravity="center"
+                android:onClick="@{activity::onClick}"
                 android:text="更多优惠 >"
                 android:textColor="@color/color_F61630"
                 android:textSize="12sp"
@@ -271,9 +272,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/shAddressLayout"
-            android:onClick="@{activity::onClick}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="@{activity::onClick}"
             android:paddingTop="15dp"
             android:paddingBottom="15dp">
 

@@ -19,6 +19,7 @@ import com.sdxxtop.webview.remotewebview.BaseWebView
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityGoodsDetailBinding
 import com.shangyi.business.databinding.ItemGoodsDetailGoodsinfoBinding
+import com.shangyi.business.weight.dialog.GoodsYhqDialog
 import com.shangyi.kt.fragment.car.entity.CommitOrderBean
 import com.shangyi.kt.fragment.car.entity.GoodsInfoBean
 import com.shangyi.kt.ui.address.AddressListActivity
@@ -27,6 +28,7 @@ import com.shangyi.kt.ui.goods.adapter.*
 import com.shangyi.kt.ui.goods.bean.GoodDetailTopBarBean
 import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
 import com.shangyi.kt.ui.goods.bean.ReecommendGood
+import com.shangyi.kt.ui.goods.bean.YouhuiquanBean
 import com.shangyi.kt.ui.goods.model.GoodDetailModel
 import com.shangyi.kt.ui.goods.weight.GoodDetailTopTitle
 import com.shangyi.kt.ui.goods.weight.ProductSkuDialog
@@ -74,6 +76,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     private var number = 1 // 商品数量
     private var dialog: ProductSkuDialog? = null   // 规格弹框
     private var carSelect = false   // 是否添加到购物车
+    private var yhqDataList: List<YouhuiquanBean?>? = null // 优惠券数据列表
 
     /**
      * 购买跳转传参
@@ -271,6 +274,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
      * 绑定数据
      */
     private fun bindData(it: GoodsDetailBean) {
+        yhqDataList = it.discountList
         //商品信息
         setGoodInfoData(it)
         //评论信息
@@ -433,12 +437,17 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
             }
 
             R.id.layoutLeft -> {
-                UIUtils.showToast("立即购买")
+//                UIUtils.showToast("立即购买")
                 buyGoods()
             }
 
             R.id.layoutRight -> {
                 UIUtils.showToast("分享")
+            }
+            R.id.tvMoreAction -> {
+                /******* 优惠券dialog ********/
+                if (yhqDataList == null) return
+                yuqDialog.show(supportFragmentManager, "")
             }
         }
     }
@@ -463,6 +472,14 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
             addressId = item!!.id
             viewList[0]?.tvShippingAddress?.text = "${item.provice?.name}${item.city?.name}${item.county?.name}${item.detail}"
         }
+    }
+
+    /**
+     * 优惠券dialog
+     */
+    private val yuqDialog: GoodsYhqDialog by lazy {
+        val dialog = GoodsYhqDialog.newInstance(yhqDataList as java.util.ArrayList<YouhuiquanBean>)
+        dialog
     }
 }
 
