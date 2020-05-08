@@ -34,7 +34,7 @@
             app:tabSelectedTextColor="#FF2942"
             app:tabTextColor="@color/color_999999" />
 
-        <androidx.viewpager.widget.ViewPager
+        <com.shangyi.kt.ui.mine.weight.ViewPagerSlide
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"

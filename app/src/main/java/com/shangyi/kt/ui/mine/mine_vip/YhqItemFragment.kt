@@ -8,6 +8,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.sdxxtop.base.BaseKTFragment
 import com.sdxxtop.base.loadsir.EmptyCallback
 import com.sdxxtop.base.loadsir.ErrorCallback
+import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentYhqViewBinding
 import com.shangyi.kt.ui.mine.bean.Number
@@ -38,6 +39,7 @@ class YhqItemFragment : BaseKTFragment<FragmentYhqViewBinding, YhqModel>() {
             if (it?.data == null) {
                 mLoadService.showCallback(ErrorCallback::class.java)
             } else {
+                mLoadService.showSuccess()
                 if (it.data.isEmpty()) {
                     mLoadService.showCallback(EmptyCallback::class.java)
                 } else {
@@ -47,6 +49,12 @@ class YhqItemFragment : BaseKTFragment<FragmentYhqViewBinding, YhqModel>() {
                         adapter.addData(it.data)
                     }
                 }
+            }
+        })
+        mBinding.vm?.delSuccess?.observe(this, Observer {
+            if (it) {
+                UIUtils.showToast("删除成功")
+                initData()
             }
         })
     }
@@ -60,6 +68,12 @@ class YhqItemFragment : BaseKTFragment<FragmentYhqViewBinding, YhqModel>() {
 
         recyclerview.layoutManager = LinearLayoutManager(context)
         recyclerview.adapter = adapter
+
+        adapter.setOnItemChildClick(object : YhqItemAdapter.OnItemChildClick {
+            override fun delItem(id: Int?) {
+                mBinding.vm?.delYhq(id)
+            }
+        })
 
         smartLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onLoadMore(refreshLayout: RefreshLayout) {
