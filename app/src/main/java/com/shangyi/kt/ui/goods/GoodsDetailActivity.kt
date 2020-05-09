@@ -20,6 +20,7 @@ import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityGoodsDetailBinding
 import com.shangyi.business.databinding.ItemGoodsDetailGoodsinfoBinding
 import com.shangyi.business.weight.dialog.GoodsYhqDialog
+import com.shangyi.kt.fragment.car.entity.AddressInfoBean
 import com.shangyi.kt.fragment.car.entity.CommitOrderBean
 import com.shangyi.kt.fragment.car.entity.GoodsInfoBean
 import com.shangyi.kt.ui.address.AddressListActivity
@@ -83,6 +84,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
      */
     private var goodBean: GoodsInfoBean? = null  // 商品信息
     private var orderInfo: CommitOrderBean? = null  // 商品信息
+    private var addressInfo: AddressInfoBean? = null  // 商品详情的地址
 
 
     override fun initObserve() {
@@ -91,7 +93,9 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
                 bindData(it)
             }
         })
-
+        mBinding.vm?.collectSuccess?.observe(this, Observer {
+            topGoodsTop.setCollectSuccess(it)
+        })
         mBinding.vm?.product?.observe(this, Observer {
             if (dialog == null) {
                 dialog = ProductSkuDialog(this)
@@ -228,8 +232,12 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
                 scrollviewFlag = false
             }
 
-            override fun clooectClick() {
-                mBinding.vm?.collectGoods(goodsId)
+            override fun clooectClick(isCollect: Boolean) {
+                if (isCollect) {
+                    mBinding.vm?.collectGoods(goodsId)
+                } else {
+                    mBinding.vm?.unCollectGoods(goodsId)
+                }
             }
         })
     }
@@ -253,6 +261,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         goodsId = intent.getIntExtra("goodsId", 0)
         mBinding.vm?.loadGoodsInfo(goodsId)
         mBinding.vm?.loadGoodsSpec(goodsId)
+        mBinding.vm?.collectGoods(goodsId)
     }
 
     /**
@@ -355,8 +364,18 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         /******** 规格 *********/
         viewList[0]?.tvStandard?.text = "${mBinding.vm?.getStandardStr(it) ?: "请选择规格"}"
         /******** 收货地址 *********/
+        addressId = it.address?.id ?: 0
         viewList[0]?.tvShippingAddress?.text = "${it.address?.address ?: "请选择收货地址"}"
 
+        // 数据请求成功后的 赋值地址bean
+        if (addressInfo == null) {
+            addressInfo = AddressInfoBean(addressId, it.address?.name, it.address?.mobile, it.address?.address)
+        } else {
+            addressInfo?.addressId = addressId
+            addressInfo?.name = it.address?.name
+            addressInfo?.phone = it.address?.mobile
+            addressInfo?.addressDesc = it.address?.address
+        }
     }
 
     /**
@@ -458,6 +477,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     private fun buyGoods() {
         val intent = Intent(this, AffirmOrderActivity::class.java)
         intent.putExtra("orderData", arrayListOf(orderInfo))
+        intent.putExtra("addressData", addressInfo)
         startActivity(intent)
     }
 
@@ -470,7 +490,17 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         if (requestCode == 11) {
             val item = data.getParcelableExtra<AreaListBean?>("areaBean")
             addressId = item!!.id
-            viewList[0]?.tvShippingAddress?.text = "${item.provice?.name}${item.city?.name}${item.county?.name}${item.detail}"
+            val addressStr = "${item.provice?.name}${item.city?.name}${item.county?.name}${item.detail}"
+            viewList[0]?.tvShippingAddress?.text = addressStr
+            // 修改地址后刷新数据
+            if (addressInfo == null) {
+                addressInfo = AddressInfoBean(item.id, item.recipient, item.mobile, addressStr)
+            } else {
+                addressInfo?.addressId = item.id
+                addressInfo?.name = item.recipient
+                addressInfo?.phone = item.mobile
+                addressInfo?.addressDesc = addressStr
+            }
         }
     }
 

@@ -15,15 +15,10 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.shangyi.business.R;
-import com.shangyi.business.utils.LogUtils;
 import com.shangyi.business.weight.dialog.adapter.GoodsYhqDialogAdapter;
 import com.shangyi.kt.ui.goods.bean.YouhuiquanBean;
 import com.shangyi.kt.ui.goods.model.GoodDetailModel;
-import com.shangyi.kt.ui.order.AffirmOrderActivity;
-import com.shangyi.kt.ui.order.model.CommitOrderModel;
 
 import java.util.ArrayList;
 

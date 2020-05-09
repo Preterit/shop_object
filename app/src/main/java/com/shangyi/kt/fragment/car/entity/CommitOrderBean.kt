@@ -30,3 +30,11 @@ data class GoodsInfoBean(
         var goodsImg: String?,
         var goodsSpecId: Int
 ) : Parcelable
+
+@Parcelize
+data class AddressInfoBean(
+        var addressId: Int,
+        var name: String?,
+        var phone: String?,
+        var addressDesc: String?
+) : Parcelable

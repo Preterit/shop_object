@@ -21,6 +21,8 @@ class GoodDetailModel : BaseViewModel() {
 
     var data = MutableLiveData<GoodsDetailBean>()
     val product = MutableLiveData<Product?>()
+    val collectSuccess = MutableLiveData<Boolean>(false)
+    private var isFirst = true  // 是否是第一次请求接口
 
     /**
      * 商品信息
@@ -138,10 +140,46 @@ class GoodDetailModel : BaseViewModel() {
             LogUtils.deCodeParams(params)
             RetrofitClient.apiCusService.collectGoods(params.aesData)
         }, {
-            mIsLoadingShow.value = false
             UIUtils.showToast("收藏成功")
+            mIsLoadingShow.value = false
+            collectSuccess.value = true
+        }, { code, msg, t ->
+            collectSuccess.value = false
+            if (msg == "收藏成功" || msg == "已收藏") {
+                if (isFirst) {
+                    isFirst = false
+                    collectSuccess.value = true
+                    return@loadOnUI
+                }
+                if (msg == "收藏成功") {
+                    UIUtils.showToast(msg)
+                }
+                collectSuccess.value = true
+            }
+            mIsLoadingShow.value = false
+        })
+    }
+
+    /**
+     * 取消收藏
+     */
+    fun unCollectGoods(goodsId: Int) {
+        val list = listOf<Int>(goodsId)
+        loadOnUI({
+            showLoadingDialog(true)
+            val params = Params()
+            params.put("gid", Gson().fromJson(list.toString(), List::class.java))
+            LogUtils.deCodeParams(params)
+            RetrofitClient.apiCusService.delCollect(params.aesData)
+        }, {
+            mIsLoadingShow.value = false
+            collectSuccess.value = false
         }, { code, msg, t ->
             UIUtils.showToast(msg)
+            if (msg == "取消收藏成功") {
+                UIUtils.showToast("取消收藏成功")
+                collectSuccess.value = false
+            }
             mIsLoadingShow.value = false
         })
     }

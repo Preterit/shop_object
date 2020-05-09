@@ -151,6 +151,7 @@ public class ProductSkuDialog extends Dialog {
                 selectedSku = sku;
 
                 setImaValue(context, selectedSku.getMainImage(), binding.ivImgLogo);
+                binding.tvSkuSellingPrice.setText(String.format(priceFormat, selectedSku.getSellingPrice()));
                 List<SkuAttribute> attributeList = selectedSku.getAttributes();
                 StringBuilder builder = new StringBuilder();
                 for (int i = 0; i < attributeList.size(); i++) {
@@ -212,7 +213,7 @@ public class ProductSkuDialog extends Dialog {
 
             setImaValue(context, selectedSku.getMainImage(), binding.ivImgLogo);
             binding.tvSkuSellingPrice.setText(String.format(priceFormat, selectedSku.getSellingPrice()));
-            binding.tvSkuSellingPriceUnit.setText("/" + product.getMeasurementUnit());
+//            binding.tvSkuSellingPriceUnit.setText("/" + product.getMeasurementUnit());
             binding.tvSkuQuantity.setText(String.format(stockQuantityFormat, selectedSku.getStockQuantity()));
             binding.btnSubmit.setEnabled(selectedSku.getStockQuantity() > 0);
             List<SkuAttribute> attributeList = selectedSku.getAttributes();
@@ -228,7 +229,7 @@ public class ProductSkuDialog extends Dialog {
         } else {
             setImaValue(context, selectedSku.getMainImage(), binding.ivImgLogo);
             binding.tvSkuSellingPrice.setText(String.format(priceFormat, product.getSellingPrice()));
-            binding.tvSkuSellingPriceUnit.setText("/" + product.getMeasurementUnit());
+//            binding.tvSkuSellingPriceUnit.setText("/" + product.getMeasurementUnit());
             binding.tvSkuQuantity.setText(String.format(stockQuantityFormat, product.getStockQuantity()));
             binding.btnSubmit.setEnabled(false);
             binding.tvSkuInfo.setText("请选择：" + skuList.get(0).getAttributes().get(0).getKey());

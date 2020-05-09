@@ -162,7 +162,6 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
             }
             R.id.tvDelete -> {
                 // 清空
-                UIUtils.showToast("清空")
                 editDel()
             }
         }

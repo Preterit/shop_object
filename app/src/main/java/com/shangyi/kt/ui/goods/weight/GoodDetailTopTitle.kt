@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.good_detail_toptitle.view.*
 class GoodDetailTopTitle : FrameLayout, View.OnClickListener {
 
     private var mListener: OnTabSelectListener? = null
+    private var isCollect = false // 是否收藏
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -39,9 +40,10 @@ class GoodDetailTopTitle : FrameLayout, View.OnClickListener {
         tvPinjia.setOnClickListener(this)
         tvDetail.setOnClickListener(this)
         tvTuijian.setOnClickListener(this)
-        ivMore.setOnClickListener{
+        ivMore.setOnClickListener {
             if (mListener != null) {
-                mListener?.clooectClick()
+                isCollect = !isCollect
+                mListener?.clooectClick(isCollect)
             }
         }
         ivBack.setOnClickListener {
@@ -116,6 +118,14 @@ class GoodDetailTopTitle : FrameLayout, View.OnClickListener {
         setTextBold(tvTuijian)
     }
 
+    fun setCollectSuccess(isCollect: Boolean) {
+        this.isCollect = isCollect
+        if (isCollect) {
+            ivMore.setImageResource(R.drawable.icon_goodsdetail_collect)
+        } else {
+            ivMore.setImageResource(R.drawable.icon_goodsdetail_uncollect)
+        }
+    }
 
     fun setOnItemSelectListener(listener: OnTabSelectListener) {
         this.mListener = listener
@@ -123,7 +133,7 @@ class GoodDetailTopTitle : FrameLayout, View.OnClickListener {
 
     interface OnTabSelectListener {
         fun onItemSelect(position: Int)
-        fun clooectClick()
+        fun clooectClick(isCollect: Boolean)
     }
 
 }

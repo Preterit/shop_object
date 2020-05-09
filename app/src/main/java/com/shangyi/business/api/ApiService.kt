@@ -284,7 +284,7 @@ interface ApiService {
     suspend fun getCollectList(@Field("data") data: String): BaseResponse<List<CollectListBean>?>
 
     /**
-     * 订单 -- 收藏列表
+     * 订单 -- 取消收藏
      */
     @FormUrlEncoded
     @POST("/api/user/delCollectionGoods")

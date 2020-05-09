@@ -33,6 +33,7 @@ data class GoodsDetailBean(
 )
 
 data class Address(
+        val id: Int,
         val address: String?,
         val mobile: String,
         val name: String,

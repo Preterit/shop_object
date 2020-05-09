@@ -51,21 +51,4 @@ public class LogUtils {
             e.printStackTrace();
         }
     }
-
-    /**
-     * 打印提交的的参数
-     *
-     * @param params
-     */
-    public static void deCodeResult(Params params) {
-        if (SpUtil.getString(Constants.API_KEY).isEmpty() || params.getAESData().isEmpty()) {
-            return;
-        }
-        try {
-            String decrypt = AESUtils.decrypt(params.getAESData(), SpUtil.getString(Constants.API_KEY));
-            e(decrypt);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
