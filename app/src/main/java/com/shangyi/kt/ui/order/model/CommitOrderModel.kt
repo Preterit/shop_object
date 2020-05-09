@@ -14,6 +14,7 @@ import com.shangyi.kt.ui.order.bean.OrderListJsonBean
 import com.shangyi.kt.ui.order.bean.OrderPayBefore
 import com.shangyi.kt.ui.order.bean.WxRequest
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Date:2020/4/24
@@ -76,11 +77,12 @@ class CommitOrderModel : BaseViewModel() {
     /**
      * 提交订单
      */
-    fun commitOrder(goodsList: ArrayList<OrderListJsonBean>, addressId: Int) {
+    fun commitOrder(goodsList: ArrayList<OrderListJsonBean>, addressId: Int, yhqData: ArrayList<Int>) {
         loadOnUI({
             showLoadingDialog(true)
             val params = Params()
             params.put("list", gson.fromJson(gson.toJson(goodsList), List::class.java))
+            params.put("coupon", gson.fromJson(gson.toJson(yhqData), List::class.java))
             params.put("address_id", addressId)
             LogUtils.deCodeParams(params)
             RetrofitClient.apiCusService.querenOrders(params.aesData)

@@ -15,7 +15,7 @@ import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityAffirmOrderBinding
 import com.shangyi.business.utils.CheckUtil
-import com.shangyi.business.utils.LogUtils
+import com.shangyi.business.weight.CustomOrderTextView
 import com.shangyi.business.weight.dialog.IosAlertDialog
 import com.shangyi.business.weight.dialog.YhqDialog
 import com.shangyi.kt.fragment.car.entity.AddressInfoBean
@@ -35,8 +35,9 @@ import kotlinx.android.synthetic.main.dialog_pay_type.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import java.lang.StringBuilder
 import java.lang.ref.WeakReference
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 
 class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrderModel>(), PayBottomDialog.OnBottomItemClickListener {
@@ -82,7 +83,7 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
                 UIUtils.showToast("支付成功")
                 val intent = Intent(this@AffirmOrderActivity, PaySuccessActivity::class.java)
                 intent.putExtra("orderId", orderId)
-                intent.putExtra("totalPrice", totalPrice)
+                intent.putExtra("totalPrice", yhPrice)
                 startActivity(intent)
                 finish()
             }
@@ -98,6 +99,9 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
     private var orderId = ""  // 订单Id
     private var payType = 1 // 1 -- 支付宝  2 -- 微信  默认选中支付宝
     private var totalPrice = 0f // 总金额
+    private var yhPrice = 0f // 使用优惠券的价格
+    private var fanPrice = 0f // 返现金额
+    private var yhqData = ArrayList<Int>()  // 优惠券ID集合
 
     /**
      * 优惠券对话框
@@ -143,7 +147,7 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
         val mDialogView = layoutInflater.inflate(R.layout.dialog_pay_type, null)
         mDialogView.iv_buy_alipay_select.isEnabled = true
         mDialogView.iv_buy_weichat_select.isEnabled = false
-        mDialogView.tv_num.text = "¥${totalPrice}"
+        mDialogView.tv_num.text = "¥${yhPrice}"
         val mDialog = PayBottomDialog(this@AffirmOrderActivity, mDialogView, intArrayOf(R.id.tv_confirm, R.id.img_cancel))
         mDialogView.ll_pay_weichat.setOnClickListener {
             //wechat
@@ -178,6 +182,11 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.adapter = OrderGoodsAdapter(orderData)
         setCommitData()
+
+        tvPrice.text = "¥$totalPrice"
+        yhPrice = totalPrice
+        tvTotalPrice.text = "$yhPrice"
+        tvFanTx.text = "下单返：¥${fanPrice}"
     }
 
     override fun initData() {
@@ -212,12 +221,8 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
      * 提交订单
      */
     private fun commitOrder() {
-        if (!orderNumber.isNullOrEmpty() && !orderId.isNullOrEmpty()) {
-            payBottomDialog.bottmShow()
-        } else {
-            setCommitData()
-            mBinding.vm?.commitOrder(list, addressId)
-        }
+        setCommitData()
+        mBinding.vm?.commitOrder(list, addressId, yhqData)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -342,9 +347,8 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
             list[list.size - 1].remark = item.psText ?: ""
             // 总金额相加
             totalPrice += item.totalPrice
+            fanPrice += item.fanPrice
         }
-        tvPrice.text = "¥$totalPrice"
-        tvTotalPrice.text = "¥$totalPrice"
     }
 
     /**************** 微信支付成功 ****************/
@@ -357,13 +361,12 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(event: String?) {
-        Log.e("onMessageEvent -- ", event)
         if (event.equals("0")) {
             payBottomDialog.dismiss()
             UIUtils.showToast("支付成功")
             val intent = Intent(this@AffirmOrderActivity, PaySuccessActivity::class.java)
             intent.putExtra("orderId", orderId)
-            intent.putExtra("totalPrice", totalPrice)
+            intent.putExtra("totalPrice", yhPrice)
             startActivity(intent)
             finish()
         }
@@ -383,11 +386,40 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
      * 进行价格的调整
      */
     private fun refreshPrice(it: List<CommitOrderYhqData>) {
-        val sb = StringBuilder()
-        it.forEach {
+        selectYhqLayout.removeAllViews()
+        yhLayout.removeAllViews()
+        yhqData.clear()
 
+        it.forEach {
+            var textView1 = CustomOrderTextView(this@AffirmOrderActivity)
+            textView1.setData(getYouhuiquanStr(it), " ")
+            selectYhqLayout.addView(textView1)
+
+            var textView = CustomOrderTextView(this@AffirmOrderActivity)
+            textView.setData(getYouhuiquanStr(it), "- ${it.price}")
+            yhLayout.addView(textView)
+
+            yhqData.add(it.id)
         }
-        yhqTx.text = ""
+        var textView = CustomOrderTextView(this@AffirmOrderActivity)
+        textView.setData(" ", "合计   " + getYhPrice(it))
+        yhLayout.addView(textView)
+
+        tvTotalPrice.text = "${getYhPrice(it)}"
+    }
+
+    /**
+     * 获取优惠完的金额
+     */
+    private fun getYhPrice(it: List<CommitOrderYhqData>): String {
+        yhPrice = totalPrice
+        it.forEach {
+            yhPrice -= it.price
+        }
+        val df = DecimalFormat("0.00")
+        df.roundingMode = RoundingMode.HALF_UP
+        yhPrice = df.format(yhPrice).toFloat()
+        return df.format(yhPrice)
     }
 
     /**
@@ -403,18 +435,6 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
             }
             3 -> {
                 "兑换券"
-            }
-            else -> ""
-        }
-    }
-
-    fun getYhqStr(bean: CommitOrderYhqData): String {
-        return when (bean.type) {
-            1 -> {  // 满减
-                "满${bean.full_price}可用"
-            }
-            2, 3 -> {   // 代金券
-                "无限制"
             }
             else -> ""
         }

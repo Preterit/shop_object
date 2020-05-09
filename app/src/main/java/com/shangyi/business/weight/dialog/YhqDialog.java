@@ -81,6 +81,7 @@ public class YhqDialog extends DialogFragment implements CommitOrderModel.OnYhqL
         if (mListener != null) {
             if (adapter != null) {
                 mListener.yhqSelectListener(adapter.getSelectData());
+                dismiss();
             }
         }
     }

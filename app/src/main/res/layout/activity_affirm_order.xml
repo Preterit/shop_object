@@ -36,6 +36,7 @@
             android:overScrollMode="never"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
+            android:paddingBottom="10dp"
             app:layout_constraintBottom_toTopOf="@+id/tvFanTx"
             app:layout_constraintTop_toBottomOf="@+id/titleView">
 
@@ -146,11 +147,11 @@
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/tvYuq" />
 
-                    <TextView
-                        android:id="@+id/yhqTx"
+                    <LinearLayout
+                        android:id="@+id/selectYhqLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="10sp"
+                        android:orientation="vertical"
                         app:layout_constraintTop_toBottomOf="@+id/tvYuq" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -195,6 +196,7 @@
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+
                     <TextView
                         android:id="@+id/tvYf"
                         android:layout_width="wrap_content"
@@ -206,6 +208,13 @@
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvPrice"
                         tools:text="+ ¥0.00" />
+
+                    <LinearLayout
+                        android:id="@+id/yhLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toBottomOf="@+id/tvYf" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
