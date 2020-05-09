@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,19 +22,22 @@ import com.shangyi.business.R;
 import com.shangyi.business.utils.LogUtils;
 import com.shangyi.business.weight.dialog.adapter.YhqFragmentDialogAdapter;
 import com.shangyi.kt.ui.order.AffirmOrderActivity;
+import com.shangyi.kt.ui.order.bean.CommitOrderYhqData;
 import com.shangyi.kt.ui.order.bean.OrderListJsonBean;
 import com.shangyi.kt.ui.order.model.CommitOrderModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Date:2020/5/5
  * author:lwb
  * Desc:
  */
-public class YhqDialog extends DialogFragment implements CommitOrderModel.OnYhqLoad, OnItemClickListener {
+public class YhqDialog extends DialogFragment implements CommitOrderModel.OnYhqLoad {
 
     private RecyclerView recycler;
+    private TextView tvOk;
     private CommitOrderModel orderModel;
     private YhqFragmentDialogAdapter adapter;
 
@@ -51,22 +55,34 @@ public class YhqDialog extends DialogFragment implements CommitOrderModel.OnYhqL
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_dialog_yhu_layout, container, false);
+        View view = inflater.inflate(R.layout.order_dialog_yhu_layout, container, false);
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recycler = view.findViewById(R.id.recyclerview);
+        tvOk = view.findViewById(R.id.tvOk);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new YhqFragmentDialogAdapter();
         recycler.setAdapter(adapter);
-        adapter.setOnItemClickListener(this);
+        tvOk.setOnClickListener(v -> getSelectYhqData());
 
         Bundle arguments = getArguments();
         ArrayList<OrderListJsonBean> data = (ArrayList<OrderListJsonBean>) arguments.getSerializable("data");
         orderModel.getYhqList(data);
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    /**
+     * 获取选中的优惠券数据
+     */
+    private void getSelectYhqData() {
+        if (mListener != null) {
+            if (adapter != null) {
+                mListener.yhqSelectListener(adapter.getSelectData());
+            }
+        }
     }
 
     @Override
@@ -101,22 +117,17 @@ public class YhqDialog extends DialogFragment implements CommitOrderModel.OnYhqL
      * 获取优惠券列表的回掉。
      */
     @Override
-    public void yhqList() {
-        LogUtils.e("获取优惠券列表的回掉。");
+    public void yhqList(List<CommitOrderYhqData> data) {
+        adapter.setList(data);
     }
 
-    /**
-     * 适配器的点击事件
-     *
-     * @param adapter
-     * @param view
-     * @param position
-     */
-    @Override
-    public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-        if (getActivity() instanceof AffirmOrderActivity) {
-            AffirmOrderActivity activity = (AffirmOrderActivity) getActivity();
-            activity.selectYhq();
-        }
+    public interface OnYhqSelectListener {
+        void yhqSelectListener(List<CommitOrderYhqData> data);
+    }
+
+    private OnYhqSelectListener mListener;
+
+    public void setOnYhqSelectListener(OnYhqSelectListener listener) {
+        this.mListener = listener;
     }
 }

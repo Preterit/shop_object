@@ -1,7 +1,5 @@
 package com.shangyi.kt.ui.order.bean
 
-import android.util.Log
-
 /**
  * Date:2020/4/21
  * author:lwb

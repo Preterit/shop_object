@@ -7,7 +7,9 @@ import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.api.RetrofitClient
 import com.shangyi.business.network.Params
 import com.shangyi.business.utils.LogUtils
+import com.shangyi.kt.fragment.car.entity.CommitOrderBean
 import com.shangyi.kt.ui.address.bean.AreaListBean
+import com.shangyi.kt.ui.order.bean.CommitOrderYhqData
 import com.shangyi.kt.ui.order.bean.OrderListJsonBean
 import com.shangyi.kt.ui.order.bean.OrderPayBefore
 import com.shangyi.kt.ui.order.bean.WxRequest
@@ -159,7 +161,9 @@ class CommitOrderModel : BaseViewModel() {
             RetrofitClient.apiCusService.getYhqList(params.aesData)
         }, { it ->
             mIsLoadingShow.value = false
-            mListener?.yhqList()
+            if (it != null) {
+                mListener?.yhqList(it)
+            }
         }, { code, msg, t ->
             UIUtils.showToast(msg)
             mIsLoadingShow.value = false
@@ -170,8 +174,9 @@ class CommitOrderModel : BaseViewModel() {
     private var mListener: OnYhqLoad? = null
 
     interface OnYhqLoad {
-        fun yhqList()
+        fun yhqList(data: List<CommitOrderYhqData>?)
     }
+
     fun setYhqListener(listener: OnYhqLoad) {
         this.mListener = listener
     }

@@ -23,6 +23,7 @@ import com.shangyi.kt.fragment.car.entity.CommitOrderBean
 import com.shangyi.kt.ui.address.AddressListActivity
 import com.shangyi.kt.ui.address.bean.AreaListBean
 import com.shangyi.kt.ui.order.adapter.OrderGoodsAdapter
+import com.shangyi.kt.ui.order.bean.CommitOrderYhqData
 import com.shangyi.kt.ui.order.bean.OrderListJsonBean
 import com.shangyi.kt.ui.order.bean.WxRequest
 import com.shangyi.kt.ui.order.model.CommitOrderModel
@@ -34,6 +35,7 @@ import kotlinx.android.synthetic.main.dialog_pay_type.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import java.lang.StringBuilder
 import java.lang.ref.WeakReference
 
 
@@ -102,6 +104,9 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
      */
     private val yhqDialog: YhqDialog by lazy {
         val dialog = YhqDialog.newInstance(list)
+        dialog.setOnYhqSelectListener {
+            refreshPrice(it)
+        }
         dialog
     }
 
@@ -201,13 +206,6 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
                 yhqDialog.show(supportFragmentManager, "")
             }
         }
-    }
-
-    /**
-     * 选择优惠券的回掉
-     */
-    fun selectYhq() {
-        LogUtils.e("选择优惠券的回掉")
     }
 
     /**
@@ -378,4 +376,47 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
         }
     }
     /**************** 微信支付成功 ****************/
+
+
+    /**
+     * 选择优惠券的回掉
+     * 进行价格的调整
+     */
+    private fun refreshPrice(it: List<CommitOrderYhqData>) {
+        val sb = StringBuilder()
+        it.forEach {
+
+        }
+        yhqTx.text = ""
+    }
+
+    /**
+     * 获取代金券的描述信息
+     */
+    fun getYouhuiquanStr(bean: CommitOrderYhqData): String {
+        return when (bean.type) {
+            1 -> {  // 满减
+                "${"领券满" + bean.full_price + "减" + bean.price}"
+            }
+            2 -> {   // 代金券
+                "${"领券立减" + bean.price}"
+            }
+            3 -> {
+                "兑换券"
+            }
+            else -> ""
+        }
+    }
+
+    fun getYhqStr(bean: CommitOrderYhqData): String {
+        return when (bean.type) {
+            1 -> {  // 满减
+                "满${bean.full_price}可用"
+            }
+            2, 3 -> {   // 代金券
+                "无限制"
+            }
+            else -> ""
+        }
+    }
 }
