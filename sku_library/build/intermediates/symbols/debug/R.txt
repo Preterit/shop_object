@@ -639,9 +639,10 @@ int drawable notification_template_icon_low_bg 0x7f08006d
 int drawable notification_tile_bg 0x7f08006e
 int drawable notify_panel_notification_icon_bg 0x7f08006f
 int drawable product_sku_close_selector 0x7f080070
-int drawable sku_item_selector 0x7f080071
-int drawable tooltip_frame_dark 0x7f080072
-int drawable tooltip_frame_light 0x7f080073
+int drawable shape_home_yhq_item_bg 0x7f080071
+int drawable sku_item_selector 0x7f080072
+int drawable tooltip_frame_dark 0x7f080073
+int drawable tooltip_frame_light 0x7f080074
 int id accessibility_action_clickable_span 0x7f0b0001
 int id accessibility_custom_action_0 0x7f0b0002
 int id accessibility_custom_action_1 0x7f0b0003

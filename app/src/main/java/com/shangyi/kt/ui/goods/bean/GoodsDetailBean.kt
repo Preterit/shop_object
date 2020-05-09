@@ -28,11 +28,12 @@ data class GoodsDetailBean(
         val spec: SpecBean?,  // 佣金 数据
         val goods_img: List<GoodsImgBean>?,  // 轮播图
         val shop_info: ShopInfoBean?,  // 商铺信息
-        val goods_unit: GoodsUnitBean?,  // 轮播图
+        val goods_unit: GoodsUnitBean?,
         val weight: Float
 )
 
 data class Address(
+        val id: Int,
         val address: String?,
         val mobile: String,
         val name: String,
@@ -77,6 +78,8 @@ data class YouhuiquanBean(
         val shop_id: Int,
         val coupon_code: String,
         val price: Float,
+        val start_time: String, //使用开始时间
+        val end_time: String, //使用结束时间
         val full_price: Float
 )
 

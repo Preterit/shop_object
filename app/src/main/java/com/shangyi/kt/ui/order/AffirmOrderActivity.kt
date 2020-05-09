@@ -18,6 +18,7 @@ import com.shangyi.business.utils.CheckUtil
 import com.shangyi.business.utils.LogUtils
 import com.shangyi.business.weight.dialog.IosAlertDialog
 import com.shangyi.business.weight.dialog.YhqDialog
+import com.shangyi.kt.fragment.car.entity.AddressInfoBean
 import com.shangyi.kt.fragment.car.entity.CommitOrderBean
 import com.shangyi.kt.ui.address.AddressListActivity
 import com.shangyi.kt.ui.address.bean.AreaListBean
@@ -87,6 +88,7 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
     }
 
     private var orderData: ArrayList<CommitOrderBean>? = null  // 商品的数据
+    private var addressData: AddressInfoBean? = null  // 地址信息
     private var addressId = 0   // 地址ID
     private var list = ArrayList<OrderListJsonBean>()  // 请求接口的商品列表
     private val mHandler = MyHandler(this)
@@ -157,7 +159,13 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
     override fun initView() {
         titleView.resetBackListener(this)
         orderData = intent.getSerializableExtra("orderData") as ArrayList<CommitOrderBean>
-        Log.e("orderData -- ", "${orderData.toString()}")
+        addressData = intent.getParcelableExtra<AddressInfoBean>("addressData")
+        addressId = addressData?.addressId ?: 0
+        tvName.text = addressData?.name
+        tvPhone.text = addressData?.phone
+        tvAdsStr.text = addressData?.addressDesc
+
+//        Log.e("orderData -- ", "${orderData.toString()}")
 
         if (orderData == null) {
             return
@@ -168,7 +176,11 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
     }
 
     override fun initData() {
-        mBinding.vm?.loadAddress()
+        if (addressData == null) {
+            mBinding.vm?.loadAddress()
+        } else {
+            mBinding.vm?.loadYunfei(list, addressId)
+        }
     }
 
     override fun onClick(v: View) {
@@ -194,7 +206,7 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
     /**
      * 选择优惠券的回掉
      */
-    fun selectYhq(){
+    fun selectYhq() {
         LogUtils.e("选择优惠券的回掉")
     }
 

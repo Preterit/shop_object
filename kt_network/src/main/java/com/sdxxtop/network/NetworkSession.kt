@@ -10,13 +10,16 @@ import java.lang.ref.WeakReference
  * Description:
  */
 object NetworkSession {
+
     lateinit var contextDef: WeakReference<Context>
     var version: Int = 0
+    var isDebug = false
 
     @JvmStatic
-    fun initNetwork(context: Context, version: Int) {
+    fun initNetwork(context: Context, version: Int, isDebug: Boolean) {
         this@NetworkSession.contextDef = WeakReference(context)
         this@NetworkSession.version = version
+        this@NetworkSession.isDebug = isDebug
     }
 
     @JvmStatic
@@ -26,4 +29,10 @@ object NetworkSession {
         }
         return contextDef.get()!!
     }
+
+    @JvmStatic
+    fun getIsDebug(): Boolean {
+        return isDebug
+    }
+
 }

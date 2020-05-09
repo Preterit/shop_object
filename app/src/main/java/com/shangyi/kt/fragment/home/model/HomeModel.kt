@@ -2,6 +2,7 @@ package com.shangyi.kt.fragment.home.model
 
 import androidx.lifecycle.MutableLiveData
 import com.sdxxtop.base.BaseViewModel
+import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.api.RetrofitClient
 import com.shangyi.business.network.Params
 import com.shangyi.kt.fragment.categroy.bean.CategroyRightBean
@@ -11,29 +12,40 @@ import com.shangyi.kt.fragment.categroy.bean.CategroyRightBean
  * author:lwb
  * Desc:
  */
-class HomeModel:BaseViewModel() {
+class HomeModel : BaseViewModel() {
 
-    var categoryRightData = MutableLiveData<CategroyRightBean?>()
-
+    var homeBanner = MutableLiveData<List<HomeBanner>?>()
+    var listData = MutableLiveData<List<HomeDataBean>?>()
 
     /**
      * 获取右侧分类数据
      */
-    fun getRightCategory(categroyId: Int) {
+    fun getHomeBannerData() {
         loadOnUI({
             showLoadingDialog(true)
             val params = Params()
-            params.put("id", categroyId)
-            RetrofitClient.apiCusService.getRightCategory(params.aesData)
+            RetrofitClient.apiCusService.getHomeBanner(params.aesData)
         }, {
-            categoryRightData.value = it
             mIsLoadingShow.value = false
+            homeBanner.value = it
         }, { code, msg, t ->
-            //            UIUtils.showToast(msg)
-            categoryRightData.value = null
+            UIUtils.showToast(msg)
             mIsLoadingShow.value = false
         })
     }
 
+    /**
+     * 获取适配器数据
+     */
+    fun getListData() {
+        loadOnUI({
+            val params = Params()
+            RetrofitClient.apiCusService.getListData(params.aesData)
+        }, {
+            listData.value = it
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+        })
+    }
 
 }

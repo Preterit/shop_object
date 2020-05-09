@@ -1,6 +1,7 @@
 package com.shangyi.kt.ui.goods.model
 
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import com.sdxxtop.base.BaseViewModel
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.api.RetrofitClient
@@ -20,6 +21,8 @@ class GoodDetailModel : BaseViewModel() {
 
     var data = MutableLiveData<GoodsDetailBean>()
     val product = MutableLiveData<Product?>()
+    val collectSuccess = MutableLiveData<Boolean>(false)
+    private var isFirst = true  // 是否是第一次请求接口
 
     /**
      * 商品信息
@@ -35,6 +38,7 @@ class GoodDetailModel : BaseViewModel() {
         }, {
             mIsLoadingShow.value = false
             data.value = it
+            LogUtils.e(Gson().toJson(it))
         }, { code, msg, t ->
             UIUtils.showToast(msg)
             mIsLoadingShow.value = false
@@ -52,6 +56,9 @@ class GoodDetailModel : BaseViewModel() {
             2 -> {   // 代金券
                 "${"领券立减" + bean.price}"
             }
+            3 -> {
+                "兑换券"
+            }
             else -> ""
         }
     }
@@ -65,6 +72,21 @@ class GoodDetailModel : BaseViewModel() {
         } else {
             ""
         }
+    }
+
+    fun getYhqData(id: Int) {
+        loadOnUI({
+            showLoadingDialog(true)
+            val params = Params()
+            params.put("cid", id)
+            LogUtils.deCodeParams(params)
+            RetrofitClient.apiCusService.getYhq(params.aesData)
+        }, {
+            mIsLoadingShow.value = false
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
+        })
     }
 
     /**
@@ -118,10 +140,46 @@ class GoodDetailModel : BaseViewModel() {
             LogUtils.deCodeParams(params)
             RetrofitClient.apiCusService.collectGoods(params.aesData)
         }, {
-            mIsLoadingShow.value = false
             UIUtils.showToast("收藏成功")
+            mIsLoadingShow.value = false
+            collectSuccess.value = true
+        }, { code, msg, t ->
+            collectSuccess.value = false
+            if (msg == "收藏成功" || msg == "已收藏") {
+                if (isFirst) {
+                    isFirst = false
+                    collectSuccess.value = true
+                    return@loadOnUI
+                }
+                if (msg == "收藏成功") {
+                    UIUtils.showToast(msg)
+                }
+                collectSuccess.value = true
+            }
+            mIsLoadingShow.value = false
+        })
+    }
+
+    /**
+     * 取消收藏
+     */
+    fun unCollectGoods(goodsId: Int) {
+        val list = listOf<Int>(goodsId)
+        loadOnUI({
+            showLoadingDialog(true)
+            val params = Params()
+            params.put("gid", Gson().fromJson(list.toString(), List::class.java))
+            LogUtils.deCodeParams(params)
+            RetrofitClient.apiCusService.delCollect(params.aesData)
+        }, {
+            mIsLoadingShow.value = false
+            collectSuccess.value = false
         }, { code, msg, t ->
             UIUtils.showToast(msg)
+            if (msg == "取消收藏成功") {
+                UIUtils.showToast("取消收藏成功")
+                collectSuccess.value = false
+            }
             mIsLoadingShow.value = false
         })
     }
@@ -215,5 +273,4 @@ class GoodsListModel : BaseViewModel() {
             mIsLoadingShow.value = false
         })
     }
-
 }

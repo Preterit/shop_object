@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonToken
 import com.sdxxtop.network.helper.data.BaseResponse
 import com.sdxxtop.network.utils.AESUtils
+import com.sdxxtop.network.utils.LongMsgLog
 import com.sdxxtop.network.utils.SpUtil
 import okhttp3.MediaType
 import okhttp3.RequestBody
@@ -83,7 +84,7 @@ internal class GsonCusResponseBodyConverter<T>(
             var baseResponse = gson.fromJson(resultStr, BaseResponse::class.java)
             if (baseResponse.code == "0" && baseResponse.data != null && SpUtil.getString("api_key").isNotEmpty()) {
                 val decrypt = AESUtils.decrypt(baseResponse.data as String, SpUtil.getString("api_key"))
-                Log.e("data decode result --  ", "$decrypt")
+                LongMsgLog.printMsg(decrypt)
                 val fromJson = gson.fromJson(decrypt, Any::class.java)
                 val resultResponse = BaseResponse<Any>(fromJson, baseResponse.code, baseResponse.msg)
                 resultStr = gson.toJson(resultResponse)

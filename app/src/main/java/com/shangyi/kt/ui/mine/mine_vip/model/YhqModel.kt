@@ -16,6 +16,7 @@ import com.shangyi.kt.ui.mine.bean.YhqListBean
 class YhqModel : BaseViewModel() {
 
     val yhqData = MutableLiveData<YhqListBean?>()
+    val delSuccess = MutableLiveData<Boolean>(false)
 
     /**
      * 获取优惠券信息
@@ -38,6 +39,26 @@ class YhqModel : BaseViewModel() {
             yhqData.value = it
         }, { code, msg, t ->
             UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
+        })
+    }
+
+    /**
+     * 删除优惠券
+     */
+    fun delYhq(id: Int?) {
+        loadOnUI({
+            showLoadingDialog(true)
+            val params = Params()
+            params.put("receive_id", id)
+            LogUtils.deCodeParams(params)
+            RetrofitClient.apiCusService.getYhqData(params.aesData)
+        }, {
+            mIsLoadingShow.value = false
+            delSuccess.value = true
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            delSuccess.value = false
             mIsLoadingShow.value = false
         })
     }

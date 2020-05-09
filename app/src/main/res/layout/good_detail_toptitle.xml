@@ -15,10 +15,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:gravity="center"
         app:layout_constraintLeft_toRightOf="@+id/ivBack"
         app:layout_constraintRight_toLeftOf="@+id/ivShare">
@@ -85,8 +85,8 @@
         android:id="@+id/ivMore"
         android:layout_width="40dp"
         android:layout_height="match_parent"
-        android:padding="13dp"
-        android:src="@drawable/icon_goods_more"
+        android:padding="12dp"
+        android:src="@drawable/icon_goodsdetail_uncollect"
         app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

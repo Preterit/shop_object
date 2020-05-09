@@ -23,7 +23,7 @@ abstract class BaseApplication : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
-        NetworkSession.initNetwork(this, versionCode())
+        NetworkSession.initNetwork(this, versionCode(),isDebug())
 
 //        ConnectivityReceiver.register(this)
 
