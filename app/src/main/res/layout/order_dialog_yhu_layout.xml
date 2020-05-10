@@ -15,22 +15,11 @@
         android:textColor="@color/color_333333"
         android:textSize="17sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="13dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="13dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="left"
-        android:text="可领取优惠券"
-        android:textColor="@color/color_333333"
-        android:textSize="17sp" />
-
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/smartLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         android:layout_weight="1"
         app:srlEnableLoadMore="false"
         app:srlEnableRefresh="false">
@@ -42,7 +31,7 @@
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     <TextView
-        android:id="@+id/tvCancel"
+        android:id="@+id/tvOk"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginLeft="15dp"

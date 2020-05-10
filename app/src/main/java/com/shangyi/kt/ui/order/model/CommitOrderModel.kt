@@ -7,11 +7,14 @@ import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.api.RetrofitClient
 import com.shangyi.business.network.Params
 import com.shangyi.business.utils.LogUtils
+import com.shangyi.kt.fragment.car.entity.CommitOrderBean
 import com.shangyi.kt.ui.address.bean.AreaListBean
+import com.shangyi.kt.ui.order.bean.CommitOrderYhqData
 import com.shangyi.kt.ui.order.bean.OrderListJsonBean
 import com.shangyi.kt.ui.order.bean.OrderPayBefore
 import com.shangyi.kt.ui.order.bean.WxRequest
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Date:2020/4/24
@@ -74,11 +77,12 @@ class CommitOrderModel : BaseViewModel() {
     /**
      * 提交订单
      */
-    fun commitOrder(goodsList: ArrayList<OrderListJsonBean>, addressId: Int) {
+    fun commitOrder(goodsList: ArrayList<OrderListJsonBean>, addressId: Int, yhqData: ArrayList<Int>) {
         loadOnUI({
             showLoadingDialog(true)
             val params = Params()
             params.put("list", gson.fromJson(gson.toJson(goodsList), List::class.java))
+            params.put("coupon", gson.fromJson(gson.toJson(yhqData), List::class.java))
             params.put("address_id", addressId)
             LogUtils.deCodeParams(params)
             RetrofitClient.apiCusService.querenOrders(params.aesData)
@@ -159,7 +163,9 @@ class CommitOrderModel : BaseViewModel() {
             RetrofitClient.apiCusService.getYhqList(params.aesData)
         }, { it ->
             mIsLoadingShow.value = false
-            mListener?.yhqList()
+            if (it != null) {
+                mListener?.yhqList(it)
+            }
         }, { code, msg, t ->
             UIUtils.showToast(msg)
             mIsLoadingShow.value = false
@@ -170,8 +176,9 @@ class CommitOrderModel : BaseViewModel() {
     private var mListener: OnYhqLoad? = null
 
     interface OnYhqLoad {
-        fun yhqList()
+        fun yhqList(data: List<CommitOrderYhqData>?)
     }
+
     fun setYhqListener(listener: OnYhqLoad) {
         this.mListener = listener
     }

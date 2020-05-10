@@ -246,7 +246,7 @@ interface ApiService {
      */
     @FormUrlEncoded
     @POST("/api/Orders/getCouponByGoods")
-    suspend fun getYhqList(@Field("data") data: String): BaseResponse<Any>
+    suspend fun getYhqList(@Field("data") data: String): BaseResponse<List<CommitOrderYhqData>?>
 
     /**
      * 订单 -- 获取全部订单
