@@ -16,6 +16,8 @@ import com.shangyi.kt.fragment.home.model.HomeModel
 import com.youth.banner.Banner
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.item_home_top_view.*
+import kotlinx.android.synthetic.main.item_home_top_view.view.*
 import kotlin.math.abs
 
 /**
@@ -75,6 +77,7 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
         appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             topSearchLayout.setBackgroundColor(changeAlpha(resources.getColor(R.color.color_ff2941), abs(verticalOffset * 1.0f) / appBarLayout.totalScrollRange))
         })
+
 
         banner = mBinding.root.findViewById(R.id.banner)
         if (banner != null) {

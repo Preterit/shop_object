@@ -4,12 +4,10 @@ import android.content.Intent
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.shangyi.business.R
+import com.shangyi.kt.ui.mine.yijian.YiJianActivity
 import com.shangyi.kt.fragment.mine.bean.MineImgTxBean
 import com.shangyi.kt.ui.address.AddressListActivity
-import com.shangyi.kt.ui.mine.mine_vip.CollectActivity
-import com.shangyi.kt.ui.mine.mine_vip.FxManagerActivity
-import com.shangyi.kt.ui.mine.mine_vip.MySyActivity
-import com.shangyi.kt.ui.mine.mine_vip.YhqActivity
+import com.shangyi.kt.ui.mine.mine_vip.*
 import kotlinx.android.synthetic.main.item_mine_order_center.view.*
 
 /**
@@ -34,7 +32,8 @@ class MineVipCenterAdapter constructor(data: ArrayList<MineImgTxBean>)
                     intent = Intent(context, CollectActivity::class.java)
                 }
                 "分销管理" -> {
-                    intent = Intent(context, FxManagerActivity::class.java)
+                    // intent = Intent(context, FenxiaoActivity::class.java)
+                    //intent = Intent(context, FxManagerActivity::class.java)
                 }
                 "我的收益" -> {
                     intent = Intent(context, MySyActivity::class.java)
@@ -43,6 +42,7 @@ class MineVipCenterAdapter constructor(data: ArrayList<MineImgTxBean>)
                     intent = Intent(context, AddressListActivity::class.java)
                 }
                 "意见反馈" -> {
+                    intent = Intent(context, YiJianActivity::class.java)
 //                    intent = Intent(context, FeedBackActivity::class.java)
                 }
                 "积分商城" -> {
