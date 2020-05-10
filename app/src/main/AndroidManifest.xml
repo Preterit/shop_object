@@ -17,7 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.shangyi.kt.ui.mine.mine_vip.YhqGoodsActivity"></activity>
+        <activity android:name="com.shangyi.kt.ui.mine.yijian.YiJianSubmitActivity" />
+        <activity android:name="com.shangyi.kt.ui.mine.yijian.YiJianActivity" />
+        <activity android:name="com.shangyi.kt.ui.mine.mine_vip.YhqGoodsActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.order.TxActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.order.AfterSaleActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.mine_vip.FxManagerActivity" />
