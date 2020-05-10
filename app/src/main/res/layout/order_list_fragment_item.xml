@@ -7,7 +7,9 @@
     android:layout_marginTop="10dp"
     android:background="@drawable/shape_affirm_order_white_bg"
     android:paddingTop="15dp"
-    android:paddingBottom="15dp">
+    android:paddingBottom="15dp"
+    android:id="@+id/order_list_item_layout"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/shopLayout"
