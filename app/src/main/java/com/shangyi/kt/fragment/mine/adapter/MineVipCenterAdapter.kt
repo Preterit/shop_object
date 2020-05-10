@@ -32,7 +32,7 @@ class MineVipCenterAdapter constructor(data: ArrayList<MineImgTxBean>)
                     intent = Intent(context, CollectActivity::class.java)
                 }
                 "分销管理" -> {
-                    // intent = Intent(context, FenxiaoActivity::class.java)
+                    //     intent = Intent(context, FenxiaoActivity::class.java)
                     //intent = Intent(context, FxManagerActivity::class.java)
                 }
                 "我的收益" -> {
