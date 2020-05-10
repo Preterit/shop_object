@@ -4,7 +4,7 @@ import android.content.Intent
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.shangyi.business.R
-import com.shangyi.kt.ui.mine.yijian.YiJianActivity
+import com.shangyi.kt.ui.mine.YiJianActivity
 import com.shangyi.kt.fragment.mine.bean.MineImgTxBean
 import com.shangyi.kt.ui.address.AddressListActivity
 import com.shangyi.kt.ui.mine.mine_vip.*
