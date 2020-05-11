@@ -1,4 +1,4 @@
-package com.shangyi.kt.ui.mine;
+package com.shangyi.kt.ui.mine.yijian;
 
 import com.sdxxtop.base.BaseKTActivity;
 import com.shangyi.business.R;

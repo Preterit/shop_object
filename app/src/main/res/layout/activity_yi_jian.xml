@@ -12,7 +12,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F2F2F2"
-    tools:context="com.shangyi.kt.ui.mine.YiJianActivity">
+    tools:context="com.shangyi.kt.ui.mine.yijian.YiJianActivity">
 
     <com.shangyi.business.weight.TitleView
         app:leftLayoutIconIsGray="true"
