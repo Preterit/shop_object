@@ -6,7 +6,8 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.shangyi.business.R
 import com.shangyi.kt.fragment.mine.bean.MineImgTxBean
 import com.shangyi.kt.ui.address.AddressListActivity
-import com.shangyi.kt.ui.mine.YiJianActivity
+import com.shangyi.kt.ui.mine.FenxiaoActivity
+import com.shangyi.kt.ui.mine.yijian.YiJianActivity
 import com.shangyi.kt.ui.mine.mine_vip.*
 import kotlinx.android.synthetic.main.item_mine_order_center.view.*
 
@@ -32,7 +33,7 @@ class MineVipCenterAdapter constructor(data: ArrayList<MineImgTxBean>)
                     intent = Intent(context, CollectActivity::class.java)
                 }
                 "分销管理" -> {
-                    //     intent = Intent(context, FenxiaoActivity::class.java)
+                    intent = Intent(context, FenxiaoActivity::class.java)
                     //intent = Intent(context, FxManagerActivity::class.java)
                 }
                 "我的收益" -> {

@@ -11,7 +11,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.shangyi.kt.ui.mine.YiJianSubmitActivity">
+    tools:context="com.shangyi.kt.ui.mine.yijian.YiJianSubmitActivity">
 
     <com.shangyi.business.weight.TitleView
         app:leftLayoutIconIsGray="true"

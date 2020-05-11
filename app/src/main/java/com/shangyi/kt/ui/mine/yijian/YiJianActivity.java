@@ -1,4 +1,4 @@
-package com.shangyi.kt.ui.mine;
+package com.shangyi.kt.ui.mine.yijian;
 
 import android.content.Intent;
 import android.view.View;

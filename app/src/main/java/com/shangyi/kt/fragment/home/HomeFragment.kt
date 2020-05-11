@@ -1,8 +1,11 @@
 package com.shangyi.kt.fragment.home
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
+import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.AppBarLayout
@@ -13,6 +16,7 @@ import com.shangyi.kt.fragment.categroy.adapter.BannerDataBean
 import com.shangyi.kt.fragment.categroy.adapter.CategroyRightBanner
 import com.shangyi.kt.fragment.home.adapter.HomeBottomAdapter
 import com.shangyi.kt.fragment.home.model.HomeModel
+import com.shangyi.kt.ui.setting.HomeJkfyActivity
 import com.youth.banner.Banner
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -72,6 +76,7 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
         recyclerview.adapter = adapter
 
         val topView = LayoutInflater.from(context).inflate(R.layout.item_home_top_view, null, false)
+        topView.findViewById<LinearLayout>(R.id.home_jkfy).setOnClickListener(this)
         adapter.addHeaderView(topView)
 
         appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
@@ -122,6 +127,14 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
         val blue = Color.blue(color)
         val alpha = (Color.alpha(color) * fraction).toInt()
         return Color.argb(alpha, red, green, blue)
+    }
+
+    override fun onClick(v: View) {
+        when(v.id){
+            R.id.home_jkfy ->{
+                startActivity(Intent(context ,HomeJkfyActivity::class.java))
+            }
+        }
     }
 }
 

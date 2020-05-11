@@ -62,6 +62,7 @@ public class SettingActivity extends BaseKTActivity<ActivitySettingBinding,Setti
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.backpwd://账号安全
+                //Intent intent = new Intent(SettingActivity.this, HomeJkfyActivity.class);
                 Intent intent = new Intent(SettingActivity.this, BackPwdActivity.class);
                 startActivity(intent);
                 break;
