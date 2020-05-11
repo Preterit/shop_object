@@ -93,7 +93,7 @@ public class LoginActivity extends BaseKTActivity<ActivityLoginBinding, LoginMod
         mTvYzm = findViewById(R.id.tv_goyzm);
         mTvBackPwd = findViewById(R.id.tv_back_pwd);
         mBtnLogin = findViewById(R.id.btn_login);
-        mEtPhone = findViewById(R.id.et_phone);
+        mEtPhone = findViewById(R.id.et_login_phone);
         mEtPwd = findViewById(R.id.et_pwd);
         mBtnUserxieyi = findViewById(R.id.btn_userxieyi);
 

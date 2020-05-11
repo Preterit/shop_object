@@ -318,4 +318,11 @@ interface ApiService {
     @POST("/api/user/CollectCoupon")
     suspend fun getYhq(@Field("data") data: String): BaseResponse<Any?>
 
+    /**
+     * 首页 -- banner
+     */
+    @FormUrlEncoded
+    @POST("/api/user/myEarnings")
+    suspend fun getSyData(@Field("data") data: String): BaseResponse<Any?>
+
 }

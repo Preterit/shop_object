@@ -42,7 +42,7 @@
                     android:background="@mipmap/personal_icon" />
 
                 <EditText
-                    android:id="@+id/et_phone"
+                    android:id="@+id/et_login_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="请输入手机号或者账号"

@@ -41,7 +41,7 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
                 it.forEach { bannerItem ->
                     bannerList.add(BannerDataBean(bannerItem.img_url))
                 }
-//                bannerAdapter.setDatas(bannerList)
+                bannerAdapter.setDatas(bannerList)
             }
         })
 
