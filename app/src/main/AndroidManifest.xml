@@ -20,7 +20,7 @@
         <activity android:name="com.shangyi.kt.ui.mine.order.OrderDetailActivity"/>
         <activity android:name="com.shangyi.kt.ui.mine.YiJianSubmitActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.YiJianActivity" />
-        <activity android:name="com.shangyi.kt.ui.setting.HomeJkfyActivity"></activity>
+        <activity android:name="com.shangyi.kt.ui.setting.HomeJkfyActivity"/>
         <activity android:name="com.shangyi.kt.ui.mine.FenxiaoActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.yijian.YiJianSubmitActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.yijian.YiJianActivity" />

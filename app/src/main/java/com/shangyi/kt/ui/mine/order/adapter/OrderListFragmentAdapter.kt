@@ -95,8 +95,10 @@ class OrderListFragmentAdapter constructor(private val fragment: OrderListFragme
                         fragment.initData()
                     }
                 }
-                2, 3 -> {
-                    Toast.makeText(context, "查看物流", Toast.LENGTH_SHORT).show()
+                2 -> {
+//                    Toast.makeText(context, "延长收货", Toast.LENGTH_SHORT).show()
+                    orderNum = item.order_num
+                    ycshDialog.show()
                 }
             }
         }
@@ -107,11 +109,6 @@ class OrderListFragmentAdapter constructor(private val fragment: OrderListFragme
                     var intent = Intent(context, ChangeAddressActivity::class.java)
                     intent.putExtra("orderNum", orderNum)
                     context.startActivity(intent)
-                }
-                2 -> {  // 待收货
-//                    Toast.makeText(context, "延长收货", Toast.LENGTH_SHORT).show()
-                    orderNum = item.order_num
-                    ycshDialog.show()
                 }
             }
         }
@@ -141,19 +138,17 @@ class OrderListFragmentAdapter constructor(private val fragment: OrderListFragme
                 holder.itemView.btnLayout.visibility = View.VISIBLE
                 holder.itemView.btn1.visibility = View.VISIBLE
                 holder.itemView.btn2.visibility = View.VISIBLE
-                holder.itemView.btn3.visibility = View.VISIBLE
+                holder.itemView.btn3.visibility = View.GONE
                 holder.itemView.btn1.text = "确认收货"
-                holder.itemView.btn2.text = "查看物流"
-                holder.itemView.btn3.text = "延长收货"
+                holder.itemView.btn2.text = "延长收货"
             }
             3 -> {
                 // 待评价
                 holder.itemView.btnLayout.visibility = View.VISIBLE
                 holder.itemView.btn1.visibility = View.VISIBLE
-                holder.itemView.btn2.visibility = View.VISIBLE
+                holder.itemView.btn2.visibility = View.GONE
                 holder.itemView.btn3.visibility = View.GONE
                 holder.itemView.btn1.text = "评价"
-                holder.itemView.btn2.text = "查看物流"
             }
             else -> {
                 holder.itemView.btnLayout.visibility = View.GONE

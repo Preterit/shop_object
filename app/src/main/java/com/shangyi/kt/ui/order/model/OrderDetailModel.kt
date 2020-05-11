@@ -35,4 +35,25 @@ class OrderDetailModel : BaseViewModel() {
             mIsLoadingShow.value = false
         })
     }
+
+    /**
+     * 获取订单信息
+     */
+    fun postYcsh(orderNum: String) {
+        showLoadingDialog(true)
+        loadOnUI({
+            val params = Params()
+            params.put("order_num", orderNum)
+            LogUtils.deCodeParams(params)
+            RetrofitClient.apiCusService.loadOrderInfo(params.aesData)
+        }, { it ->
+            orderInfo.value = it
+            mIsLoadingShow.value = false
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
+        })
+    }
+
+
 }

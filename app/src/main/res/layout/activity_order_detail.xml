@@ -164,7 +164,6 @@
                     android:background="@drawable/shape_order_detail_white_bg"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
-                    android:paddingTop="15dp"
                     android:paddingRight="10dp">
 
                     <ImageView
@@ -181,6 +180,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="14dp"
+                        android:layout_marginTop="15dp"
                         android:text="@{vm.orderInfo.address.recipient}"
                         android:textColor="@color/color_333333"
                         android:textSize="12sp"
@@ -576,44 +576,18 @@
         </androidx.core.widget.NestedScrollView>
 
         <LinearLayout
+            android:id="@+id/bottomBtnLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:gravity="end"
             android:orientation="horizontal"
-            android:paddingStart="@dimen/dp_16"
-            android:paddingTop="@dimen/dp_10"
-            android:paddingEnd="@dimen/dp_16"
-            android:paddingBottom="@dimen/dp_10">
-
-            <TextView
-                android:id="@+id/order_detail_look_express_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_empty_sample"
-                android:paddingStart="@dimen/dp_29"
-                android:paddingTop="@dimen/dp_6"
-                android:paddingEnd="@dimen/dp_29"
-                android:paddingBottom="@dimen/dp_6"
-                android:text="查看物流"
-                android:textColor="@color/color_999999"
-                android:textSize="@dimen/sp_12" />
-
-            <TextView
-                android:id="@+id/order_detail_comment_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_20"
-                android:background="@drawable/order_success"
-                android:paddingStart="@dimen/dp_29"
-                android:paddingTop="@dimen/dp_6"
-                android:paddingEnd="@dimen/dp_29"
-                android:paddingBottom="@dimen/dp_6"
-                android:text="评价"
-                android:textColor="@color/color_ff2941"
-                android:textSize="@dimen/sp_12" />
-
-        </LinearLayout>
+            android:paddingStart="16dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="10dp"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
     </LinearLayout>
 </layout>

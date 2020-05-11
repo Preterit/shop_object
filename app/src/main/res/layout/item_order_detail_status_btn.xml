@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/text"
+    android:layout_marginRight="10dp"
+    android:background="@drawable/shape_order_list_item_btn_gray_bg"
+    android:paddingLeft="20dp"
+    android:paddingTop="7dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="7dp"
+    android:text="评价"
+    android:textColor="@color/color_999999"
+    android:textSize="14sp"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
