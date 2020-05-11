@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -14,8 +13,8 @@ import com.shangyi.business.weight.dialog.CancelOrderDialog
 import com.shangyi.business.weight.dialog.IosAlertDialog
 import com.shangyi.kt.ui.mine.bean.OrderListBean
 import com.shangyi.kt.ui.mine.order.ChangeAddressActivity
+import com.shangyi.kt.ui.mine.order.OrderDetailActivity
 import com.shangyi.kt.ui.mine.order.OrderListFragment
-import com.shangyi.kt.ui.order.OrderDetailActivity
 import com.shangyi.kt.ui.order.weight.OrderListItemView
 import kotlinx.android.synthetic.main.order_list_fragment_item.view.*
 
@@ -27,8 +26,9 @@ import kotlinx.android.synthetic.main.order_list_fragment_item.view.*
 class OrderListFragmentAdapter constructor(private val fragment: OrderListFragment) : BaseQuickAdapter<OrderListBean, BaseViewHolder>(R.layout.order_list_fragment_item) {
 
     private var orderNum = ""
+
     companion object {
-        const val ORDER_LIST_ID_BUNDLE_KEY = "orderListId";
+        const val ORDER_LIST_ID_BUNDLE_KEY = "order_num"
     }
 
     override fun convert(holder: BaseViewHolder, item: OrderListBean) {
@@ -38,14 +38,12 @@ class OrderListFragmentAdapter constructor(private val fragment: OrderListFragme
         holder.itemView.tvGoodsCountStr.text = "共${item.order_goods.size}件商品 合计：¥ "
         holder.itemView.tvFanPrice.text = item.commission
         holder.itemView.tvStatusStr.text = item.order_status
-        holder.itemView.order_list_item_layout.setOnClickListener({
-            val intent = Intent();
-            intent.setClass(context, OrderDetailActivity::class.java);
-            val bundle = Bundle();
-            bundle.putInt(ORDER_LIST_ID_BUNDLE_KEY, item.id);
-            intent.putExtras(bundle);
-            (context as Activity).startActivity(intent);
-        });
+        holder.itemView.order_list_item_layout.setOnClickListener {
+            val intent = Intent()
+            intent.setClass(context, OrderDetailActivity::class.java)
+            intent.putExtra(ORDER_LIST_ID_BUNDLE_KEY, item.order_num)
+            (context as Activity).startActivity(intent)
+        }
 
         /**
          * 备注信息
@@ -68,7 +66,6 @@ class OrderListFragmentAdapter constructor(private val fragment: OrderListFragme
 
         setBtnStatus(item, holder)
         setBtnClickListener(item, holder)
-//        addChildClickViewIds(R.id.btn1,R.id.btn2,R.id.btn3)
     }
 
     /**
@@ -108,7 +105,7 @@ class OrderListFragmentAdapter constructor(private val fragment: OrderListFragme
                 0 -> {  // 待支付
 //                    Toast.makeText(context, "修改地址", Toast.LENGTH_SHORT).show()
                     var intent = Intent(context, ChangeAddressActivity::class.java)
-                    intent.putExtra("orderNum",orderNum)
+                    intent.putExtra("orderNum", orderNum)
                     context.startActivity(intent)
                 }
                 2 -> {  // 待收货

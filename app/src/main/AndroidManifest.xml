@@ -17,6 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name="com.shangyi.kt.ui.mine.order.OrderDetailActivity"/>
         <activity android:name="com.shangyi.kt.ui.mine.YiJianSubmitActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.YiJianActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.mine_vip.YhqGoodsActivity" />
@@ -78,12 +79,6 @@
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop" />
-
-        <activity android:name="com.shangyi.kt.ui.order.OrderDetailActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            >
-        </activity>
 
         <receiver android:name=".wxapi.util.AppRegister">
             <intent-filter>
