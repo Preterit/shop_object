@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import com.sdxxtop.base.BaseKTFragment
 import com.sdxxtop.base.loadsir.ErrorCallback
+import com.sdxxtop.base.loadsir.LoadingCallback
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentCarBinding
@@ -124,6 +125,7 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
     }
 
     fun initData1() {
+        mLoadService.showCallback(LoadingCallback::class.java)
         mBinding.vm?.getCarList()
     }
 
@@ -238,6 +240,7 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
      * 更新购物车数据的回掉
      */
     override fun carDataRefresh(it: List<CartInfo?>?) {
+        bottomBuyLayout.cbBuy.isEnabled = false
         if (it != null) {
             if (it.isEmpty()) {
                 linearLayout.removeAllViews()

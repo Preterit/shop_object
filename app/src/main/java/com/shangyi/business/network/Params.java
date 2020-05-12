@@ -4,10 +4,8 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.sdxxtop.network.utils.AESUtils;
-import com.shangyi.business.api.Constom;
 
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by Administrator on 2018/5/7.
@@ -80,8 +78,11 @@ public class Params {
         String normalData = NetUtil.getNormalData(map);
 
         String requestData = "";
+        if (SpUtil.getString(Constants.API_KEY).isEmpty()) {
+            return requestData;
+        }
         try {
-            requestData = AESUtils.encrypt(normalData, Constom.API_KEY);
+            requestData = AESUtils.encrypt(normalData, SpUtil.getString(Constants.API_KEY));
         } catch (Exception e) {
             e.printStackTrace();
         }

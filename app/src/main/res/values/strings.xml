@@ -12,6 +12,11 @@
     <string name="order_add" tools:ignore="ExtraTranslation">+ </string>
     <string name="order_yf_free" tools:ignore="ExtraTranslation">免运费</string>
     <string name="order_yf_price" tools:ignore="ExtraTranslation">运费: </string>
+    <string name="order_detail_num" tools:ignore="ExtraTranslation">订单编号： </string>
+    <string name="order_detail_create_time" tools:ignore="ExtraTranslation">创建时间： </string>
+    <string name="order_detail_pay_time" tools:ignore="ExtraTranslation">付款时间： </string>
+    <string name="order_detail_send_time" tools:ignore="ExtraTranslation">发货时间： </string>
+    <string name="price_tag" tools:ignore="ExtraTranslation">¥</string>
 
 
 </resources>

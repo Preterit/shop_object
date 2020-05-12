@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/order_list_item_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginTop="10dp"
     android:background="@drawable/shape_affirm_order_white_bg"
     android:paddingTop="15dp"
-    android:paddingBottom="15dp"
-    android:id="@+id/order_list_item_layout"
-    >
+    android:paddingBottom="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/shopLayout"
@@ -153,12 +152,12 @@
             android:id="@+id/tvGoodsCountStr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="共1件商品 合计：¥ "
             android:textColor="@color/color_333333"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/tvPrice"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="共1件商品 合计：¥ " />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -110,8 +110,14 @@ class MainActivity : BaseKTActivity<ActivityMainBinding, MainModel>() {
         }
     }
 
+    private var isFirst = true  // 用来判断是否是 启动MainActivity
+
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
+        if (isFirst) {
+            isFirst = false
+            return
+        }
         // 登陆成功 进行状态切换
         if (SpUtil.getInt(Constants.USER_ID, -1) != -1) {
             setCurrentFragment()

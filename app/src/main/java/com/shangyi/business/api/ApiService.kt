@@ -305,17 +305,27 @@ interface ApiService {
     suspend fun getHomeBanner(@Field("data") data: String): BaseResponse<List<HomeBanner>?>
 
     /**
-     * 首页 -- banner
      */
     @FormUrlEncoded
     @POST("/api/index/recommendGoods")
     suspend fun getListData(@Field("data") data: String): BaseResponse<List<HomeDataBean>?>
 
     /**
-     * 首页 -- banner
      */
     @FormUrlEncoded
     @POST("/api/user/CollectCoupon")
     suspend fun getYhq(@Field("data") data: String): BaseResponse<Any?>
+
+    /**
+     */
+    @FormUrlEncoded
+    @POST("/api/user/myEarnings")
+    suspend fun getSyData(@Field("data") data: String): BaseResponse<Any?>
+    /**
+     * 订单 -- 订单详情信息
+     */
+    @FormUrlEncoded
+    @POST("/api/user/getCommentOrders")
+    suspend fun loadOrderInfo(@Field("data") data: String): BaseResponse<OrderDetailInfoBean?>
 
 }

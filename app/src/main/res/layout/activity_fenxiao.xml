@@ -66,16 +66,17 @@
                 android:textSize="11sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2019年12月23号"
             android:layout_marginLeft="20dp"
             android:padding="5dp"
+            android:text="2019年12月23号"
             app:layout_constraintBottom_toBottomOf="@+id/ll2"
-            app:layout_constraintLeft_toRightOf="@id/ll2"
-            />
+            app:layout_constraintLeft_toRightOf="@id/ll2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constar2"
         android:layout_width="match_parent"
@@ -128,15 +129,15 @@
                 android:textSize="11sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2020年5月3号"
             android:layout_marginLeft="20dp"
             android:padding="5dp"
+            android:text="2020年5月3号"
             app:layout_constraintBottom_toBottomOf="@+id/ll1"
-            app:layout_constraintLeft_toRightOf="@id/ll1"
-            />
+            app:layout_constraintLeft_toRightOf="@id/ll1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

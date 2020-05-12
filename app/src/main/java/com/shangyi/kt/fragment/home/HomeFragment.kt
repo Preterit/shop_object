@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.AppBarLayout
 import com.sdxxtop.base.BaseKTFragment
+import com.sdxxtop.base.loadsir.LoadingCallback
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentHomeBinding
 import com.shangyi.kt.fragment.categroy.adapter.BannerDataBean
@@ -47,16 +48,18 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
 
     override fun initObserve() {
         mBinding.vm?.homeBanner?.observe(this, Observer {
+            mLoadService.showSuccess()
             if (it != null && it.isNotEmpty()) {
                 bannerList.clear()
                 it.forEach { bannerItem ->
                     bannerList.add(BannerDataBean(bannerItem.img_url))
                 }
-//                bannerAdapter.setDatas(bannerList)
+                bannerAdapter.setDatas(bannerList)
             }
         })
 
         mBinding.vm?.listData?.observe(this, Observer {
+            mLoadService.showSuccess()
             if (it != null) {
                 adapter.setList(it)
             }
@@ -111,6 +114,7 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
     }
 
     override fun initData() {
+        mLoadService.showCallback(LoadingCallback::class.java)
         mBinding.vm?.getHomeBannerData()
         mBinding.vm?.getListData()
     }

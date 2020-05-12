@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="10dp"
         android:orientation="horizontal"
         android:weightSum="4"
@@ -24,14 +24,14 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="44dp"
-                android:layout_height="44dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:src="@drawable/homel1" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:text="高佣榜单"
                 android:textColor="#333333"
@@ -47,14 +47,14 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="44dp"
-                android:layout_height="44dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:src="@drawable/homel2" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:text="每周精选"
                 android:textColor="#333333"
                 android:textSize="12sp" />
@@ -69,14 +69,14 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="44dp"
-                android:layout_height="44dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:src="@drawable/homel3" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:text="健康防疫"
                 android:textColor="#333333"
                 android:textSize="12sp" />
@@ -90,14 +90,14 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="44dp"
-                android:layout_height="44dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:src="@drawable/homel4" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:text="邀请好礼"
                 android:textColor="#333333"
@@ -107,7 +107,7 @@
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/homeGifImg"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -177,24 +177,24 @@
             <ImageView
                 android:id="@+id/home_pinpai_one"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="130dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="13dp"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/pinpai1" />
 
             <ImageView
                 android:id="@+id/home_pinpai_two"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="13dp"
+                android:layout_height="130dp"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/pinpai2" />
 
             <ImageView
                 android:id="@+id/home_pinpai_three"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="130dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/pinpai3" />
@@ -206,7 +206,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="7dp"
         android:layout_marginRight="5dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/cardView">

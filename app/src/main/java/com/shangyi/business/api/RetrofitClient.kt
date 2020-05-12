@@ -1,6 +1,9 @@
 package com.shangyi.business.api
 
+import android.text.TextUtils
 import com.sdxxtop.network.api.BaseRetrofitClient
+import com.shangyi.business.network.Constants
+import com.shangyi.business.network.SpUtil
 import okhttp3.OkHttpClient
 
 /**
@@ -10,12 +13,14 @@ import okhttp3.OkHttpClient
  * Description:
  */
 object RetrofitClient : BaseRetrofitClient() {
+
     val apiService by lazy {
-        getService(ApiService::class.java, Constom.GETNETWORK)
+        getService(ApiService::class.java, getBaseUrl())
     }
     val apiCusService by lazy {
-        getCusService(ApiService::class.java, Constom.GETNETWORK)
+        getCusService(ApiService::class.java, getBaseUrl())
     }
+
     override fun isDebug(): Boolean {
         return true
     }
@@ -23,5 +28,13 @@ object RetrofitClient : BaseRetrofitClient() {
     override fun handleBuilder(builder: OkHttpClient.Builder) {
 
     }
+
+    /**
+     * 获取baseUrl
+     */
+    fun getBaseUrl() = if (!TextUtils.isEmpty(SpUtil.getString(Constants.BASEURL))) SpUtil.getString(Constants.BASEURL)
+    else "http://shop.xueli001.cn/"
+
+
 
 }

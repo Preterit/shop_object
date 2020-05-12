@@ -22,7 +22,6 @@ class HomeModel : BaseViewModel() {
      */
     fun getHomeBannerData() {
         loadOnUI({
-            showLoadingDialog(true)
             val params = Params()
             RetrofitClient.apiCusService.getHomeBanner(params.aesData)
         }, {

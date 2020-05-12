@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sdxxtop.base.BaseKTFragment
 import com.sdxxtop.base.loadsir.EmptyCallback
 import com.sdxxtop.base.loadsir.ErrorCallback
+import com.sdxxtop.base.loadsir.LoadingCallback
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentCategroyRightBinding
 import com.shangyi.kt.fragment.categroy.adapter.BannerDataBean
@@ -90,6 +91,7 @@ class CategroyRightFragment : BaseKTFragment<FragmentCategroyRightBinding, Categ
      * 点击条目刷新数据
      */
     fun loadCategroyRightData(categroyId: Int) {
+        mLoadService.showCallback(LoadingCallback::class.java)
         mCategroyId = categroyId
         mBinding.vm?.getRightCategory(categroyId)
     }
@@ -99,6 +101,7 @@ class CategroyRightFragment : BaseKTFragment<FragmentCategroyRightBinding, Categ
      * 重试
      */
     override fun preLoad() {
+        mLoadService.showCallback(LoadingCallback::class.java)
         mBinding.vm?.getRightCategory(mCategroyId)
     }
 

@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.sdxxtop.base.utils.UIUtils;
-import com.shangyi.business.api.Constom;
+import com.shangyi.business.network.Constants;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -20,7 +20,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        api = WXAPIFactory.createWXAPI(this, Constom.WXAPP_ID, false);
+        api = WXAPIFactory.createWXAPI(this, Constants.WXAPP_ID, false);
         try {
             Intent intent = getIntent();
             api.handleIntent(intent, this);
