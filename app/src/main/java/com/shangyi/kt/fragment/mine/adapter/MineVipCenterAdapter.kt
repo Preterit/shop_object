@@ -7,6 +7,7 @@ import com.shangyi.business.R
 import com.shangyi.kt.fragment.mine.bean.MineImgTxBean
 import com.shangyi.kt.ui.address.AddressListActivity
 import com.shangyi.kt.ui.mine.FenxiaoActivity
+import com.shangyi.kt.ui.mine.LazyFragmentActivity
 import com.shangyi.kt.ui.mine.yijian.YiJianActivity
 import com.shangyi.kt.ui.mine.mine_vip.*
 import kotlinx.android.synthetic.main.item_mine_order_center.view.*
@@ -47,7 +48,7 @@ class MineVipCenterAdapter constructor(data: ArrayList<MineImgTxBean>)
 //                    intent = Intent(context, FeedBackActivity::class.java)
                 }
                 "积分商城" -> {
-
+                    intent = Intent(context, LazyFragmentActivity::class.java)
                 }
             }
             if (intent != null) {

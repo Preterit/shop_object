@@ -70,7 +70,6 @@ class MineFragment : BaseKTFragment<FragmentMineBinding, MineModel>() {
             override fun itemSelect(position: Int) {
                 centerLayoutManager.smoothScrollToPosition(rvHorTj, RecyclerView.State(), position)
                 viewPager.currentItem = position
-                startActivity(Intent(context, CollectActivity::class.java))
             }
         })
 
