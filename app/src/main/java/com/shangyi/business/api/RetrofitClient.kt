@@ -13,6 +13,7 @@ import okhttp3.OkHttpClient
  * Description:
  */
 object RetrofitClient : BaseRetrofitClient() {
+
     val apiService by lazy {
         getService(ApiService::class.java, getBaseUrl())
     }
@@ -28,7 +29,12 @@ object RetrofitClient : BaseRetrofitClient() {
 
     }
 
+    /**
+     * 获取baseUrl
+     */
     fun getBaseUrl() = if (!TextUtils.isEmpty(SpUtil.getString(Constants.BASEURL))) SpUtil.getString(Constants.BASEURL)
     else "http://shop.xueli001.cn/"
+
+
 
 }

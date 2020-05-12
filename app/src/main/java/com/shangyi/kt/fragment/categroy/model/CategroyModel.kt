@@ -40,7 +40,7 @@ class CategroyModel : BaseViewModel() {
      */
     fun getRightCategory(categroyId: Int) {
         loadOnUI({
-            showLoadingDialog(true)
+//            showLoadingDialog(true)
             val params = Params()
             params.put("id", categroyId)
             RetrofitClient.apiCusService.getRightCategory(params.aesData)
