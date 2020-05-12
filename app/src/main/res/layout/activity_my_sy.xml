@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:orientation="vertical"
         tools:context="com.shangyi.kt.ui.mine.mine_vip.MySyActivity">
 
@@ -36,19 +37,19 @@
                 android:id="@+id/appBarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/translate">
+                android:background="@color/white">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:background="#F61730"
+                    android:layout_height="170dp"
+                    android:background="@drawable/my_shouyi_top_bg"
                     app:layout_scrollFlags="scroll">
 
                     <TextView
                         android:id="@+id/tvTopTx"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="13dp"
+                        android:layout_marginTop="18dp"
                         android:text="总收益"
                         android:textColor="@color/white"
                         android:textSize="18sp"
@@ -59,7 +60,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="15dp"
                         android:text="￥135.07"
                         android:textColor="@color/white"
                         android:textSize="24sp"
@@ -73,9 +74,11 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="@color/color_F0F0F0">
+                    android:background="@color/white">
 
                     <TextView
+                        android:drawablePadding="6dp"
+                        android:drawableRight="@drawable/my_shouyi_down_icon"
                         android:id="@+id/tvDateSelect"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

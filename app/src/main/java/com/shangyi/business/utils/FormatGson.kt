@@ -3,7 +3,8 @@ package com.shangyi.business.utils
 import android.util.Log
 import com.google.gson.Gson
 import com.sdxxtop.network.utils.AESUtils
-import com.shangyi.business.api.Constom
+import com.shangyi.business.network.Constants
+import com.shangyi.business.network.SpUtil
 
 /**
  * Date:2020/4/2
@@ -23,10 +24,10 @@ class FormatGson private constructor() {
 
     fun <T> forMatGson(aesStr: String?, type: Class<T>): T? {
         var result: T? = null
-        if (aesStr.isNullOrEmpty()) {
+        if (aesStr.isNullOrEmpty() || SpUtil.getString(Constants.API_KEY).isNullOrEmpty()) {
             return null
         }
-        val json = AESUtils.decrypt(aesStr, Constom.API_KEY)
+        val json = AESUtils.decrypt(aesStr, SpUtil.getString(Constants.API_KEY))
         Log.e("AES decode --- ", json)
         try {
             val toJson = gson.toJson(json)

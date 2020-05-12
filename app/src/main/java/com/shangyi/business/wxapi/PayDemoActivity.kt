@@ -7,9 +7,8 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.shangyi.business.R
-import com.shangyi.business.api.Constom
+import com.shangyi.business.network.Constants.WXAPP_ID
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX
-import com.tencent.mm.opensdk.modelmsg.WXImageObject
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject
 import com.tencent.mm.opensdk.modelpay.PayReq
@@ -28,7 +27,7 @@ class PayDemoActivity : AppCompatActivity() {
 //            getOrderInfo()
             shareWebpage("上医在线分享", "测试上医在线分享功能。。", "www.baidu.com", SendMessageToWX.Req.WXSceneSession)
         }
-        api.registerApp(Constom.WXAPP_ID)
+        api.registerApp(WXAPP_ID)
     }
 
     /**
@@ -36,7 +35,7 @@ class PayDemoActivity : AppCompatActivity() {
      */
     private val api: IWXAPI by lazy {
         var api = WXAPIFactory.createWXAPI(this, null)
-        api.registerApp(Constom.WXAPP_ID)
+        api.registerApp(WXAPP_ID)
         api
     }
 

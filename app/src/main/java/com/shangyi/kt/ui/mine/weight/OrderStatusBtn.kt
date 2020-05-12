@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.LinearLayout
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
@@ -14,7 +13,6 @@ import com.shangyi.business.weight.dialog.IosAlertDialog
 import com.shangyi.kt.ui.mine.order.ChangeAddressActivity
 import com.shangyi.kt.ui.mine.order.OrderDetailActivity
 import com.shangyi.kt.ui.pingjia.AddPinglunActivity
-import kotlinx.android.synthetic.main.activity_tx.view.*
 import kotlinx.android.synthetic.main.item_order_detail_status_btn.view.*
 
 /**

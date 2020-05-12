@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.sdxxtop.base.utils.UIUtils;
 import com.shangyi.business.R;
+import com.shangyi.business.network.Constants;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -17,7 +18,6 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.greenrobot.eventbus.EventBus;
 
-import static com.shangyi.business.api.Constom.WXAPP_ID;
 
 public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEventHandler {
 
@@ -30,7 +30,7 @@ public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEvent
         setContentView(R.layout.activity_wxpay_entry);
 
         iwxapi = WXAPIFactory.createWXAPI(this, null);
-        iwxapi.registerApp(WXAPP_ID);//appID
+        iwxapi.registerApp(Constants.WXAPP_ID);//appID
         iwxapi.handleIntent(getIntent(), this);
     }
 

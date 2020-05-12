@@ -2,6 +2,7 @@ package com.study.glidemodel;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
@@ -100,11 +101,22 @@ public class GlideImageLoader {
         if (url == null || getContext() == null) return;
         url = url.replace(" ", "");
         Context context = getImageView().getContext();
-        if (context instanceof Activity) {
-            boolean destroy = ActivityDestroy.isDestroy((Activity) context);
-            if (!destroy) {
-                requestBuilder(url, options).into(getImageView());
+//        if (context instanceof Activity) {
+//            boolean destroy = ActivityDestroy.isDestroy((Activity) context);
+//            if (!destroy) {
+//                requestBuilder(url, options).into(getImageView());
+//            }
+//        }
+
+        while (context instanceof ContextWrapper) {
+            if (context instanceof Activity) {
+                boolean destroy = ActivityDestroy.isDestroy((Activity) context);
+                if (!destroy) {
+                    requestBuilder(url, options).into(getImageView());
+                }
+                break;
             }
+            context = ((ContextWrapper) context).getBaseContext();
         }
     }
 

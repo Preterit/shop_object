@@ -10,6 +10,7 @@ import com.shangyi.business.network.Constants
 import com.shangyi.business.network.Params
 import com.shangyi.business.network.SpUtil
 import com.shangyi.business.utils.FormatGson
+import com.shangyi.business.utils.LogUtils
 import com.shangyi.kt.ui.userlogin.bean.GetCodeBean
 import com.shangyi.kt.ui.userlogin.bean.LoginSuccess
 
@@ -42,6 +43,8 @@ class LoginModel : BaseViewModel() {
             params.put("password", pwd)
             params.put("code", code)
             params.put("login_type", login_type)
+            LogUtils.deCodeParams(params)
+            Log.e("login data -- ","${params.aesData}")
             RetrofitClient.apiService.login(params.aesData)
         }, {
             val bean = FormatGson.instance.forMatGson(it, LoginSuccess::class.java)

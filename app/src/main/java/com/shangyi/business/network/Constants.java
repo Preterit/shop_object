@@ -14,5 +14,8 @@ public interface Constants {
     String BASEURL = "baseurl";
 
     String API_KEY = "api_key"; // 加密的key
-    public static final String APP_ID = "wxd930ea5d5a258f4f";
+    String APP_ID = "wxd930ea5d5a258f4f";
+
+    //微信的appID
+    String WXAPP_ID = "wx8c512b137c836be1";
 }
