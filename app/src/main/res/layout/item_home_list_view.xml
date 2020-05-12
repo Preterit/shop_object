@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/home_item_bg"
-    android:paddingBottom="10dp"
+    android:paddingBottom="13dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     app:cardBackgroundColor="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,8 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="135dp"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             app:layout_constraintTop_toTopOf="parent"
             app:siv_radius="10dp"
             app:siv_shape_type="rectangle" />
