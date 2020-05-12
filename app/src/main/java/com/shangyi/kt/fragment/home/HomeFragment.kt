@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,12 +18,18 @@ import com.shangyi.kt.fragment.categroy.adapter.BannerDataBean
 import com.shangyi.kt.fragment.categroy.adapter.CategroyRightBanner
 import com.shangyi.kt.fragment.home.adapter.HomeBottomAdapter
 import com.shangyi.kt.fragment.home.model.HomeModel
+import com.shangyi.kt.ui.home.HomeGaoyongActivity
+import com.shangyi.kt.ui.home.HomeHaoKefyActivity
+import com.shangyi.kt.ui.home.HomePinpaiActivity
+import com.shangyi.kt.ui.home.HomeXueyaActivity
 import com.shangyi.kt.ui.setting.HomeJkfyActivity
+import com.study.glidemodel.GlideImageView
 import com.youth.banner.Banner
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_home_top_view.*
 import kotlinx.android.synthetic.main.item_home_top_view.view.*
+import pl.droidsonroids.gif.GifImageView
 import kotlin.math.abs
 
 /**
@@ -80,6 +87,13 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
 
         val topView = LayoutInflater.from(context).inflate(R.layout.item_home_top_view, null, false)
         topView.findViewById<LinearLayout>(R.id.home_jkfy).setOnClickListener(this)
+        topView.findViewById<LinearLayout>(R.id.home_gaoyong).setOnClickListener(this)
+        topView.findViewById<LinearLayout>(R.id.home_jingxuan).setOnClickListener(this)
+        topView.findViewById<GifImageView>(R.id.homeGifImg).setOnClickListener(this)
+        topView.findViewById<ImageView>(R.id.home_pinpai_one).setOnClickListener(this)
+        topView.findViewById<ImageView>(R.id.home_pinpai_two).setOnClickListener(this)
+        topView.findViewById<ImageView>(R.id.home_pinpai_three).setOnClickListener(this)
+
         adapter.addHeaderView(topView)
 
         appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
@@ -96,6 +110,7 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
             ))
             banner!!.setAdapter(bannerAdapter).setIndicator(CircleIndicator(context)).start()
         }
+
     }
 
     override fun initData() {
@@ -135,9 +150,35 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
 
     override fun onClick(v: View) {
         when(v.id){
+            //每周精选
+            R.id.home_jingxuan ->{
+                startActivity(Intent(context , HomeXueyaActivity::class.java))
+            }
+            //健康防疫
             R.id.home_jkfy ->{
                 startActivity(Intent(context ,HomeJkfyActivity::class.java))
             }
+            //好课推荐
+            R.id.homeGifImg ->{
+                startActivity(Intent(context , HomeHaoKefyActivity::class.java))
+            }
+            //高佣专区
+            R.id.home_gaoyong ->{
+                startActivity(Intent(context , HomeGaoyongActivity::class.java))
+            }
+            //品牌好物
+            R.id.home_pinpai_one ->{
+                startActivity(Intent(context , HomePinpaiActivity::class.java))
+            }
+            //品牌好物
+            R.id.home_pinpai_two ->{
+                startActivity(Intent(context , HomePinpaiActivity::class.java))
+            }
+            //品牌好物
+            R.id.home_pinpai_three ->{
+                startActivity(Intent(context , HomePinpaiActivity::class.java))
+            }
+
         }
     }
 }
