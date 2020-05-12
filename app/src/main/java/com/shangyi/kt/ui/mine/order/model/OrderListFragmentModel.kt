@@ -25,7 +25,7 @@ class OrderListFragmentModel : BaseViewModel() {
             type: Int
     ) {
         loadOnUI({
-            showLoadingDialog(true)
+//            showLoadingDialog(true)
             val params = Params()
             params.put("page", page)
             if (type != -1) {

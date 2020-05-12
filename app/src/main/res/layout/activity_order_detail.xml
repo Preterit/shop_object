@@ -30,6 +30,7 @@
             app:titleValue="订单详情" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/orderCenter"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
