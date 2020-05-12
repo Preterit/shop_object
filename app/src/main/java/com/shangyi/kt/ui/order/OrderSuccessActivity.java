@@ -65,7 +65,9 @@ public class OrderSuccessActivity extends BaseKTActivity<ActivityOrderSuccessBin
         mSuccessOrderTuijianRcy = findViewById(R.id.success_order_tuijian_rcy);
 
         mLlShopping = findViewById(R.id.ll_shopping);
+
         mTvPrice.setText("￥"+ mPrice);
+
         mSuccessOrderTuijianAdapter = new SuccessOrderTuijianAdapter();
         mSuccessOrderTuijianRcy.setLayoutManager(new GridLayoutManager(OrderSuccessActivity.this,2));
         mSuccessOrderTuijianRcy.setAdapter(mSuccessOrderTuijianAdapter);

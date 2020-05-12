@@ -17,7 +17,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.shangyi.kt.ui.setting.HomeJkfyActivity"></activity>
+        <activity android:name="com.shangyi.kt.ui.home.HomeXueyaActivity"></activity>
+        <activity android:name="com.shangyi.kt.ui.home.HomePinpaiActivity" />
+        <activity android:name="com.shangyi.kt.ui.home.HomeGaoyongActivity" />
+        <activity android:name="com.shangyi.kt.ui.home.HomeHaoKefyActivity" />
+        <activity android:name="com.shangyi.kt.ui.setting.HomeJkfyActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.FenxiaoActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.yijian.YiJianSubmitActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.yijian.YiJianActivity" />

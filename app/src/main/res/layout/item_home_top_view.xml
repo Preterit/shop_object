@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/home_gaoyong"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -38,6 +39,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/home_jingxuan"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -173,6 +175,7 @@
             app:layout_constraintTop_toBottomOf="@id/left1">
 
             <ImageView
+                android:id="@+id/home_pinpai_one"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -181,6 +184,7 @@
                 android:background="@drawable/pinpai1" />
 
             <ImageView
+                android:id="@+id/home_pinpai_two"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="13dp"
@@ -188,6 +192,7 @@
                 android:background="@drawable/pinpai2" />
 
             <ImageView
+                android:id="@+id/home_pinpai_three"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
