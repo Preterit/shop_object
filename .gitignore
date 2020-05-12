@@ -10,3 +10,4 @@
 /build/.transforms
 /captures
 .externalNativeBuild
+/sku_library/build/
