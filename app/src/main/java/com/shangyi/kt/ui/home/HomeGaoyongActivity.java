@@ -71,6 +71,7 @@ public class HomeGaoyongActivity extends BaseKTActivity<ActivityHomeGaoyongBindi
     public void initData() {
         super.initData();
         getMBinding().getVm().successOrderTuijian(000);
+
     }
 
     @Override
