@@ -1,23 +1,21 @@
 package com.shangyi.kt.ui.mine.order
 
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.sdxxtop.base.BaseKTFragment
 import com.sdxxtop.base.loadsir.ErrorCallback
 import com.sdxxtop.base.loadsir.OrderListEmptyCallback
+import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentOrderListBinding
-import com.shangyi.kt.ui.mine.bean.OrderListBean
 import com.shangyi.kt.ui.mine.order.adapter.OrderListFragmentAdapter
 import com.shangyi.kt.ui.mine.order.model.OrderListFragmentModel
 import kotlinx.android.synthetic.main.fragment_order_list.*
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 /**
  * Date:2020/5/6
@@ -99,6 +97,14 @@ class OrderListFragment : BaseKTFragment<FragmentOrderListBinding, OrderListFrag
 
     override fun preLoad() {
         getData()
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: String?) {
+        if (event.equals("0")) {
+            UIUtils.showToast("支付成功")
+            getData()
+        }
     }
 
 }

@@ -1,5 +1,8 @@
 package com.shangyi.kt.ui.order.bean
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 /**
  * Date:2020/5/11
  * author:lwb
@@ -37,6 +40,7 @@ data class Address(
         val zip_code: Any
 )
 
+@Parcelize
 data class OrderDetailGood(
         val gid: Int,
         val good_name: String?,
@@ -45,7 +49,7 @@ data class OrderDetailGood(
         val pic: String?,
         val price: Float,
         val sku_info: String?
-)
+) : Parcelable
 
 data class ShopInfo(
         val id: Int,

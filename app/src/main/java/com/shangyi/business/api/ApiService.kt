@@ -328,4 +328,18 @@ interface ApiService {
     @POST("/api/user/getCommentOrders")
     suspend fun loadOrderInfo(@Field("data") data: String): BaseResponse<OrderDetailInfoBean?>
 
+    /**
+     * 订单 -- 修改订单地址
+     */
+    @FormUrlEncoded
+    @POST("/api/orders/changeOrderAddress")
+    suspend fun changeOrderAds(@Field("data") data: String): BaseResponse<Any?>
+
+    /**
+     * 订单 -- 申请退款
+     */
+    @FormUrlEncoded
+    @POST("/api/orders/orderRefund")
+    suspend fun orderRefund(@Field("data") data: String): BaseResponse<Any?>
+
 }

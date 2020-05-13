@@ -10,8 +10,11 @@ import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
 import com.shangyi.business.weight.dialog.CancelOrderDialog
 import com.shangyi.business.weight.dialog.IosAlertDialog
+import com.shangyi.kt.ui.mine.bean.OrderDetailAddress
+import com.shangyi.kt.ui.mine.bean.PayDialogData
 import com.shangyi.kt.ui.mine.order.ChangeAddressActivity
 import com.shangyi.kt.ui.mine.order.OrderDetailActivity
+import com.shangyi.kt.ui.order.bean.OrderDetailInfoBean
 import com.shangyi.kt.ui.pingjia.AddPinglunActivity
 import kotlinx.android.synthetic.main.item_order_detail_status_btn.view.*
 
@@ -50,6 +53,7 @@ class OrderStatusBtn constructor(context: Context, attrs: AttributeSet? = null, 
 
     var orderActivity: OrderDetailActivity? = null
     var orderNum: String? = null // 订单编号
+    var orderData: OrderDetailInfoBean? = null // 订单数据
 
     /**
      * 设置按钮点击事件
@@ -57,9 +61,10 @@ class OrderStatusBtn constructor(context: Context, attrs: AttributeSet? = null, 
     fun onItemClick(title: String) {
         if (context is OrderDetailActivity) {
             orderActivity = context as OrderDetailActivity
-            orderNum = orderActivity?.getOrderNum()
+            orderData = orderActivity?.getOrderData()
+            orderNum = orderData?.order_num
         }
-        if (orderActivity == null || orderNum == null) return
+        if (orderActivity == null || orderNum == null || orderData == null) return
         when (title) {
             "评价" -> {
                 var intent = Intent(orderActivity, AddPinglunActivity::class.java)
@@ -69,7 +74,14 @@ class OrderStatusBtn constructor(context: Context, attrs: AttributeSet? = null, 
                 UIUtils.showToast("确认收货")
             }
             "付款" -> {
-                UIUtils.showToast("付款")
+//                UIUtils.showToast("付款")
+                val dialog = OrderPayDialog.newInstance(PayDialogData(
+                        orderData?.id ?: 0,
+                        orderData?.order_num ?: "",
+                        "",
+                        orderData?.pay_amount ?: 0.00f
+                ))
+                dialog.show(orderActivity?.supportFragmentManager!!, "")
             }
             "取消订单" -> {
                 val cancelDialog = CancelOrderDialog.newInstance(orderNum)
@@ -83,10 +95,19 @@ class OrderStatusBtn constructor(context: Context, attrs: AttributeSet? = null, 
             }
             "修改地址" -> {
                 var intent = Intent(context, ChangeAddressActivity::class.java)
-                intent.putExtra("orderNum", orderNum)
+                intent.putExtra("orderId", orderData?.id)
+                intent.putExtra("address", OrderDetailAddress(
+                        orderData?.address_id ?: 0,
+                        orderData?.address?.recipient ?: "",
+                        orderData?.address?.mobile,
+                        orderData?.address?.country,
+                        orderData?.address?.province,
+                        orderData?.address?.city,
+                        "",
+                        orderData?.address?.detail
+                ))
                 orderActivity?.startActivity(intent)
             }
-
         }
     }
 

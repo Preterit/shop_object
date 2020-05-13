@@ -41,7 +41,6 @@ public class LoginActivity extends BaseKTActivity<ActivityLoginBinding, LoginMod
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login:
-                startActivity(new Intent(this,MainActivity.class));
                 initLogin();
                 break;
             case R.id.tv_goregist://立即注册

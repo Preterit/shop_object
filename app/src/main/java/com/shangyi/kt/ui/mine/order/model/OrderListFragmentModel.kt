@@ -16,6 +16,7 @@ import com.shangyi.kt.ui.mine.bean.OrderListBean
  */
 class OrderListFragmentModel : BaseViewModel() {
     val data = MutableLiveData<List<OrderListBean>?>()
+    val changeAds = MutableLiveData<Boolean>(false)
 
     /**
      * 获取订单列表
@@ -85,7 +86,21 @@ class OrderListFragmentModel : BaseViewModel() {
     /**
      * 修改地址
      */
-    fun changeAddress(orderNum: String) {
-
+    fun changeAddress(orderId: Int,addressId:Int) {
+        loadOnUI({
+            showLoadingDialog(true)
+            val params = Params()
+            params.put("order_id", orderId)
+            params.put("address_id", addressId)
+            LogUtils.deCodeParams(params)
+            RetrofitClient.apiCusService.changeOrderAds(params.aesData)
+        }, {
+            mIsLoadingShow.value = false
+            UIUtils.showToast("修改成功")
+            changeAds.value = true
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
+        })
     }
 }

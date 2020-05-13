@@ -31,12 +31,14 @@ class OrderDetailActivity : BaseKTActivity<ActivityOrderDetailBinding, OrderDeta
     override fun initObserve() {
         mBinding.vm?.orderInfo?.observe(this, Observer {
             if (it != null) {
+                orderData = it
                 bandData(it)
             }
         })
     }
 
     private var orderNum = ""   // 订单编号
+    private var orderData: OrderDetailInfoBean? = null   // 订单详情
     private var adapter = OrderDetailGoodsAdapter()
 
     override fun initView() {
@@ -47,7 +49,7 @@ class OrderDetailActivity : BaseKTActivity<ActivityOrderDetailBinding, OrderDeta
     }
 
     override fun initData() {
-        mBinding.vm?.loadOrderInfo(orderNum)
+
     }
 
     /**
@@ -56,7 +58,8 @@ class OrderDetailActivity : BaseKTActivity<ActivityOrderDetailBinding, OrderDeta
     private fun bandData(it: OrderDetailInfoBean) {
         glideImageView.loadImage(it.shop?.shop_avatar ?: "")
         adapter.setList(it.order_goods)
-
+        adapter.setOrderStatus(it.status)
+        adapter.setOrderNum(it.order_num)
         setStatusImg(it.status)
     }
 
@@ -121,5 +124,10 @@ class OrderDetailActivity : BaseKTActivity<ActivityOrderDetailBinding, OrderDeta
     /**
      * 返回订单编号。
      */
-    fun getOrderNum() = orderNum
+    fun getOrderData() = orderData
+
+    override fun onResume() {
+        super.onResume()
+        mBinding.vm?.loadOrderInfo(orderNum)
+    }
 }

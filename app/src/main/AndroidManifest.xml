@@ -17,10 +17,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.shangyi.kt.ui.mine.LazyFragmentActivity"/>
+        <activity
+            android:name="com.shangyi.kt.ui.mine.order.RefundActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name="com.shangyi.kt.ui.mine.LazyFragmentActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.order.OrderDetailActivity" />
         <activity android:name="com.shangyi.kt.ui.setting.HomeJkfyActivity" />
-        <activity android:name="com.shangyi.kt.ui.home.HomeXueyaActivity"/>
+        <activity android:name="com.shangyi.kt.ui.home.HomeXueyaActivity" />
         <activity android:name="com.shangyi.kt.ui.home.HomePinpaiActivity" />
         <activity android:name="com.shangyi.kt.ui.home.HomeGaoyongActivity" />
         <activity android:name="com.shangyi.kt.ui.home.HomeHaoKefyActivity" />
@@ -68,8 +71,8 @@
         <activity
             android:name="com.shangyi.kt.ui.userlogin.LoginActivity"
             android:launchMode="singleTask" />
-
-        <activity android:name="com.shangyi.kt.ui.splash.SplashActivity"
+        <activity
+            android:name="com.shangyi.kt.ui.splash.SplashActivity"
             android:theme="@style/AppThemeSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
