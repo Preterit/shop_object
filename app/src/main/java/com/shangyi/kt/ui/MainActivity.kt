@@ -1,6 +1,8 @@
 package com.shangyi.kt.ui
 
 import android.content.Intent
+import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import com.sdxxtop.base.BaseKTActivity
 import com.shangyi.business.R
@@ -41,6 +43,10 @@ class MainActivity : BaseKTActivity<ActivityMainBinding, MainModel>() {
         }
     }
 
+    companion object {
+       const val IS_LOGIN = "isLogin"
+    }
+
     /**
      * 初始化第一个Fragment
      */
@@ -48,6 +54,7 @@ class MainActivity : BaseKTActivity<ActivityMainBinding, MainModel>() {
         homeFragment = HomeFragment()
         currentFragment = homeFragment
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout, currentFragment!!).commitAllowingStateLoss()
+        switchFragment(0)
     }
 
     /**
@@ -110,16 +117,11 @@ class MainActivity : BaseKTActivity<ActivityMainBinding, MainModel>() {
         }
     }
 
-    private var isFirst = true  // 用来判断是否是 启动MainActivity
-
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        if (isFirst) {
-            isFirst = false
-            return
-        }
+        val isLogin = intent?.getIntExtra(IS_LOGIN, 0) ?: 0  // 从登陆页面进行跳转
         // 登陆成功 进行状态切换
-        if (SpUtil.getInt(Constants.USER_ID, -1) != -1) {
+        if (isLogin == 1 && SpUtil.getInt(Constants.USER_ID, -1) != -1) {
             setCurrentFragment()
             cusomBottomTab.setViewEnable()
         }

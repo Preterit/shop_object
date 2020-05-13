@@ -55,7 +55,9 @@ public class YzmActivity extends BaseKTActivity<ActivityYzmBinding, LoginModel> 
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
                     UIUtils.showToast("登陆成功");
-                    startActivity(new Intent(YzmActivity.this, MainActivity.class));
+                    Intent intent = new Intent(YzmActivity.this, MainActivity.class);
+                    intent.putExtra(MainActivity.IS_LOGIN,1);
+                    startActivity(intent);
                     finish();
                 }
             }

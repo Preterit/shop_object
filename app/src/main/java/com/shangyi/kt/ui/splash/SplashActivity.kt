@@ -1,7 +1,8 @@
 package com.shangyi.kt.ui.splash
 
 import android.content.Intent
-import android.view.View
+import android.os.Bundle
+import android.view.WindowManager
 import androidx.lifecycle.Observer
 import com.sdxxtop.base.BaseKTActivity
 import com.shangyi.business.R
@@ -17,6 +18,12 @@ class SplashActivity : BaseKTActivity<ActivitySplashBinding, SplashModel>() {
     }
 
     override fun initObserve() {
+        mBinding.vm?.settingData?.observe(this, Observer {
+            if (it) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
+        })
     }
 
     override fun layoutId() = R.layout.activity_splash
@@ -29,14 +36,8 @@ class SplashActivity : BaseKTActivity<ActivitySplashBinding, SplashModel>() {
         mBinding.vm?.loadSettingInfo()
     }
 
-    override fun onClick(v: View) {
-        when (v.id) {
-            R.id.tvClick -> {
-                if (mBinding.vm?.settingData?.value == true){
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
-                }
-            }
-        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        super.onCreate(savedInstanceState)
     }
 }
