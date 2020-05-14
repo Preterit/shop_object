@@ -61,7 +61,7 @@ class SplashModel : BaseViewModel() {
             mIsLoadingShow.value = false
             SpUtil.putString(Constants.API_KEY, it?.api_key)
         }, { code, msg, t ->
-            UIUtils.showToast(msg)
+//            UIUtils.showToast(msg)
             settingData.value = SpUtil.getString(Constants.API_KEY).isNotEmpty() && SpUtil.getString(Constants.BASEURL).isNotEmpty()
         })
     }
