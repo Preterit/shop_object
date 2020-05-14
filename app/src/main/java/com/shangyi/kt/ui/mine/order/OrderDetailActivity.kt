@@ -32,11 +32,13 @@ class OrderDetailActivity : BaseKTActivity<ActivityOrderDetailBinding, OrderDeta
     }
 
     private var orderNum = ""   // 订单编号
+    var orderRid = ""   // 退款订单编号
     private var orderData: OrderDetailInfoBean? = null   // 订单详情
     private var adapter = OrderDetailGoodsAdapter()
 
     override fun initView() {
         orderNum = intent.getStringExtra(OrderListFragmentAdapter.ORDER_LIST_ID_BUNDLE_KEY) ?: ""
+        orderRid = intent.getStringExtra("orderRid") ?: ""
 
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.adapter = adapter

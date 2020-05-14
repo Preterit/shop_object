@@ -48,6 +48,7 @@ class OrderListFragmentAdapter constructor(private val fragment: OrderListFragme
             val intent = Intent()
             intent.setClass(context, OrderDetailActivity::class.java)
             intent.putExtra(ORDER_LIST_ID_BUNDLE_KEY, item.order_num)
+            intent.putExtra("orderRid", item.rid.toString())
             (context as Activity).startActivity(intent)
         }
 
@@ -97,6 +98,7 @@ class OrderListFragmentAdapter constructor(private val fragment: OrderListFragme
 //                    Toast.makeText(context, "查看进度", Toast.LENGTH_SHORT).show()
                     val intent = Intent(context, CancelRefundActivity::class.java)
                     intent.putExtra("orderNum", item.order_num)
+                    intent.putExtra("orderRid", item.rid.toString())
                     context.startActivity(intent)
                 }
             }

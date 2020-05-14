@@ -15,6 +15,7 @@ import com.shangyi.kt.ui.goods.bean.GoodsSpecBean
 import com.shangyi.kt.ui.goods.bean.ReecommendGood
 import com.shangyi.kt.ui.mine.bean.CollectListBean
 import com.shangyi.kt.ui.mine.bean.OrderListBean
+import com.shangyi.kt.ui.mine.bean.RefundOrderBean
 import com.shangyi.kt.ui.mine.bean.YhqListBean
 import com.shangyi.kt.ui.order.bean.*
 import com.shangyi.kt.ui.pingjia.bean.PingjiaDataBean
@@ -347,7 +348,13 @@ interface ApiService {
      * 订单 -- 取消退款
      */
     @FormUrlEncoded
-    @POST("/api/user/cancelOrderRefund")
+    @POST("/api/orders/cancelOrderRefund")
     suspend fun cancelOrderRefund(@Field("data") data: String): BaseResponse<Any?>
+    /**
+     * 订单 -- 查看退款订单详情
+     */
+    @FormUrlEncoded
+    @POST("/api/orders/refundOrderInfo")
+    suspend fun getRefundOrder(@Field("data") data: String): BaseResponse<RefundOrderBean?>
 
 }

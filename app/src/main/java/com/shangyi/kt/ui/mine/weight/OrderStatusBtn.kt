@@ -112,6 +112,8 @@ class OrderStatusBtn constructor(context: Context, attrs: AttributeSet? = null, 
             "查看进度" -> {
                 val intent = Intent(context, CancelRefundActivity::class.java)
                 intent.putExtra("orderNum", orderNum)
+                intent.putExtra("orderRid", orderActivity?.orderRid)
+
                 context.startActivity(intent)
             }
         }

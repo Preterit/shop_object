@@ -15,6 +15,7 @@ data class OrderListBean(
         val order_num: String,
         val order_status: String,
         val order_type: Int,
+        val rid: Int?,
         val pay_amount: Double,
         val remark: String,
         val shop: Shop?,
