@@ -12,6 +12,7 @@ import com.shangyi.business.weight.dialog.CancelOrderDialog
 import com.shangyi.business.weight.dialog.IosAlertDialog
 import com.shangyi.kt.ui.mine.bean.OrderDetailAddress
 import com.shangyi.kt.ui.mine.bean.PayDialogData
+import com.shangyi.kt.ui.mine.order.CancelRefundActivity
 import com.shangyi.kt.ui.mine.order.ChangeAddressActivity
 import com.shangyi.kt.ui.mine.order.OrderDetailActivity
 import com.shangyi.kt.ui.order.bean.OrderDetailInfoBean
@@ -108,6 +109,11 @@ class OrderStatusBtn constructor(context: Context, attrs: AttributeSet? = null, 
                 ))
                 orderActivity?.startActivity(intent)
             }
+            "查看进度" -> {
+                val intent = Intent(context, CancelRefundActivity::class.java)
+                intent.putExtra("orderNum", orderNum)
+                context.startActivity(intent)
+            }
         }
     }
 
@@ -121,6 +127,23 @@ class OrderStatusBtn constructor(context: Context, attrs: AttributeSet? = null, 
                 .setHeightMsg("每笔订单只能延迟一次哦")
                 .setPositiveButton("确认", Color.parseColor("#FF2942")) {
                     orderActivity?.mBinding?.vm?.postYcsh(orderNum!!)
+                }
+                .setNegativeButton("取消", Color.parseColor("#333333")) {
+
+                }
+        dialog
+    }
+
+    /**
+     * 取消退款
+     */
+    private val cancelRefundDialog: IosAlertDialog by lazy {
+        val dialog = IosAlertDialog(context)
+                .builder()
+                .setTitle("取消退款？")
+                .setHeightMsg("每笔订单只能延迟一次哦")
+                .setPositiveButton("确认", Color.parseColor("#FF2942")) {
+                    orderActivity?.mBinding?.vm?.cancelRefund(orderNum!!)
                 }
                 .setNegativeButton("取消", Color.parseColor("#333333")) {
 

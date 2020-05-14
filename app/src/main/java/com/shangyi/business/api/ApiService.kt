@@ -321,6 +321,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/api/user/myEarnings")
     suspend fun getSyData(@Field("data") data: String): BaseResponse<Any?>
+
     /**
      * 订单 -- 订单详情信息
      */
@@ -341,5 +342,12 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/api/orders/orderRefund")
     suspend fun orderRefund(@Field("data") data: String): BaseResponse<Any?>
+
+    /**
+     * 订单 -- 取消退款
+     */
+    @FormUrlEncoded
+    @POST("/api/user/cancelOrderRefund")
+    suspend fun cancelOrderRefund(@Field("data") data: String): BaseResponse<Any?>
 
 }

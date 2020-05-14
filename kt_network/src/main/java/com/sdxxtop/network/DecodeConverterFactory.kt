@@ -1,11 +1,8 @@
 package com.sdxxtop.network
 
-import android.util.Log
 import com.google.gson.Gson
-import com.google.gson.JsonIOException
 import com.google.gson.TypeAdapter
 import com.google.gson.reflect.TypeToken
-import com.google.gson.stream.JsonToken
 import com.sdxxtop.network.helper.data.BaseResponse
 import com.sdxxtop.network.utils.AESUtils
 import com.sdxxtop.network.utils.LongMsgLog

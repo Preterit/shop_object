@@ -12,11 +12,14 @@ import com.shangyi.business.weight.dialog.CancelOrderDialog
 import com.shangyi.business.weight.dialog.IosAlertDialog
 import com.shangyi.kt.ui.mine.bean.OrderListBean
 import com.shangyi.kt.ui.mine.bean.PayDialogData
+import com.shangyi.kt.ui.mine.order.CancelRefundActivity
 import com.shangyi.kt.ui.mine.order.ChangeAddressActivity
 import com.shangyi.kt.ui.mine.order.OrderDetailActivity
 import com.shangyi.kt.ui.mine.order.OrderListFragment
 import com.shangyi.kt.ui.mine.weight.OrderPayDialog
 import com.shangyi.kt.ui.order.weight.OrderListItemView
+import com.shangyi.kt.ui.pingjia.AddPinglunActivity
+import com.shangyi.kt.ui.pingjia.PingjiaActivity
 import kotlinx.android.synthetic.main.order_list_fragment_item.view.*
 
 /**
@@ -87,7 +90,14 @@ class OrderListFragmentAdapter constructor(private val fragment: OrderListFragme
                     Toast.makeText(context, "确认收货", Toast.LENGTH_SHORT).show()
                 }
                 3 -> {
-                    Toast.makeText(context, "评价", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(context, "评价", Toast.LENGTH_SHORT).show()
+                    context.startActivity(Intent(context, AddPinglunActivity::class.java))
+                }
+                6 -> {
+//                    Toast.makeText(context, "查看进度", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(context, CancelRefundActivity::class.java)
+                    intent.putExtra("orderNum", item.order_num)
+                    context.startActivity(intent)
                 }
             }
         }
@@ -156,6 +166,14 @@ class OrderListFragmentAdapter constructor(private val fragment: OrderListFragme
                 holder.itemView.btn2.visibility = View.GONE
                 holder.itemView.btn3.visibility = View.GONE
                 holder.itemView.btn1.text = "评价"
+            }
+            6 -> {
+                // 申请退款
+                holder.itemView.btnLayout.visibility = View.VISIBLE
+                holder.itemView.btn1.visibility = View.VISIBLE
+                holder.itemView.btn2.visibility = View.GONE
+                holder.itemView.btn3.visibility = View.GONE
+                holder.itemView.btn1.text = "查看进度"
             }
             else -> {
                 holder.itemView.btnLayout.visibility = View.GONE

@@ -16,7 +16,7 @@ class RefundOrderAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.ite
     private var selectItemPosition = -1
 
     init {
-        setList(arrayListOf("我不想买了", "信息填写错误，重新拍", "卖家缺货", "同城见面交易", "其他原因"))
+        setList(arrayListOf("订单信息拍错（规格/尺码/颜色等）", "我不想要了", "地址/电话信息填写错误", "没用/少用优惠", "缺货"))
     }
 
     override fun convert(holder: BaseViewHolder, item: String) {
@@ -24,7 +24,7 @@ class RefundOrderAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.ite
         holder.itemView.tvTitle.text = item
     }
 
-    fun setCurrentSelectItem(position:Int){
+    fun setCurrentSelectItem(position: Int) {
         this.selectItemPosition = position
         notifyDataSetChanged()
     }

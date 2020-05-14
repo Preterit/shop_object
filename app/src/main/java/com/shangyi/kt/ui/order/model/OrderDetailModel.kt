@@ -37,7 +37,7 @@ class OrderDetailModel : BaseViewModel() {
     }
 
     /**
-     * 获取订单信息
+     * 延迟收货
      */
     fun postYcsh(orderNum: String) {
         showLoadingDialog(true)
@@ -49,6 +49,26 @@ class OrderDetailModel : BaseViewModel() {
         }, { it ->
             orderInfo.value = it
             mIsLoadingShow.value = false
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
+        })
+    }
+
+    /**
+     * 取消退款
+     */
+    fun cancelRefund(orderNum: String) {
+        showLoadingDialog(true)
+        loadOnUI({
+            val params = Params()
+            params.put("order_num", orderNum)
+            LogUtils.deCodeParams(params)
+            RetrofitClient.apiCusService.cancelOrderRefund(params.aesData)
+        }, { it ->
+            mIsLoadingShow.value = false
+            UIUtils.showToast("取消退款成功")
+            loadOrderInfo(orderNum)
         }, { code, msg, t ->
             UIUtils.showToast(msg)
             mIsLoadingShow.value = false

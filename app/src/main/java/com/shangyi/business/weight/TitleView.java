@@ -63,8 +63,6 @@ public class TitleView extends RelativeLayout {
     }
 
     private void init() {
-        Log.e("TitleView", "" + clipToPadding);
-        Log.e("TitleView", "" + fitsSystemWindows);
         setClipToPadding(clipToPadding);
         setFitsSystemWindows(fitsSystemWindows);
         setBackgroundColor(bgColor);

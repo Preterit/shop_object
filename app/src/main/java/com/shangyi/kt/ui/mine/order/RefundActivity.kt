@@ -26,7 +26,7 @@ class RefundActivity : BaseKTActivity<ActivityRefundBinding, RefundModel>() {
     }
 
     private var goodsInfo: OrderDetailGood? = null   // 传进来的商品信息
-    private var orderNum = ""// 传进来的商品信息
+    private var orderNum = ""       // 传进来的商品信息
 
     /**
      * 退款原因的选择框
@@ -70,7 +70,7 @@ class RefundActivity : BaseKTActivity<ActivityRefundBinding, RefundModel>() {
                 )
             }
 
-            R.id.tvSelectReason -> {
+            R.id.selectLayout -> {
                 // 退款原因
                 reasonDialog.show(supportFragmentManager, "")
             }

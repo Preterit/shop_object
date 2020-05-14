@@ -1,15 +1,9 @@
 package com.shangyi.kt.ui.mine.order
 
-import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kingja.loadsir.callback.Callback.OnReloadListener
-import com.kingja.loadsir.core.LoadService
-import com.kingja.loadsir.core.LoadSir
 import com.sdxxtop.base.BaseKTActivity
-import com.sdxxtop.base.loadsir.PlaceholderCallback
-import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityOrderDetailBinding
 import com.shangyi.kt.ui.mine.order.adapter.OrderListFragmentAdapter
@@ -100,6 +94,10 @@ class OrderDetailActivity : BaseKTActivity<ActivityOrderDetailBinding, OrderDeta
                 // 已签收
                 ivOrderStatusImg.setImageResource(R.drawable.order_detail_success)
                 btnStrList = arrayListOf("评价")
+            }
+            6 -> {
+                // 申请退款
+                btnStrList = arrayListOf("查看进度")
             }
 
             else -> {

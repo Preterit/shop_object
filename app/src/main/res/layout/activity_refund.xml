@@ -76,24 +76,35 @@
             android:background="@color/color_DDDDDD"
             app:layout_constraintTop_toBottomOf="@+id/glideImageView" />
 
-        <TextView
-            android:id="@+id/tvSelectReason"
+        <LinearLayout
+            android:id="@+id/selectLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/icon_arrows_right"
-            android:drawablePadding="10dp"
-            android:gravity="right"
-            android:hint="选择退款原因"
             android:onClick="@{activity::onClick}"
-            android:paddingLeft="90dp"
-            android:paddingTop="15dp"
             android:paddingRight="16dp"
-            android:paddingBottom="15dp"
-            android:textColor="@color/color_333333"
-            android:textSize="12sp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvLine"
-            tools:text="我不想要了" />
+            app:layout_constraintTop_toBottomOf="@+id/tvLine">
+
+            <TextView
+                android:id="@+id/tvSelectReason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:hint="选择退款原因"
+                android:paddingLeft="90dp"
+                android:paddingTop="15dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="17dp"
+                android:textColor="@color/color_333333"
+                android:textSize="12sp"
+                tools:text="我不想要了" />
+
+            <ImageView
+                android:layout_width="5dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/icon_right_logo" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -102,9 +113,9 @@
             android:text="退款原因"
             android:textColor="@color/color_333333"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@id/tvSelectReason"
+            app:layout_constraintBottom_toBottomOf="@id/selectLayout"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvSelectReason" />
+            app:layout_constraintTop_toTopOf="@+id/selectLayout" />
 
         <TextView
             android:id="@+id/tvDesc"
@@ -115,7 +126,7 @@
             android:textColor="@color/color_333333"
             android:textSize="12sp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSelectReason" />
+            app:layout_constraintTop_toBottomOf="@+id/selectLayout" />
 
         <TextView
             android:id="@+id/tvAllPrice"
@@ -126,7 +137,7 @@
             android:textColor="#FF2941"
             android:textSize="12sp"
             app:layout_constraintLeft_toRightOf="@+id/tvDesc"
-            app:layout_constraintTop_toBottomOf="@+id/tvSelectReason" />
+            app:layout_constraintTop_toBottomOf="@+id/selectLayout" />
 
         <TextView
             android:id="@+id/tvTemp"
@@ -156,7 +167,7 @@
         <LinearLayout
             android:id="@+id/llEtLayout"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="100dp"
             android:layout_marginRight="15dp"
             android:background="@drawable/shape_tk_et_bg"
             app:layout_constraintLeft_toRightOf="@+id/tvTksm"

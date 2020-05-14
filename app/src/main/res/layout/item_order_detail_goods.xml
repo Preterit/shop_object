@@ -97,7 +97,6 @@
         android:id="@+id/tvBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
         android:background="@drawable/shape_order_list_item_btn_gray_bg"
         android:paddingLeft="20dp"
         android:paddingTop="7dp"
