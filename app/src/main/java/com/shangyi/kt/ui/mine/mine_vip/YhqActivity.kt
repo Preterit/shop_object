@@ -32,6 +32,7 @@ class YhqActivity : BaseKTActivity<ActivityYhqBinding, YhqModel>() {
         val adapter = MineOrderFragmentAdapter(supportFragmentManager, fragmentList, list)
         viewPager.adapter = adapter
         tablayout.setupWithViewPager(viewPager)
+        viewPager.offscreenPageLimit = list.size
     }
 
     /**

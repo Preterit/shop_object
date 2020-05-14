@@ -41,5 +41,6 @@ class AllOrderActivity : BaseKTActivity<ActivityAllOrderBinding, MineOrderModel>
         tablayout.setupWithViewPager(viewPager)
 
         viewPager.currentItem = currentItem
+        viewPager.offscreenPageLimit = list.size
     }
 }

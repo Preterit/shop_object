@@ -292,11 +292,18 @@ interface ApiService {
     suspend fun delCollect(@Field("data") data: String): BaseResponse<Any?>
 
     /**
-     * 订单 -- 收藏列表
+     * 订单 -- 优惠券列表
      */
     @FormUrlEncoded
     @POST("/api/user/getUserCoupon")
     suspend fun getYhqData(@Field("data") data: String): BaseResponse<YhqListBean?>
+
+    /**
+     * 订单 -- 删除优惠券
+     */
+    @FormUrlEncoded
+    @POST("/api/user/userCouponDel")
+    suspend fun delYhq(@Field("data") data: String): BaseResponse<Any?>
 
     /**
      * 首页 -- banner
@@ -338,6 +345,13 @@ interface ApiService {
     suspend fun changeOrderAds(@Field("data") data: String): BaseResponse<Any?>
 
     /**
+     * 订单 -- 确认收货
+     */
+    @FormUrlEncoded
+    @POST("/api/user/completeOrders")
+    suspend fun confirmReceipt(@Field("data") data: String): BaseResponse<Any?>
+
+    /**
      * 订单 -- 申请退款
      */
     @FormUrlEncoded
@@ -350,6 +364,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/api/orders/cancelOrderRefund")
     suspend fun cancelOrderRefund(@Field("data") data: String): BaseResponse<Any?>
+
     /**
      * 订单 -- 查看退款订单详情
      */

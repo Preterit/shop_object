@@ -19,7 +19,6 @@ import com.shangyi.kt.ui.mine.order.OrderListFragment
 import com.shangyi.kt.ui.mine.weight.OrderPayDialog
 import com.shangyi.kt.ui.order.weight.OrderListItemView
 import com.shangyi.kt.ui.pingjia.AddPinglunActivity
-import com.shangyi.kt.ui.pingjia.PingjiaActivity
 import kotlinx.android.synthetic.main.order_list_fragment_item.view.*
 
 /**
@@ -80,6 +79,7 @@ class OrderListFragmentAdapter constructor(private val fragment: OrderListFragme
      */
     private fun setBtnClickListener(item: OrderListBean, holder: BaseViewHolder) {
         holder.itemView.btn1.setOnClickListener {
+            orderNum = item.order_num
             when (item.status) {
                 0 -> {
                     val dialog = OrderPayDialog.newInstance(PayDialogData(
@@ -88,7 +88,8 @@ class OrderListFragmentAdapter constructor(private val fragment: OrderListFragme
                     dialog.show(fragment.childFragmentManager, "")
                 }
                 2 -> {
-                    Toast.makeText(context, "确认收货", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(context, "确认收货", Toast.LENGTH_SHORT).show()
+                    qrshDialog.show()
                 }
                 3 -> {
 //                    Toast.makeText(context, "评价", Toast.LENGTH_SHORT).show()
@@ -200,5 +201,21 @@ class OrderListFragmentAdapter constructor(private val fragment: OrderListFragme
         dialog
     }
 
+    /**
+     * 延迟收货
+     */
+    private val qrshDialog: IosAlertDialog by lazy {
+        val dialog = IosAlertDialog(context)
+                .builder()
+                .setTitle("确认收货")
+                .setHeightMsg("确认收货")
+                .setPositiveButton("确认", Color.parseColor("#FF2942")) {
+                    fragment.mBinding.vm?.confirmReceipt(orderNum)
+                }
+                .setNegativeButton("取消", Color.parseColor("#333333")) {
+
+                }
+        dialog
+    }
 
 }

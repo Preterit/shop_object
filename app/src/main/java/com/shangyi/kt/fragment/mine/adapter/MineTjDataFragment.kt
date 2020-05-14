@@ -6,6 +6,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.sdxxtop.base.BaseKTFragment
+import com.sdxxtop.base.BaseLazyFragment
 import com.sdxxtop.base.loadsir.ErrorCallback
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentTestBinding
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_test.*
  * author:lwb
  * Desc:
  */
-class MineTjDataFragment : BaseKTFragment<FragmentTestBinding, MineModel>() {
+class MineTjDataFragment : BaseLazyFragment<FragmentTestBinding, MineModel>() {
 
     companion object {
         fun newInstance(id: Int): MineTjDataFragment {
@@ -77,16 +78,12 @@ class MineTjDataFragment : BaseKTFragment<FragmentTestBinding, MineModel>() {
         }
     }
 
-    override fun initData() {
-        mBinding.vm?.loadFmListData(itemId)
-    }
-
-    override fun loadData() {
-
-    }
-
     override fun preLoad() {
         initData()
+    }
+
+    override fun onFragmentFirstVisible() {
+        mBinding.vm?.loadFmListData(itemId)
     }
 
 }

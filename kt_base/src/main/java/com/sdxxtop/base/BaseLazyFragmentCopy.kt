@@ -1,18 +1,80 @@
 package com.sdxxtop.base
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.kingja.loadsir.core.LoadService
+import com.kingja.loadsir.core.LoadSir
+import com.sdxxtop.base.dialog.LoadingDialog
+import com.sdxxtop.base.lifecycle.FragmentLifecycleImpl
+import com.sdxxtop.base.load.IPreLoad
 
 /**
- *
+ * 原版，不使用
  */
-abstract class BaseLazyFragment<DB : ViewDataBinding, VM : BaseViewModel> : BaseFragment<DB, VM>() {
+abstract class BaseLazyFragmentCopy<DB : ViewDataBinding, VM : BaseViewModel> : Fragment(), IVMView<VM>, IPreLoad {
+
+    companion object {
+        const val TAG = "BaseLazyFragment"
+    }
+
+    lateinit var mBinding: DB
+    lateinit var mLoadService: LoadService<Any>
+
+    val mViewModel: VM by lazy {
+        ViewModelProviders.of(this@BaseLazyFragmentCopy)[vmClazz()]
+    }
+
+    val mLoadingDialog by lazy {
+        LoadingDialog(activity)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        mBinding = DataBindingUtil.inflate<DB>(inflater, layoutId(), container, false)
+        lifecycle.addObserver(FragmentLifecycleImpl(javaClass.simpleName))
+        mBinding.lifecycleOwner = this
+        rootView = mBinding.root
+        val loadSirBindView = loadSirBindView()
+
+        return if (loadSirBindView == null) {
+            mLoadService = LoadSir.getDefault().register(mBinding.root) {
+                preLoad()
+            }
+            mLoadService.loadLayout
+        } else {
+            //自定义的一个加载界面
+            mLoadService = LoadSir.getDefault().register(loadSirBindView) {
+                preLoad()
+            }
+            mBinding.root
+        }
+    }
+
+    open fun loadSirBindView(): View? {
+        return null
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        bindVM()
+        mBinding.executePendingBindings()
+
+        initView()
+        initSelfObserve()
+        //初始化完view
         mIsViewCreated = true
+
+        initObserve()
+        initEvent()
+
         // 本次分发主要时用于分发默认tab可见状态，这种状况下它的生命周期是：1 fragment setUserVisibleHint: true-》onAttach-》onCreate-》onCreateView-》onResume
         // 默认 Tab getUserVisibleHint() = true !isHidden() = true
         // 对于非默认 tab 或者非默认显示的 Fragment 在该生命周期中只做了 isViewCreated 标志位设置 可见状态将不会在这里分发
@@ -24,12 +86,44 @@ abstract class BaseLazyFragment<DB : ViewDataBinding, VM : BaseViewModel> : Base
         }
     }
 
+    private fun initSelfObserve() {
+        mViewModel.mIsLoadingShow.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                mLoadingDialog.show()
+            } else {
+                mLoadingDialog.dismiss()
+            }
+        })
+    }
+
+    override fun preLoad() {
+    }
+
+    override fun bindVM() {
+
+    }
+
+    override fun initEvent() {
+    }
+
+    override fun loadData() {
+    }
+
+    override fun initData() {
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.unbind()
+    }
+
+    private var rootView: View? = null  // rootView
     private var mIsViewCreated = false  // view是否创建完成
     private var mIsFirstVisible = true  // 是否是第一次可见
     private var currentVisibleState = false  //
 
     /*****  当前fragment 第一次可见  *******/
-    protected open fun onFragmentFirstVisible() {}
+    protected abstract fun onFragmentFirstVisible()
 
     /*****  当前fragment resume  *******/
     protected open fun onFragmentResume() {}
