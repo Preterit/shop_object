@@ -100,7 +100,8 @@ public class WebviewDefaultSetting {
         mWebSettings.setAppCacheMaxSize(1024*1024*80);
 
         // 用户可以自己设置useragent
-        mWebSettings.setUserAgentString("webprogress/build you agent info");
+        // TODO  这里可以进行设置
+//        mWebSettings.setUserAgentString("webprogress/build you agent info");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             webView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG);

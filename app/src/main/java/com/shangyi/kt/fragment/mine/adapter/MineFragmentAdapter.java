@@ -12,9 +12,9 @@ import java.util.List;
  * Desc:
  */
 public class MineFragmentAdapter extends FragmentPagerAdapter {
-    private List<Fragment> mFragments;
+    private List<MineTjDataFragment> mFragments;
 
-    public MineFragmentAdapter(FragmentManager fm, List<Fragment> mFragments) {
+    public MineFragmentAdapter(FragmentManager fm, List<MineTjDataFragment> mFragments) {
         super(fm);
         this.mFragments = mFragments;
     }

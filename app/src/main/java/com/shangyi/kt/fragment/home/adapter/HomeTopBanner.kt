@@ -1,6 +1,5 @@
 package com.shangyi.kt.fragment.home.adapter
 
-import android.content.Intent
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
@@ -52,5 +51,7 @@ class HomeTopBannerHoler : RecyclerView.ViewHolder {
 
 
 data class HomeBannerBean(
-        val img: String?
+        val img: String?,
+        val page_url: String?,
+        val name: String?
 )

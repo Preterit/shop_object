@@ -9,7 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import com.sdxxtop.base.BaseFragment
 import com.sdxxtop.base.BaseKTFragment
+import com.sdxxtop.base.BaseLazyFragment
 import com.sdxxtop.base.loadsir.ErrorCallback
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentMineBinding
@@ -52,7 +54,7 @@ class MineFragment : BaseKTFragment<FragmentMineBinding, MineModel>() {
     }
 
     val titleList = arrayListOf("精选推荐", "生鲜集市", "线上菜市场", "精致女性", "无惧年龄", "出行助手", "居家必备", "开学必备")
-    val fragmentList = ArrayList<Fragment>()
+    val fragmentList = ArrayList<MineTjDataFragment>()
     private var mineFragmentAdapter: MineFragmentAdapter? = null  // 个人中心商品推荐的 fragment 适配器
     private var mineHorTjAdapter: MineHorTjAdapter? = null  // 个人中心商品推荐的 横向 推荐分类适配器
 
@@ -140,6 +142,10 @@ class MineFragment : BaseKTFragment<FragmentMineBinding, MineModel>() {
             viewPager.adapter = mineFragmentAdapter
             viewPager.offscreenPageLimit = fragmentList.size
             mineHorTjAdapter?.setList(titleList)
+        } else {
+            fragmentList.forEach {
+                it.onResume()
+            }
         }
     }
 
