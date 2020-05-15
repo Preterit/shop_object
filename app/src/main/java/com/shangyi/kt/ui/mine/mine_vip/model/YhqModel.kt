@@ -46,7 +46,7 @@ class YhqModel : BaseViewModel() {
      * 删除优惠券
      */
     fun delYhq(id: Int?) {
-        loadOnUI({
+        /*loadOnUI({
             showLoadingDialog(true)
             val params = Params()
             params.put("receive_id", id)
@@ -59,6 +59,6 @@ class YhqModel : BaseViewModel() {
             UIUtils.showToast(msg)
             delSuccess.value = false
             mIsLoadingShow.value = false
-        })
+        })*/
     }
 }
