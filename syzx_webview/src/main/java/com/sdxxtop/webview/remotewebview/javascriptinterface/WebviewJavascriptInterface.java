@@ -2,10 +2,10 @@ package com.sdxxtop.webview.remotewebview.javascriptinterface;
 
 import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
 import android.webkit.JavascriptInterface;
 
 /**
- *
  * 1. 保留command的注册
  * 2. 不支持command通过远程aidl方式调用
  */
@@ -27,6 +27,23 @@ public final class WebviewJavascriptInterface {
                 try {
                     if (javascriptCommand != null) {
                         javascriptCommand.exec(mContext, cmd, param);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    @JavascriptInterface
+    public void goodsDetail(final String param) {
+        Log.e("goodsDetail -- ", "" + param);
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    if (javascriptCommand != null) {
+                        javascriptCommand.exec(mContext, "goodsDetail", param);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

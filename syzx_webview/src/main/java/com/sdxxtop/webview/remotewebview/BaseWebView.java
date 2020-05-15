@@ -88,7 +88,7 @@ public class BaseWebView extends WebView implements XuxinWebviewClient.WebviewTo
                 }
             });
         }
-        addJavascriptInterface(remoteInterface, "webview");
+        addJavascriptInterface(remoteInterface, "android");
     }
 
     @Override

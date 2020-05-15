@@ -20,12 +20,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.shangyi.kt.ui.home.activity.HomeJKClassroomActivity"/>
+        <activity android:name="com.shangyi.kt.ui.home.activity.HomeBannerWebActivity"></activity>
+        <activity android:name="com.shangyi.kt.ui.home.activity.HomeJKClassroomActivity" />
         <activity android:name="com.shangyi.kt.ui.home.activity.HomeJingXuanActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.LazyFragmentActivity" />
-        <activity android:name="com.shangyi.kt.ui.splash.GuideActivity"
-            android:theme="@style/AppThemeGuide"/>
-
+        <activity
+            android:name="com.shangyi.kt.ui.splash.GuideActivity"
+            android:theme="@style/AppThemeGuide" />
         <activity android:name="com.shangyi.kt.ui.mine.order.CancelRefundActivity" />
         <activity
             android:name="com.shangyi.kt.ui.mine.order.RefundActivity"
@@ -80,7 +81,9 @@
         <activity
             android:name="com.shangyi.kt.ui.userlogin.LoginActivity"
             android:launchMode="singleTask" />
-        <activity android:name="com.shangyi.kt.ui.splash.SplashActivity">
+        <activity
+            android:name="com.shangyi.kt.ui.splash.SplashActivity"
+            android:theme="@style/AppThemeSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -91,9 +94,8 @@
         <activity android:name="com.shangyi.kt.ui.userlogin.YzmActivity" />
         <activity android:name="com.shangyi.kt.ui.setting.SettingActivity" />
         <activity
-            android:name="com.shangyi.kt.ui.WebActivity"
-            android:hardwareAccelerated="true"
-            android:process=":remoteweb" />
+            android:name="com.shangyi.kt.ui.WebActivity" />
+
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
