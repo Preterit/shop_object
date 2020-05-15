@@ -7,7 +7,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="500dp"
         android:scaleType="fitXY"
         android:src="@drawable/gaoyongicon" />
 
@@ -97,7 +97,7 @@
         android:gravity="center">
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="25dp"
             android:background="@drawable/gaoyongtitle"
             />
     </LinearLayout>
