@@ -2,6 +2,7 @@ package com.shangyi.kt.ui.home.activity;
 
 import com.sdxxtop.base.BaseKTActivity;
 import com.shangyi.business.R;
+
 import com.shangyi.business.databinding.ActivityHomePinpaiBinding;
 import com.shangyi.kt.ui.home.adapter.PinpaiAdapter;
 import com.shangyi.kt.ui.home.bean.PinPaiBean;
@@ -59,9 +60,6 @@ public class HomePinpaiActivity extends BaseKTActivity<ActivityHomePinpaiBinding
         mPinpaiAdapter = new PinpaiAdapter();
         mPinpaiRey.setLayoutManager(new LinearLayoutManager(HomePinpaiActivity.this,LinearLayoutManager.HORIZONTAL ,false));
         mPinpaiRey.setAdapter(mPinpaiAdapter);
-
-        /*View headView = LayoutInflater.from(this).inflate(R.layout.pinpai_item_view, null);
-        mPinpaiAdapter.addHeaderView(headView);*/
 
     }
 }

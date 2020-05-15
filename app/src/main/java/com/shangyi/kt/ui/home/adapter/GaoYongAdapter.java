@@ -32,11 +32,6 @@ public class GaoYongAdapter extends BaseQuickAdapter<GaoYongBean, BaseViewHolder
 
         ivImg.loadImage(imgUrl, R.color.placeholder_color);
 
-        /*holder.setText(R.id.tvTitle, "sshkslj");
-        holder.setText(R.id.tvPrice, "￥34.34");
-        holder.setText(R.id.tvZhuanTx, "￥" +"343");
-
-        ivImg.loadImage(imgUrl+"", R.color.placeholder_color);*/
 
     }
 }
