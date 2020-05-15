@@ -1,15 +1,14 @@
 package com.shangyi.kt.ui.home.activity;
 
 
-import android.os.Bundle;
-import android.view.View;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.sdxxtop.base.BaseKTActivity;
 import com.shangyi.business.R;
 import com.shangyi.business.databinding.ActivityHomeJkclassroomViewBinding;
-import com.shangyi.kt.ui.home.adapter.HaokeRcyAdapter;
 import com.shangyi.kt.ui.home.adapter.HomeKeTangAdapter;
-import com.shangyi.kt.ui.home.adapter.PinpaiAdapter;
 import com.shangyi.kt.ui.home.bean.HaoKetjBean;
 import com.shangyi.kt.ui.home.model.HomeJKClassroomModel;
 
@@ -17,13 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-public class HomeJKClassroomActivity extends BaseKTActivity<ActivityHomeJkclassroomViewBinding,HomeJKClassroomModel> {
+public class HomeJKClassroomActivity extends BaseKTActivity<ActivityHomeJkclassroomViewBinding, HomeJKClassroomModel> {
 
     private RecyclerView mKeTangRcy;
     private HomeKeTangAdapter mHomeKeTangAdapter;
@@ -66,7 +59,7 @@ public class HomeJKClassroomActivity extends BaseKTActivity<ActivityHomeJkclassr
         mKeTangRcy = findViewById(R.id.ketang_recyclerview);
 
         mHomeKeTangAdapter = new HomeKeTangAdapter();
-        mKeTangRcy.setLayoutManager(new LinearLayoutManager(HomeJKClassroomActivity.this,LinearLayoutManager.VERTICAL ,false));
+        mKeTangRcy.setLayoutManager(new LinearLayoutManager(HomeJKClassroomActivity.this, LinearLayoutManager.VERTICAL, false));
         mKeTangRcy.setAdapter(mHomeKeTangAdapter);
     }
 }

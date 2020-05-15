@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:bgColor="#4C65FD"
-            app:leftLayoutIconIsGray="true"
+            app:leftLayoutIsShow="true"
             app:titleColor="@color/white"
             app:titleValue="健康课堂" />
 

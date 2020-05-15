@@ -1,5 +1,7 @@
 package com.shangyi.kt.ui.home.adapter;
 
+import android.view.View;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.shangyi.business.R;
@@ -22,6 +24,12 @@ public class HomeKeTangAdapter extends BaseQuickAdapter<HaoKetjBean, BaseViewHol
 
     @Override
     protected void convert(@NotNull BaseViewHolder holder, HaoKetjBean item) {
+        if (holder.getLayoutPosition() == 0){
+            holder.getView(R.id.top_line).setVisibility(View.VISIBLE);
+        }else{
+            holder.getView(R.id.top_line).setVisibility(View.GONE);
+        }
+
         /*String imgUrl = item.getGoods_one_img().getUrl();
         GlideImageView ivImg = holder.getView(R.id.glideImageView);
         holder.setText(R.id.tvTitle, item.getName());
