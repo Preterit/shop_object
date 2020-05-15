@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/img_ketang"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="11dp"
+        android:layout_height="11dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/ketang_time"
+        android:background="@drawable/ketang_img" />
+
+    <TextView
+        android:id="@+id/ketang_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/img_ketang"
+        android:text="2020-05-15"
+        android:textSize="12sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        />
+    <ImageView
+        android:id="@+id/ketang_tv"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_ketang"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/ketang_line"
+        android:textColor="@color/black" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintLeft_toRightOf="@id/img_ketang"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ketang_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_goodsdetail_lookmore_item_bg"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="15dp">
+
+        <TextView
+            android:id="@+id/tv_kc_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="健康管理师"
+            android:textSize="15sp"
+            android:textColor="#333333"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tv_item"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:text="."
+            android:textSize="15sp"
+            android:background="#FF3B51"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="13dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/tv_zhuangtai"
+            />
+        <TextView
+            android:id="@+id/tv_zhuangtai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未直播"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:textColor="#FF3B51"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tv_kc_zj_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="如何预防高血压"
+            android:textSize="12sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_kc_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+        <TextView
+            android:id="@+id/tv_kc_xj_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="高血压在日常生活中的表现"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="25dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_kc_zj_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+        <com.study.glidemodel.GlideImageView
+            android:id="@+id/glideImageView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_kc_xj_title"
+            android:layout_width="205dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/ketang_icon"/>
+
+        <com.study.glidemodel.GlideImageView
+            android:id="@+id/js_icon"
+            app:layout_constraintLeft_toRightOf="@id/glideImageView"
+            app:layout_constraintTop_toTopOf="@id/glideImageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/js_icon"/>
+
+
+        <TextView
+            android:id="@+id/js_name"
+            app:layout_constraintTop_toBottomOf="@id/js_icon"
+            app:layout_constraintLeft_toRightOf="@id/glideImageView"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:text="讲师：王培玉"
+            android:textColor="@color/color_333333"
+            android:textSize="15sp" />
+        <TextView
+            android:id="@+id/js_shenfen"
+            app:layout_constraintTop_toBottomOf="@id/js_name"
+            app:layout_constraintLeft_toRightOf="@id/glideImageView"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="健康管理师教材编委"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp" />
+
+        <com.study.glidemodel.GlideImageView
+            android:id="@+id/dp_icon"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/glideImageView"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ke_dp_icon"/>
+
+        <TextView
+            android:id="@+id/dp_title"
+            app:layout_constraintTop_toBottomOf="@id/glideImageView"
+            app:layout_constraintLeft_toRightOf="@id/dp_icon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:text="好学习旗舰店"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_guankan"
+            app:layout_constraintTop_toBottomOf="@id/glideImageView"
+            app:layout_constraintRight_toLeftOf="@id/img_kc_fx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="16dp"
+            android:text="观看"
+            android:textColor="#FF2941"
+            android:textSize="12sp" />
+        <ImageView
+            android:id="@+id/img_kc_fx"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/glideImageView"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/kc_fenxiang_icon"
+            />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/zhuanLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dp_icon"
+            android:background="@drawable/shipin_btn"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp">
+
+            <ImageView
+                android:id="@+id/img_shipin"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginLeft="15dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:background="@drawable/kc_shipin_heji"
+                />
+
+            <TextView
+                android:id="@+id/tv_kc_heji"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/img_shipin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="9dp"
+                android:text="健康管理师课程合集"
+                android:textColor="#4C65FD"
+                android:textSize="12sp" />
+
+
+            <ImageView
+                android:id="@+id/img_shipin_lianjie"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:background="@drawable/ke_lianjie_icon"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

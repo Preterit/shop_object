@@ -8,6 +8,7 @@ import com.shangyi.business.network.Params
 import com.shangyi.business.utils.LogUtils
 import com.shangyi.kt.fragment.home.model.HomeDataBean
 import com.shangyi.kt.ui.home.bean.GaoYongBean
+import com.shangyi.kt.ui.home.bean.HaoKetjBean
 import com.shangyi.kt.ui.home.bean.JingXuanBean
 import com.shangyi.kt.ui.order.bean.OrderBean
 
@@ -18,17 +19,17 @@ import com.shangyi.kt.ui.order.bean.OrderBean
  */
 class HomeJKClassroomModel:BaseViewModel() {
 
-    var successData = MutableLiveData<List<JingXuanBean>>()
+    var successData = MutableLiveData<List<HaoKetjBean>>()
 
     /**
      * 商品推荐
      */
-    fun jingXuanTuijian(module: String) {
+    fun haoKeTuijian(module: String) {
         loadOnUI({
             val params = Params()
             params.put("module", "002")
             LogUtils.deCodeParams(params)
-            RetrofitClient.apiCusService.jingXuanTuijian(params.aesData)
+            RetrofitClient.apiCusService.haoKeTuijian(params.aesData)
         }, {
             mIsLoadingShow.value = false
             successData.value = it
