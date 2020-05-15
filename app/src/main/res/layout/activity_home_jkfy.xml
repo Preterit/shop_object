@@ -20,8 +20,8 @@
         <com.shangyi.business.weight.TitleView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:leftLayoutIconIsGray="true"
             app:bgColor="#3d63f5"
+            app:leftLayoutIsShow="true"
             app:titleColor="@color/white"
             app:titleValue="健康防疫" />
 

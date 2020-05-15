@@ -10,24 +10,27 @@
             type="com.shangyi.kt.ui.home.model.HomeGaoyongModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="#F4683F"
+        android:orientation="vertical"
         tools:context="com.shangyi.kt.ui.setting.HomeJkfyActivity">
 
         <com.shangyi.business.weight.TitleView
-            app:titleValue="高佣专区"
-            app:bgColor="#F4683F"
-            app:titleColor="#FFFFFF"
-            app:leftLayoutIconIsGray="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:elevation="1dp"
+            app:bgColor="@color/translate"
+            app:layout_constraintTop_toTopOf="parent"
+            app:leftLayoutIsShow="true"
+            app:titleColor="@color/white"
+            app:titleValue="高佣专区" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/gaoyong_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

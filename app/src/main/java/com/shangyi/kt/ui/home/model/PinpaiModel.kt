@@ -30,7 +30,7 @@ class PinpaiModel:BaseViewModel() {
             RetrofitClient.apiCusService.pinPaiTuijian(params.aesData)
         }, {
             mIsLoadingShow.value = false
-//            successData.value = it
+            successData.value = it
         }, { code, msg, t ->
             UIUtils.showToast(msg)
             mIsLoadingShow.value = false

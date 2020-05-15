@@ -28,8 +28,8 @@ public class PinPaiBean {
 
     private int id;
     private String name;
-    private int price;
-    private int sale_price;
+    private float price;
+    private float sale_price;
     private int weight;
     private int sale_count;
     private int count;
@@ -40,6 +40,22 @@ public class PinPaiBean {
     private GoodsOneImgBean goods_one_img;
     private DealerBean dealer;
     private List<?> discountList;
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public float getSale_price() {
+        return sale_price;
+    }
+
+    public void setSale_price(float sale_price) {
+        this.sale_price = sale_price;
+    }
 
     public int getId() {
         return id;
@@ -57,17 +73,6 @@ public class PinPaiBean {
         this.name = name;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getSale_price() {
-        return sale_price;
-    }
 
     public void setSale_price(int sale_price) {
         this.sale_price = sale_price;

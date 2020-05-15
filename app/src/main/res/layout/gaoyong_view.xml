@@ -7,7 +7,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="450dp"
         android:scaleType="fitXY"
         android:src="@drawable/gaoyongicon" />
 
@@ -30,14 +30,14 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="44dp"
-                android:layout_height="44dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/gaoyong_icon01" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:text="优质货源"
                 android:textColor="#FFFFFF"
@@ -53,14 +53,14 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="44dp"
-                android:layout_height="44dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/gaoyong_icon02" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:text="100%正品"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp" />
@@ -75,14 +75,14 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="44dp"
-                android:layout_height="44dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/gaoyong_icon03" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:text="高额佣金"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp" />
@@ -97,7 +97,7 @@
         android:gravity="center">
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/gaoyongtitle"
             />
     </LinearLayout>

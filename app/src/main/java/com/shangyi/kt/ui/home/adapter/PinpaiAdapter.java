@@ -29,7 +29,5 @@ public class PinpaiAdapter extends BaseQuickAdapter<PinPaiBean, BaseViewHolder> 
         holder.setText(R.id.tvZhuanTx, "返" + item.getSale_price() + "");
 
         ivImg.loadImage(imgUrl, R.color.placeholder_color);
-
-
     }
 }
