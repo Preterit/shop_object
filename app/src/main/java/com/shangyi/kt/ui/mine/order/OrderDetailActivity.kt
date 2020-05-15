@@ -1,15 +1,9 @@
 package com.shangyi.kt.ui.mine.order
 
-import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kingja.loadsir.callback.Callback.OnReloadListener
-import com.kingja.loadsir.core.LoadService
-import com.kingja.loadsir.core.LoadSir
 import com.sdxxtop.base.BaseKTActivity
-import com.sdxxtop.base.loadsir.PlaceholderCallback
-import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityOrderDetailBinding
 import com.shangyi.kt.ui.mine.order.adapter.OrderListFragmentAdapter
@@ -31,23 +25,27 @@ class OrderDetailActivity : BaseKTActivity<ActivityOrderDetailBinding, OrderDeta
     override fun initObserve() {
         mBinding.vm?.orderInfo?.observe(this, Observer {
             if (it != null) {
+                orderData = it
                 bandData(it)
             }
         })
     }
 
     private var orderNum = ""   // 订单编号
+    var orderRid = ""   // 退款订单编号
+    private var orderData: OrderDetailInfoBean? = null   // 订单详情
     private var adapter = OrderDetailGoodsAdapter()
 
     override fun initView() {
         orderNum = intent.getStringExtra(OrderListFragmentAdapter.ORDER_LIST_ID_BUNDLE_KEY) ?: ""
+        orderRid = intent.getStringExtra("orderRid") ?: ""
 
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.adapter = adapter
     }
 
     override fun initData() {
-        mBinding.vm?.loadOrderInfo(orderNum)
+
     }
 
     /**
@@ -56,7 +54,8 @@ class OrderDetailActivity : BaseKTActivity<ActivityOrderDetailBinding, OrderDeta
     private fun bandData(it: OrderDetailInfoBean) {
         glideImageView.loadImage(it.shop?.shop_avatar ?: "")
         adapter.setList(it.order_goods)
-
+        adapter.setOrderStatus(it.status)
+        adapter.setOrderNum(it.order_num)
         setStatusImg(it.status)
     }
 
@@ -98,6 +97,10 @@ class OrderDetailActivity : BaseKTActivity<ActivityOrderDetailBinding, OrderDeta
                 ivOrderStatusImg.setImageResource(R.drawable.order_detail_success)
                 btnStrList = arrayListOf("评价")
             }
+            6 -> {
+                // 申请退款
+                btnStrList = arrayListOf("查看进度")
+            }
 
             else -> {
                 // 已完成
@@ -121,5 +124,10 @@ class OrderDetailActivity : BaseKTActivity<ActivityOrderDetailBinding, OrderDeta
     /**
      * 返回订单编号。
      */
-    fun getOrderNum() = orderNum
+    fun getOrderData() = orderData
+
+    override fun onResume() {
+        super.onResume()
+        mBinding.vm?.loadOrderInfo(orderNum)
+    }
 }

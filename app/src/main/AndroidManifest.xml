@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".MyApplication"
@@ -20,12 +23,24 @@
         <activity android:name="com.shangyi.kt.ui.home.activity.HomeJKClassroomActivity"></activity>
         <activity android:name="com.shangyi.kt.ui.home.activity.HomeJingXuanActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.LazyFragmentActivity" />
+        <activity android:name="com.shangyi.kt.ui.splash.GuideActivity"
+            android:theme="@style/AppThemeGuide"/>
+
+        <activity android:name="com.shangyi.kt.ui.mine.order.CancelRefundActivity" />
+        <activity
+            android:name="com.shangyi.kt.ui.mine.order.RefundActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name="com.shangyi.kt.ui.mine.LazyFragmentActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.order.OrderDetailActivity" />
         <activity android:name="com.shangyi.kt.ui.setting.HomeJkfyActivity" />
         <activity android:name="com.shangyi.kt.ui.home.activity.HomeXueyaActivity" />
         <activity android:name="com.shangyi.kt.ui.home.activity.HomePinpaiActivity" />
         <activity android:name="com.shangyi.kt.ui.home.activity.HomeGaoyongActivity" />
         <activity android:name="com.shangyi.kt.ui.home.activity.HomeHaoKefyActivity" />
+        <activity android:name="com.shangyi.kt.ui.home.HomeXueyaActivity" />
+        <activity android:name="com.shangyi.kt.ui.home.HomePinpaiActivity" />
+        <activity android:name="com.shangyi.kt.ui.home.HomeGaoyongActivity" />
+        <activity android:name="com.shangyi.kt.ui.home.HomeHaoKefyActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.FenxiaoActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.yijian.YiJianSubmitActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.yijian.YiJianActivity" />

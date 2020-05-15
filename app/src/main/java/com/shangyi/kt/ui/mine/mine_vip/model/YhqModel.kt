@@ -26,7 +26,6 @@ class YhqModel : BaseViewModel() {
             page: Int
     ) {
         loadOnUI({
-            showLoadingDialog(true)
             val params = Params()
             if (type != 0) {
                 params.put("type", type)
@@ -52,7 +51,7 @@ class YhqModel : BaseViewModel() {
             val params = Params()
             params.put("receive_id", id)
             LogUtils.deCodeParams(params)
-            RetrofitClient.apiCusService.getYhqData(params.aesData)
+            RetrofitClient.apiCusService.delYhq(params.aesData)
         }, {
             mIsLoadingShow.value = false
             delSuccess.value = true

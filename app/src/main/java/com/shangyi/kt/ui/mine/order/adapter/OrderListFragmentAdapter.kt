@@ -3,8 +3,6 @@ package com.shangyi.kt.ui.mine.order.adapter
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
-import android.os.Bundle
-import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -13,10 +11,14 @@ import com.shangyi.business.R
 import com.shangyi.business.weight.dialog.CancelOrderDialog
 import com.shangyi.business.weight.dialog.IosAlertDialog
 import com.shangyi.kt.ui.mine.bean.OrderListBean
+import com.shangyi.kt.ui.mine.bean.PayDialogData
+import com.shangyi.kt.ui.mine.order.CancelRefundActivity
 import com.shangyi.kt.ui.mine.order.ChangeAddressActivity
 import com.shangyi.kt.ui.mine.order.OrderDetailActivity
 import com.shangyi.kt.ui.mine.order.OrderListFragment
+import com.shangyi.kt.ui.mine.weight.OrderPayDialog
 import com.shangyi.kt.ui.order.weight.OrderListItemView
+import com.shangyi.kt.ui.pingjia.AddPinglunActivity
 import kotlinx.android.synthetic.main.order_list_fragment_item.view.*
 
 /**
@@ -24,9 +26,11 @@ import kotlinx.android.synthetic.main.order_list_fragment_item.view.*
  * author:lwb
  * Desc:
  */
-class OrderListFragmentAdapter constructor(private val fragment: OrderListFragment) : BaseQuickAdapter<OrderListBean, BaseViewHolder>(R.layout.order_list_fragment_item) {
+class OrderListFragmentAdapter constructor(private val fragment: OrderListFragment) :
+        BaseQuickAdapter<OrderListBean, BaseViewHolder>(R.layout.order_list_fragment_item) {
 
     private var orderNum = ""
+    private var payType = 1   //  支付类型
 
     companion object {
         const val ORDER_LIST_ID_BUNDLE_KEY = "order_num"
@@ -43,6 +47,7 @@ class OrderListFragmentAdapter constructor(private val fragment: OrderListFragme
             val intent = Intent()
             intent.setClass(context, OrderDetailActivity::class.java)
             intent.putExtra(ORDER_LIST_ID_BUNDLE_KEY, item.order_num)
+            intent.putExtra("orderRid", item.rid.toString())
             (context as Activity).startActivity(intent)
         }
 
@@ -74,15 +79,28 @@ class OrderListFragmentAdapter constructor(private val fragment: OrderListFragme
      */
     private fun setBtnClickListener(item: OrderListBean, holder: BaseViewHolder) {
         holder.itemView.btn1.setOnClickListener {
+            orderNum = item.order_num
             when (item.status) {
                 0 -> {
-                    Toast.makeText(context, "付款", Toast.LENGTH_SHORT).show()
+                    val dialog = OrderPayDialog.newInstance(PayDialogData(
+                            item.id, item.order_num, "", item.pay_amount.toFloat()
+                    ))
+                    dialog.show(fragment.childFragmentManager, "")
                 }
                 2 -> {
-                    Toast.makeText(context, "确认收货", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(context, "确认收货", Toast.LENGTH_SHORT).show()
+                    qrshDialog.show()
                 }
                 3 -> {
-                    Toast.makeText(context, "评价", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(context, "评价", Toast.LENGTH_SHORT).show()
+                    context.startActivity(Intent(context, AddPinglunActivity::class.java))
+                }
+                6 -> {
+//                    Toast.makeText(context, "查看进度", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(context, CancelRefundActivity::class.java)
+                    intent.putExtra("orderNum", item.order_num)
+                    intent.putExtra("orderRid", item.rid.toString())
+                    context.startActivity(intent)
                 }
             }
         }
@@ -108,7 +126,8 @@ class OrderListFragmentAdapter constructor(private val fragment: OrderListFragme
                 0 -> {  // 待支付
 //                    Toast.makeText(context, "修改地址", Toast.LENGTH_SHORT).show()
                     var intent = Intent(context, ChangeAddressActivity::class.java)
-                    intent.putExtra("orderNum", orderNum)
+                    intent.putExtra("orderId", item.id)
+                    intent.putExtra("address", item.address)
                     context.startActivity(intent)
                 }
             }
@@ -151,6 +170,14 @@ class OrderListFragmentAdapter constructor(private val fragment: OrderListFragme
                 holder.itemView.btn3.visibility = View.GONE
                 holder.itemView.btn1.text = "评价"
             }
+            6 -> {
+                // 申请退款
+                holder.itemView.btnLayout.visibility = View.VISIBLE
+                holder.itemView.btn1.visibility = View.VISIBLE
+                holder.itemView.btn2.visibility = View.GONE
+                holder.itemView.btn3.visibility = View.GONE
+                holder.itemView.btn1.text = "查看进度"
+            }
             else -> {
                 holder.itemView.btnLayout.visibility = View.GONE
             }
@@ -173,4 +200,22 @@ class OrderListFragmentAdapter constructor(private val fragment: OrderListFragme
                 }
         dialog
     }
+
+    /**
+     * 延迟收货
+     */
+    private val qrshDialog: IosAlertDialog by lazy {
+        val dialog = IosAlertDialog(context)
+                .builder()
+                .setTitle("确认收货")
+                .setHeightMsg("确认收货")
+                .setPositiveButton("确认", Color.parseColor("#FF2942")) {
+                    fragment.mBinding.vm?.confirmReceipt(orderNum)
+                }
+                .setNegativeButton("取消", Color.parseColor("#333333")) {
+
+                }
+        dialog
+    }
+
 }

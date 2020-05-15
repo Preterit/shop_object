@@ -16,6 +16,7 @@ import com.shangyi.kt.ui.goods.bean.ReecommendGood
 import com.shangyi.kt.ui.home.bean.*
 import com.shangyi.kt.ui.mine.bean.CollectListBean
 import com.shangyi.kt.ui.mine.bean.OrderListBean
+import com.shangyi.kt.ui.mine.bean.RefundOrderBean
 import com.shangyi.kt.ui.mine.bean.YhqListBean
 import com.shangyi.kt.ui.order.bean.*
 import com.shangyi.kt.ui.pingjia.bean.PingjiaDataBean
@@ -322,12 +323,48 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/api/user/myEarnings")
     suspend fun getSyData(@Field("data") data: String): BaseResponse<Any?>
+
     /**
      * 订单 -- 订单详情信息
      */
     @FormUrlEncoded
     @POST("/api/user/getCommentOrders")
     suspend fun loadOrderInfo(@Field("data") data: String): BaseResponse<OrderDetailInfoBean?>
+
+    /**
+     * 订单 -- 修改订单地址
+     */
+    @FormUrlEncoded
+    @POST("/api/orders/changeOrderAddress")
+    suspend fun changeOrderAds(@Field("data") data: String): BaseResponse<Any?>
+
+    /**
+     * 订单 -- 确认收货
+     */
+    @FormUrlEncoded
+    @POST("/api/user/completeOrders")
+    suspend fun confirmReceipt(@Field("data") data: String): BaseResponse<Any?>
+
+    /**
+     * 订单 -- 申请退款
+     */
+    @FormUrlEncoded
+    @POST("/api/orders/orderRefund")
+    suspend fun orderRefund(@Field("data") data: String): BaseResponse<Any?>
+
+    /**
+     * 订单 -- 取消退款
+     */
+    @FormUrlEncoded
+    @POST("/api/orders/cancelOrderRefund")
+    suspend fun cancelOrderRefund(@Field("data") data: String): BaseResponse<Any?>
+
+    /**
+     * 订单 -- 查看退款订单详情
+     */
+    @FormUrlEncoded
+    @POST("/api/orders/refundOrderInfo")
+    suspend fun getRefundOrder(@Field("data") data: String): BaseResponse<RefundOrderBean?>
 
     /**
      * 首页二级页面  高佣榜单

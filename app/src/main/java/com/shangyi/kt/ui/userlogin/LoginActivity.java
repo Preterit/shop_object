@@ -1,6 +1,5 @@
 package com.shangyi.kt.ui.userlogin;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -18,7 +17,6 @@ import com.shangyi.business.R;
 import com.shangyi.business.databinding.ActivityLoginBinding;
 import com.shangyi.kt.ui.MainActivity;
 import com.shangyi.kt.ui.WebActivity;
-import com.shangyi.kt.ui.poster.PosterActivity;
 import com.shangyi.kt.ui.userlogin.model.LoginModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -126,7 +124,9 @@ public class LoginActivity extends BaseKTActivity<ActivityLoginBinding, LoginMod
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra(MainActivity.IS_LOGIN,1);
+                    startActivity(intent);
                     finish();
                 }
             }

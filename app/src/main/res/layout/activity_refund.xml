@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.shangyi.kt.ui.mine.order.model.RefundModel" />
+
+        <variable
+            name="activity"
+            type="com.shangyi.kt.ui.mine.order.RefundActivity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        tools:context="com.shangyi.kt.ui.mine.order.RefundActivity">
+
+        <com.shangyi.business.weight.TitleView
+            android:id="@+id/titleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:bottom_line_show="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:leftLayoutIconIsGray="true"
+            app:titleValue="申请退款" />
+
+        <com.study.glidemodel.GlideImageView
+            android:id="@+id/glideImageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleView"
+            app:siv_radius="5dp"
+            app:siv_shape_type="rectangle" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="19dp"
+            android:text="产品名称产品名称产品名称产品名称产品名称产产品名称"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/glideImageView"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/glideImageView" />
+
+        <TextView
+            android:id="@+id/tvAttr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="浅紫色  XL"
+            android:textSize="10sp"
+            app:layout_constraintLeft_toLeftOf="@+id/tvName"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+        <TextView
+            android:id="@+id/tvLine"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/color_DDDDDD"
+            app:layout_constraintTop_toBottomOf="@+id/glideImageView" />
+
+        <LinearLayout
+            android:id="@+id/selectLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{activity::onClick}"
+            android:paddingRight="16dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLine">
+
+            <TextView
+                android:id="@+id/tvSelectReason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:hint="选择退款原因"
+                android:paddingLeft="90dp"
+                android:paddingTop="15dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="17dp"
+                android:textColor="@color/color_333333"
+                android:textSize="12sp"
+                tools:text="我不想要了" />
+
+            <ImageView
+                android:layout_width="5dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/icon_right_logo" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="退款原因"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/selectLayout"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/selectLayout" />
+
+        <TextView
+            android:id="@+id/tvDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="退款金额："
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectLayout" />
+
+        <TextView
+            android:id="@+id/tvAllPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:text="¥75.35"
+            android:textColor="#FF2941"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toRightOf="@+id/tvDesc"
+            app:layout_constraintTop_toBottomOf="@+id/selectLayout" />
+
+        <TextView
+            android:id="@+id/tvTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:text="不可修改，最多¥75.35，含发货邮费¥0.00"
+            android:textColor="@color/color_999999"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvAllPrice" />
+
+        <TextView
+            android:id="@+id/tvTksm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:text="退款说明："
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTemp" />
+
+
+        <LinearLayout
+            android:id="@+id/llEtLayout"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/shape_tk_et_bg"
+            app:layout_constraintLeft_toRightOf="@+id/tvTksm"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTksm">
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="top"
+                android:hint="选填"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvPhotoStr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:text="上传凭证"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llEtLayout" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvPhotoStr" />
+
+        <TextView
+            android:id="@+id/tvSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginRight="25dp"
+            android:background="@drawable/shape_car_shop_nogoods_red_bg"
+            android:gravity="center"
+            android:onClick="@{activity::onClick}"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="提交"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerview" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -16,6 +16,9 @@ import com.shangyi.kt.ui.mine.bean.OrderListBean
  */
 class OrderListFragmentModel : BaseViewModel() {
     val data = MutableLiveData<List<OrderListBean>?>()
+    val changeAds = MutableLiveData<Boolean>(false)
+    val confirmReceipt = MutableLiveData<Boolean>(false)
+
 
     /**
      * 获取订单列表
@@ -25,7 +28,6 @@ class OrderListFragmentModel : BaseViewModel() {
             type: Int
     ) {
         loadOnUI({
-//            showLoadingDialog(true)
             val params = Params()
             params.put("page", page)
             if (type != -1) {
@@ -85,7 +87,41 @@ class OrderListFragmentModel : BaseViewModel() {
     /**
      * 修改地址
      */
-    fun changeAddress(orderNum: String) {
+    fun changeAddress(orderId: Int, addressId: Int) {
+        loadOnUI({
+            showLoadingDialog(true)
+            val params = Params()
+            params.put("order_id", orderId)
+            params.put("address_id", addressId)
+            LogUtils.deCodeParams(params)
+            RetrofitClient.apiCusService.changeOrderAds(params.aesData)
+        }, {
+            mIsLoadingShow.value = false
+            UIUtils.showToast("修改成功")
+            changeAds.value = true
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
+        })
+    }
 
+    /**
+     * 确认收货
+     */
+    fun confirmReceipt(order_num: String) {
+        loadOnUI({
+            showLoadingDialog(true)
+            val params = Params()
+            params.put("order_num", order_num)
+            LogUtils.deCodeParams(params)
+            RetrofitClient.apiCusService.confirmReceipt(params.aesData)
+        }, {
+            mIsLoadingShow.value = false
+            UIUtils.showToast("确认收货成功")
+            confirmReceipt.value = true
+        }, { code, msg, t ->
+            UIUtils.showToast(msg)
+            mIsLoadingShow.value = false
+        })
     }
 }

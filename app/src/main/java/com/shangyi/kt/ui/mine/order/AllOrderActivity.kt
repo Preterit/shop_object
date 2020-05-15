@@ -1,12 +1,17 @@
 package com.shangyi.kt.ui.mine.order
 
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import com.sdxxtop.base.BaseKTActivity
+import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityAllOrderBinding
 import com.shangyi.kt.ui.mine.order.adapter.MineOrderFragmentAdapter
 import com.shangyi.kt.ui.mine.order.model.MineOrderModel
+import com.shangyi.kt.ui.order.PaySuccessActivity
 import kotlinx.android.synthetic.main.activity_all_order.*
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class AllOrderActivity : BaseKTActivity<ActivityAllOrderBinding, MineOrderModel>() {
 
@@ -36,5 +41,6 @@ class AllOrderActivity : BaseKTActivity<ActivityAllOrderBinding, MineOrderModel>
         tablayout.setupWithViewPager(viewPager)
 
         viewPager.currentItem = currentItem
+        viewPager.offscreenPageLimit = list.size
     }
 }

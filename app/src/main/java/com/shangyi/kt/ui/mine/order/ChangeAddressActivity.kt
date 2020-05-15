@@ -4,11 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import com.sdxxtop.base.BaseKTActivity
+import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityChangeAddressBinding
 import com.shangyi.kt.ui.address.AddressListActivity
 import com.shangyi.kt.ui.address.bean.AreaListBean
+import com.shangyi.kt.ui.mine.bean.OrderDetailAddress
 import com.shangyi.kt.ui.mine.order.model.OrderListFragmentModel
 import kotlinx.android.synthetic.main.activity_change_address.*
 import kotlinx.android.synthetic.main.item_goods_detail_goodsinfo.view.*
@@ -23,14 +26,26 @@ class ChangeAddressActivity : BaseKTActivity<ActivityChangeAddressBinding, Order
     }
 
     override fun initObserve() {
+        mBinding.vm?.changeAds?.observe(this, Observer {
+            if (it) {
+                finish()
+            }
+        })
     }
 
-
-    private var orderNum = ""
-    private var addressId = 0  // 地址ID
+    private var orderId = 0  // 订单ID
+    private var address: OrderDetailAddress? = null  // 地址
+    private var addressId = -1  // 地址ID
 
     override fun initView() {
-        orderNum = intent.getStringExtra("orderNum") ?: ""
+        orderId = intent.getIntExtra("orderId", 0)
+        address = intent.getParcelableExtra("address")
+
+        if (address != null) {
+            tvName.text = "收货人：${address?.recipient}"
+            tvNumber.text = address?.mobile
+            tvAddress.text = "收货地址：${address?.country ?: ""}${address?.province ?: ""}${address?.city ?: ""}${address?.county ?: ""}${address?.detail}"
+        }
     }
 
     override fun onClick(v: View) {
@@ -46,7 +61,11 @@ class ChangeAddressActivity : BaseKTActivity<ActivityChangeAddressBinding, Order
             }
             R.id.tvChange -> {
                 // 修改地址
-                mBinding.vm?.changeAddress(orderNum)
+                if (addressId == -1) {
+                    UIUtils.showToast("当前地址未改动")
+                    return
+                }
+                mBinding.vm?.changeAddress(orderId, addressId)
             }
         }
     }

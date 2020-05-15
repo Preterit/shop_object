@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/home_item_bg"
-    android:paddingBottom="13dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
+    android:background="@drawable/home_item_bg"
+    android:paddingBottom="13dp"
     app:cardBackgroundColor="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,9 +18,10 @@
             android:id="@+id/glideImageView"
             android:layout_width="match_parent"
             android:layout_height="135dp"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
+            android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
             app:siv_radius="10dp"
             app:siv_shape_type="rectangle" />

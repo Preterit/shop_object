@@ -18,4 +18,7 @@ public interface Constants {
 
     //微信的appID
     String WXAPP_ID = "wx8c512b137c836be1";
+
+    // 是否第一次打开
+    String FIRST_OPEN = "first_open";
 }

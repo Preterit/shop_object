@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.sdxxtop.base.BaseKTFragment
+import com.sdxxtop.base.BaseLazyFragment
 import com.sdxxtop.base.loadsir.EmptyCallback
 import com.sdxxtop.base.loadsir.ErrorCallback
+import com.sdxxtop.base.loadsir.LoadingCallback
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentYhqViewBinding
@@ -21,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_yhq_view.*
  * author:lwb
  * Desc:
  */
-class YhqItemFragment : BaseKTFragment<FragmentYhqViewBinding, YhqModel>() {
+class YhqItemFragment : BaseLazyFragment<FragmentYhqViewBinding, YhqModel>() {
 
     override fun vmClazz() = YhqModel::class.java
     override fun layoutId() = R.layout.fragment_yhq_view
@@ -54,7 +56,7 @@ class YhqItemFragment : BaseKTFragment<FragmentYhqViewBinding, YhqModel>() {
         mBinding.vm?.delSuccess?.observe(this, Observer {
             if (it) {
                 UIUtils.showToast("删除成功")
-                initData()
+                onFragmentResume()
             }
         })
     }
@@ -78,14 +80,14 @@ class YhqItemFragment : BaseKTFragment<FragmentYhqViewBinding, YhqModel>() {
         smartLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onLoadMore(refreshLayout: RefreshLayout) {
                 page = adapter.data.size
-                initData()
+                onFragmentResume()
                 refreshLayout.finishLoadMore()
                 refreshLayout.finishRefresh()
             }
 
             override fun onRefresh(refreshLayout: RefreshLayout) {
                 page = 0
-                initData()
+                onFragmentResume()
                 refreshLayout.finishLoadMore()
                 refreshLayout.finishRefresh()
             }
@@ -102,11 +104,12 @@ class YhqItemFragment : BaseKTFragment<FragmentYhqViewBinding, YhqModel>() {
         }
     }
 
-    override fun initData() {
-        mBinding.vm?.loadYhuData(type, page)
+    override fun preLoad() {
+        onFragmentResume()
     }
 
-    override fun preLoad() {
-        initData()
+    override fun onFragmentResume() {
+        mLoadService.showCallback(LoadingCallback::class.java)
+        mBinding.vm?.loadYhuData(type, page)
     }
 }
