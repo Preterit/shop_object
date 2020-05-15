@@ -7,13 +7,13 @@
 
         <variable
             name="vm"
-            type="com.shangyi.kt.ui.home.model.HomeJianKangFYModel" />
+            type="com.shangyi.kt.ui.home.model.HomeJingXuanModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#9fdaff"
+        android:background="@color/white"
         android:orientation="vertical"
         tools:context="com.shangyi.kt.ui.setting.HomeJkfyActivity">
 
@@ -21,12 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:leftLayoutIconIsGray="true"
-            app:bgColor="#3d63f5"
-            app:titleColor="@color/white"
-            app:titleValue="健康防疫" />
+            app:titleValue="每周精选" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fangyi_recyclerview"
+            android:id="@+id/jingxuan_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

@@ -1,21 +1,18 @@
-package com.shangyi.kt.ui.home;
+package com.shangyi.kt.ui.home.activity;
 
 import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.sdxxtop.base.BaseKTActivity;
 import com.shangyi.business.R;
 import com.shangyi.business.databinding.ActivityHomeGaoyongBinding;
 import com.shangyi.kt.ui.home.adapter.GaoYongAdapter;
+import com.shangyi.kt.ui.home.bean.GaoYongBean;
 import com.shangyi.kt.ui.home.model.HomeGaoyongModel;
-import com.shangyi.kt.ui.order.bean.OrderBean;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -40,10 +37,10 @@ public class HomeGaoyongActivity extends BaseKTActivity<ActivityHomeGaoyongBindi
 
     @Override
     public void initObserve() {
-        getMBinding().getVm().getSuccessData().observe(this, new Observer<List<OrderBean>>() {
+        getMBinding().getVm().getSuccessData().observe(this, new Observer<List<GaoYongBean>>() {
             @Override
-            public void onChanged(List<OrderBean> orderBeans) {
-                mGaoYongAdapter.setList(orderBeans);
+            public void onChanged(List<GaoYongBean> gaoYongBeans) {
+                mGaoYongAdapter.setList(gaoYongBeans);
             }
         });
     }
@@ -70,7 +67,7 @@ public class HomeGaoyongActivity extends BaseKTActivity<ActivityHomeGaoyongBindi
     @Override
     public void initData() {
         super.initData();
-        getMBinding().getVm().successOrderTuijian(000);
+        getMBinding().getVm().gaoYongTuijian("001");
 
     }
 

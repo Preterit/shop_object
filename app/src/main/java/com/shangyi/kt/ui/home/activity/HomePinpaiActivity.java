@@ -1,15 +1,10 @@
-package com.shangyi.kt.ui.home;
-
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
+package com.shangyi.kt.ui.home.activity;
 
 import com.sdxxtop.base.BaseKTActivity;
 import com.shangyi.business.R;
 import com.shangyi.business.databinding.ActivityHomePinpaiBinding;
-import com.shangyi.kt.ui.home.adapter.HaokeRcyAdapter;
 import com.shangyi.kt.ui.home.adapter.PinpaiAdapter;
+import com.shangyi.kt.ui.home.bean.PinPaiBean;
 import com.shangyi.kt.ui.home.model.PinpaiModel;
 import com.shangyi.kt.ui.order.bean.OrderBean;
 
@@ -18,7 +13,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,10 +33,10 @@ public class HomePinpaiActivity extends BaseKTActivity<ActivityHomePinpaiBinding
 
     @Override
     public void initObserve() {
-        getMBinding().getVm().getSuccessData().observe(this, new Observer<List<OrderBean>>() {
+        getMBinding().getVm().getSuccessData().observe(this, new Observer<List<PinPaiBean>>() {
             @Override
-            public void onChanged(List<OrderBean> orderBeans) {
-                mPinpaiAdapter.setList(orderBeans);
+            public void onChanged(List<PinPaiBean> pinPaiBeans) {
+                mPinpaiAdapter.setList(pinPaiBeans);
             }
         });
     }
@@ -50,7 +44,7 @@ public class HomePinpaiActivity extends BaseKTActivity<ActivityHomePinpaiBinding
     @Override
     public void initData() {
         super.initData();
-        getMBinding().getVm().successOrderTuijian(000);
+        getMBinding().getVm().pinPaiTuijian("005");
     }
 
     @Override
@@ -63,7 +57,7 @@ public class HomePinpaiActivity extends BaseKTActivity<ActivityHomePinpaiBinding
 
         mPinpaiRey = findViewById(R.id.pinpai_recyclerview);
         mPinpaiAdapter = new PinpaiAdapter();
-        mPinpaiRey.setLayoutManager(new LinearLayoutManager(HomePinpaiActivity.this,LinearLayoutManager.HORIZONTAL ,true));
+        mPinpaiRey.setLayoutManager(new LinearLayoutManager(HomePinpaiActivity.this,LinearLayoutManager.HORIZONTAL ,false));
         mPinpaiRey.setAdapter(mPinpaiAdapter);
 
         /*View headView = LayoutInflater.from(this).inflate(R.layout.pinpai_item_view, null);

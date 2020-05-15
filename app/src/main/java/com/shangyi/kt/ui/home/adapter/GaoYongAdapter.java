@@ -3,6 +3,7 @@ package com.shangyi.kt.ui.home.adapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.shangyi.business.R;
+import com.shangyi.kt.ui.home.bean.GaoYongBean;
 import com.shangyi.kt.ui.order.bean.OrderBean;
 import com.study.glidemodel.GlideImageView;
 
@@ -14,14 +15,14 @@ import org.jetbrains.annotations.NotNull;
  * auther: Dz
  * function:
  */
-public class GaoYongAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
+public class GaoYongAdapter extends BaseQuickAdapter<GaoYongBean, BaseViewHolder> {
 
     public GaoYongAdapter() {
         super(R.layout.gaoyong_adapter_view);
     }
 
     @Override
-    protected void convert(@NotNull BaseViewHolder holder, OrderBean item) {
+    protected void convert(@NotNull BaseViewHolder holder, GaoYongBean item) {
         String imgUrl = item.getGoods_one_img().getUrl();
         //int imgUrl = R.drawable.duck;
         GlideImageView ivImg = holder.getView(R.id.glideImageView);

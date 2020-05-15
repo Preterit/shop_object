@@ -7,6 +7,7 @@ import com.shangyi.business.api.RetrofitClient
 import com.shangyi.business.network.Params
 import com.shangyi.business.utils.LogUtils
 import com.shangyi.kt.fragment.home.model.HomeDataBean
+import com.shangyi.kt.ui.home.bean.HaoKetjBean
 import com.shangyi.kt.ui.order.bean.OrderBean
 
 /**
@@ -16,17 +17,17 @@ import com.shangyi.kt.ui.order.bean.OrderBean
  */
 class HaokeModel:BaseViewModel() {
 
-    var successData = MutableLiveData<List<OrderBean>?>()
+    var successData = MutableLiveData<List<HaoKetjBean>?>()
 
     /**
      * 商品推荐
      */
-    fun successOrderTuijian(shop_id: Int) {
+    fun haoKeTuijian(module: String) {
         loadOnUI({
             val params = Params()
-            params.put("shop_id", 1)
+            params.put("module", "004")
             LogUtils.deCodeParams(params)
-            RetrofitClient.apiCusService.successOrdertuijian(params.aesData)
+            RetrofitClient.apiCusService.haoKeTuijian(params.aesData)
         }, {
             mIsLoadingShow.value = false
             successData.value = it

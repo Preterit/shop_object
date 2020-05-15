@@ -13,6 +13,7 @@ import com.shangyi.kt.ui.goods.bean.GoodsDetailBean
 import com.shangyi.kt.ui.goods.bean.GoodsListBean
 import com.shangyi.kt.ui.goods.bean.GoodsSpecBean
 import com.shangyi.kt.ui.goods.bean.ReecommendGood
+import com.shangyi.kt.ui.home.bean.*
 import com.shangyi.kt.ui.mine.bean.CollectListBean
 import com.shangyi.kt.ui.mine.bean.OrderListBean
 import com.shangyi.kt.ui.mine.bean.YhqListBean
@@ -327,5 +328,42 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/api/user/getCommentOrders")
     suspend fun loadOrderInfo(@Field("data") data: String): BaseResponse<OrderDetailInfoBean?>
+
+    /**
+     * 首页二级页面  高佣榜单
+     */
+    @FormUrlEncoded
+    @POST("/api/index/getShowGoods")
+    suspend fun gaoyongTuijian(@Field("data") data: String): BaseResponse<List<GaoYongBean>?>
+
+
+    /**
+     * 首页二级页面  每周精选
+     */
+    @FormUrlEncoded
+    @POST("/api/index/getShowGoods")
+    suspend fun jingXuanTuijian(@Field("data") data: String): BaseResponse<List<JingXuanBean>?>
+
+    /**
+     * 首页二级页面  健康防疫
+     */
+    @FormUrlEncoded
+    @POST("/api/index/getShowGoods")
+    suspend fun fangYiTuijian(@Field("data") data: String): BaseResponse<List<FangYiBean>?>
+
+    /**
+     * 首页二级页面  好课推荐
+     */
+    @FormUrlEncoded
+    @POST("/api/index/getShowGoods")
+    suspend fun haoKeTuijian(@Field("data") data: String): BaseResponse<List<HaoKetjBean>?>
+
+    /**
+     * 首页二级页面  品牌馆
+     */
+    @FormUrlEncoded
+    @POST("/api/index/getShowGoods")
+    suspend fun pinPaiTuijian(@Field("data") data: String): BaseResponse<List<PinPaiBean>?>
+
 
 }

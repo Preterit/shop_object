@@ -7,7 +7,8 @@ import com.shangyi.business.api.RetrofitClient
 import com.shangyi.business.network.Params
 import com.shangyi.business.utils.LogUtils
 import com.shangyi.kt.fragment.home.model.HomeDataBean
-import com.shangyi.kt.ui.home.bean.PinPaiBean
+import com.shangyi.kt.ui.home.bean.FangYiBean
+import com.shangyi.kt.ui.home.bean.GaoYongBean
 import com.shangyi.kt.ui.order.bean.OrderBean
 
 /**
@@ -15,19 +16,19 @@ import com.shangyi.kt.ui.order.bean.OrderBean
  * auther: Dz
  * function:
  */
-class PinpaiModel:BaseViewModel() {
+class HomeJianKangFYModel:BaseViewModel() {
 
-    var successData = MutableLiveData<List<PinPaiBean>?>()
+    var successData = MutableLiveData<List<FangYiBean>>()
 
     /**
      * 商品推荐
      */
-    fun pinPaiTuijian(module: String) {
+    fun FangYiTuijian(module: String) {
         loadOnUI({
             val params = Params()
-            params.put("module", "005")
+            params.put("module", "003")
             LogUtils.deCodeParams(params)
-            RetrofitClient.apiCusService.pinPaiTuijian(params.aesData)
+            RetrofitClient.apiCusService.fangYiTuijian(params.aesData)
         }, {
             mIsLoadingShow.value = false
             successData.value = it

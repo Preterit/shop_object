@@ -1,4 +1,4 @@
-package com.shangyi.kt.ui.home;
+package com.shangyi.kt.ui.home.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="vm"
-            type="com.shangyi.kt.ui.home.model.HomeJianKangFYModel" />
+            type="com.shangyi.kt.ui.home.model.HomeJKClassroomModel" />
     </data>
 
     <LinearLayout
+        tools:context="com.shangyi.kt.ui.setting.HomeJkfyActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#9fdaff"
-        android:orientation="vertical"
-        tools:context="com.shangyi.kt.ui.setting.HomeJkfyActivity">
+        android:background="@color/white"
+        android:orientation="vertical">
 
         <com.shangyi.business.weight.TitleView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             app:leftLayoutIconIsGray="true"
-            app:bgColor="#3d63f5"
+            app:titleValue="健康课堂"
+            app:bgColor="#4C65FD"
             app:titleColor="@color/white"
-            app:titleValue="健康防疫" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fangyi_recyclerview"
+            android:id="@+id/jingxuan_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

@@ -1,14 +1,13 @@
-package com.shangyi.kt.ui.home;
+package com.shangyi.kt.ui.home.activity;
 
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.sdxxtop.base.BaseKTActivity;
 import com.shangyi.business.R;
 import com.shangyi.business.databinding.ActivityHomeHaoKefyBinding;
-import com.shangyi.kt.ui.home.adapter.GaoYongAdapter;
 import com.shangyi.kt.ui.home.adapter.HaokeRcyAdapter;
+import com.shangyi.kt.ui.home.bean.HaoKetjBean;
 import com.shangyi.kt.ui.home.model.HaokeModel;
 import com.shangyi.kt.ui.order.bean.OrderBean;
 
@@ -38,10 +37,10 @@ public class HomeHaoKefyActivity extends BaseKTActivity<ActivityHomeHaoKefyBindi
 
     @Override
     public void initObserve() {
-        getMBinding().getVm().getSuccessData().observe(this, new Observer<List<OrderBean>>() {
+        getMBinding().getVm().getSuccessData().observe(this, new Observer<List<HaoKetjBean>>() {
             @Override
-            public void onChanged(List<OrderBean> orderBeans) {
-                mHaokeRcyAdapter.setList(orderBeans);
+            public void onChanged(List<HaoKetjBean> haoKetjBeans) {
+                mHaokeRcyAdapter.setList(haoKetjBeans);
             }
         });
     }
@@ -49,7 +48,7 @@ public class HomeHaoKefyActivity extends BaseKTActivity<ActivityHomeHaoKefyBindi
     @Override
     public void initData() {
         super.initData();
-        getMBinding().getVm().successOrderTuijian(000);
+        getMBinding().getVm().haoKeTuijian("004");
     }
 
     @Override
