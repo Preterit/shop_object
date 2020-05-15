@@ -36,7 +36,7 @@ public abstract class BaseWebviewFragment extends BaseFragment implements WebVie
         Bundle bundle = getArguments();
         if (bundle != null) {
             webUrl = bundle.getString(WebConstants.INTENT_TAG_URL);
-            if(bundle.containsKey(ACCOUNT_INFO_HEADERS)){
+            if (bundle.containsKey(ACCOUNT_INFO_HEADERS)) {
                 accountInfoHeaders = (HashMap<String, String>) bundle.getSerializable(ACCOUNT_INFO_HEADERS);
             }
         }
@@ -47,7 +47,7 @@ public abstract class BaseWebviewFragment extends BaseFragment implements WebVie
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutRes(), container, false);
         webView = view.findViewById(R.id.web_view);
-        if(accountInfoHeaders != null) {
+        if (accountInfoHeaders != null) {
             webView.setHeaders(accountInfoHeaders);
         }
         return view;

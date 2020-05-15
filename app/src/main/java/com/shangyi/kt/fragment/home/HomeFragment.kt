@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -12,6 +11,7 @@ import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.AppBarLayout
+import com.google.gson.Gson
 import com.sdxxtop.base.BaseKTFragment
 import com.sdxxtop.base.loadsir.LoadingCallback
 import com.sdxxtop.webview.command.Command
@@ -20,12 +20,14 @@ import com.sdxxtop.webview.command.ResultBack
 import com.sdxxtop.webview.utils.WebConstants
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentHomeBinding
+import com.shangyi.business.javascriptInterface.JsCallAndroidGoodsDetail
 import com.shangyi.kt.fragment.categroy.adapter.BannerDataBean
 import com.shangyi.kt.fragment.home.adapter.HomeBannerBean
 import com.shangyi.kt.fragment.home.adapter.HomeBottomAdapter
 import com.shangyi.kt.fragment.home.adapter.HomeTopBanner
 import com.shangyi.kt.fragment.home.model.HomeModel
 import com.shangyi.kt.ui.WebActivity
+import com.shangyi.kt.ui.goods.GoodsDetailActivity
 import com.shangyi.kt.ui.home.activity.*
 import com.shangyi.kt.ui.setting.HomeJkfyActivity
 import com.youth.banner.Banner
@@ -114,9 +116,6 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
         banner?.setOnBannerListener(OnBannerListener { data: Any, position: Int ->
             if (position == 0) {
                 val item = data as HomeBannerBean
-//                var intent = Intent(context, HomeBannerWebActivity::class.java)
-//                intent.putExtra("url",item.page_url)
-//                startActivity(intent)
                 CommandsManager.getInstance().registerCommand(WebConstants.LEVEL_BASE, goodsDetailCommand)
                 WebActivity.startCommonWeb(context, item.name, item.page_url, 1)
             }
@@ -201,7 +200,13 @@ class HomeFragment : BaseKTFragment<FragmentHomeBinding, HomeModel>() {
      */
     private val goodsDetailCommand = object : Command {
         override fun exec(context: Context?, params: MutableMap<Any?, Any?>?, resultBack: ResultBack?) {
-            Log.e("dialogCommand -- ", "" + params.toString())
+            val data = params?.get("data")
+            if (data != null) {
+                val dataBean = Gson().fromJson(data.toString(), JsCallAndroidGoodsDetail::class.java)
+                val intent = Intent(context, GoodsDetailActivity::class.java)
+                intent.putExtra("goodsId", dataBean.gid)
+                startActivity(intent)
+            }
         }
 
         override fun name(): String {

@@ -3,23 +3,22 @@ package com.sdxxtop.webview.remotewebview.javascriptinterface;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
-import android.webkit.JavascriptInterface;
 
 /**
- * 1. 保留command的注册
- * 2. 不支持command通过远程aidl方式调用
+ * Date:2020/5/15
+ * author:lwb
+ * Desc:
  */
-public final class WebviewJavascriptInterface {
+public abstract class BaseJavascriptInterface {
 
-    private final Context mContext;
-    private final Handler mHandler = new Handler();
+    private Context mContext;
     private JavascriptCommand javascriptCommand;
+    private final Handler mHandler = new Handler();
 
-    public WebviewJavascriptInterface(Context context) {
-        mContext = context;
+    public BaseJavascriptInterface(Context context) {
+        this.mContext = context;
     }
 
-    @JavascriptInterface
     public void post(final String cmd, final String param) {
         mHandler.post(new Runnable() {
             @Override
@@ -38,4 +37,5 @@ public final class WebviewJavascriptInterface {
     public void setJavascriptCommand(JavascriptCommand javascriptCommand) {
         this.javascriptCommand = javascriptCommand;
     }
+
 }

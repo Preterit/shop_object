@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -12,6 +12,10 @@
         <variable
             name="activity"
             type="com.shangyi.kt.ui.goods.GoodsDetailActivity" />
+
+        <variable
+            name="view"
+            type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -137,8 +141,10 @@
                             android:text="返¥3.5"
                             android:textColor="@color/white"
                             android:textSize="10sp"
+                            android:visibility="@{vm.data.dealer == null ? view.GONE:view.VISIBLE}"
                             app:layout_constraintBottom_toBottomOf="@+id/tvShareTx"
-                            app:layout_constraintLeft_toRightOf="@+id/tvShareTx" />
+                            app:layout_constraintLeft_toRightOf="@+id/tvShareTx"
+                            tools:visibility="visible" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -183,8 +189,10 @@
                             android:text="赚¥"
                             android:textColor="@color/color_FFEE00"
                             android:textSize="10sp"
+                            android:visibility="@{vm.data.dealer == null ? view.GONE:view.VISIBLE}"
                             app:layout_constraintBottom_toBottomOf="@+id/tvShareTx"
-                            app:layout_constraintLeft_toRightOf="@+id/tvShareTx" />
+                            app:layout_constraintLeft_toRightOf="@+id/tvShareTx"
+                            tools:visibility="visible" />
 
                         <TextView
                             android:id="@+id/tvZhuanMoneyTx"
@@ -194,8 +202,10 @@
                             android:text="3.45"
                             android:textColor="@color/color_FFEE00"
                             android:textSize="13sp"
+                            android:visibility="@{vm.data.dealer == null ? view.GONE:view.VISIBLE}"
                             app:layout_constraintBottom_toBottomOf="@+id/tvZhuanTx"
-                            app:layout_constraintLeft_toRightOf="@+id/tvZhuanTx" />
+                            app:layout_constraintLeft_toRightOf="@+id/tvZhuanTx"
+                            tools:visibility="visible" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

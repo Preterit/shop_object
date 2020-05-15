@@ -43,7 +43,7 @@ public class NumIndicator extends BaseIndicator {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int count = config.getIndicatorSize();
-        if (count <= 1) return;
+        if (count < 1) return;
         setMeasuredDimension(width, height);
     }
 

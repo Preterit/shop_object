@@ -1,11 +1,13 @@
 package com.shangyi.kt.fragment.home.adapter
 
+import android.content.Intent
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.shangyi.business.R
 import com.shangyi.kt.fragment.home.model.DisCountListBean
 import com.shangyi.kt.fragment.home.model.HomeDataBean
+import com.shangyi.kt.ui.goods.GoodsDetailActivity
 import com.shangyi.kt.ui.mine.weight.HomeYhqItemView
 import kotlinx.android.synthetic.main.item_home_list_view.view.*
 
@@ -36,6 +38,11 @@ class HomeBottomAdapter : BaseQuickAdapter<HomeDataBean?, BaseViewHolder>(R.layo
             holder.itemView.flowLayout.visibility = View.VISIBLE
         } else {
             holder.itemView.flowLayout.visibility = View.GONE
+        }
+        holder.itemView.setOnClickListener{
+            val intent = Intent(context, GoodsDetailActivity::class.java)
+            intent.putExtra("goodsId", item?.id)
+            context.startActivity(intent)
         }
     }
 

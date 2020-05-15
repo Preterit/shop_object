@@ -19,6 +19,8 @@ import com.sdxxtop.webview.remotewebview.BaseWebView
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityGoodsDetailBinding
 import com.shangyi.business.databinding.ItemGoodsDetailGoodsinfoBinding
+import com.shangyi.business.network.Constants
+import com.shangyi.business.network.SpUtil
 import com.shangyi.business.weight.dialog.GoodsYhqDialog
 import com.shangyi.kt.fragment.car.entity.AddressInfoBean
 import com.shangyi.kt.fragment.car.entity.CommitOrderBean
@@ -36,6 +38,7 @@ import com.shangyi.kt.ui.goods.weight.ProductSkuDialog
 import com.shangyi.kt.ui.goods.weight.banner.indicator.NumIndicator
 import com.shangyi.kt.ui.order.AffirmOrderActivity
 import com.shangyi.kt.ui.pingjia.PingjiaActivity
+import com.shangyi.kt.ui.userlogin.LoginActivity
 import com.youth.banner.Banner
 import com.youth.banner.config.IndicatorConfig
 import com.youth.banner.indicator.CircleIndicator
@@ -58,7 +61,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     private var bannerAdapter: MultipleTypesAdapter? = null   // 轮播图适配器
     private var goodsDetailTjBannerAdapter = GoodsDetailTjBannerAdapter()   // 商铺推荐的轮播图适配器
     private var banner: Banner<GoodDetailTopBarBean, MultipleTypesAdapter>? = null  // 商品轮播图
-    private val topBannerDataList: MutableList<GoodDetailTopBarBean> = ArrayList<GoodDetailTopBarBean>()  // 商品顶部轮播图
+    private val topBannerDataList: MutableList<GoodDetailTopBarBean> = ArrayList()  // 商品顶部轮播图
     private var shopTjBanner: Banner<GoodDetailTopBarBean, GoodsDetailTjBannerAdapter>? = null  // 商品推荐轮播图
 
     private var viewList = ConcurrentHashMap<Int, View?>()  // 填充的view布局
@@ -447,8 +450,10 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
 
             R.id.tvCar -> {
                 // 加入购物车
-                carSelect = true
-                dialog?.show()
+                if (isLogin()) {
+                    carSelect = true
+                    dialog?.show()
+                }
             }
 
             R.id.tvService -> {
@@ -457,7 +462,9 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
 
             R.id.layoutLeft -> {
 //                UIUtils.showToast("立即购买")
-                buyGoods()
+                if (isLogin()) {
+                    buyGoods()
+                }
             }
 
             R.id.layoutRight -> {
@@ -510,6 +517,22 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     private val yuqDialog: GoodsYhqDialog by lazy {
         val dialog = GoodsYhqDialog.newInstance(yhqDataList as java.util.ArrayList<YouhuiquanBean>)
         dialog
+    }
+
+    /**
+     * 判断是否登陆过。
+     *
+     * @return
+     */
+    fun isLogin(): Boolean {
+        var isLogin = false
+        val userID = SpUtil.getInt(Constants.USER_ID, -1)
+        if (userID != -1) {
+            isLogin = true
+        } else {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+        return isLogin
     }
 }
 

@@ -18,6 +18,9 @@ import android.webkit.WebView;
 import com.google.gson.Gson;
 
 import com.sdxxtop.webview.remotewebview.callback.WebViewCallBack;
+import com.sdxxtop.webview.remotewebview.javascriptinterface.BaseJavascriptInterface;
+import com.sdxxtop.webview.remotewebview.javascriptinterface.JavascriptCommand;
+import com.sdxxtop.webview.remotewebview.javascriptinterface.JavascriptInterfaceSybk;
 import com.sdxxtop.webview.remotewebview.javascriptinterface.WebviewJavascriptInterface;
 import com.sdxxtop.webview.remotewebview.settings.WebviewDefaultSetting;
 import com.sdxxtop.webview.remotewebview.webviewclient.XuxinWebviewClient;
@@ -32,7 +35,7 @@ public class BaseWebView extends WebView implements XuxinWebviewClient.WebviewTo
     protected Context context;
     private WebViewCallBack webViewCallBack;
     private Map<String, String> mHeaders;
-    private WebviewJavascriptInterface remoteInterface = null;
+    private BaseJavascriptInterface remoteInterface = null;
     private XuxinWebviewClient mXuxinWebviewClient;
 
     public BaseWebView(Context context) {
@@ -78,8 +81,9 @@ public class BaseWebView extends WebView implements XuxinWebviewClient.WebviewTo
          * Web Native交互触发
          */
         if (remoteInterface == null) {
-            remoteInterface = new WebviewJavascriptInterface(context);
-            remoteInterface.setJavascriptCommand(new WebviewJavascriptInterface.JavascriptCommand() {
+            // TODO 这里切换到项目 需要的JavascriptInterface
+            remoteInterface = new JavascriptInterfaceSybk(context);
+            remoteInterface.setJavascriptCommand(new JavascriptCommand() {
                 @Override
                 public void exec(Context context, String cmd, String params) {
                     if (webViewCallBack != null) {
