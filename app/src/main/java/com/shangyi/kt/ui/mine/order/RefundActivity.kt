@@ -7,10 +7,13 @@ import com.sdxxtop.base.BaseKTActivity
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
 import com.shangyi.business.databinding.ActivityRefundBinding
-import com.shangyi.business.weight.dialog.CancelOrderDialog
+import com.shangyi.business.utils.qiniu.QnUploadUtil
 import com.shangyi.business.weight.dialog.RefundOrderDialog
+import com.shangyi.kt.ui.mine.bean.RefundImgParams
 import com.shangyi.kt.ui.mine.order.model.RefundModel
+import com.shangyi.kt.ui.mine.weight.imgselect.CusMediaSelect
 import com.shangyi.kt.ui.order.bean.OrderDetailGood
+import com.tencent.mm.opensdk.utils.Log
 import kotlinx.android.synthetic.main.activity_refund.*
 
 class RefundActivity : BaseKTActivity<ActivityRefundBinding, RefundModel>() {
@@ -32,8 +35,8 @@ class RefundActivity : BaseKTActivity<ActivityRefundBinding, RefundModel>() {
                     UIUtils.showToast("修改成功")
                 }
                 val intent = Intent()
-                intent.putExtra("isFinish",true)
-                setResult(2,intent)
+                intent.putExtra("isFinish", true)
+                setResult(2, intent)
                 finish()
             }
         })
@@ -42,6 +45,7 @@ class RefundActivity : BaseKTActivity<ActivityRefundBinding, RefundModel>() {
     private var goodsInfo: OrderDetailGood? = null   // 传进来的商品信息
     private var orderNum = ""       // 传进来的商品信息
     private var orderRid = ""       // 退款ID
+    private var imgUrlList = ArrayList<RefundImgParams>()  // 需要上传的图片链接
 
     /**
      * 退款原因的选择框
@@ -61,7 +65,7 @@ class RefundActivity : BaseKTActivity<ActivityRefundBinding, RefundModel>() {
 
     override fun initView() {
         goodsInfo = intent.getParcelableExtra("goodsInfo")
-        orderRid = intent.getStringExtra("orderRid")?:""
+        orderRid = intent.getStringExtra("orderRid") ?: ""
         orderNum = intent.getStringExtra("order_num") ?: ""
         glideImageView.loadImage(goodsInfo?.pic ?: "")
         tvName.text = goodsInfo?.good_name
@@ -74,17 +78,7 @@ class RefundActivity : BaseKTActivity<ActivityRefundBinding, RefundModel>() {
         when (v.id) {
             R.id.tvSubmit -> {
                 // 提交
-                if (tvSelectReason.text.isNullOrEmpty()) {
-                    UIUtils.showToast("请选择退款原因")
-                    return
-                }
-                mBinding.vm?.refundOrder(
-                        orderNum,
-                        goodsInfo?.gid ?: 0,
-                        tvSelectReason.text.toString(),
-                        editText.text.toString().trim(),
-                        orderRid
-                )
+                submit()
             }
 
             R.id.selectLayout -> {
@@ -93,4 +87,51 @@ class RefundActivity : BaseKTActivity<ActivityRefundBinding, RefundModel>() {
             }
         }
     }
+
+    /**
+     * 提交
+     */
+    private fun submit() {
+        if (tvSelectReason.text.isNullOrEmpty()) {
+            UIUtils.showToast("请选择退款原因")
+            return
+        }
+        if (!cusMeditLayout.getImagePushPath().isNullOrEmpty()) {
+            imgUrlList.clear()
+            mLoadingDialog.show()
+            QnUploadUtil.getInstance().upLoad(cusMeditLayout.getImagePushPath())
+            QnUploadUtil.getInstance().setOnImgUpLoadListener { _it ->
+                mLoadingDialog.dismiss()
+                _it.values.forEach {
+                    if (it != null) {
+                        imgUrlList.add(it as RefundImgParams)
+                    }
+                }
+                mBinding.vm?.refundOrder(
+                        orderNum,
+                        goodsInfo?.gid ?: 0,
+                        tvSelectReason.text.toString(),
+                        editText.text.toString().trim(),
+                        orderRid,
+                        imgUrlList
+                )
+            }
+        } else {
+            mBinding.vm?.refundOrder(
+                    orderNum,
+                    goodsInfo?.gid ?: 0,
+                    tvSelectReason.text.toString(),
+                    editText.text.toString().trim(),
+                    orderRid,
+                    imgUrlList
+            )
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        cusMeditLayout?.callActivityResult(requestCode, resultCode, data)
+    }
+
+
 }

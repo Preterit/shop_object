@@ -134,5 +134,6 @@ dependencies {
 
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.7'
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+    implementation 'com.qiniu:qiniu-android-sdk:7.5.0'
 
 }

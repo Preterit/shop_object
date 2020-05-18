@@ -198,10 +198,10 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/llEtLayout" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
+        <com.shangyi.kt.ui.mine.weight.imgselect.CusMediaSelect
+            android:id="@+id/cusMeditLayout"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="15dp"
@@ -223,7 +223,7 @@
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerview" />
+            app:layout_constraintTop_toBottomOf="@+id/cusMeditLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

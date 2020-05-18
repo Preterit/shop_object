@@ -21,4 +21,11 @@ public interface Constants {
 
     // 是否第一次打开
     String FIRST_OPEN = "first_open";
+    // 用户手机号
+    String USER_NUMBEI = "user_numbei";
+
+    /****** 七牛云ak/sk *****/
+    String QN_ACCESS_KEY = "s0_Gmchd6K-gtYp7LTXsL_iwiNuNEc1mg8J6fC4O";
+    String QN_SECRET_KEY = "SZG0uS-2yeSV48hSlxaXTeVm6edgLXnyDRhJAij7";
+    String QN_BUCKET = "shangyi-shop";
 }

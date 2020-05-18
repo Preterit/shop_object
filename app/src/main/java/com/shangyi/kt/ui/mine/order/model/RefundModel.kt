@@ -1,12 +1,13 @@
 package com.shangyi.kt.ui.mine.order.model
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import com.sdxxtop.base.BaseViewModel
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.api.RetrofitClient
 import com.shangyi.business.network.Params
 import com.shangyi.business.utils.LogUtils
+import com.shangyi.kt.ui.mine.bean.RefundImgParams
 
 /**
  * Date:2020/5/13
@@ -25,7 +26,8 @@ class RefundModel : BaseViewModel() {
             gid: Int,
             remark: String,
             explain: String,
-            orderRid: String
+            orderRid: String,
+            imgUrlList: ArrayList<RefundImgParams>
     ) {
         loadOnUI({
             showLoadingDialog(true)
@@ -36,6 +38,9 @@ class RefundModel : BaseViewModel() {
             params.put("explain", explain)
             if (!orderRid.isNullOrEmpty()) {
                 params.put("order_refund_id", orderRid)
+            }
+            if (imgUrlList.isNotEmpty()) {
+                params.put("img", Gson().fromJson(Gson().toJson(imgUrlList), List::class.java))
             }
             LogUtils.deCodeParams(params)
             RetrofitClient.apiCusService.orderRefund(params.aesData)
