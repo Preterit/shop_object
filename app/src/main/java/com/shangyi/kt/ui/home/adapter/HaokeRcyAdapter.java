@@ -1,8 +1,12 @@
 package com.shangyi.kt.ui.home.adapter;
 
+import android.content.Intent;
+import android.view.View;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.shangyi.business.R;
+import com.shangyi.kt.ui.goods.GoodsDetailActivity;
 import com.shangyi.kt.ui.home.bean.HaoKetjBean;
 import com.shangyi.kt.ui.order.bean.OrderBean;
 import com.study.glidemodel.GlideImageView;
@@ -31,6 +35,15 @@ public class HaokeRcyAdapter extends BaseQuickAdapter<HaoKetjBean, BaseViewHolde
 
         ivImg.loadImage(imgUrl, R.color.placeholder_color);
 
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), GoodsDetailActivity.class);
+                intent.putExtra("goodsId",item.getId());
+                getContext().startActivity(intent);
+            }
+        });
 
     }
 }

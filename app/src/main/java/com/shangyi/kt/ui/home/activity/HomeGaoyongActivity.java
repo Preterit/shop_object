@@ -68,13 +68,11 @@ public class HomeGaoyongActivity extends BaseKTActivity<ActivityHomeGaoyongBindi
     public void initData() {
         super.initData();
         getMBinding().getVm().gaoYongTuijian("001");
-
     }
 
     @Override
     public void onClick(@NotNull View v) {
         switch (v.getId()){
-
             default:
                 //nothing
                 break;
