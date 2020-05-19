@@ -27,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
 public class LoginActivity extends BaseKTActivity<ActivityLoginBinding, LoginModel> implements View.OnClickListener {
 
     private final String TAG = "LoginActivity";
+    public static final String IS_SKIP = "is_Skip";
 
     private TextView mTvRegister;
     private TextView mTvYzm;
@@ -35,6 +36,7 @@ public class LoginActivity extends BaseKTActivity<ActivityLoginBinding, LoginMod
     private EditText mEtPhone;
     private EditText mEtPwd;
     private TextView mBtnUserxieyi;
+    private boolean isSkip;   // 是否跳转到主页面 、 详情里面进行登陆操作，不需要跳转到主页面。
 
 
     @Override
@@ -87,6 +89,7 @@ public class LoginActivity extends BaseKTActivity<ActivityLoginBinding, LoginMod
 
     @Override
     public void initView() {
+        isSkip = getIntent().getBooleanExtra(IS_SKIP, true);
         mTvRegister = findViewById(R.id.tv_goregist);
         mTvYzm = findViewById(R.id.tv_goyzm);
         mTvBackPwd = findViewById(R.id.tv_back_pwd);
@@ -124,10 +127,14 @@ public class LoginActivity extends BaseKTActivity<ActivityLoginBinding, LoginMod
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra(MainActivity.IS_LOGIN,1);
-                    startActivity(intent);
-                    finish();
+                    if (isSkip) {
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra(MainActivity.IS_LOGIN, 1);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        finish();
+                    }
                 }
             }
         });

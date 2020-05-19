@@ -21,3 +21,7 @@ data class RefundOrderBean(
         val status: Int,
         val update_time: String
 )
+
+data class RefundImgParams(
+        var url:String
+)

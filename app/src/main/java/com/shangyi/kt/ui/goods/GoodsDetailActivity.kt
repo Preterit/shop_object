@@ -530,7 +530,9 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         if (userID != -1) {
             isLogin = true
         } else {
-            startActivity(Intent(this, LoginActivity::class.java))
+            var intent = Intent(this, LoginActivity::class.java)
+            intent.putExtra(LoginActivity.IS_SKIP,false)
+            startActivity(intent)
         }
         return isLogin
     }

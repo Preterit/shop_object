@@ -39,7 +39,7 @@ class SplashModel : BaseViewModel() {
             }
 
             override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
-                var responseBody = response.body()
+                var responseBody = response.body
                 val baseUrl = responseBody?.string()?.replace("\n", "")
                 SpUtil.putString(Constants.BASEURL, baseUrl)
                 responseBody?.close()

@@ -5,6 +5,7 @@ import android.content.Context;
 
 import androidx.multidex.MultiDex;
 
+import com.qiniu.android.utils.AsyncRun;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
@@ -15,6 +16,8 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.sdxxtop.base.BaseApplication;
 import com.shangyi.business.network.NetWorkSession;
+import com.shangyi.business.utils.qiniu.QnUploadUtil;
+
 import sing.util.LogUtil;
 import sing.util.ToastUtil;
 
@@ -39,6 +42,16 @@ public class MyApplication extends BaseApplication {
 
         ToastUtil.init(this);
         LogUtil.init(true, "111");
+
+        /**
+         * 初始化 七牛云上传util
+         */
+        AsyncRun.runInBack(new Runnable() {
+            @Override
+            public void run() {
+                QnUploadUtil.getInstance().init();
+            }
+        });
     }
 
     private static MyApplication instance;
