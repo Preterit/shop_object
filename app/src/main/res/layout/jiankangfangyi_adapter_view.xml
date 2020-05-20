@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginLeft="15dp"
     android:layout_marginTop="10dp"
     android:layout_marginRight="15dp"
@@ -13,18 +13,15 @@
 
     <com.study.glidemodel.GlideImageView
         android:id="@+id/glideImageView"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="15dp"
-        android:layout_width="95dp"
-        android:layout_height="95dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvTitle"
-        app:layout_constraintLeft_toRightOf="@id/glideImageView"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/glideImageView"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
@@ -33,43 +30,46 @@
         android:maxLines="2"
         android:text="产品名称产品名称产品名称产..."
         android:textColor="@color/color_333333"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        app:layout_constraintLeft_toRightOf="@id/glideImageView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/glideImageView" />
 
     <TextView
         android:id="@+id/tvPriceTag"
-        app:layout_constraintBottom_toBottomOf="@id/glideImageView"
-        app:layout_constraintLeft_toRightOf="@id/glideImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="1dp"
         android:text="¥"
         android:textColor="@color/color_F61630"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/glideImageView"
+        app:layout_constraintLeft_toRightOf="@id/glideImageView" />
 
     <TextView
         android:id="@+id/tvPrice"
-        app:layout_constraintBottom_toBottomOf="@id/tvPriceTag"
-        app:layout_constraintLeft_toRightOf="@+id/tvPriceTag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:includeFontPadding="false"
         android:text="89"
         android:textColor="@color/color_F61630"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvPriceTag"
+        app:layout_constraintLeft_toRightOf="@+id/tvPriceTag" />
 
 
     <TextView
         android:id="@+id/tvYishouTx"
-        app:layout_constraintBottom_toBottomOf="@id/tvPriceTag"
-        app:layout_constraintLeft_toRightOf="@+id/tvPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:gravity="center"
         android:text="已售34327233件"
         android:textColor="@color/color_333333"
-        android:textSize="10sp" />
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvPriceTag"
+        app:layout_constraintLeft_toRightOf="@+id/tvPrice" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/zhuanLayout"
@@ -79,8 +79,7 @@
         android:layout_marginRight="10dp"
         android:background="@drawable/icon_home_item_get_bg"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flowLayout">
+        app:layout_constraintRight_toRightOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
