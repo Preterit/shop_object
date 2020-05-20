@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.shangyi.business.R;
 import com.shangyi.business.databinding.DialogProductSkuBinding;
+import com.shangyi.business.databinding.DialogProductSkuSyzsBinding;
 import com.wuhenzhizao.sku.bean.Product;
 import com.wuhenzhizao.sku.bean.Sku;
 import com.wuhenzhizao.sku.bean.SkuAttribute;
@@ -43,7 +44,7 @@ public class ProductSkuDialog extends Dialog {
     private Sku selectedSku;
     private String priceFormat;
     private String stockQuantityFormat;
-    private DialogProductSkuBinding binding;
+    private DialogProductSkuSyzsBinding binding;
 
     public ProductSkuDialog(@NonNull Context context) {
         this(context, R.style.CommonBottomDialogStyle);
@@ -56,7 +57,7 @@ public class ProductSkuDialog extends Dialog {
     }
 
     private void initView() {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_product_sku, null, true);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_product_sku_syzs, null, true);
         setContentView(binding.getRoot());
 
         binding.ibSkuClose.setOnClickListener(new View.OnClickListener() {

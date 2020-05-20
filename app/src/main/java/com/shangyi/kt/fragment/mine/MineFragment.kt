@@ -32,7 +32,7 @@ import kotlinx.android.synthetic.main.fragment_mine.*
  * author:lwb
  * Desc:
  */
-class MineFragment : BaseKTFragment<FragmentMineBinding, MineModel>() {
+class   MineFragment : BaseKTFragment<FragmentMineBinding, MineModel>() {
 
     override fun vmClazz() = MineModel::class.java
     override fun layoutId() = R.layout.fragment_mine

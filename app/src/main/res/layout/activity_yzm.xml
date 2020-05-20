@@ -42,7 +42,7 @@
                 android:maxLines="1"
                 android:textColor="@color/login"
                 android:textColorHint="@color/hint"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 android:theme="@style/MyEditText" />
 
             <RelativeLayout
@@ -61,7 +61,7 @@
                     android:maxLines="1"
                     android:textColor="@color/login"
                     android:textColorHint="@color/hint"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:theme="@style/MyEditText" />
 
                 <TextView

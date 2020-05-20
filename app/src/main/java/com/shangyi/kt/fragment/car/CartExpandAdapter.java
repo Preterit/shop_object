@@ -185,7 +185,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
         }
 
         CartInfo dataBean = (CartInfo) getGroup(groupPosition);
-        groupViewHolder.tvShopName.setText(dataBean.name + "  >");
+        groupViewHolder.tvShopName.setText(dataBean.name);
         groupViewHolder.checkBox.setEnabled(dataBean.ischeck);
         groupViewHolder.checkboxLayout.setOnClickListener(new View.OnClickListener() {
             @Override

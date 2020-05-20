@@ -79,7 +79,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/color_F9F9F9"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:elevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -147,8 +148,7 @@
                                 android:includeFontPadding="false"
                                 android:text="智慧相伴，健康同行"
                                 android:textColor="@color/white"
-                                android:textSize="11sp"
-                                android:textStyle="bold" />
+                                android:textSize="11sp" />
                         </LinearLayout>
 
                         <ImageView
@@ -315,13 +315,14 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="15dp"
                     android:src="@drawable/icon_mine_tj_logo" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvHorTj"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" />
 
             </com.google.android.material.appbar.AppBarLayout>
 
@@ -330,6 +331,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#F9F9F9"
+                android:elevation="0dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

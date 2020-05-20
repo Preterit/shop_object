@@ -35,14 +35,25 @@
             android:id="@+id/tvShopName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
-            android:text="纪梵希官方旗舰店  >"
+            android:singleLine="true"
+            android:text="纪梵希官方旗舰店"
             android:textColor="@color/color_333333"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/checkboxLayout"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="7dp"
+            android:layout_height="14dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/icon_back_right"
+            app:layout_constraintBottom_toBottomOf="@+id/tvShopName"
+            app:layout_constraintLeft_toRightOf="@+id/tvShopName"
+            app:layout_constraintTop_toTopOf="@+id/tvShopName" />
 
         <TextView
             android:id="@+id/tvLingquan"
