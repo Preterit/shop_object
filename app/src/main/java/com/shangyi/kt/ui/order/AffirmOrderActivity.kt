@@ -133,7 +133,7 @@ class AffirmOrderActivity : BaseKTActivity<ActivityAffirmOrderBinding, CommitOrd
                 .setMsg(" ")
                 .setMsg2("超过支付时效后，订单会被取消哦")
                 .setMsg3(" ")
-                .setPositiveButton("继续支付", Color.parseColor("#FF2942"), {})
+                .setPositiveButton("继续支付", Color.parseColor("#FF2942")) {}
                 .setNegativeButton("确定离开", Color.parseColor("#333333")) {
                     finish()
                 }

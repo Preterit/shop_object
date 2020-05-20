@@ -24,18 +24,18 @@ class CollectListItemView : LinearLayout {
         glideImageView.loadImage(data?.url ?: "")
         tvGoodsName.text = data?.name
         tvPrice.text = data?.sale_price.toString()
-        tvZhuanTx.text = "赚¥ ${data?.normal_dealer}"
+        tvZhuanTx.text = "赚¥ ${data?.dealer}"
 
         if (data?.is_show == 1) {
             // (1、展示 0、不展示）
+            tvNoGoods.visibility = View.GONE
+            tvNoPrice.visibility = View.INVISIBLE
+            conPriceLayout.visibility = View.VISIBLE
+        } else {
             tvNoGoods.visibility = View.VISIBLE
             glideImageView.alpha = 0.7f
             tvNoPrice.visibility = View.VISIBLE
             conPriceLayout.visibility = View.INVISIBLE
-        } else {
-            tvNoGoods.visibility = View.GONE
-            tvNoPrice.visibility = View.INVISIBLE
-            conPriceLayout.visibility = View.VISIBLE
         }
 
         checkboxLayout.visibility = if (data?.isEdit!!) View.VISIBLE else View.GONE

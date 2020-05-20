@@ -125,17 +125,25 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
     }
 
     fun initData1() {
-        mLoadService.showCallback(LoadingCallback::class.java)
         mBinding.vm?.getCarList()
     }
 
     override fun initData() {
+        mLoadService.showCallback(LoadingCallback::class.java)
         initData1()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!isHidden) {
+            initData1()
+        }
     }
 
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         if (!hidden) {
+            mLoadService.showCallback(LoadingCallback::class.java)
             initData1()
         }
     }

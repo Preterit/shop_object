@@ -371,6 +371,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
                 itemsBean.ischeck = false;
             }
         }
+        refreshMoney();
         notifyDataSetChanged();
     }
 

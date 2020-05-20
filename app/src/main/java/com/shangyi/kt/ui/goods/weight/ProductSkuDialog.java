@@ -38,6 +38,7 @@ public class ProductSkuDialog extends Dialog {
     private Product product;
     private List<Sku> skuList;
     private Callback callback;
+    private String mUnitStr;  // 商品规格描述 件/部/条/质量
 
     private Sku selectedSku;
     private String priceFormat;
@@ -181,7 +182,7 @@ public class ProductSkuDialog extends Dialog {
                 }
                 int quantityInt = Integer.parseInt(quantity);
                 if (quantityInt > 0 && quantityInt <= selectedSku.getStockQuantity()) {
-                    callback.onAdded(selectedSku, quantityInt);
+                    callback.onAdded(selectedSku, quantityInt,mUnitStr);
                     dismiss();
                 } else {
                     Toast.makeText(getContext(), "商品数量超出库存，请修改数量", Toast.LENGTH_SHORT).show();
@@ -194,6 +195,7 @@ public class ProductSkuDialog extends Dialog {
         this.product = product;
         this.skuList = product.getSkus();
         this.callback = callback;
+        this.mUnitStr = product.getMeasurementUnit();
 
         priceFormat = context.getString(R.string.comm_price_format);
         stockQuantityFormat = context.getString(R.string.product_detail_sku_stock);
@@ -272,14 +274,11 @@ public class ProductSkuDialog extends Dialog {
 
 
     public interface Callback {
-        void onAdded(Sku sku, int quantity);
+        void onAdded(Sku sku, int quantity,String unit);
     }
 
     RequestOptions requestOptions = new RequestOptions().placeholder(R.color.placeholder_color_F5);
     public void setImaValue(Context context, String url, ImageView imageView) {
-        if (!TextUtils.isEmpty(url)) {
-            url = "";
-        }
         Glide.with(context).load(url).apply(requestOptions).into(imageView);
     }
 }
