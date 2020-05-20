@@ -94,15 +94,19 @@ class AddAddressActivity : BaseKTActivity<ActivityAddAddressBinding, AddAddressM
     private fun commitAddress() {
         if (edName.text.toString().trim().isEmpty()) {
             UIUtils.showToast("请填写收货人姓名")
+            return
         }
         if (edNumber.text.toString().trim().isEmpty()) {
             UIUtils.showToast("请填写收货人手机号")
+            return
         }
         if (tvAddress.text.toString().trim().isEmpty()) {
             UIUtils.showToast("请填写收货地址")
+            return
         }
         if (addressDetail.text.toString().trim().isEmpty()) {
             UIUtils.showToast("请填写详细地址")
+            return
         }
         mBinding.vm?.saveAddress(
                 edName.text.toString().trim(),
