@@ -30,13 +30,6 @@ public class HomeKeTangAdapter extends BaseQuickAdapter<HaoKetjBean, BaseViewHol
             holder.getView(R.id.top_line).setVisibility(View.GONE);
         }
 
-        /*String imgUrl = item.getGoods_one_img().getUrl();
-        GlideImageView ivImg = holder.getView(R.id.glideImageView);
-        holder.setText(R.id.tvTitle, item.getName());
-        holder.setText(R.id.tvPrice, item.getPrice() + "");
-        holder.setText(R.id.tvZhuanTx,  item.getSale_price() + "");
-
-        ivImg.loadImage(imgUrl, R.color.placeholder_color);*/
 
 
     }

@@ -31,7 +31,7 @@ public class HaokeRcyAdapter extends BaseQuickAdapter<HaoKetjBean, BaseViewHolde
         GlideImageView ivImg = holder.getView(R.id.glideImageView);
         holder.setText(R.id.tvTitle, item.getName());
         holder.setText(R.id.tvPrice, item.getPrice() + "");
-        holder.setText(R.id.tvZhuanTx,  item.getSale_price() + "");
+        holder.setText(R.id.tvZhuanTx,  item.getDealer().getNormal_dealer() + "");
 
         ivImg.loadImage(imgUrl, R.color.placeholder_color);
 

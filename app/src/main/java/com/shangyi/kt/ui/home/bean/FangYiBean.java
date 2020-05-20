@@ -38,7 +38,7 @@ public class FangYiBean {
     private int shop_id;
     private int msales;
     private GoodsOneImgBean goods_one_img;
-    private Object dealer;
+    private DealerBean dealer;
     private List<?> discountList;
 
     public int getId() {
@@ -137,11 +137,11 @@ public class FangYiBean {
         this.goods_one_img = goods_one_img;
     }
 
-    public Object getDealer() {
+    public DealerBean getDealer() {
         return dealer;
     }
 
-    public void setDealer(Object dealer) {
+    public void setDealer(DealerBean dealer) {
         this.dealer = dealer;
     }
 
@@ -155,8 +155,8 @@ public class FangYiBean {
 
     public static class GoodsOneImgBean {
         /**
-         * good_id : 4
-         * url : http://shopvideo.xueli001.cn/goods_img/04/70e84d1d269937ed.jpg
+         * good_id : 16
+         * url :  http://shopvideo.xueli001.cn/4picture2020051315112792
          */
 
         private int good_id;
@@ -176,6 +176,42 @@ public class FangYiBean {
 
         public void setUrl(String url) {
             this.url = url;
+        }
+    }
+
+    public static class DealerBean {
+        /**
+         * gid : 16
+         * cash_back : 0
+         * normal_dealer : 5
+         */
+
+        private int gid;
+        private int cash_back;
+        private int normal_dealer;
+
+        public int getGid() {
+            return gid;
+        }
+
+        public void setGid(int gid) {
+            this.gid = gid;
+        }
+
+        public int getCash_back() {
+            return cash_back;
+        }
+
+        public void setCash_back(int cash_back) {
+            this.cash_back = cash_back;
+        }
+
+        public int getNormal_dealer() {
+            return normal_dealer;
+        }
+
+        public void setNormal_dealer(int normal_dealer) {
+            this.normal_dealer = normal_dealer;
         }
     }
 }

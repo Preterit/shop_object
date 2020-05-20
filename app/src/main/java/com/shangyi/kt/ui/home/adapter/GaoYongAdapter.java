@@ -31,8 +31,8 @@ public class GaoYongAdapter extends BaseQuickAdapter<GaoYongBean, BaseViewHolder
         //int imgUrl = R.drawable.duck;
         GlideImageView ivImg = holder.getView(R.id.glideImageView);
         holder.setText(R.id.tvTitle, item.getName());
-        holder.setText(R.id.tvPrice, item.getPrice() + "");
-        holder.setText(R.id.tvZhuanTx, "赚" + item.getSale_price() + "");
+        holder.setText(R.id.tvPrice, item.getSale_price() + "");
+        holder.setText(R.id.tvZhuanTx, "赚" + item.getDealer().getNormal_dealer() + "");
 
         ivImg.loadImage(imgUrl, R.color.placeholder_color);
 
