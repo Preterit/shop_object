@@ -29,8 +29,8 @@ public class PinpaiAdapter extends BaseQuickAdapter<PinPaiBean, BaseViewHolder> 
     protected void convert(@NotNull BaseViewHolder holder, PinPaiBean item) {
         String imgUrl = item.getGoods_one_img().getUrl();
         GlideImageView ivImg = holder.getView(R.id.glideImageView);
-        holder.setText(R.id.tvPrice, item.getPrice() + "");
-        holder.setText(R.id.tvZhuanTx, "返" + item.getSale_price() + "");
+        holder.setText(R.id.tvPrice, item.getSale_price() + "");
+        holder.setText(R.id.tvZhuanTx,   item.getDealer().getCash_back() + "");
 
         ivImg.loadImage(imgUrl, R.color.placeholder_color);
 

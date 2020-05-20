@@ -68,6 +68,14 @@ interface ApiService {
     suspend fun register(@Field("data") data: String): BaseResponse<String?>
 
     /**
+     * 退出登录
+     */
+    @FormUrlEncoded
+    @POST("/api/login/logOut")
+    suspend fun getQuitLogin(@Field("data") data: String): BaseResponse<Any?>
+
+
+    /**
      * 完善个人信息
      */
     @FormUrlEncoded
