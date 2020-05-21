@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.shangyi.kt.ui.setting.HuiYuanModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F2F2F2">
+
+        <com.shangyi.business.weight.TitleView
+            app:leftLayoutIconIsGray="true"
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleValue="设置" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/title">
+
+
+            <com.shangyi.business.weight.CumSettingItemView
+                android:id="@+id/backpwd"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:leftImg="@mipmap/anquan"
+                app:rightText="修改"
+                app:rightTextIsShow="true"
+                app:rightImgIsShow="true"
+                app:rightImg="@mipmap/right" />
+
+            <com.shangyi.business.weight.CumSettingItemView
+                android:id="@+id/huiyuan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:leftText="昵称"
+                app:rightTextIsShow="false"
+                app:rightImg="@mipmap/right"
+                app:rightImgIsShow="true" />
+
+            <com.shangyi.business.weight.CumSettingItemView
+                android:id="@+id/setting_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:leftText="会员ID"
+                app:rightTextIsShow="false"
+                app:rightImg="@mipmap/right"
+                app:rightImgIsShow="true" />
+
+            <com.shangyi.business.weight.CumSettingItemView
+                android:id="@+id/setting_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:leftText="性别"
+                app:rightTextIsShow="false"
+                app:rightImg="@mipmap/right"
+                app:rightImgIsShow="true" />
+
+            <com.shangyi.business.weight.CumSettingItemView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:leftText="生日"
+                app:rightTextIsShow="true"
+                app:rightImgIsShow="true" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
