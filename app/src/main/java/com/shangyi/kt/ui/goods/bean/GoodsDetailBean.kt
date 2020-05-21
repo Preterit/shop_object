@@ -65,10 +65,12 @@ data class DealerBean(
 )
 
 data class SpecBean(
+        val id: Int,
         val product_id: Int,
+        val stock: Int,
         val value: String,
         val price: Float,
-        val market_price: Float,
+        val sale_price: Float,
         val image: String
 )
 

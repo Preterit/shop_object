@@ -21,7 +21,7 @@ data class Good(
         val sale_price: Float?,
         val shop_id: Int,
         val cash_back: Float?,   // 购买返现
-        val normal_dealer: Float?,   // 返佣
+        val dealer: Float?,   // 返佣
         var isSelect: Boolean = false, // 是否选中
         var isEdit: Boolean = false, // 是否 编辑
         val url: String

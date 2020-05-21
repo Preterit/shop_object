@@ -1,5 +1,7 @@
 package com.shangyi.kt.fragment.car.entity;
 
+import com.shangyi.kt.ui.goods.bean.DealerBean;
+
 import java.util.List;
 
 /**
@@ -29,6 +31,7 @@ public class CartInfo {
         public String name;
         public float price;
         public float sale_price;
+        public DealerBean dealer;
         public GoodsUnit goods_unit;
         public int count;//库存量
         public int number;//购物车数量
@@ -52,7 +55,7 @@ public class CartInfo {
     public static class SpecBean {
         public String value;
         public float price;
-        public float market_price;
+        public float sale_price;
         public String image;
         public int stock;
         public int id;

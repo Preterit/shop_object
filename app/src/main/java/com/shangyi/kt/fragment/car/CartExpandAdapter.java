@@ -60,11 +60,11 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
         }
         CartInfo.ItemsBean item = getChild(groupPosition, position);
         childViewHolder.checkBox.setEnabled(item.ischeck);
-        childViewHolder.glideImageView.loadImage(item.goods_img.get(0).url, R.color.placeholder_color);
+        childViewHolder.glideImageView.loadImage(item.spec.image, R.color.placeholder_color);
         childViewHolder.tvGoodsName.setText(item.name);
-        childViewHolder.tvGoodsPrice.setText(String.valueOf(item.sale_price));
+        childViewHolder.tvGoodsPrice.setText(String.valueOf(item.spec.sale_price));
         childViewHolder.tvNumber.setText(String.valueOf(item.number));
-        childViewHolder.tvFanPrice.setText("下单返￥" + item.sale_price);
+        childViewHolder.tvFanPrice.setText("下单返￥" + item.dealer.getCash_back());
 
         childViewHolder.checkboxLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,7 +185,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
         }
 
         CartInfo dataBean = (CartInfo) getGroup(groupPosition);
-        groupViewHolder.tvShopName.setText(dataBean.name + "  >");
+        groupViewHolder.tvShopName.setText(dataBean.name);
         groupViewHolder.checkBox.setEnabled(dataBean.ischeck);
         groupViewHolder.checkboxLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -228,7 +228,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
 
         void delectClick(boolean isEmpty, int[] cid);
 
-        void moneyRefresh(float money);
+        void moneyRefresh(float money, float fanPrice, int selectCount);
     }
 
     public void setAdapterClickListener(OnAdapterClickListener listener) {
@@ -301,15 +301,19 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
      */
     public void refreshMoney() {
         float money = 0;
+        float fanprice = 0;
+        int selectCount = 0;
         for (CartInfo cartInfo : list) {
             for (CartInfo.ItemsBean item : cartInfo.child) {
                 if (item.ischeck) {
-                    money += item.sale_price * item.number;
+                    money += item.spec.sale_price * item.number;
+                    fanprice += item.dealer.getCash_back();
+                    selectCount++;
                 }
             }
         }
         if (mListener != null) {
-            mListener.moneyRefresh(money);
+            mListener.moneyRefresh(money, fanprice, selectCount);
         }
     }
 
@@ -371,6 +375,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
                 itemsBean.ischeck = false;
             }
         }
+        refreshMoney();
         notifyDataSetChanged();
     }
 

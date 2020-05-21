@@ -21,6 +21,7 @@ import com.shangyi.business.databinding.ActivityGoodsDetailBinding
 import com.shangyi.business.databinding.ItemGoodsDetailGoodsinfoBinding
 import com.shangyi.business.network.Constants
 import com.shangyi.business.network.SpUtil
+import com.shangyi.business.utils.parse
 import com.shangyi.business.weight.dialog.GoodsYhqDialog
 import com.shangyi.kt.fragment.car.entity.AddressInfoBean
 import com.shangyi.kt.fragment.car.entity.CommitOrderBean
@@ -76,8 +77,10 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
     private var tabIndex = -1  // 当前选中tab的下标
     private var goodsId = 0 // 商品ID
     private var addressId = 0 // 地址ID
-    private var skuId = "0" // 商品规格ID
+    private var skuId = "-1" // 商品规格ID
     private var number = 1 // 商品数量
+    private var mUnit = "" // 商品规格 描述  件/部/条/质量
+    private var totalCount = 0 // 默认商品数量
     private var dialog: ProductSkuDialog? = null   // 规格弹框
     private var carSelect = false   // 是否添加到购物车
     private var yhqDataList: List<YouhuiquanBean?>? = null // 优惠券数据列表
@@ -102,16 +105,22 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         mBinding.vm?.product?.observe(this, Observer {
             if (dialog == null) {
                 dialog = ProductSkuDialog(this)
-                dialog?.setData(it, ProductSkuDialog.Callback { sku, quantity ->
+                dialog?.setData(it, ProductSkuDialog.Callback { sku, quantity, unit ->
+                    var str = "${sku.attributes.toString().replace("[", "").replace("]", "")} $quantity ${if (unit.isEmpty()) mUnit else ""}"
                     dialog?.dismiss()
                     skuId = sku.id
                     number = quantity
-                    viewList[0]?.tvStandard?.text = "${sku.attributes.toString().replace("[", "").replace("]", "")} $quantity 部"
+                    viewList[0]?.tvStandard?.text = str
                     // 切换规格， 切换商品图片
                     goodBean?.goodsImg = sku.mainImage
                     goodBean?.goodsSpecId = skuId.toInt()
-                    goodBean?.SpecStr = "${sku.attributes.toString().replace("[", "").replace("]", "")} $quantity 部"
+                    goodBean?.SpecStr = str
                     goodBean?.goodsPrice = sku.sellingPrice
+                    goodBean?.goodsCount = number
+
+                    orderInfo?.totalPrice = (number * sku.sellingPrice).parse()
+                    // 刷新页面数据
+                    viewList[0]?.tvPrice?.text = sku.sellingPrice.toString()
 
                     if (carSelect) {
                         carSelect = false
@@ -286,6 +295,9 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
      * 绑定数据
      */
     private fun bindData(it: GoodsDetailBean) {
+        skuId = it.spec?.id.toString()
+        totalCount = it.spec?.stock ?: 0
+
         yhqDataList = it.discountList
         //商品信息
         setGoodInfoData(it)
@@ -299,11 +311,11 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
         goodBean = GoodsInfoBean(
                 it.id,
                 1,
-                it.sale_price,
+                it.spec?.sale_price ?: 0.0f,
                 it.name,
                 it.spec?.value ?: "",
                 it.spec?.image,
-                it.spec?.product_id ?: 0
+                it.spec?.id ?: 0
         )
 
         if (goodBean != null) {
@@ -314,10 +326,9 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
                     arrayListOf(goodBean!!),
                     it.dealer?.cash_back ?: 0f,
                     "",
-                    it.sale_price
+                    it.spec?.sale_price ?: 0f
             )
         }
-
     }
 
     /**
@@ -365,6 +376,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
 
 
         /******** 规格 *********/
+        this.mUnit = it.goods_unit?.name ?: ""
         viewList[0]?.tvStandard?.text = "${mBinding.vm?.getStandardStr(it) ?: "请选择规格"}"
         /******** 收货地址 *********/
         addressId = it.address?.id ?: 0
@@ -482,10 +494,12 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
      * 购买商品
      */
     private fun buyGoods() {
-        val intent = Intent(this, AffirmOrderActivity::class.java)
-        intent.putExtra("orderData", arrayListOf(orderInfo))
-        intent.putExtra("addressData", addressInfo)
-        startActivity(intent)
+        if (skuId != "-1" && totalCount > 0) {
+            val intent = Intent(this, AffirmOrderActivity::class.java)
+            intent.putExtra("orderData", arrayListOf(orderInfo))
+            intent.putExtra("addressData", addressInfo)
+            startActivity(intent)
+        }
     }
 
     /**
@@ -531,7 +545,7 @@ class GoodsDetailActivity : BaseKTActivity<ActivityGoodsDetailBinding, GoodDetai
             isLogin = true
         } else {
             var intent = Intent(this, LoginActivity::class.java)
-            intent.putExtra(LoginActivity.IS_SKIP,false)
+            intent.putExtra(LoginActivity.IS_SKIP, false)
             startActivity(intent)
         }
         return isLogin

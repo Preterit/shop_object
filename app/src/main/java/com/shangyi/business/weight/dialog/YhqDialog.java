@@ -37,7 +37,7 @@ import java.util.List;
 public class YhqDialog extends DialogFragment implements CommitOrderModel.OnYhqLoad {
 
     private RecyclerView recycler;
-    private TextView tvOk;
+    private TextView tvOk, tvNoHuyTx;
     private CommitOrderModel orderModel;
     private YhqFragmentDialogAdapter adapter;
 
@@ -62,6 +62,7 @@ public class YhqDialog extends DialogFragment implements CommitOrderModel.OnYhqL
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recycler = view.findViewById(R.id.recyclerview);
+        tvNoHuyTx = view.findViewById(R.id.tvNoHuyTx);
         tvOk = view.findViewById(R.id.tvOk);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new YhqFragmentDialogAdapter();
@@ -119,7 +120,14 @@ public class YhqDialog extends DialogFragment implements CommitOrderModel.OnYhqL
      */
     @Override
     public void yhqList(List<CommitOrderYhqData> data) {
-        adapter.setList(data);
+        if (data == null || data.size() == 0) {
+            tvNoHuyTx.setVisibility(View.VISIBLE);
+            recycler.setVisibility(View.GONE);
+        } else {
+            adapter.setList(data);
+            tvNoHuyTx.setVisibility(View.GONE);
+            recycler.setVisibility(View.VISIBLE);
+        }
     }
 
     public interface OnYhqSelectListener {

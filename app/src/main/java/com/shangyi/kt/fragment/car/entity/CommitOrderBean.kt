@@ -16,14 +16,14 @@ data class CommitOrderBean(
         val goodsInfos: List<GoodsInfoBean>?,
         val fanPrice: Float = 0f,
         var psText: String?,
-        val totalPrice: Float = 0f
+        var totalPrice: Float
 ) : Parcelable
 
 
 @Parcelize
 data class GoodsInfoBean(
         var goodsId: Int,
-        val goodsCount: Int,
+        var goodsCount: Int,
         var goodsPrice: Float,
         val goodsName: String,
         var SpecStr: String,

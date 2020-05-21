@@ -1,5 +1,6 @@
 package com.shangyi.kt.ui.order.model
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.sdxxtop.base.BaseViewModel
@@ -64,6 +65,8 @@ class CommitOrderModel : BaseViewModel() {
             val params = Params()
             params.put("list", gson.fromJson(gson.toJson(goodsList), List::class.java))
             params.put("address_id", addressId)
+            LogUtils.deCodeParams(params)
+            Log.e("yun fei ---  ","${params.aesData}")
             RetrofitClient.apiCusService.loadYunfei(params.aesData)
         }, { it ->
             mIsLoadingShow.value = false

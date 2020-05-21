@@ -37,14 +37,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_37"
-            android:layout_marginTop="@dimen/dp_121"
+            android:layout_marginTop="200dp"
             android:layout_marginRight="@dimen/dp_37"
             android:hint="请输入手机号"
             android:inputType="number"
             android:maxLines="1"
             android:textColor="@color/login"
             android:textColorHint="@color/hint"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:theme="@style/MyEditText" />
 
         <RelativeLayout
@@ -63,7 +63,7 @@
                 android:maxLines="1"
                 android:textColor="@color/login"
                 android:textColorHint="@color/hint"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 android:theme="@style/MyEditText" />
 
             <TextView
