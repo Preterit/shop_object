@@ -67,11 +67,11 @@
                 <TextView
                     android:id="@+id/btn_yzm"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dp_30"
+                    android:layout_height="30dp"
                     android:layout_alignParentRight="true"
                     android:text="获取验证码"
                     android:textColor="@color/btnyzm"
-                    android:textSize="@dimen/sp_15" />
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <LinearLayout

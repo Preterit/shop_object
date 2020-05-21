@@ -20,8 +20,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.shangyi.kt.ui.mine.mine_vip.PointsShopActivity"></activity>
+        <activity android:name="com.shangyi.kt.ui.setting.HuiYuanActivity"></activity>
         <activity android:name="com.shangyi.kt.ui.home.activity.HomeBannerWebActivity" />
+        <activity android:name="com.shangyi.kt.ui.mine.mine_vip.PointsShopActivity"></activity>
         <activity android:name="com.shangyi.kt.ui.home.activity.HomeJKClassroomActivity" />
         <activity android:name="com.shangyi.kt.ui.home.activity.HomeJingXuanActivity" />
         <activity android:name="com.shangyi.kt.ui.mine.LazyFragmentActivity" />
@@ -94,7 +95,9 @@
         <activity android:name="com.shangyi.kt.ui.userlogin.RegisterActivity" />
         <activity android:name="com.shangyi.kt.ui.userlogin.YzmActivity" />
         <activity android:name="com.shangyi.kt.ui.setting.SettingActivity" />
-        <activity android:name="com.shangyi.kt.ui.WebActivity" />
+        <activity
+            android:name="com.shangyi.kt.ui.WebActivity" />
+
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"

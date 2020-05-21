@@ -102,8 +102,8 @@ public class SettingActivity extends BaseKTActivity<ActivitySettingBinding,Setti
                 startActivity(intent1);
                 break;
             case R.id.huiyuan://会员中心
-                Intent intentHuiYan = new Intent(SettingActivity.this, TxActivity.class);
-                startActivity(intentHuiYan);
+                Intent intentHuiYuan = new Intent(SettingActivity.this, HuiYuanActivity.class);
+                startActivity(intentHuiYuan);
                 break;
             case R.id.quit_login://退出登录
                 quitLogin();

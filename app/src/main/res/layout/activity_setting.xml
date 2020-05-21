@@ -51,23 +51,39 @@
                 app:rightTextIsShow="false"
                 app:rightImg="@mipmap/right"
                 app:rightImgIsShow="true" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#E5E5E5"
+                app:layout_constraintTop_toBottomOf="@id/con02" />
 
             <com.shangyi.business.weight.CumSettingItemView
                 android:id="@+id/setting_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:leftImg="@mipmap/message"
+                android:layout_marginTop="1dp"
                 app:leftText="消息推送"
                 app:rightTextIsShow="false"
                 app:rightImg="@mipmap/right"
                 app:rightImgIsShow="true" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#E5E5E5"
+                app:layout_constraintTop_toBottomOf="@id/con02" />
             <com.shangyi.business.weight.CumSettingItemView
                 android:id="@+id/setting_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:leftImg="@mipmap/about"
                 app:leftText="关于上医宝库"
+                android:layout_marginTop="1dp"
                 app:rightTextIsShow="false"
                 app:rightImg="@mipmap/right"
                 app:rightImgIsShow="true" />
