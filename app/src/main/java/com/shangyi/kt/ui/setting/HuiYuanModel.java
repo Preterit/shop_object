@@ -7,5 +7,5 @@ import com.sdxxtop.base.BaseViewModel;
  * auther: Dz
  * function:
  */
-class HuiYuanModel extends BaseViewModel {
+public class HuiYuanModel extends BaseViewModel {
 }
