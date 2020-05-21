@@ -48,7 +48,7 @@ class MineVipCenterAdapter constructor(data: ArrayList<MineImgTxBean>)
 //                    intent = Intent(context, FeedBackActivity::class.java)
                 }
                 "积分商城" -> {
-                    intent = Intent(context, LazyFragmentActivity::class.java)
+                    intent = Intent(context, PointsShopActivity::class.java)
                 }
             }
             if (intent != null) {

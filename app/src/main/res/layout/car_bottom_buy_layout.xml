@@ -58,13 +58,13 @@
         android:id="@+id/tvPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:text="0"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="30dp"
+        android:text="0.00"
         android:textColor="@color/color_F61630"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/tvPay"
+        app:layout_constraintLeft_toLeftOf="@+id/tvPriceTemp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -72,31 +72,57 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp"
         android:text="¥"
         android:textColor="@color/color_F61630"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/tvPrice"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvPrice"
+        app:layout_constraintRight_toLeftOf="@+id/tvPrice" />
 
     <TextView
         android:id="@+id/tvPriceStr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="5dp"
+        android:layout_marginBottom="2dp"
         android:text="合计："
         android:textColor="@color/color_666666"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/tvPriceTag"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvPrice"
+        app:layout_constraintRight_toLeftOf="@+id/tvPriceTag" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="#1A000000"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fanPriceTx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:text="下单返￥0.00"
+        android:textColor="@color/color_666666"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/tvPriceStr"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
+
+    <TextView
+        android:id="@+id/tvPriceTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:text="99999.99"
+        android:textColor="@color/color_F61630"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintRight_toLeftOf="@+id/tvPay"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

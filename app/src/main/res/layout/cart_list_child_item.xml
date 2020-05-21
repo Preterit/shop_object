@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
     android:background="@color/translate"
+    android:clickable="true"
     android:paddingLeft="10dp"
     android:paddingRight="10dp">
 
@@ -58,25 +58,25 @@
             android:id="@+id/tvGoodsTag"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
             android:text="¥"
             android:textColor="@color/color_F61630"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/glideImageView"
-            app:layout_constraintLeft_toLeftOf="@+id/tvGoodsName"
-            app:layout_constraintTop_toBottomOf="@+id/glideImageView" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvGoodsPrice"
+            app:layout_constraintLeft_toLeftOf="@+id/tvGoodsName" />
 
         <TextView
             android:id="@+id/tvGoodsPrice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
+            android:layout_marginBottom="3dp"
             android:text="429.00"
             android:textColor="@color/color_F61630"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/glideImageView"
-            app:layout_constraintLeft_toRightOf="@+id/tvGoodsTag"
-            app:layout_constraintTop_toBottomOf="@+id/glideImageView" />
+            app:layout_constraintLeft_toRightOf="@+id/tvGoodsTag" />
 
         <ImageView
             android:id="@+id/ivAdd"

@@ -1,5 +1,6 @@
 package com.shangyi.kt.fragment.car
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -52,6 +53,13 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
     private val lookMoreFragment: LookMoreFragment by lazy {
         LookMoreFragment()
     }
+
+    /**
+     *
+     */
+//    private val delDialog : Dialog by Lazy{
+//        Dialog(context!!)
+//    }
 
     /**
      * 购买的layout
@@ -212,19 +220,18 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
             expandableListView.setAdapter(exAdapter)
             expandableListView.setOnGroupClickListener { _, _, _, _ -> true }
             exAdapter?.setAdapterClickListener(object : CartExpandAdapter.OnAdapterClickListener {
-                override fun moneyRefresh(money: Float) {
+                override fun moneyRefresh(money: Float, fanPrice: Float, selectCount: Int) {
                     bottomBuyLayout.tvPrice.text = "$money"
+                    bottomBuyLayout.fanPriceTx.text = "下单返￥$fanPrice"
+                    bottomBuyLayout.tvPay.text = "结算($selectCount)"
                 }
 
                 override fun childAddCutClick(type: Int, groupPosition: Int, childPosition: Int, count: Int) {
-                    if (type == 1) {
-                        UIUtils.showToast("商品增加到${count}")
-                    } else {
-                        UIUtils.showToast("商品减少到${count}")
-                    }
+
                 }
 
                 override fun delectClick(isEmpty: Boolean, cid: IntArray?) {
+
                     mBinding.vm?.delGoods(cid?.asList(), false)
                     if (isEmpty) {
                         linearLayout.removeView(expandableListView)
