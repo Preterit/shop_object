@@ -13,7 +13,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
         android:orientation="vertical"
         tools:context="com.shangyi.kt.ui.mine.mine_vip.MySyActivity">
 
@@ -37,7 +36,8 @@
                 android:id="@+id/appBarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white">
+                android:background="@color/white"
+                app:elevation="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -58,6 +58,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:id="@+id/tvTotalPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
@@ -77,12 +78,12 @@
                     android:background="@color/white">
 
                     <TextView
-                        android:drawablePadding="6dp"
-                        android:drawableRight="@drawable/my_shouyi_down_icon"
                         android:id="@+id/tvDateSelect"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
+                        android:drawableRight="@drawable/my_shouyi_down_icon"
+                        android:drawablePadding="6dp"
                         android:text="2020.4"
                         android:textColor="@color/color_333333"
                         android:textSize="18sp"
@@ -124,6 +125,7 @@
                 android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:overScrollMode="never"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

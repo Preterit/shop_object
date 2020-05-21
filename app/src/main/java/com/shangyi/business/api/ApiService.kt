@@ -14,10 +14,7 @@ import com.shangyi.kt.ui.goods.bean.GoodsListBean
 import com.shangyi.kt.ui.goods.bean.GoodsSpecBean
 import com.shangyi.kt.ui.goods.bean.ReecommendGood
 import com.shangyi.kt.ui.home.bean.*
-import com.shangyi.kt.ui.mine.bean.CollectListBean
-import com.shangyi.kt.ui.mine.bean.OrderListBean
-import com.shangyi.kt.ui.mine.bean.RefundOrderBean
-import com.shangyi.kt.ui.mine.bean.YhqListBean
+import com.shangyi.kt.ui.mine.bean.*
 import com.shangyi.kt.ui.order.bean.*
 import com.shangyi.kt.ui.pingjia.bean.PingjiaDataBean
 import com.shangyi.kt.ui.splash.bean.GetSettingBean
@@ -330,7 +327,7 @@ interface ApiService {
      */
     @FormUrlEncoded
     @POST("/api/user/myEarnings")
-    suspend fun getSyData(@Field("data") data: String): BaseResponse<Any?>
+    suspend fun getSyData(@Field("data") data: String): BaseResponse<MyDataBean?>
 
     /**
      * 订单 -- 订单详情信息

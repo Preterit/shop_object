@@ -78,10 +78,10 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
             public void onClick(View v) {
                 if (mListener != null) {
                     int[] cid = {list.get(groupPosition).child.get(position).cid};
-                    list.get(groupPosition).child.remove(position);
-                    if (list.get(groupPosition).child.size() == 0) {
-                        list.remove(groupPosition);
-                    }
+//                    list.get(groupPosition).child.remove(position);
+//                    if (list.get(groupPosition).child.size() == 0) {
+//                        list.remove(groupPosition);
+//                    }
                     mListener.delectClick(list.size() == 0, cid);
                     notifyDataSetChanged();
                     refreshMoney();

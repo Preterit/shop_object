@@ -1,7 +1,7 @@
 package com.shangyi.kt.fragment.car
 
-import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,17 +13,17 @@ import com.sdxxtop.base.loadsir.LoadingCallback
 import com.sdxxtop.base.utils.UIUtils
 import com.shangyi.business.R
 import com.shangyi.business.databinding.FragmentCarBinding
-import com.shangyi.kt.fragment.other.lookmore.LookMoreFragment
+import com.shangyi.business.weight.dialog.CarGoodsDelDialog
+import com.shangyi.business.weight.dialog.IosAlertDialog
 import com.shangyi.kt.fragment.car.entity.CartInfo
-import com.shangyi.kt.fragment.car.weight.NestedExpandaleListView
 import com.shangyi.kt.fragment.car.model.CarModel
 import com.shangyi.kt.fragment.car.model.OnCarDataRefresh
+import com.shangyi.kt.fragment.car.weight.NestedExpandaleListView
+import com.shangyi.kt.fragment.other.lookmore.LookMoreFragment
 import com.shangyi.kt.ui.order.AffirmOrderActivity
 import kotlinx.android.synthetic.main.car_bottom_buy_layout.view.*
 import kotlinx.android.synthetic.main.car_bottom_caozuo_layout.view.*
-import kotlinx.android.synthetic.main.car_bottom_caozuo_layout.view.cbCaozuo
 import kotlinx.android.synthetic.main.fragment_car.*
-import kotlinx.android.synthetic.main.fragment_car.titleView
 import kotlinx.android.synthetic.main.item_car_nogoods_layout.view.*
 
 
@@ -42,6 +42,7 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
 
     private var carListData: List<CartInfo?>? = null  // 购物车数据
     private var exAdapter: CartExpandAdapter? = null  // 购物车列表
+    private var selectId: List<Int>? = null   // 选中的需要删除的商品ID
 
     override fun initObserve() {
 
@@ -55,11 +56,16 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
     }
 
     /**
-     *
+     * 删除商品的dialog
      */
-//    private val delDialog : Dialog by Lazy{
-//        Dialog(context!!)
-//    }
+    private val delDialog by lazy {
+        val dialog = CarGoodsDelDialog(context)
+        dialog.setOnConfirmClick {
+            dialog.dismiss()
+            mBinding.vm?.delGoods(selectId, true)
+        }
+        dialog
+    }
 
     /**
      * 购买的layout
@@ -208,7 +214,8 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
             UIUtils.showToast("选择需要删除的商品")
             return
         }
-        mBinding.vm?.delGoods(selectId, true)
+        delDialog.show()
+        this.selectId = selectId
     }
 
     /**
@@ -231,8 +238,8 @@ class CarFragment : BaseKTFragment<FragmentCarBinding, CarModel>(), OnCarDataRef
                 }
 
                 override fun delectClick(isEmpty: Boolean, cid: IntArray?) {
-
-                    mBinding.vm?.delGoods(cid?.asList(), false)
+                    delDialog.show()
+                    selectId = cid?.asList()
                     if (isEmpty) {
                         linearLayout.removeView(expandableListView)
                         linearLayout.addView(noGoodsLayout, 0)

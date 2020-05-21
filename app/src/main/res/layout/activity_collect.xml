@@ -13,13 +13,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/color_F4F4F4"
         tools:context="com.shangyi.kt.ui.mine.mine_vip.CollectActivity">
 
         <com.shangyi.business.weight.TitleView
             android:id="@+id/titleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:bottom_line_show="true"
             app:layout_constraintTop_toTopOf="parent"
             app:leftLayoutIconIsGray="true"
             app:rightTextColor="#FF4242"
@@ -30,7 +30,7 @@
             android:id="@+id/smartLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/white"
+            android:layout_marginTop="5dp"
             app:layout_constraintBottom_toTopOf="@+id/bottomLayout"
             app:layout_constraintTop_toBottomOf="@+id/titleView">
 
@@ -52,9 +52,10 @@
 
             <LinearLayout
                 android:id="@+id/checkboxLayout"
-                android:layout_width="70dp"
+                android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:gravity="center"
+                android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -63,8 +64,17 @@
                     android:id="@+id/checkboxActivity"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:layout_marginLeft="20dp"
                     android:background="@drawable/select_goods_item_selector"
                     android:button="@null" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="全选"
+                    android:textColor="@color/color_666666"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <ImageView
